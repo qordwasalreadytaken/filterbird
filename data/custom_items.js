@@ -1727,6 +1727,7 @@ function setItemFromCustom() {
 	else if (itemTemp.rarity == "Rare") { itemTemp.rarity = "rare" }
 	else if (itemTemp.rarity == "Set") { itemTemp.rarity = "set" }
 	else if (itemTemp.rarity == "Unique") { itemTemp.rarity = "unique" }
+	else if (itemTemp.rarity == "Synthesized") { itemTemp.rarity = "unique" }
 	else if (itemTemp.rarity == "Craft") { itemTemp.rarity = "craft" }
 	itemToCompare = {}
 	for (affix in itemTemp) { itemToCompare[affix] = itemTemp[affix] }
@@ -1800,6 +1801,7 @@ function setItemCodes() {
 		else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
 		else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
+		else if (itemToCompare.rarity == "synthesized") { itemToCompare.UNI = true }
 		else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
 	} else {itemToCompare.UNI = true }
@@ -1858,6 +1860,7 @@ function setItemCodes() {
 	if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
 	if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
 	if (typeof(itemToCompare.RUNE) == 'undefined') { itemToCompare.RUNE = 0 }
+	if (typeof(itemToCompare.GEM) == 'undefined') { itemToCompare.GEM = 0 }
 	if (typeof(itemToCompare.RUNENAME) == 'undefined') { itemToCompare.RUNENAME = "" }
 	if (typeof(itemToCompare.GLEVEL) == 'undefined') { itemToCompare.GLEVEL = "" }
 	if (typeof(itemToCompare.GTYPE) == 'undefined') { itemToCompare.GTYPE = "" }

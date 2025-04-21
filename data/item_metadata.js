@@ -1422,6 +1422,7 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	//hit_skill_Fire_Bolt_lvl:1, att_skill_Fire_Bolt_lvl:1, gethit_skill_Charged_Bolt_lvl:1, att_skill_Ice_Bolt_lvl:1, gethit_skill_Frost_Nova_lvl:1, hit_skill_Nova_lvl:1, gethit_skill_Nova_lvl:1, att_skill_Lightning_Surge_lvl:1, att_skill_Chain_Lightning_lvl:1, gethit_skill_Hydra_lvl:1, hit_skill_Amplify_Damage_lvl:1, 
 
 map_tier:{index:["map_tier"], format:["Tier: ",""]},
+maptier:{index:["maptier"], format:["Tier: ",""]},
 map_mf_gf:{index:["map_mf_gf"], format:["Magic and Gold Find: +","%"]},
 pd2:1,
 quant_min:1,
@@ -1507,6 +1508,8 @@ var codes = {
 	// TODO: ITEMSTAT57 & ITEMSTAT58 (min and max poison damage) should apply if pDamage_all is used instead of pDamage_min & pDamage_max
 	skill_Cold_Enchant:"SK40", skill_Inferno:"SK41", skill_Lightning:"SK49", skill_Enchant_Fire:"SK52", skill_Skeleton_Mastery:"SK69", skill_Poison_Dagger:"SK73", skill_Golem_Mastery:"SK79", skill_Bone_Prison:"SK88", skill_Thorns:"SK103", skill_General_Mastery:"SK128", skill_Throwing_Mastery:"SK135", skill_Polearm_and_Spear_Mastery:"SK136", skill_Double_Throw:"SK140", skill_Combat_Reflexes:"SK141", skill_Berserk:"SK152", skill_Tiger_Strike:"SK254", skill_Blade_Sentinel:"SK257", skill_Fists_of_Fire:"SK259", skill_Dragon_Claw:"SK260", skill_Cobra_Strike:"SK265", skill_Claws_of_Thunder:"SK269", skill_Chain_Lightning_Sentry:"SK271", skill_Phoenix_Strike:"SK280", 
 	skill_Ice_Barrage:"SK369", skill_Combustion:"SK376", skill_Lesser_Hydra:"SK383", skill_Blood_Warp:"SK367", skill_Curse_Mastery:"SK374", skill_Dark_Pact:"SK381", skill_Holy_Nova:"SK364", skill_Holy_Light:"SK371", skill_Joust:"SK378", skill_Gust:"SK370", 
+	// qord updating
+	skill_Holy_Bolt:"SK477", skill_Holy_Bolt:"%SKILL(477)%", skill_Fist_of_the_Heavens:"SK121", skill_Fist_of_the_Heavens:"%SKILL(121)%", 
 };
 
 var item_groups = {
@@ -1567,7 +1570,7 @@ var all_codes = {
 	amu:3,rin:3,aqv:3,cqv:3,aq2:1,cq2:1,
 	bks:3,bkd:3,hdm:3,box:3,tr1:3,ass:3,msf:3,vip:3,hst:3,j34:3,g34:3,xyz:3,g33:3,bbb:3,qbr:3,qey:3,qhr:3,qf1:3,qf2:3,mss:3,hfh:3,ice:3,tr2:3,
 	tes:3,ceh:3,bet:3,fed:3,toa:3,pk1:3,pk2:3,pk3:3,dhn:3,bey:3,mbr:3,
-	cx5:1,cx6:1,cx7:1,maz:1,ma4:1,ma5:1,ma6:1,ma2:1,cm4:1,cx8:1,ma1:1,ma3:1,ma7:1,ma8:1,ma9:1,ma10:1,cx9:1,
+	cx5:1,cx6:1,cx7:1,maz:1,ma4:1,ma5:1,ma6:1,ma2:1,cm4:1,cx8:1,ma1:1,ma3:1,ma7:1,ma8:1,ma9:1,ma10:1,ma11:1,cx9:1,
 	rvl:3,rvs:3,yps:3,wms:3,vps:3,hp1:3,hp2:3,hp3:3,hp4:3,hp5:3,mp1:3,mp2:3,mp3:3,mp4:3,mp5:3,opl:3,opm:3,ops:3,gpl:3,gpm:3,gps:3,
 	gcv:3,gcw:3,gcg:3,gcr:3,gcb:3,gcy:3,skc:3,gfv:3,gfw:3,gfg:3,gfr:3,gfb:3,gfy:3,skf:3,gsv:3,gsw:3,gsg:3,gsr:3,gsb:3,gsy:3,sku:3,gzv:3,glw:3,glg:3,glr:3,glb:3,gly:3,skl:3,gpv:3,gpw:3,gpg:3,gpr:3,gpb:3,gpy:3,skz:3,
 	r01:3,r02:3,r03:3,r04:3,r05:3,r06:3,r07:3,r08:3,r09:3,r10:3,r11:3,r12:3,r13:3,r14:3,r15:3,r16:3,r17:3,r18:3,r19:3,r20:3,r21:3,r22:3,r23:3,r24:3,r25:3,r26:3,r27:3,r28:3,r29:3,r30:3,r31:3,r32:3,r33:3,
@@ -1619,7 +1622,11 @@ var all_codes = {
 	OS251:2,OS252:2,OS253:2,OS254:2,OS255:2,OS256:2,OS257:2,OS258:2,OS259:2,OS260:2,OS261:2,OS262:2,OS263:2,OS264:2,OS265:2,OS266:2,OS267:2,OS268:2,OS269:2,OS270:2,OS271:2,OS272:2,OS273:2,OS274:2,OS275:2,OS276:2,OS277:2,OS278:2,OS279:2,OS280:2,
 	OS357:2,OS364:2,OS367:2,OS369:2,OS371:2,OS381:2,OS383:2,OS366:2,OS374:2,OS376:2,OS378:2,OS370:2,
 	FILTERLVL:1,FILTLVL:3,
-	CHARSTAT14:3,CHARSTAT15:3,MAPTIER:2,SOCKETS:2,EDEF:2,EDAM:2,AUTOMOD:2,CLASS:2,CLUB:2,TMACE:2,HAMMER:2
+	CHARSTAT14:3,CHARSTAT15:3,MAPTIER:2,SOCKETS:2,EDEF:2,EDAM:2,AUTOMOD:2,CLASS:2,CLUB:2,TMACE:2,HAMMER:2,
+	
+// Trying to add newer PoD filter options, adding these removed the Unrecognized conditions and resulted in only Invalid formatting, a step in the right direction
+	STORAGE:1, GAMBLE:1,MAPTIER:1,MAPTIER:2,MAPTIER:3,MAPTIER:4,MAPTIER:5,MAPTIER:6,MAPTIER:7,MAPTIER:8,MAPTIER:9,MAPTIER:10,MAPTIER:11,
+	ma12:1, ma13:1, ma14:1, SK477:1, SKILL121:1, SK121:1, GEMTIER:3,
 };
 
 // TODO: Create list of mutually exclusive condition groups to expand syntax/error checking ...might be better to have a list of incompatible codes for all codes (except item codes, which could be handled separately) - there can only be 1 item code, and all codes are incompatible with any item code that is a subset of its' other incompatible codes (e.g. HELM is incompatible with SHIELD and all item codes that inherit SHIELD such as buc or kit)

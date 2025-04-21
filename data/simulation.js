@@ -16,7 +16,10 @@ var colors = {
 	BLACK:"000000",
 	ORANGE:"#c48736",
 	PURPLE:"#9b2aea",
-	RED:"#a94838"
+	RED:"#a94838",
+	COBALT:"#0047AB",
+	PINK:"#FFC0CB",
+	DPURPLE:"#301934"
 };
 var filter = [0,{text:"",result:["",""],o:""},{text:"",result:["",""],o:""}];	// stores most recent info, first index unused
 var item_old = {};
@@ -395,7 +398,7 @@ function parseFile(file,num) {
 		else { name_saved = itemToCompare.base }
 	}
 	if (typeof(itemToCompare.color_stuck) != 'undefined') { name_saved = "%"+itemToCompare.color_stuck+"%"+name_saved }
-	if (settings.version == 1 && itemToCompare.type == "rune") { name_saved = "%ORANGE%"+name_saved }
+	if (settings.version == 0 && itemToCompare.type == "rune") { name_saved = "%ORANGE%"+name_saved }
 	var display_default = "<l style='color:"+colors[getColor(itemToCompare)]+"'>"+name_saved+"</l>";
 	var output_total = name_saved;
 	var done = false;
@@ -407,6 +410,7 @@ function parseFile(file,num) {
 	for (line in lines) { if (done == false) {
 		line_num = Number(line)+1;
 		document.getElementById("o3").innerHTML += "<br>ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// gets displayed if the function halts unexpectedly at any point
+//		console.log("Invalid formatting: ", line)
 		var rule = lines[line].split("/")[0];
 		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
@@ -455,7 +459,7 @@ function parseFile(file,num) {
 			if (index_end > index+12 && rule.substring(0,index).length == 0) {
 				conditions = conditions.split(",").join("‚")	// Refactors "MULTI" conditions since they use commas (uses the "Single low-9 quotation mark" instead of "comma")
 				var match_override = false;
-				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
+				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" and ").join(" ").split(" OR ").join(",|,").split(" or ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
 				var neg_paren_close = 0;
 				var c_falsify = false;
@@ -468,9 +472,11 @@ function parseFile(file,num) {
 					cond = Number(cond)
 					var c = cond_list[cond];
 					// TODO: Check whether the "BETEEN" operator is present and reconfigure it to use multiple conditions with ">" and "<" (may need a different solution for PREFIX/SUFFIX/AUTOMOD)
-					var nonbool_conditions = ["GOLD","RUNE","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK"];
+					var nonbool_conditions = ["GOLD","RUNE","GEM","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK"];
 					if (c == "GEM") { c = "GEMLEVEL" }
-					if (c == "RUNENUM" || c == "RUNENAME") { c = "RUNE" }
+					if (c == "RUNENUM" || c == "RUNENAME" || c == "RUNETIER") { c = "RUNE" }
+					if (c == "STORAGE") { c = "" }
+					
 					var number = false;
 					var value_is_negative = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
@@ -499,7 +505,7 @@ function parseFile(file,num) {
 								cond_list[cond] = ("STAT"+Number(cr.slice(4)))
 								c = cond_list[cond]
 							} }
-							if (cr.substr(0,2) == "SK") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 100) {
+							if (cr.substr(0,2) == "SK") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 500) {
 								recognized = true
 								cond_list[cond] = ("SK"+Number(cr.slice(2)))
 								c = cond_list[cond]
@@ -567,6 +573,8 @@ function parseFile(file,num) {
 				}
 				if (settings.validation == 1 && errors < settings.max_errors) {
 					if (unrecognized_conditions == true) {
+						// log unrecognized conditions to the console
+						console.log("unrecognized conditions: ", unrecognized_list)
 						var unrecognized_conditions_string = ": <l style='color:#c55'>"+unrecognized_list[0]+"</l>";
 						var plural_s = "";
 						if (unrecognized_list.length > 1) {
@@ -603,18 +611,18 @@ function parseFile(file,num) {
 				//	}
 				//}
 				
-				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
+				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY[^%]*/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
-				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
+				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
-				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
-				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
+				if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
+				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
 				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
-				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
+//				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,"),split("%NOTIFY(ITEM)%").join(",ignore_NOTIFY(ITEM,").split("%NOTIFY(WHITE)%").join(",ignore_NOTIFY(WHITE,").split("%NOTIFY(GRAY)%").join(",ignore_NOTIFY(GRAY,").split("%NOTIFY(BLUE)%").join(",ignore_NOTIFY(BLUE,").split("%NOTIFY(YELLOW)%").join(",ignore_NOTIFY(YELLOW,").split("%NOTIFY(TAN)%").join(",ignore_NOTIFY(TAN,").split("%NOTIFY(GOLD)%").join(",ignore_NOTIFY(GOLD,").split("%NOTIFY(GREEN)%").join(",ignore_NOTIFY(GREEN,").split("%NOTIFY(DARK_GREEN)%").join(",ignore_NOTIFY(DARK_GREEN,").split("%NOTIFY(BLACK)%").join(",ignore_NOTIFY(BLACK,").split("%NOTIFY(PURPLE)%").join(",ignore_NOTIFY(PURPLE,").split("%NOTIFY(RED)%").join(",ignore_NOTIFY(RED,").split("%NOTIFY(ORANGE)%").join(",ignore_NOTIFY(ORANGE,").split(/%NOTIFYS[^%]*%/g).join(",ignore_NOTIFY(ORANGE,")}
 				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
-				if (settings.version == 1) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
-				if (settings.version == 1) {
-					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
+				if (settings.version == 0) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
+				if (settings.version == 0) {
+					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER-","STORAGE("];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 							for (let a = 0; a < 16; a++) {
@@ -632,28 +640,116 @@ function parseFile(file,num) {
 						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
 					} }
+					if (out_format.includes("STORAGE(") || out_format.includes("storage(")) {
+						const storagePattern = /(?:%?)storage\([^)]*\)(?:%?)/gi;
+						let match;
+						while ((match = storagePattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					// This will ignore macros
+					if (out_format.includes("%!"))  {
+						const macroPattern = /%!.*?!%/g;
+						let match;
+						while ((match = macroPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					// This ignores the border, need to remove this when html fixing happens
+					if (out_format.match(/%border\([^)]+\)%/i)) {
+						const mapiconPattern = /%border\(([^)]+)\)%/gi;
+						let match;
+						while ((match = mapiconPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					// This ignores the bgcolor, need to remove this when html fixing happens
+					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
+						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
+						let match;
+						while ((match = mapiconPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					if (out_format.match(/%mapicon\([^)]+\)%/i)) {
+						const mapiconPattern = /%mapicon\(([^)]+)\)%/gi;
+						let match;
+						while ((match = mapiconPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
 				}
 				for (let lvl = 0; lvl <= 9; lvl++) {
 					out_format = out_format.split("%TIER-"+lvl+"%").join(",ignore_TIER-"+lvl+",")
 				}
 				if (settings.version == 0) {
 					for (let stat = 0; stat <= 500; stat++) {
-						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
-						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+//						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
+//						if (typeof(itemToCompare["%STAT("+stat]) != 'undefined') { out_format = out_format.split("%STAT("+stat+")%").join(",ref_STAT"+stat+",") }
+//						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+						// Ranges like %STAT(0,138)%
+						out_format = out_format.replace(/%STAT\((\d+),\d+\)%/g, function(match, first) {
+							const key = "STAT" + first;
+							if (typeof(itemToCompare[key]) !== 'undefined') {
+								return ",ref_" + key + ",";
+							} else {
+								return ",0,";
+							}
+						});
+						
+						// Single stat entries
+//						for (let stat = 0; stat <= 500; stat++) {
+							const tagFlat = "%STAT" + stat + "%";
+							const tagParen = "%STAT(" + stat + ")%";
+							const key = "STAT" + stat;
+							const hasStat = typeof(itemToCompare[key]) !== 'undefined';
+
+							out_format = out_format.split(tagFlat).join(hasStat ? ",ref_" + key + "," : ",0,");
+							out_format = out_format.split(tagParen).join(hasStat ? ",ref_" + key + "," : ",0,");
+//						}
+						// Needs to be removed at a later date
+						if (out_format.match(/%stat\([^)]+\)%/i)) {
+							const mapiconPattern = /%stat\(([^)]+)\)%/gi;
+							let match;
+							while ((match = mapiconPattern.exec(out_format)) !== null) {
+								let matchStr = match[0];
+								out_format = out_format.split(matchStr).join(",ignore_notification,");
+							}
+						}
+
 					}
-				}
+					for (let skill = 0; skill <= 500; skill++) {
+						const tag = "%SKILL(" + skill + ")%";
+						if (typeof(itemToCompare["SKILL" + skill]) !== 'undefined') {
+							out_format = out_format.split(tag).join(",ref_SKILL" + skill + ",");
+						} else {
+							out_format = out_format.split(tag).join(",0,");
+						}
+					}
+									}
 				// POST-SEASON-6 CHANGES: This section is my first editing of simulation.js since a long absence and may not account for everything
-				if (settings.version == 1) {
+				if (settings.version == 0) {
 					out_format = out_format.split("%SOCKETS%").join(",ref_SOCK,").split("%DEF%").join(",ref_DEF,").split("%ED%").join(",ref_ED,").split("%EDEF%").join(",ref_EDEF,").split("%EDAM%").join(",ref_EDAM,").split("%AR%").join(",ref_AR,").split("%RES%").join(",ref_RES,").split("%FRES%").join(",ref_FRES,").split("%CRES%").join(",ref_CRES,").split("%LRES%").join(",ref_LRES,").split("%PRES%").join(",ref_PRES,").split("%FRW%").join(",ref_FRW,").split("%IAS%").join(",ref_IAS,").split("%FCR%").join(",ref_FCR,").split("%FHR%").join(",ref_FHR,").split("%FBR%").join(",ref_FBR,").split("%MINDMG%").join(",ref_MINDMG,").split("%MAXDMG%").join(",ref_MAXDMG,").split("%STR%").join(",ref_STR,").split("%DEX%").join(",ref_DEX,").split("%LIFE%").join(",ref_LIFE,").split("%MANA%").join(",ref_MANA,").split("%MFIND%").join(",ref_MFIND,").split("%GFIND%").join(",ref_GFIND,").split("%MAEK%").join(",ref_MAEK,").split("%DTM%").join(",ref_DTM,").split("%REPLIFE%").join(",ref_REPLIFE,").split("%REPAIR%").join(",ref_REPAIR,").split("%ARPER%").join(",ref_ARPER,").split("%FOOLS%").join(",ref_FOOLS,").split("%%").join(",ref_,")
 					for (let stat = 0; stat <= 504; stat++) {
-						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
-						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",");out_format = out_format.split("STAT"+stat+"").join(",ref_STAT"+stat+",") }
+						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,");out_format = out_format.split("STAT"+stat+"").join(",0,") }
 						if (typeof(itemToCompare["CHARSTAT"+stat]) != 'undefined') { out_format = out_format.split("%CHARSTAT"+stat+"%").join(",ref_CHARSTAT"+stat+",") }
 						else { out_format = out_format.split("%CHARSTAT"+stat+"%").join(",0,") }
 					}
 					for (let stat = 6; stat <= 384; stat++) {
 						if (typeof(itemToCompare["SK"+stat]) != 'undefined') { out_format = out_format.split("%SK"+stat+"%").join(",ref_SK"+stat+",") }
 						else { out_format = out_format.split("%SK"+stat+"%").join(",0,") }
+						if (stat == 155) { stat = 220 }
+						if (stat == 280) { stat = 363 }
+					}
+					for (let stat = 6; stat <= 384; stat++) {
+						if (typeof(itemToCompare["OS"+stat]) != 'undefined') { out_format = out_format.split("OS"+stat).join(",ref_SK"+stat+",") }
+						else { out_format = out_format.split("OS"+stat).join(",0,") }
 						if (stat == 155) { stat = 220 }
 						if (stat == 280) { stat = 363 }
 					}
@@ -681,7 +777,7 @@ function parseFile(file,num) {
 						if (settings.version == 0) {
 							if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }	// TODO: Also display notice for notification keywords (BORDER, MAP, DOT, PX, NOTIFY)
 							notices.pd2_conditions = 1
-						} else if (settings.version == 1) {
+						} else if (settings.version == 0) {
 							if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 							notices.pod_conditions = 1
 						}
@@ -705,6 +801,8 @@ function parseFile(file,num) {
 					}
 				}
 				if (unrecognized_keywords == true) {
+					// log these unrecognized keywords to the console
+					console.log("unrecognized keywords: ",unrecognized_list)
 					var unrecognized_keywords_string = ": <l style='color:#cc5'>"+unrecognized_list[0]+"</l>";
 					var plural_s = "";
 					if (unrecognized_list.length > 1) {
@@ -810,14 +908,16 @@ function parseFile(file,num) {
 	var description_active = false;
 	if (output_total.includes("{") == true && output_total.includes("}") == true) { if (output_total.indexOf("{") < output_total.lastIndexOf("}")) { description_active = true } }
 	
-	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
-	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
-	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
-	if (settings.version == 1) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
+	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
+	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
+	if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
+	if (settings.version == 0) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
 	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
 	if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
-	if (settings.version == 1) {
-		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
+	//Add new keywords 
+	if (settings.version == 0) { out_format = out_format}	// TODO: organize keywords for different versions - these lines are a mess
+	if (settings.version == 0) {
+		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER","STORAGE("];
 		for (n in notifs) {
 			if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 				for (let a = 0; a < 16; a++) {
@@ -833,6 +933,18 @@ function parseFile(file,num) {
 			var av = a.toString(16);
 			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 		} }
+		if (out_format.includes("STORAGE(") || out_format.includes("storage(")) {
+			const storagePattern = /(?:%?)storage\([^)]*\)(?:%?)/gi;
+			let match;
+			while ((match = storagePattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
+		if (out_format.includes("%MAPICON(") || out_format.includes("%mapicon(")) { for (let a = 0; a < 500; a++) {
+			var av = a.toString(16);
+			out_format = out_format.split("%MAPICON("+av+")%").join(",ignore_notification,").split("%MAPICON("+av.toUpperCase()+")%").join(",ignore_notification,").split("%mapicon("+av+")%").join(",ignore_notification,").split("%mapicon("+av.toUpperCase()+")%").join(",ignore_notification,")
+		} }
 	}
 	for (let lvl = 0; lvl <= 9; lvl++) {
 		out_format = out_format.split("%TIER-"+lvl+"%").join(",ignore_TIER-"+lvl+",")
@@ -844,7 +956,7 @@ function parseFile(file,num) {
 		}
 	}
 	// POST-SEASON-6 CHANGES: This section is my first editing of simulation.js since a long absence and may not account for everything
-	if (settings.version == 1) {
+	if (settings.version == 0) {
 		out_format = out_format.split("%SOCKETS%").join(",ref_SOCK,").split("%DEF%").join(",ref_DEF,").split("%ED%").join(",ref_ED,").split("%EDEF%").join(",ref_EDEF,").split("%EDAM%").join(",ref_EDAM,").split("%AR%").join(",ref_AR,").split("%RES%").join(",ref_RES,").split("%FRES%").join(",ref_FRES,").split("%CRES%").join(",ref_CRES,").split("%LRES%").join(",ref_LRES,").split("%PRES%").join(",ref_PRES,").split("%FRW%").join(",ref_FRW,").split("%IAS%").join(",ref_IAS,").split("%FCR%").join(",ref_FCR,").split("%FHR%").join(",ref_FHR,").split("%FBR%").join(",ref_FBR,").split("%MINDMG%").join(",ref_MINDMG,").split("%MAXDMG%").join(",ref_MAXDMG,").split("%STR%").join(",ref_STR,").split("%DEX%").join(",ref_DEX,").split("%LIFE%").join(",ref_LIFE,").split("%MANA%").join(",ref_MANA,").split("%MFIND%").join(",ref_MFIND,").split("%GFIND%").join(",ref_GFIND,").split("%MAEK%").join(",ref_MAEK,").split("%DTM%").join(",ref_DTM,").split("%REPLIFE%").join(",ref_REPLIFE,").split("%REPAIR%").join(",ref_REPAIR,").split("%ARPER%").join(",ref_ARPER,").split("%FOOLS%").join(",ref_FOOLS,").split("%%").join(",ref_,")
 			for (let stat = 0; stat <= 504; stat++) {
 			if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
@@ -888,7 +1000,7 @@ function parseFile(file,num) {
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
-			else if (settings.version == 1 && o == "ref_RUNENAME" && itemToCompare.RUNE > 0) { color = colors["ORANGE"]; temp = itemToCompare.name.split(" ")[0]; }	// TODO: why isn't itemToCompare.RUNENAME setup by this point? (for stacked runes)
+			else if (settings.version == 0 && o == "ref_RUNENAME" && itemToCompare.RUNE > 0) { color = colors["ORANGE"]; temp = itemToCompare.name.split(" ")[0]; }	// TODO: why isn't itemToCompare.RUNENAME setup by this point? (for stacked runes)
 			else if (o == "ref_GLEVEL") {
 				if (itemToCompare.type == "gem") {
 					var g_level = ["NONE","Chipped","Flawed","Normal","Flawless","Perfect"];
@@ -961,7 +1073,7 @@ function parseFile(file,num) {
 	}
 	if (display.includes("�") || display.includes("�")) { notices.encoding = 1 }
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
-	else if (settings.error_limit == 0 && errors >= 50) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
+	else if (settings.error_limit == 0 && errors >= 500) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
 	return [display,description]
 }
 
@@ -1296,7 +1408,7 @@ function setCLVL2(value) {
 	document.getElementById("clvl").value = value
 	document.getElementById("dropdown_clvl").value = value
 	character.CLVL = Number(value)
-	if (settings.version == 1) { itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2) }
+	if (settings.version == 0) { itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2) }
 	else {
 		if (character.CHARSTAT14 > (character.CLVL * 10000)) {
 			character.CHARSTAT14 = character.CLVL * 10000
