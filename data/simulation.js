@@ -32,6 +32,7 @@ var launcher_data = [];
 var github_text = "";
 var github_data = [];
 var filter_text = "";
+var border = "";
 
 // startup - runs when the page loads
 // ---------------------------------
@@ -103,7 +104,7 @@ function loadItems() {
 			else if (typeof(item.color) != 'undefined') { addon = "<option style='color:"+colors[getColor(item)]+"'>" + item.name + "</option>" }
 			else if (typeof(item.rarity) != 'undefined') { addon = "<option class='dropdown-"+item.rarity+"'>" + item.name + "</option>" }
 			else { addon = "<option class='dropdown-unique'>" + item.name + "</option>" }
-			choices += addon
+			choices += addon //border
 		}
 	}
 	document.getElementById("dropdown_item").innerHTML = choices
@@ -400,6 +401,8 @@ function parseFile(file,num) {
 	if (typeof(itemToCompare.color_stuck) != 'undefined') { name_saved = "%"+itemToCompare.color_stuck+"%"+name_saved }
 	if (settings.version == 0 && itemToCompare.type == "rune") { name_saved = "%ORANGE%"+name_saved }
 	var display_default = "<l style='color:"+colors[getColor(itemToCompare)]+"'>"+name_saved+"</l>";
+//	var display_default = "<l style='color:"+colors[getColor(itemToCompare)]+" " + border +"'>"+name_saved+"</l>";
+	console.log("Display: ", display_default)
 	var output_total = name_saved;
 	var done = false;
 	var continued = 0;
@@ -658,14 +661,26 @@ function parseFile(file,num) {
 						}
 					}
 					// This ignores the border, need to remove this when html fixing happens
-					if (out_format.match(/%border\([^)]+\)%/i)) {
-						const mapiconPattern = /%border\(([^)]+)\)%/gi;
-						let match;
-						while ((match = mapiconPattern.exec(out_format)) !== null) {
-							let matchStr = match[0];
-							out_format = out_format.split(matchStr).join(",ignore_notification,");
-						}
-					}
+//					if (out_format.match(/%border\([^)]+\)%/i)) {
+//						const mapiconPattern = /%border\(([^)]+)\)%/gi;
+//						let match;
+//						while ((match = mapiconPattern.exec(out_format)) !== null) {
+//							let matchStr = match[0];
+//							out_format = out_format.split(matchStr).join(",ignore_notification,");
+//						}
+//					}
+// Regex for %BORDER(x)% or %BORDER(x,y)% (case-insensitive)
+					const borderRegex = /%border\((\d+)(?:,(\d+))?\)%/gi;
+					out_format = out_format.replace(borderRegex, (match, colorIdxStr, widthStr) => {
+						let colorIdx = parseInt(colorIdxStr);
+						let width = widthStr ? parseInt(widthStr) : 1;
+						let color = colorIndexMap[colorIdx] || "#000000"; // fallback to black if undefined
+
+						// Generate inline style or whatever format you need
+						border = "border:${width}px solid ${color}";
+						return border;
+					});
+
 					// This ignores the bgcolor, need to remove this when html fixing happens
 					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
 						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
@@ -675,6 +690,16 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
+//					const bgroundRegex = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
+//					out_format = out_format.replace(bgroundRegex, (match, colorIdxStr, widthStr) => {
+//						let colorIdx = parseInt(colorIdxStr);
+//						let width = widthStr ? parseInt(widthStr) : 1;
+//						let color = colorIndexMap[colorIdx] || "#000000"; // fallback to black if undefined
+//
+//						// Generate inline style or whatever format you need
+//						border = "border:${width}px solid ${color}";
+//						return border;
+//					});
 					if (out_format.match(/%mapicon\([^)]+\)%/i)) {
 						const mapiconPattern = /%mapicon\(([^)]+)\)%/gi;
 						let match;
