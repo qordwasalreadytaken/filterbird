@@ -33,6 +33,9 @@ var github_text = "";
 var github_data = [];
 var filter_text = "";
 var border = "";
+var bgcolor = "";
+let mappedbgcolor = "";
+let mappedborder = "";
 
 // startup - runs when the page loads
 // ---------------------------------
@@ -381,6 +384,10 @@ function parseFile(file,num) {
 	var all_conditions = [];
 	var all_line_nums = [];
 	var name_saved = itemToCompare.NAME;
+	var border = "";
+	var bgcolor = "";
+	let mappedbgcolor = "";
+	let mappedborder = "";
 	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {	// setup variables to accomodate item names that use multiple lines
 		if (typeof(itemToCompare.base) != 'undefined') {
 			if (itemToCompare.ID == true) {
@@ -625,7 +632,8 @@ function parseFile(file,num) {
 				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
 				if (settings.version == 0) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
 				if (settings.version == 0) {
-					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER-","STORAGE("];
+//					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER-","STORAGE("];
+					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE("];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 							for (let a = 0; a < 16; a++) {
@@ -660,46 +668,46 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
-					// This ignores the border, need to remove this when html fixing happens
-//					if (out_format.match(/%border\([^)]+\)%/i)) {
-//						const mapiconPattern = /%border\(([^)]+)\)%/gi;
-//						let match;
-//						while ((match = mapiconPattern.exec(out_format)) !== null) {
-//							let matchStr = match[0];
-//							out_format = out_format.split(matchStr).join(",ignore_notification,");
-//						}
-//					}
 // Regex for %BORDER(x)% or %BORDER(x,y)% (case-insensitive)
-					const borderRegex = /%border\((\d+)(?:,(\d+))?\)%/gi;
-					out_format = out_format.replace(borderRegex, (match, colorIdxStr, widthStr) => {
-						let colorIdx = parseInt(colorIdxStr);
-						let width = widthStr ? parseInt(widthStr) : 1;
-						let color = colorIndexMap[colorIdx] || "#000000"; // fallback to black if undefined
+					const borderRegex = /%BORDER\((\d+)(?:,(\d+))?\)%/gi;
+					out_format = out_format.replace(borderRegex, (match, bordercolorIdxStr, borderwidthStr) => {
+						let bordercolorIdx = parseInt(bordercolorIdxStr);
+						let width = borderwidthStr ? parseInt(borderwidthStr) : 1;
+						mappedborder = colorIndexMap[bordercolorIdx] || "#000000"; // fallback to black if undefined
 
-						// Generate inline style or whatever format you need
-						border = "border:${width}px solid ${color}";
-						return border;
+						console.log("border color log 1 is " + mappedborder);
+						return mappedborder
 					});
-
-					// This ignores the bgcolor, need to remove this when html fixing happens
-					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
-						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
+					// This ignores the border, need to remove this when html fixing happens
+					if (out_format.match(/%border\([^)]+\)%/i)) {
+						const mapiconPattern = /%border\(([^)]+)\)%/gi;
 						let match;
 						while ((match = mapiconPattern.exec(out_format)) !== null) {
 							let matchStr = match[0];
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
-//					const bgroundRegex = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
-//					out_format = out_format.replace(bgroundRegex, (match, colorIdxStr, widthStr) => {
-//						let colorIdx = parseInt(colorIdxStr);
-//						let width = widthStr ? parseInt(widthStr) : 1;
-//						let color = colorIndexMap[colorIdx] || "#000000"; // fallback to black if undefined
-//
-//						// Generate inline style or whatever format you need
-//						border = "border:${width}px solid ${color}";
-//						return border;
-//					});
+
+					// This ignores the bgcolor, need to remove this when html fixing happens
+//					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
+//						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
+//						let match;
+//						while ((match = mapiconPattern.exec(out_format)) !== null) {
+//							let matchStr = match[0];
+//							out_format = out_format.split(matchStr).join(",ignore_notification,");
+//						}
+//					}
+					
+					const bgroundRegex = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
+					out_format = out_format.replace(bgroundRegex, (match, colorIdxStr, widthStr) => {
+						let colorIdx = parseInt(colorIdxStr);
+						let width = widthStr ? parseInt(widthStr) : 1;
+						mappedbgcolor = colorIndexMap[colorIdx] || "#000000"; // fallback to black if undefined
+
+						console.log("background color log 1 is " + mappedbgcolor);
+						return mappedbgcolor
+					});
+
 					if (out_format.match(/%mapicon\([^)]+\)%/i)) {
 						const mapiconPattern = /%mapicon\(([^)]+)\)%/gi;
 						let match;
@@ -1054,19 +1062,48 @@ function parseFile(file,num) {
 				if (o == "}" && description_braces == 1) { description_braces = description_braces+1; blank = true; }
 			}
 		}
+//		console.log("background color log 2 is "+ mappedbgcolor)
+		//Add background bgcolor & border color here?
+//		console.log("description_braces value: " + description_braces);
+//		if (mappedbgcolor != "") {
+//			console.log("Condition passed. mappedbgcolor: " + mappedbgcolor);
+//		} else {
+//			console.log("Condition failed. Mappedbgcolor is empty or undefined.");
+//		}
 		
 		if (description_braces != 1) {
 			if (o == "misc_NL" || o == "‗") { display += "<br>" }
-			if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
-			else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
-			if (settings.validation == 1) {
-				if (o == " ") { text_length[0]++ }
-				else if (blank == false) { text_length[0] += ~~temp.length; }
+			if (mappedbgcolor != "") {
+				console.log("background color log 3 is "+ mappedbgcolor)
+
+				if (o == " ") {
+					display += "<l style='color:Black; background-color:" + mappedbgcolor + "; '>_</l>";
+				} else if (blank == false) {
+					display += "<l style='color:" + color + "; background-color:" + mappedbgcolor + ";'>" + temp + "</l>";
+				}
+				if (settings.validation == 1) {
+					if (o == " ") { text_length[0]++ }
+					else if (blank == false) { text_length[0] += ~~temp.length; }
+				}
+			}
+			else {
+				if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
+				else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+				if (settings.validation == 1) {
+					if (o == " ") { text_length[0]++ }
+					else if (blank == false) { text_length[0] += ~~temp.length; }
+				}
 			}
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
-			if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
-			else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
+			if (mappedbgcolor != "") {
+				if (o == " ") { description += "<l style='color:Black; background-color:" + mappedbgcolor + "; '>_</l>"}
+				else if (blank == false) { description += "<l style='color:" + color + "; background-color:" + mappedbgcolor + ";'>" + temp + "</l>" }
+			}
+			else {
+				if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
+				else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
+			}
 			if (settings.validation == 1) {
 				if (o == "misc_NL" || o == "‗") { text_length[2]++ }
 				if (o == " ") { text_length[1]++; text_length[2]++; }
