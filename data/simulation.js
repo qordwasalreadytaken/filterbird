@@ -34,7 +34,7 @@ var github_data = [];
 var filter_text = "";
 var border = "";
 var bgcolor = "";
-let mappedbgcolor = "";
+//let mappedbgcolor = "";
 let mappedborder = "";
 
 // startup - runs when the page loads
@@ -469,7 +469,59 @@ function parseFile(file,num) {
 			if (index_end > index+12 && rule.substring(0,index).length == 0) {
 				conditions = conditions.split(",").join("‚")	// Refactors "MULTI" conditions since they use commas (uses the "Single low-9 quotation mark" instead of "comma")
 				var match_override = false;
-				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" and ").join(" ").split(" OR ").join(",|,").split(" or ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
+//				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" and ").join(" ").split(" OR ").join(",|,").split(" or ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
+				var cond_format;
+
+				// Initialize an empty array to store any untouched segments
+				var untouchedSegments = [];
+
+				// Step 1: Check for SET("...") or UNIQUE("...")
+				if (conditions.includes('SET(')) {
+					const match = conditions.match(/SET\("([^"]+)"\)/); // Extract the text inside SET(...)
+					if (match) {
+						untouchedSegments.push(match[1]); // Add untouched text to the array
+						conditions = conditions.replace(match[0], 'SET_PLACEHOLDER'); // Replace with placeholder
+					}
+				}
+
+				if (conditions.includes('UNIQUE(')) {
+					const match = conditions.match(/UNIQUE\("([^"]+)"\)/); // Extract the text inside UNIQUE(...)
+					if (match) {
+						untouchedSegments.push(match[1]); // Add untouched text to the array
+						conditions = conditions.replace(match[0], 'UNIQUE_PLACEHOLDER'); // Replace with placeholder
+					}
+				}
+
+				// Step 2: Apply transformations to the remaining conditions
+				cond_format = conditions.split("  ").join(" ")
+					.split("(").join(",(,")
+					.split(")").join(",),")
+					.split("!").join(",!,")
+					.split("<=").join(",≤,")
+					.split(">=").join(",≥,")
+					.split(">").join(",>,")
+					.split("<").join(",<,")
+					.split("=").join(",=,")
+					.split(" AND ").join(" ")
+					.split(" and ").join(" ")
+					.split(" OR ").join(",|,")
+					.split(" or ").join(",|,")
+					.split("+").join(",+,")
+					.split(" ").join(",&,")
+					.split(",,").join(",");
+
+				// Step 3: Reinsert untouched segments into the formatted string
+				if (untouchedSegments.length) {
+					untouchedSegments.forEach((segment, index) => {
+						const placeholder = index === 0 ? 'SET_PLACEHOLDER' : 'UNIQUE_PLACEHOLDER';
+						cond_format = cond_format.replace(placeholder, `"${segment}"`);
+					});
+				}
+
+				// Output
+//				console.log(cond_format);
+
+
 				var cond_list = cond_format.split(",");
 				var neg_paren_close = 0;
 				var c_falsify = false;
@@ -482,11 +534,47 @@ function parseFile(file,num) {
 					cond = Number(cond)
 					var c = cond_list[cond];
 					// TODO: Check whether the "BETEEN" operator is present and reconfigure it to use multiple conditions with ">" and "<" (may need a different solution for PREFIX/SUFFIX/AUTOMOD)
-					var nonbool_conditions = ["GOLD","RUNE","GEM","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK"];
+					var nonbool_conditions = ["GOLD","RUNE","GEM","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK","QUEST","SYNTH","SPECIAL","UNIQUE"];
 					if (c == "GEM") { c = "GEMLEVEL" }
 					if (c == "RUNENUM" || c == "RUNENAME" || c == "RUNETIER") { c = "RUNE" }
 					if (c == "STORAGE") { c = "" }
+//					if (c == "PLRCLASS" || c == "!PLRCLASS" || c == "AMA" || c == "BAR" || c == "DRU" || c == "NEC" || c == "ASS" || c == "PAL" || c == "SOR") { c = "" }
+//					if (c == "MAPTIER" || c == "MAP") { c = "" }
+//					if (c == "SYNTH") { c = "UNI" }
+					if (c === "QUEST" && equipment.quest.some(item => item.CODE === itemToCompare.CODE)) {
+						c = itemToCompare.CODE;
+					}
+					if (c == "QUEST") { c = "" }
+					if (c === "SPECIAL" && equipment.quest.some(item => item.CODE === itemToCompare.CODE)) {
+						c = itemToCompare.CODE;
+					}
+					if (c == "SPECIAL") { c = "UNI" }
+
+					if (c == "UNIQUE") {
+						// Extract the name within the UNIQUE parentheses
+						const nameMatch = itemDisplay.match(/UNIQUE\("([^"]+)"\)/);
+						console.log("Name to match " + nameMatch)
+						const variableName = nameMatch ? nameMatch[1] : null; // Dynamically captured name
+						console.log("Name to match2 " + variableName)
 					
+						// Extract the optional code (e.g., "lst") after the name
+						const codeMatch = itemDisplay.match(/\b([a-zA-Z0-9]+)\b(?=\]?$)/);
+						console.log("Name to match3 " + codeMatch)
+						const variableCode = codeMatch ? codeMatch[1] : null; // Dynamically captured code
+						console.log("Name to match4 " + variableCode)
+
+						// Search across all sections of equipment
+						const matchingItem = Object.values(equipment).flat().find(item => 
+							item.name == variableName && (!variableCode || item.CODE === variableCode)
+						);
+					
+						// Update 'c' if a matching item is found
+						if (matchingItem) {
+							c = matchingItem.CODE;
+						}
+						else{ c = "" }
+					}
+																				
 					var number = false;
 					var value_is_negative = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
@@ -621,19 +709,20 @@ function parseFile(file,num) {
 				//	}
 				//}
 				
-				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY[^%]*/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
+				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY\([^)]*\)%?/gi, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
-				if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
-				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
+				if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
+				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
 				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 //				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,"),split("%NOTIFY(ITEM)%").join(",ignore_NOTIFY(ITEM,").split("%NOTIFY(WHITE)%").join(",ignore_NOTIFY(WHITE,").split("%NOTIFY(GRAY)%").join(",ignore_NOTIFY(GRAY,").split("%NOTIFY(BLUE)%").join(",ignore_NOTIFY(BLUE,").split("%NOTIFY(YELLOW)%").join(",ignore_NOTIFY(YELLOW,").split("%NOTIFY(TAN)%").join(",ignore_NOTIFY(TAN,").split("%NOTIFY(GOLD)%").join(",ignore_NOTIFY(GOLD,").split("%NOTIFY(GREEN)%").join(",ignore_NOTIFY(GREEN,").split("%NOTIFY(DARK_GREEN)%").join(",ignore_NOTIFY(DARK_GREEN,").split("%NOTIFY(BLACK)%").join(",ignore_NOTIFY(BLACK,").split("%NOTIFY(PURPLE)%").join(",ignore_NOTIFY(PURPLE,").split("%NOTIFY(RED)%").join(",ignore_NOTIFY(RED,").split("%NOTIFY(ORANGE)%").join(",ignore_NOTIFY(ORANGE,").split(/%NOTIFYS[^%]*%/g).join(",ignore_NOTIFY(ORANGE,")}
-				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
-				if (settings.version == 0) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
+				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("PLRCLASS").join(",ref_PLRCLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
+				if (settings.version == 0) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("PLRCLASS").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
 				if (settings.version == 0) {
+//					if (out_format.includes("QUEST")) {out_format = out_format.split("QUEST").join(",misc_QUEST")};
 //					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER-","STORAGE("];
-					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE("];
+					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE(","%NOTIFY(","PLRCLASS("];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 							for (let a = 0; a < 16; a++) {
@@ -646,15 +735,32 @@ function parseFile(file,num) {
 							}
 						}
 					}
-					if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
-						var av = a.toString(16);
-						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
-						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
-					} }
+					//ignore PLRCLASS
+					if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
+						const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
+						let match;
+						while ((match = plrclassPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+//					if (out_format.includes("%NOTIFY") || out_format.includes("%notify")) { for (let a = 0; a < 16; a++) {
+//						var av = a.toString(16);
+//						out_format = out_format.split("%NOTIFY"+av+"%").join(",ignore_notification,").split("%NOTIFY"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify"+av+"%").join(",ignore_notification,").split("%notify"+av.toUpperCase()+"%").join(",ignore_notification,")
+//						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
+//					} }
 					if (out_format.includes("STORAGE(") || out_format.includes("storage(")) {
 						const storagePattern = /(?:%?)storage\([^)]*\)(?:%?)/gi;
 						let match;
 						while ((match = storagePattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					if (out_format.includes("UNIQUE(") || out_format.includes("unique(")) {
+						const uniquePattern = /(?:%?)unique\([^)]*\)(?:%?)/gi;
+						let match;
+						while ((match = uniquePattern.exec(out_format)) !== null) {
 							let matchStr = match[0];
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
@@ -669,7 +775,7 @@ function parseFile(file,num) {
 						}
 					}
 // Regex for %BORDER(x)% or %BORDER(x,y)% (case-insensitive)
-					const borderRegex = /%BORDER\((\d+)(?:,(\d+))?\)%/gi;
+					const borderRegex = /%border\([^)]+\)%/gi;
 					out_format = out_format.replace(borderRegex, (match, bordercolorIdxStr, borderwidthStr) => {
 						let bordercolorIdx = parseInt(bordercolorIdxStr);
 						let width = borderwidthStr ? parseInt(borderwidthStr) : 1;
@@ -679,14 +785,14 @@ function parseFile(file,num) {
 						return mappedborder
 					});
 					// This ignores the border, need to remove this when html fixing happens
-					if (out_format.match(/%border\([^)]+\)%/i)) {
-						const mapiconPattern = /%border\(([^)]+)\)%/gi;
-						let match;
-						while ((match = mapiconPattern.exec(out_format)) !== null) {
-							let matchStr = match[0];
-							out_format = out_format.split(matchStr).join(",ignore_notification,");
-						}
-					}
+//					if (out_format.match(/%border\([^)]+\)%/i)) {
+//						const mapiconPattern = /%border\(([^)]+)\)%/gi;
+//						let match;
+//						while ((match = mapiconPattern.exec(out_format)) !== null) {
+//							let matchStr = match[0];
+//							out_format = out_format.split(matchStr).join(",ignore_notification,");
+//						}
+//					}
 
 					// This ignores the bgcolor, need to remove this when html fixing happens
 //					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
@@ -707,6 +813,16 @@ function parseFile(file,num) {
 						console.log("background color log 1 is " + mappedbgcolor);
 						return mappedbgcolor
 					});
+					// This ignores the bgcolor, need to remove this when html fixing happens
+					if (out_format.match(/%bgcolor\((\d+)(?:,(\d+))?\)%/gi)) {
+						console.log("Ignoring background color");
+						const bgcolorPattern = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
+						let match;
+						while ((match = bgcolorPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
 
 					if (out_format.match(/%mapicon\([^)]+\)%/i)) {
 						const mapiconPattern = /%mapicon\(([^)]+)\)%/gi;
@@ -942,15 +1058,15 @@ function parseFile(file,num) {
 	if (output_total.includes("{") == true && output_total.includes("}") == true) { if (output_total.indexOf("{") < output_total.lastIndexOf("}")) { description_active = true } }
 	
 	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
-	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
-	if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%MAPTIER%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
+	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
+	if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
 	if (settings.version == 0) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
 	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
-	if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
+	if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("PLRCLASS").join(",ref_PLRCLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
 	//Add new keywords 
 	if (settings.version == 0) { out_format = out_format}	// TODO: organize keywords for different versions - these lines are a mess
 	if (settings.version == 0) {
-		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER","STORAGE("];
+		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER","STORAGE(","%NOTIFY("];
 		for (n in notifs) {
 			if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 				for (let a = 0; a < 16; a++) {
@@ -962,10 +1078,32 @@ function parseFile(file,num) {
 				}
 			}
 		}
-		if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
+//		if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
+//			var av = a.toString(16);
+//			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
+//		} }
+		if (out_format.includes("%NOTIFY(") || out_format.includes("%notify(")) { for (let a = 0; a < 16; a++) {
 			var av = a.toString(16);
-			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
+			out_format = out_format.split("%NOTIFY("+av+"%").join(",ignore_notification,").split("%NOTIFY("+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify("+av+"%").join(",ignore_notification,").split("%notify("+av.toUpperCase()+"%").join(",ignore_notification,")
 		} }
+		//This gets rid of "notifyXX" in item name displays
+		if (out_format.includes("%NOTIFY(") || out_format.includes("%notify(")) {
+			const notifyPattern = /(?:%?)notify\([^)]*\)(?:%?)/gi;
+			let match;
+			while ((match = notifyPattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
+		// ignore plrclass
+		if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
+			const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
+			let match;
+			while ((match = plrclassPattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
 		if (out_format.includes("STORAGE(") || out_format.includes("storage(")) {
 			const storagePattern = /(?:%?)storage\([^)]*\)(?:%?)/gi;
 			let match;
@@ -1077,9 +1215,9 @@ function parseFile(file,num) {
 				console.log("background color log 3 is "+ mappedbgcolor)
 
 				if (o == " ") {
-					display += "<l style='color:Black; background-color:" + mappedbgcolor + "; '>_</l>";
+					display += "<l style='color:Black; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +"; '>_</l>";
 				} else if (blank == false) {
-					display += "<l style='color:" + color + "; background-color:" + mappedbgcolor + ";'>" + temp + "</l>";
+					display += "<l style='color:" + color + "; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +"'>" + temp + "</l>";
 				}
 				if (settings.validation == 1) {
 					if (o == " ") { text_length[0]++ }
@@ -1097,8 +1235,8 @@ function parseFile(file,num) {
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
 			if (mappedbgcolor != "") {
-				if (o == " ") { description += "<l style='color:Black; background-color:" + mappedbgcolor + "; '>_</l>"}
-				else if (blank == false) { description += "<l style='color:" + color + "; background-color:" + mappedbgcolor + ";'>" + temp + "</l>" }
+				if (o == " ") { description += "<l style='color:Black; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +"; '>_</l>";}
+				else if (blank == false) { description += "<l style='color:" + color + "; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +";'>" + temp + "</l>" }
 			}
 			else {
 				if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
@@ -1110,6 +1248,16 @@ function parseFile(file,num) {
 				else if (blank == false) { text_length[1] += ~~temp.length; text_length[2] += ~~temp.length; }
 			}
 		}
+		// This ignores the bgcolor, need to remove this when html fixing happens
+		if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
+			const bgcolorPattern = /%bgcolor\(([^)]+)\)%/gi;
+			let match;
+			while ((match = bgcolorPattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
+		
 	}
 	if (settings.validation == 1) {
 		if (text_length[0] > 56) {

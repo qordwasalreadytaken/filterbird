@@ -1728,6 +1728,7 @@ function setItemFromCustom() {
 	else if (itemTemp.rarity == "Set") { itemTemp.rarity = "set" }
 	else if (itemTemp.rarity == "Unique") { itemTemp.rarity = "unique" }
 	else if (itemTemp.rarity == "Synthesized") { itemTemp.rarity = "unique" }
+	else if (itemTemp.rarity == "Synth") { itemTemp.rarity = "unique" }
 	else if (itemTemp.rarity == "Craft") { itemTemp.rarity = "craft" }
 	itemToCompare = {}
 	for (affix in itemTemp) { itemToCompare[affix] = itemTemp[affix] }
@@ -1886,16 +1887,21 @@ function setItemCodes() {
 	if (typeof(itemToCompare.life) != 'undefined') { itemToCompare.LIFE = itemToCompare.life }
 	if (typeof(itemToCompare.mana) != 'undefined') { itemToCompare.MANA = itemToCompare.mana }
 	
+	// implement quest items group
+	var quest = ["bks","bkd","box","tr1","ass","j34","g34","xyz","bbb","qbr","qey","qhr","mss","ice","tr2"]
+	for (qi in quest) { if (itemToCompare.CODE == qi[th]) { itemToCompare["QUEST"] = true; } }
+
 	// implement missing PoD keywords:
 	itemToCompare.CL = ""
 	itemToCompare.CLASS = ""
-	if (typeof(itemToCompare.CL1) != 'undefined') { if (itemToCompare.CL1 == true) { itemToCompare.CL = "Dru"; itemToCompare.CLASS = "Druid"; } }
-	if (typeof(itemToCompare.CL2) != 'undefined') { if (itemToCompare.CL2 == true) { itemToCompare.CL = "Bar"; itemToCompare.CLASS = "Barbarian"; } }
-	if (typeof(itemToCompare.CL3) != 'undefined') { if (itemToCompare.CL3 == true) { itemToCompare.CL = "Pal"; itemToCompare.CLASS = "Paladin"; } }
-	if (typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL4 == true) { itemToCompare.CL = "Nec"; itemToCompare.CLASS = "Necromancer"; } }
-	if (typeof(itemToCompare.CL5) != 'undefined') { if (itemToCompare.CL5 == true) { itemToCompare.CL = "Ass"; itemToCompare.CLASS = "Assassin"; } }
-	if (typeof(itemToCompare.CL6) != 'undefined') { if (itemToCompare.CL6 == true) { itemToCompare.CL = "Sor"; itemToCompare.CLASS = "Sorceress"; } }
-	if (typeof(itemToCompare.CL7) != 'undefined') { if (itemToCompare.CL7 == true) { itemToCompare.CL = "Ama"; itemToCompare.CLASS = "Amazon"; } }
+	itemToCompare.PLRCLASS = ""
+	if (typeof(itemToCompare.CL1) != 'undefined') { if (itemToCompare.CL1 == true) { itemToCompare.PLRCLASS = "DRU"; itemToCompare.CL = "Dru"; itemToCompare.CLASS = "Druid"; } }
+	if (typeof(itemToCompare.CL2) != 'undefined') { if (itemToCompare.CL2 == true) { itemToCompare.PLRCLASS = "BAR"; itemToCompare.CL = "Bar"; itemToCompare.CLASS = "Barbarian"; } }
+	if (typeof(itemToCompare.CL3) != 'undefined') { if (itemToCompare.CL3 == true) { itemToCompare.PLRCLASS = "PAL"; itemToCompare.CL = "Pal"; itemToCompare.CLASS = "Paladin"; } }
+	if (typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL4 == true) { itemToCompare.PLRCLASS = "NEC"; itemToCompare.CL = "Nec"; itemToCompare.CLASS = "Necromancer"; } }
+	if (typeof(itemToCompare.CL5) != 'undefined') { if (itemToCompare.CL5 == true) { itemToCompare.PLRCLASS = "ASS"; itemToCompare.CL = "Ass"; itemToCompare.CLASS = "Assassin"; } }
+	if (typeof(itemToCompare.CL6) != 'undefined') { if (itemToCompare.CL6 == true) { itemToCompare.PLRCLASS = "SOR"; itemToCompare.CL = "Sor"; itemToCompare.CLASS = "Sorceress"; } }
+	if (typeof(itemToCompare.CL7) != 'undefined') { if (itemToCompare.CL7 == true) { itemToCompare.PLRCLASS = "AMA"; itemToCompare.CL = "Ama"; itemToCompare.CLASS = "Amazon"; } }
 	itemToCompare.QUAL = ""
 	if (typeof(itemToCompare.rarity) != 'undefined') {
 		if (itemToCompare.SUP != true && itemToCompare.INF != true) { itemToCompare.QUAL = itemToCompare.rarity[0].toUpperCase() + itemToCompare.rarity.substring(1) }
@@ -1939,14 +1945,14 @@ function setItemCodes() {
 // ---------------------------------
 function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
-	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON"];
+	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON","AMA","PAL","ASS","QUEST","UNIQUE"];
 	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE",max_durability:"MAXDUR"};
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_bonus:"ARPER"};
 	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;
 	var reset_selected = false;
 	
 	// Both PD2 and PoD seem to have all of these codes now... TODO: test PoD codes, especially whether certain groups include/exclude the same related categories
-	if (settings.version == 1) {
+	if (settings.version == 0) {
 		if (typeof(itemToCompare.WP5) != 'undefined' || typeof(itemToCompare.WP7) != 'undefined') { if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true } }
 		if (typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false } }
@@ -1969,7 +1975,7 @@ function setPD2Codes() {
 	for (aff in code_other) {
 		if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
 	}
-	if (settings.version == 1) {
+	if (settings.version == 0) {
 		document.getElementById("character_class").style.display = "inline-table"
 		document.getElementById("character_shop").style.display = "inline-table"
 		document.getElementById("character_equipped").style.display = "inline-table"
