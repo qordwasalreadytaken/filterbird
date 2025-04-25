@@ -495,25 +495,21 @@ function parseFile(file,num) {
             itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, (match, styleName) => {
 				return styleMacros[styleName] || match;
             });
+			// separate double %'s
+			itemDisplayLine = itemDisplayLine.replace('%%', '% %')
 			// remove extra spaces on either side of an equal sign so we can remove things better
 			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
 			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
-			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?),/g, () => {
-				return ""; // Replace with an empty string
-			});
-			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?) /g, () => {
-				return ""; // Replace with an empty string
-			});
-//			itemDisplayLine = itemDisplayLine.replace(/MapIconColor(.*?) /g, () => {
-//				return ""; // Replace with an empty string
-//			});
+
+			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?), /g, "")
+			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?) /g, "")
 			itemDisplayLine = itemDisplayLine.replace(/\bBackgroundColor\s*=\s*(\d+)\b/g, '%bgcolor($1)%');
 			itemDisplayLine = itemDisplayLine.replace(/\bBorderColor\s*=\s*(\d+)\b/g, '%BORDER($1)%');
 			itemDisplayLine = itemDisplayLine.replace("NotificationPriority=HIGH,", "").replace("NotificationPriority=MEDIUM,", "").replace("NotificationPriority=LOW,", "").replace("NotificationPriority=HIGH", "").replace("NotificationPriority=MEDIUM", "").replace("NotificationPriority=LOW", "");
 			itemDisplayLine = itemDisplayLine.replace("NotificationSoundPriority=HIGH,", "").replace("NotificationSoundPriority=MEDIUM,", "").replace("NotificationSoundPriority=LOW,", "").replace("NotificationSoundPriority=HIGH", "").replace("NotificationSoundPriority=MEDIUM", "").replace("NotificationSoundPriority=LOW", "");
-			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b/g, "").replace(/MapIconColor\s*=\s*(\d+)\b/g, "");
 			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(\d+)\b/g, "").replace(/NotificationSound\s*=\s*(\d+)\b/g, "");
 			itemDisplayLine = itemDisplayLine.replace(/MapIcon\s*=\s*(\d+)\b/g, "").replace(/MapIcon\s*=\s*(\d+)\b/g, "");
+			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b/g, "").replace(/MapIconColor\s*=\s*(\d+)\b/g, "");
 			itemDisplayLine = itemDisplayLine.replace(/BorderSize\s*=\s*(\d+)\b/g, "").replace(/BorderSize\s*=\s*(\d+)\b/g, "");
 			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
 			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')

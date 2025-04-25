@@ -125,8 +125,8 @@ ItemDisplay[mp1 CLVL>14]:
 ItemDisplay[mp2 CLVL>19]:
 ItemDisplay[mp3 CLVL>25]:
 // -------------------------------------------------------------- 
-ItemDisplay[FILTERLVL<5 rvl]: %BORDER(155,8)% %BGCOLOR(143)% %NL%%GREEN%!%PURPLE% R 70% %GREEN%!
-ItemDisplay[rvs]: %GREEN%!%PURPLE% r 35%  %BGCOLOR(143)% %BORDER(155,8)% 
+ItemDisplay[FILTERLVL<5 rvl]: %BORDER(155,8)%%BGCOLOR(143)%%NL%%GREEN%!%PURPLE% R 70% %GREEN%!
+ItemDisplay[rvs]: %BORDER(155,8)%%BGCOLOR(143)%%GREEN%!%PURPLE% r 35% 
 // -------------------------------------------------------------------------------------------------------------
 //						Scrolls								|
 // -------------------------------------------------------------------------------------------------------------
@@ -413,8 +413,8 @@ ItemDisplay[r26]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%
 ItemDisplay[r27]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOO %RED%OHM %PURPLE%OOOOOO%NL% %NL% %NOTIFYSOUND(r27,HIGH)%
 ItemDisplay[r28]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOOO %RED%LO %PURPLE%OOOOOOO%NL% %NL% %NOTIFYSOUND(r28,HIGH)%
 ItemDisplay[r29]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOO %RED%SUR %PURPLE%OOOOOO%NL% %NL% %NOTIFYSOUND(r29,HIGH)%
-ItemDisplay[r30]: %NOTIFY(ITEM,HIGH)% %MAPICON(96,1)% %BORDER(8,3)% %BGCOLOR(225)% %NL% %PURPLE%OOOOOOOOOO %RED%BER %PURPLE%OOOOOOOOOO%NL% %NL% %NOTIFYSOUND(r30,HIGH)%
-ItemDisplay[r31]: %NL% %PURPLE%OOOOOOOOOO %RED%JAH %PURPLE%OOOOOOOOOO%NL% %NL% %NOTIFYSOUND(r31,HIGH)% %NOTIFY(ITEM,HIGH)% %MAPICON(96,1)% %BORDER(8,3)% %BGCOLOR(225)%
+ItemDisplay[r30]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOOOOOO %RED%BER %PURPLE%OOOOOOOOOO%NL% %NL% %NOTIFYSOUND(r30,HIGH)%
+ItemDisplay[r31]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOOOOOO %RED%JAH %PURPLE%OOOOOOOOOO%NL% %NL% %NOTIFYSOUND(r31,HIGH)%
 ItemDisplay[r32]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOO %RED%CHAM %PURPLE%OOOOOO%NL% %NL% %NOTIFYSOUND(r32,HIGH)%
 ItemDisplay[r33]: %NOTIFY(ITEM,HIGH)%%MAPICON(96,1)%%BORDER(8,3)%%BGCOLOR(225)%%NL%%PURPLE%OOOOOO %RED%ZOD %PURPLE%OOOOOO%NL% %NL% %NOTIFYSOUND(r33,HIGH)%
 // -------------------------------------------------------------------------------------------------------------
@@ -823,7 +823,7 @@ ItemDisplay[rin !ID MAG ILVL>94]: %BLUE%%NAME% %GREEN%[%ILVL%]%CONTINUE%%NOTIFYS
 //						Rare Rings								|
 // -------------------------------------------------------------------------------------------------------------
 Sound[RareRing]: "southpark\howdyho4"
-ItemDisplay[rin !ID RARE]: %NL% %YELLOW%(%NAME%)%MAPICON(54)% %NOTIFYSOUND(RareRing,HIGH)% %BORDER(12,8)% %BGCOLOR(109)% 
+ItemDisplay[rin !ID RARE]: %BORDER(12,8)%%BGCOLOR(109)% %ORANGE%[%ILVL%]%NL%%YELLOW%(%NAME%)%MAPICON(54)% %NOTIFYSOUND(RareRing,HIGH)%
 // -------------------------------------------------------------------------------------------------------------
 // 			Set Ring
 // -------------------------------------------------------------------------------------------------------------
@@ -2201,7 +2201,7 @@ ItemDisplay[xhm SET !ID]: %NOTIFY(ITEM,MEDIUM)%%MAPICON(15,2)% %NL%%RED%** %GREE
 // ------------------------------------------------------------------------------------------------ Whitstan's Guard
 ItemDisplay[FILTERLVL<4 xml SET !ID]: %NOTIFY(ITEM,MEDIUM)%%MAPICON(15,2)% %GREEN%%NAME% %DGREEN%Orphan's %NOTIFYSOUND(LowSet,HIGH)%
 // ------------------------------------------------------------------------------------------------ Magnus' Skin
-ItemDisplay[FILTERLVL<4 xvg SET !ID]: %NOTIFY(ITEM,MEDIUM)% %MAPICON(15,2)% %GREEN%%NAME% %DGREEN%Orphan's %NOTIFYSOUND(LowSet,HIGH)%
+ItemDisplay[FILTERLVL<4 xvg SET !ID]: %NOTIFY(ITEM,MEDIUM)%%MAPICON(15,2)% %GREEN%%NAME% %DGREEN%Orphan's %NOTIFYSOUND(LowSet,HIGH)%
 // ------------------------------------------------------------------------------------------------ Wilhelm's Pride
 ItemDisplay[FILTERLVL<4 ztb SET !ID]: %NOTIFY(ITEM,MEDIUM)%%MAPICON(15,2)% %GREEN%%NAME% %DGREEN%Orphan's %NOTIFYSOUND(LowSet,HIGH)%
 //

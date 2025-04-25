@@ -56,9 +56,6 @@ Sound[corb1]: "ding"
 Sound[corb2]: "ding"
 Sound[corb3]: "zelda2"
 
-//Testing notes
-ItemDescription[ALTNote]: Press ALT for more // {{ALTNote}}
-
 //Text Macros
 //Called with %!macroname!%, %!tansocks!% for example
 TextMacro[upb4slam]:          %RED%Upgrade before corrupting for chance at max sockets
@@ -68,46 +65,27 @@ TextMacro[upb4slamsetarm1]:   %RED%Upgrade (Eld Ith PTopaz) before corrupting fo
 TextMacro[upb4slamsetarm2]:   %RED%Upgrade (Hel Io PTopaz) before corrupting for chance at max sockets
 
 TextMacro[pcm]:               %GRAY%Possible Corruption Mods 
-TextMacro[shopping]:          %RED%@@@@@  
-// %!shopping!%
-TextMacro[tansocks]:          %TAN%[%SOCKETS%] 
-// %!tansocks!%
-TextMacro[graysocks]:         %GRAY%[%SOCKETS%] 
-// %!graysocks!%
-TextMacro[stripedsocks]:      %WHITE%[%RED%%SOCKETS%%WHITE%] 
-// %!stripedsocks!%
-TextMacro[runename]:          %ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]  
-// %!runename!%
-TextMacro[mapmacro]:          %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%] [%CODE%] 
-// %!mapmacro!%
-TextMacro[qspecial]:          %SAGE%    %NAME%     
-//Qord special // %!qspecial!% "Qords special"
-TextMacro[gguueth]:           %NL%%GRAY% »      Eth %GOLD%%NAME%%GRAY%      « %NL% 
-// %!gguueth!% "GG Unid'd Unique Ethereal"
-TextMacro[ethuniq]:           %GRAY%Eth %GOLD%%NAME% 
-// %!ethuniq!%
-TextMacro[gguunoeth]:         %NL%%PURPLE%»»%RED%»» %ORANGE%»»  %YELLOW%»     %RED%%NAME%%YELLOW%     «%ORANGE%  «« %RED%««%PURPLE%««%NL% 
-// %!gguunoeth!% "GG Unid'd Unique Not Ethereal"
-TextMacro[ggidun]:            %NL%%GOLD%%NAME%%NL%%NL% 
-// %!ggidun!% "GG ID'd Uniques"
-TextMacro[okuniq]:            %YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«  
-// %!okuniq!% "Ok Uniques"
-TextMacro[okuniqid]:          %GOLD%%NAME%%NL%  
-// %!okuniqid!% "Ok Uniques, ID'd'"
-TextMacro[okuniqeth]:         %YELLOW%»%TAN%»%GRAY%ETH»     %GOLD%%NAME%%GRAY%     «%TAN%«%YELLOW%« 
-// %!okuniqeth!% "Ok Uniques, ethereal"
-TextMacro[setmacro]:          %GREEN%    %NAME%     %GREEN% 
-TextMacro[cubesoxwep]:        %NL% { Ral + Amn + P Amethyst %NL% Cube recipe for adding sockets to non-superior weapons %NL% }  
-// %!cubesoxwep!%
-TextMacro[cubesoxarm]:        %NL% { Tal + Thul + P Topaz %NL% Cube recipe for adding sockets to non-superior armor %NL% }  
-// %!cubesoxarm!%
-TextMacro[cubesoxhat]:        %NL% { Ral + Thul + P Sapphire %NL% Cube recipe for adding sockets to non-superior helmets %NL% } 
-// %!cubesoxhat!%
-TextMacro[cubesoxshld]:       %NL% { Tal + Amn + P Ruby %NL% Cube recipe for adding sockets to non-superior shields %NL% } 
-// %!cubesoxshld!%
+TextMacro[shopping]:          %RED%@@@@@  // %!shopping!%
+TextMacro[tansocks]:          %TAN%[%SOCKETS%] // %!tansocks!%
+TextMacro[graysocks]:         %GRAY%[%SOCKETS%] // %!graysocks!%
+TextMacro[stripedsocks]:      %WHITE%[%RED%%SOCKETS%%WHITE%] // %!stripedsocks!%
+TextMacro[runename]:          %ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]  // %!runename!%
+TextMacro[mapmacro]:          %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%] [%CODE%] // %!mapmacro!%
+TextMacro[qspecial]:          %SAGE%    %NAME%     //Qord special // %!qspecial!% "Qords special"
+TextMacro[gguueth]:           %NL%%GRAY% »      Eth %GOLD%%NAME%%GRAY%      « %NL% // %!gguueth!% "GG Unid'd Unique Ethereal"
+TextMacro[ethuniq]:           %GRAY%Eth %GOLD%%NAME% // %!ethuniq!%
+TextMacro[gguunoeth]:         %NL%%PURPLE%»»%RED%»» %ORANGE%»»  %YELLOW%»     %RED%%NAME%%YELLOW%     «%ORANGE%  «« %RED%««%PURPLE%««%NL% // %!gguunoeth!% "GG Unid'd Unique Not Ethereal"
+TextMacro[ggidun]:            %NL%%GOLD%%NAME%%NL%%NL% // %!ggidun!% "GG ID'd Uniques"
+TextMacro[okuniq]:            %YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«  // %!okuniq!% "Ok Uniques"
+TextMacro[okuniqid]:          %GOLD%%NAME%%NL%  // %!okuniqid!% "Ok Uniques, ID'd'"
+TextMacro[okuniqeth]:         %YELLOW%»%TAN%»%GRAY%ETH»     %GOLD%%NAME%%GRAY%     «%TAN%«%YELLOW%« // %!okuniqeth!% "Ok Uniques, ethereal"
+TextMacro[setmacro]:          %GREEN%    %NAME%     %GREEN% // %!setmacro!%
+TextMacro[cubesoxwep]:        %NL% { Ral + Amn + P Amethyst %NL% Cube recipe for adding sockets to non-superior weapons %NL% }  // %!cubesoxwep!%
+TextMacro[cubesoxarm]:        %NL% { Tal + Thul + P Topaz %NL% Cube recipe for adding sockets to non-superior armor %NL% }  // %!cubesoxarm!%
+TextMacro[cubesoxhat]:        %NL% { Ral + Thul + P Sapphire %NL% Cube recipe for adding sockets to non-superior helmets %NL% } // %!cubesoxhat!%
+TextMacro[cubesoxshld]:       %NL% { Tal + Amn + P Ruby %NL% Cube recipe for adding sockets to non-superior shields %NL% } // %!cubesoxshld!%
 TextMacro[cubesox]:           %NL% Weapons: Ral + Amn + P Amethyst %NL% Armor: Tal + Thul + P Topaz %NL% Helmets: Ral + Thul + P Sapphire %NL% Shields: Tal + Amn + P Ruby %NL% Cube recipies for adding sockets to: 
-TextMacro[shugnite]:          %NL% %SAGE%  { Changed in patch Shugnite } 
-// %!shugnite!%
+TextMacro[shugnite]:          %NL% %SAGE%  { Changed in patch Shugnite } // %!shugnite!%
 
 //Custom display styles
 //inline example: <:pelt: BorderColor = 99, BorderSize = 4, NotificationSound = SoundFile>
@@ -120,9 +98,9 @@ ItemStyle[pelt]:              MapIcon = 4, MapIconColor = 5, BorderColor = 4, Bo
 //ItemStyle[qnique]:          MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@local\sfx\Act5\Soldier\sol_overhere", NotificationPriority = HIGH //<<qnique>>
 ItemStyle[qnique]:            MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Act5\Soldier\sol_overhere", NotificationPriority = HIGH //<<qnique>>
 //ItemStyle[gguniqs]:         MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@local\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  //<<gguniqs>>
-ItemStyle[gguniqs]:           MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  
-ItemStyle[okuniqs]:           BorderColor=111, BorderSize=2, BackgroundColor=203, NotificationColor=ORANGE //<<okuniqs>>
-ItemStyle[ggsets]:            BorderColor = 111, BorderSize = 2, NotificationColor = GREEN 
+ItemStyle[gguniqs]:           MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  //<<gguniqs>>
+ItemStyle[okuniqs]:           BorderColor = 111, BorderSize = 2, BackgroundColor = 203, NotificationColor = ORANGE //<<okuniqs>>
+ItemStyle[ggsets]:            BorderColor = 111, BorderSize = 2, NotificationColor = GREEN //<<ggsets>>
 ItemStyle[orbs]:              BorderColor = 111, BorderSize = 2 //<<orbs>>  //not in use, to be deleted?
 ItemStyle[stack]:             NotificationColor = PURPLE //<<stack>>
 ItemStyle[notify]:            NotificationColor = WHITE //<<notify>>
@@ -144,9 +122,8 @@ SkillList[testlist]: "Meteor" "Energy Shield"
 //ItemDisplay[rvs]: %PURPLE%R %WHITE%70% <:notify: NotificationSoundPriority = HIGH, NotificationSound = "@global\sfx\object\shrine\warping">
 
 //Gambling screen
-// filterbird
-//ItemDisplay[STORAGE(GAMBLE) NMAG !ID (7wa)]: %NAME% <:notify: NotificationColor = RED>
-//ItemDisplay[STORAGE(GAMBLE) NMAG !ID (amu OR rin OR EQ7 OR aar)]: Gamble %NAME% <:notify: NotificationColor = RED>
+ItemDisplay[STORAGE(GAMBLE) NMAG !ID (7wa)]: %NAME% <:notify: NotificationColor = RED>
+ItemDisplay[STORAGE(GAMBLE) NMAG !ID (amu OR rin OR EQ7 OR aar)]: Gamble %NAME% <:notify: NotificationColor = RED>
 
 //Gold
 ItemDisplay[GOLD<100 CLVL<20]:
@@ -156,7 +133,7 @@ ItemDisplay[GOLD>5000 CLVL>79]: %NAME%
 
 //Pots
 ItemDisplay[rvl]: %PURPLE%R %WHITE%70% //%NOTIFYSOUND(corb3)%
-ItemDisplay[rvs]: %PURPLE%r %WHITE%35% %!okuniq!% <<okuniqs>>
+ItemDisplay[rvs]: %PURPLE%r %WHITE%35%
 //ItemDisplay["Super Healing Potion"]: %RED%%NAME% %MAPICON(4,5)% %BORDER(1,33)% %BGCOLOR(4)% 
 //ItemDisplay["Super Healing Potion" AND CLVL>85 AND CHARSTAT(6)<400]: %RED%! Drink a pot ! %WHITE% Hp
 ItemDisplay["Super Healing Potion"]:  %RED%!%WHITE%Hp
@@ -181,9 +158,8 @@ ItemDisplay[wms (FILTERLVL=1)]: %WHITE%thaw
 ItemDisplay[wms CLVL>60]:
 ItemDisplay[yps FILTERLVL=1]: %WHITE%antidote
 //ItemDisplay[key (FILTERLVL=1 AND PLRCLASS=0)]: %GRAY%key
-// filterbird error
-//ItemDisplay[key FILTERLVL=1 AND !PLRCLASS(ASS)]: %GRAY%key
-ItemDisplay[key FILTERLVL=1]: %GRAY%key
+ItemDisplay[key (FILTERLVL=1 AND !PLRCLASS(ASS))]: %GRAY%key
+//ItemDisplay[key FILTERLVL=1]: %GRAY%key
 //Choking, Exploding, Fulminating, Oil, Rancid, Strangling
 ItemDisplay[(gpm OR opm OR opl OR ops OR gps OR gpl) FILTERLVL=1]: %NAME%
 //Throws $35k+, money maker
@@ -210,14 +186,13 @@ ItemDisplay[leg]: %NAME%  <<qspecials>>
 // Alt text for horadric staff
 ItemDisplay[hst OR msf]: %TAN%%NAME% <:notify: NotificationColor = GOLD> {%NAME% %DGREEN%[Circle]                [Circle&Crescent]%NL%[Crescent]             [Triangle]%NL%[Square]     [Arrows]%NL%[Star]%NL%%ORANGE%DURIEL TOMB ORDER:} //%NOTIFY(GOLD)%
 // Alt test for horadric cube
-ItemDisplay[box]: %TAN%%NAME% { %!cubesox!% } {{ALTNote}}  <:notify: NotificationColor = GOLD> 
-//ItemDisplay[box]: %TAN%%NAME% {{ALTNote}} 
+ItemDisplay[box]: %TAN%%NAME% { %!cubesox!% } <:notify: NotificationColor = GOLD> 
 // Other quest
 ItemDisplay[QUEST]: %TAN%%NAME% <:notify: NotificationColor = GOLD> //%NOTIFY(GOLD)%
 
 //PoD Items
-//ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
-//ItemDisplay[SYNTH]: %GOLD%%NAME% <<qspecials>> //failsafe forsynthesized items, the above *should* catch them though
+ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
+ItemDisplay[SYNTH]: %GOLD%%NAME% <<qspecials>> //failsafe forsynthesized items, the above *should* catch them though
 ItemDisplay[std]: %NAME%
 ItemDisplay[cx5]: %NL%%GRAY%»     %PURPLE% %NAME% %GRAY%      «%NL%%NL% {  - Charms and Jewels%NL%  - Ethereal Items%NL%  - Socketed Items%NL%  - Non-magical Items%NL%%WHITE%Any item can be corrupted except:%NL%with another item and press the Transmute button twice.%NL%Place the Orb of Corruption%WHITE% into the Horadric Cube%WHITE%%NL%} <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(128/0/128), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
 ItemDisplay[cx9]: %NL%%GRAY%»     %WHITE% %NAME% %GRAY%      «%NL%%NL%  <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(255/255/255), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
@@ -266,6 +241,7 @@ ItemDisplay[gpr]: %RED%Ø P %WHITE%Ruby %RED%Ø<:notify: MapIcon = 49>
 ItemDisplay[gpb]: %BLUE%Ø P %WHITE%Sapphire %BLUE%Ø<<notify>>
 ItemDisplay[gpy]: %YELLOW%Ø P %WHITE%Topaz %YELLOW%Ø<<notify>>
 ItemDisplay[skz]: %WHITE%Ø P %WHITE%Skull %WHITE%Ø<:notify: MapIcon = 49> //<<stack>>
+// filterbird
 //ItemDisplay[GEM FILTERLVL=1 AND (DIFFICULTY=0 or CLVL<40)]: %NAME%
 
 //Magic and rare Rings and amulets
@@ -331,7 +307,8 @@ ItemDisplay[EQ7 (MAG OR RARE)]: %NAME%
 //ItemDisplay[ci3 NMAG !ETH SOCK=0]: %NAME% %YELLOW%[%GRAY%imbue%YELLOW%]
 
 //Arrows Bolts
-ItemDisplay[RARE (aq2 OR cq2) (AREALVL>12 AND AREALVL<21)]: %NL% %NAME% %NL% <<rare>> %CONTINUE%
+// filterbird
+//ItemDisplay[RARE (aq2 OR cq2) (AREALVL > 12 AND AREALVL < 21)]: %NL% %NAME% %NL% <<rare>> %CONTINUE%
 ItemDisplay[RARE (aq2 OR cq2) ILVL>60]: %NL% %NAME% %NL% <<rare>> %CONTINUE%
 ItemDisplay[RARE (aq2 OR cq2) FILTERLVL<5]: %NAME% %CONTINUE% 
 
@@ -410,7 +387,7 @@ ItemDisplay[UNI !ID FILTERLVL<5]: %NAME% // [%CODE%]
 
 //Sets
 //Good set parts
-ItemDisplay[(7ma OR amu OR uar OR ci3 OR 7qr OR uth OR ulg OR xtb OR xhm OR xmg OR ult OR xhl OR 7ls OR upl) SET]: %!setmacro!%  <<ggsets>> 
+ItemDisplay[(7ma OR amu OR uar OR ci3 OR 7qr OR uth OR ulg OR xtb OR xhm OR xmg OR ult OR xhl OR 7ls OR upl) SET]: %!setmacro!% <<ggsets>> //%CONTINUE%
 //Set catch all
 ItemDisplay[SET !ID FILTERLVL<5]: %NAME% // %CONTINUE%// [%CODE%]
 
@@ -847,7 +824,8 @@ ItemDisplay[(EQ3) AND (NMAG OR RW)  (SOCK=0 OR SOCK>1) FILTERLVL=1]: %GRAY% %NAM
 
 //Other requests, eth elder & archon staff, axes, elite 4os swords
 ItemDisplay[(6cs OR 6ws) NMAG ETH (SOCK=0 OR SOCK>3) FILTERLVL<3]: %NAME% %!graysocks!%
-ItemDisplay[NMAG WP1 (SOCK=0 OR SOCK=4) FILTERLVL=1]: %NAME% %!graysocks!%
+// filterbird, soace after = sign
+ItemDisplay[WP1 NMAG (SOCK=0 OR SOCK=4) FILTERLVL=1]: %NAME% %!graysocks!%
 ItemDisplay[(WP16 OR WP15) (ELT OR EXC) NMAG (SOCK=0 OR SOCK=4) FILTERLVL=1]: %NAME% %!graysocks!% //are wp15, wp16, and wp17 working yet??
 //ItemDisplay[WP3 ELT NMAG (SOCK=0 OR SOCK=4) FILTERLVL= 1]: %NAME% %!graysocks!%
 
@@ -918,6 +896,7 @@ ItemDisplay[(9ga OR spc OR wnd OR ywn OR bwn OR gwn OR ktr OR wrb OR xtp OR xld 
 ItemDisplay[WEAPON (RARE OR SET OR UNI OR CRAFT) ID]:%NAME%{%GRAY% Enh Dam 35-50% | Deadly Strike 10% | Max Dam Clvl | CB 20% | IAS 10-15% %NL% %!pcm!%}
 //boots
 //ItemDisplay[EQ5 (RARE OR SET OR UNI OR CRAFT) ID]:%NAME%{%GRAY% Fire Res 10-20% | All Res 5-10% | Dex 5-15 | Light Res 10-20% | Cooldown -10% %NL% %!pcm!%}
+// filterbird space at =
 ItemDisplay[EQ5 (RARE OR SET OR UNI OR CRAFT) ID AND !STAT360=1]:%NAME%{%GRAY% Fire Res 10-20% | All Res 5-10% | Dex 5-15 | Light Res 10-20% | Cooldown -10% %NL% %!pcm!%}
 //gloves
 ItemDisplay[EQ4 (RARE OR SET OR UNI OR CRAFT) ID]:%NAME%{%GRAY% IAS 10% | Cold Res 10-20% | All Res 5-10% | LGOH M5-10, R5-10 | Psn Res 10-20% %NL% %!pcm!%}
@@ -978,5 +957,6 @@ ItemDisplay[(ARMOR OR WEAPON) ETH CLVL<19]: %GRAY%ETH %NAME%
 ItemDisplay[(ARMOR OR WEAPON) SOCK>0 CLVL<19]: %NAME% %!graysocks!%
 // If you're above level 18, hide all other weapons and armor 
 ItemDisplay[(ARMOR OR WEAPON) CLVL>18]:
+
 
 
