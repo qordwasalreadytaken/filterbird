@@ -371,11 +371,44 @@ function clearText(num) {
 	document.getElementById("filter_text_"+num).value = "";
 }
 
+function extractMacrosFromFile(file) {
+    const macros = {}; // Dictionary to store extracted macros
+
+    // Updated regex: handles line breaks properly between parts of the macro definition
+    const macroRegex = /TextMacro\s*\[(.*?)\]\s*:\s*(.+)/g;
+
+    let match;
+
+    // Safely iterate over all matches in the file
+    while ((match = macroRegex.exec(file)) !== null) {
+        const macroName = match[1].trim(); // Extract macro name
+        const macroValue = match[2].trim(); // Extract macro value
+        macros[macroName] = macroValue;
+    }
+
+    return macros;
+}
+
+
+
+
+//// Example definitions for macros and styles
+//var textMacros = {
+//    okuniq: '%YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«',
+//	runename: '%ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]',
+//};
+//
+//var itemStyles = {
+//    okuniqs: 'BorderColor = 111, BorderSize = 2, BackgroundColor = 203, NotificationColor = ORANGE',
+//	rune: 'MapIcon = 75, MapIconColor = 5, BorderColor = 111, BorderSize = 2, BackgroundColor = 75, NotificationColor = PURPLE, NotificationPriority = HIGH, NotificationSound = corb2, NotificationSoundPriority = HIGH',
+//};
+
 // parseFile - parses the filter file line by line
 //	file: text of the filter
 //	num: filter number (1 or 2)
 // ---------------------------------
 function parseFile(file,num) {
+	const textMacros = extractMacrosFromFile(file);
 	var errors = 0;
 	var display = "";
 	var description = "";
@@ -419,13 +452,40 @@ function parseFile(file,num) {
 	var line_num = 0;
 	for (line in lines) { if (done == false) {
 		line_num = Number(line)+1;
+
 		document.getElementById("o3").innerHTML += "<br>ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>Please copy/paste that line and give it to Qord, or just tell him the filter and line # that fails"	// gets displayed if the function halts unexpectedly at any point
 //		console.log("Invalid formatting: ", line)
 		var rule = lines[line].split("/")[0];
 		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
+		if (line_num !== -1) {
+            // Extract the ItemDisplay line
+            var itemDisplayLine = rule_with_tabs;
+
+            // Step 1: Replace macros (%!macro!%)
+            itemDisplayLine = itemDisplayLine.replace(/%!(.*?)!%/g, (match, macroName) => {
+                return textMacros[macroName] || match;
+            });
+
+            // Step 2: Replace styles (<<style>>)
+//            itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, (match, styleName) => {
+//                return itemStyles[styleName] || match;
+//            });
+			itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, () => {
+				return ""; // Replace with an empty string
+			});
+
+            // Step 3: Update `rule_with_tabs` with the substituted line for further processing
+//            rule_with_tabs = itemDisplayLine.split("­").join("•").split("\n");
+            rule_with_tabs = itemDisplayLine.split("/")[0];
+			
+			console.log(rule_with_tabs)
+            // Process the updated `rule_with_tabs` string dynamically in subsequent logic
+		}
+		
 		var index_with_tabs = rule_with_tabs.indexOf("ItemDisplay[");
 		var index_end = rule.indexOf("]:");
+		
 		if (settings.validation == 1 && errors < settings.max_errors) {
 			if (!(rule_with_tabs.substring(0,rule_with_tabs.indexOf("ItemDisplayFilterName[]:")).length == 0)) {
 				if (!(index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) && rule_with_tabs.length > 0) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the line is not a rule and has other characters prior to any "/" characters
@@ -436,9 +496,11 @@ function parseFile(file,num) {
 			var match = false;
 			var formula = "";
 			var conditions = rule.substring(0,index).concat(rule.substring(index+12)).split("]:")[0];
+	
 			while (conditions.includes("  ")) { conditions = conditions.split("  ").join(" "); }	// remove multiple spaces within conditions
 			conditions = conditions.split("( ").join("(").split(" )").join(")")						// removes extra spaces within parentheses
-			var output = lines_with_tabs[line].substring(0,index).concat(lines_with_tabs[line].substring(index+12)).split("]:")[1];
+//			var output = lines_with_tabs[line].substring(0,index).concat(lines_with_tabs[line].substring(index+12)).split("]:")[1];
+			var output = rule_with_tabs.split("]:")[1];
 			if (conditions[0] == " " || conditions[conditions.length-1] == " ") {
 				//if (settings.validation == 1 && errors < settings.max_errors) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule's conditions have space on either side (cosmetic only)
 				conditions = conditions.trim()
@@ -468,6 +530,7 @@ function parseFile(file,num) {
 			}
 			if (index_end > index+12 && rule.substring(0,index).length == 0) {
 				conditions = conditions.split(",").join("‚")	// Refactors "MULTI" conditions since they use commas (uses the "Single low-9 quotation mark" instead of "comma")
+				conditions = conditions.replace(/%NOTIFY.*?%/g, '');
 				var match_override = false;
 //				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" and ").join(" ").split(" OR ").join(",|,").split(" or ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_format;
@@ -709,7 +772,9 @@ function parseFile(file,num) {
 				//	}
 				//}
 				
-				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY\([^)]*\)%?/gi, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
+
+
+				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY.*?%/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
@@ -744,6 +809,14 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
+					if (out_format.includes("%NOTIFY(") || out_format.includes("%notify(")) {
+						const notifylassPattern = /%NOTIFY.*?%/g;
+						let match;
+						while ((match = notifyclassPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
 //					if (out_format.includes("%NOTIFY") || out_format.includes("%notify")) { for (let a = 0; a < 16; a++) {
 //						var av = a.toString(16);
 //						out_format = out_format.split("%NOTIFY"+av+"%").join(",ignore_notification,").split("%NOTIFY"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify"+av+"%").join(",ignore_notification,").split("%notify"+av.toUpperCase()+"%").join(",ignore_notification,")
@@ -768,6 +841,14 @@ function parseFile(file,num) {
 					// This will ignore macros
 					if (out_format.includes("%!"))  {
 						const macroPattern = /%!.*?!%/g;
+						let match;
+						while ((match = macroPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					if (out_format.includes("<<"))  {
+						const macroPattern = /<<.*?>>/g;
 						let match;
 						while ((match = macroPattern.exec(out_format)) !== null) {
 							let matchStr = match[0];
@@ -813,12 +894,32 @@ function parseFile(file,num) {
 						console.log("background color log 1 is " + mappedbgcolor);
 						return mappedbgcolor
 					});
+
+					const bg2roundRegex = /BackgroundColor\s*=\s*(\d+),/gi;
+
+					out_format = out_format.replace(bg2roundRegex, (match, colorIdxStr) => {
+						let colorIdx = parseInt(colorIdxStr); // Parse the numeric value for color index
+						let mappedbgcolor = colorIndexMap[colorIdx] || "#000000"; // Fallback to black if undefined
+					
+						console.log("Mapped background color is " + mappedbgcolor);
+						return mappedbgcolor // Replace with the mapped color
+					});
+					
 					// This ignores the bgcolor, need to remove this when html fixing happens
 					if (out_format.match(/%bgcolor\((\d+)(?:,(\d+))?\)%/gi)) {
 						console.log("Ignoring background color");
 						const bgcolorPattern = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
 						let match;
 						while ((match = bgcolorPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					if (out_format.match(/BackgroundColor\s*=\s*(\d+),/gi)) {
+						console.log("Ignoring background2 color");
+						const bgcolor2Pattern = /BackgroundColor\s*=\s*(\d+),/gi;
+						let match;
+						while ((match = bgcolor2Pattern.exec(out_format)) !== null) {
 							let matchStr = match[0];
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
@@ -1087,8 +1188,8 @@ function parseFile(file,num) {
 			out_format = out_format.split("%NOTIFY("+av+"%").join(",ignore_notification,").split("%NOTIFY("+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify("+av+"%").join(",ignore_notification,").split("%notify("+av.toUpperCase()+"%").join(",ignore_notification,")
 		} }
 		//This gets rid of "notifyXX" in item name displays
-		if (out_format.includes("%NOTIFY(") || out_format.includes("%notify(")) {
-			const notifyPattern = /(?:%?)notify\([^)]*\)(?:%?)/gi;
+		if (out_format.includes("%NOTIFY") || out_format.includes("%notify")) {
+			const notifyPattern = /%NOTIFY.*?%/g;
 			let match;
 			while ((match = notifyPattern.exec(out_format)) !== null) {
 				let matchStr = match[0];

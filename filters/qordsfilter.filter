@@ -102,7 +102,7 @@ ItemStyle[pelt]:              MapIcon = 4, MapIconColor = 5, BorderColor = 4, Bo
 ItemStyle[qnique]:            MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Act5\Soldier\sol_overhere", NotificationPriority = HIGH //<<qnique>>
 //ItemStyle[gguniqs]:         MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@local\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  //<<gguniqs>>
 ItemStyle[gguniqs]:           MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  //<<gguniqs>>
-ItemStyle[okuniqs]:           BorderColor = 111, BorderSize = 2, BackgroundColor = 203, NotificationColor = ORANGE //<<okuniqs>>
+ItemStyle[okuniqs]:           BorderColor=111, BorderSize=2, BackgroundColor=203, NotificationColor=ORANGE //<<okuniqs>>
 ItemStyle[ggsets]:            BorderColor = 111, BorderSize = 2, NotificationColor = GREEN //<<ggsets>>
 ItemStyle[orbs]:              BorderColor = 111, BorderSize = 2 //<<orbs>>  //not in use, to be deleted?
 ItemStyle[stack]:             NotificationColor = PURPLE //<<stack>>
@@ -137,7 +137,7 @@ ItemDisplay[GOLD>5000 CLVL>79]: %NAME%
 
 //Pots
 ItemDisplay[rvl]: %PURPLE%R %WHITE%70% //%NOTIFYSOUND(corb3)%
-ItemDisplay[rvs]: %PURPLE%r %WHITE%35%
+ItemDisplay[rvs]: %PURPLE%r %WHITE%35% %!okuniq!% <<okuniqs>>
 //ItemDisplay["Super Healing Potion"]: %RED%%NAME% %MAPICON(4,5)% %BORDER(1,33)% %BGCOLOR(4)% 
 //ItemDisplay["Super Healing Potion" AND CLVL>85 AND CHARSTAT(6)<400]: %RED%! Drink a pot ! %WHITE% Hp
 ItemDisplay["Super Healing Potion"]:  %RED%!%WHITE%Hp
@@ -197,8 +197,8 @@ ItemDisplay[box]: %TAN%%NAME% { %!cubesox!% } {{ALTNote}}  <:notify: Notificatio
 ItemDisplay[QUEST]: %TAN%%NAME% <:notify: NotificationColor = GOLD> //%NOTIFY(GOLD)%
 
 //PoD Items
-ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
-ItemDisplay[SYNTH]: %GOLD%%NAME% <<qspecials>> //failsafe forsynthesized items, the above *should* catch them though
+//ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
+//ItemDisplay[SYNTH]: %GOLD%%NAME% <<qspecials>> //failsafe forsynthesized items, the above *should* catch them though
 ItemDisplay[std]: %NAME%
 ItemDisplay[cx5]: %NL%%GRAY%»     %PURPLE% %NAME% %GRAY%      «%NL%%NL% {  - Charms and Jewels%NL%  - Ethereal Items%NL%  - Socketed Items%NL%  - Non-magical Items%NL%%WHITE%Any item can be corrupted except:%NL%with another item and press the Transmute button twice.%NL%Place the Orb of Corruption%WHITE% into the Horadric Cube%WHITE%%NL%} <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(128/0/128), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
 ItemDisplay[cx9]: %NL%%GRAY%»     %WHITE% %NAME% %GRAY%      «%NL%%NL%  <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(255/255/255), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
