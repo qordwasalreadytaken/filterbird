@@ -1,3 +1,18 @@
+# [FilterBird](https://qordwasalreadytaken.github.io/filterbird/)
+
+FilterBird, originally by toolmaster BW, is a tool to allow you to "use" an item filter without being in game. 
+
+This version in not up to date, but has been updated enough to not crash (as much?) with PoD's newer filtering options. 
+
+Includes limited support for TextMacros and ItemStyles.
+
+Please see the original ReadMe below for more information on FilterBird. 
+
+No refunds.
+
+
+
+
 # [FilterBird](https://betweenwalls.github.io/filterbird/)
 Diablo II Filter Simulation (Path of Diablo & Project Diablo II)
 
