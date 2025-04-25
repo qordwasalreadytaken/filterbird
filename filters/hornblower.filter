@@ -771,10 +771,10 @@ ItemDisplay[!ETH UNI ID ci3 SOCK=1 SOCK=2]: %GOLD% %NAME% %GREEN%[%SOCKETS%]%NL%
 ItemDisplay[!ETH UNI ID ci3 SOCK=3]: %GOLD% %NAME% %PURPLE%[%SOCKETS%]%NL% %ORANGE%-%YELLOW% %STAT(334,0)%Light Res%WHITE% | %ORANGE%+%YELLOW% %STAT(330,0)%Light Dmg <<GG1>>
 ItemDisplay[ETH UNI !ID ci3]: %ORANGE%ETH %GOLD% %NAME% %PURPLE%O<<BASIC>>
 //Shako
-ItemDisplay[!ETH UNI !ID uap]: %NL%       %PURPLE%O %GOLD% %NAME% %PURPLE%O       %NL% %GOLD%<<GG1>>
-ItemDisplay[!ETH UNI ID uap SOCK=0]: %BASENAME% %NL% %GOLD% %ITEMNAME%<<GG1>>
-ItemDisplay[!ETH UNI ID uap SOCK=2]: %BASENAME% %NL% %GOLD% %ITEMNAME% %GREEN%[%SOCKETS%]<<GG1>>
-ItemDisplay[!ETH UNI ID uap]: %BASENAME% %NL% %GOLD% %ITEMNAME% %ORANGE%[%SOCKETS%]<<GG1>>
+ItemDisplay[!ETH UNI !ID uap]: %NL%       %PURPLE%O %GOLD% %NAME% %PURPLE%O       %NL% %GOLD% <<GG1>>
+ItemDisplay[!ETH UNI ID uap SOCK=0]: %BASENAME% %NL% %GOLD% %ITEMNAME% <<GG1>>
+ItemDisplay[!ETH UNI ID uap SOCK=2]: %BASENAME% %NL% %GOLD% %ITEMNAME% %GREEN%[%SOCKETS%] <<GG1>>
+ItemDisplay[!ETH UNI ID uap]: %BASENAME% %NL% %GOLD% %ITEMNAME% %ORANGE%[%SOCKETS%] <<GG1>>
 ItemDisplay[ETH UNI !ID uap]: %ORANGE%ETH %GOLD% %NAME% <<BASIC>>
 //Crown of Ages
 ItemDisplay[!ETH UNI !ID urn]: %ORANGE%Crown of Ages%NL%       %PURPLE%O %GOLD% %NAME% %PURPLE%O       %GOLD%<<GG>>

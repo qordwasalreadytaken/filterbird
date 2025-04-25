@@ -242,8 +242,8 @@ ItemDisplay[uhm UNI !ID ETH FILTERLVL=1]: %LIGHT_GRAY%ETH %GOLD%Veil of Steel or
 ItemDisplay[xhm UNI !ID !ETH FILTERLVL<3]: %!LOWTIER!% %GOLD%Valkyrie Wing%NL%%BASENAME% %!LOWEND!% <<UNIQUE>>
 ItemDisplay[xhm UNI !ID ETH FILTERLVL=1]: %LIGHT_GRAY%ETH %GOLD%Valkyrie Wing%NL%%BASENAME%
 //- Andariel's Visage
-ItemDisplay[usk UNI !ID !ETH]: %!MIDTIER!% %GOLD%Andariel's Visage%NL%%BASENAME% %!MIDEND!% <<UNIQUE>>
-ItemDisplay[usk UNI !ID ETH FILTERLVL<3]: %LIGHT_GRAY%ETH %GOLD%Andariel's Visage%NL%%BASENAME%
+ItemDisplay[usk UNI !ID !ETH]: %!MIDTIER!% %GOLD% Andariel's Visage%NL%  %!MIDEND!% <<UNIQUE>>
+ItemDisplay[usk UNI !ID ETH FILTERLVL<3]: %LIGHT_GRAY% ETH %GOLD% Andariel's Visage %NL% 
 //- Crown of Ages
 ItemDisplay[urn UNI !ID !ETH]: %!MIDTIER!% %GOLD%Crown of Ages%NL%%BASENAME% %!MIDEND!% <<UNIQUE>>
 ItemDisplay[urn UNI !ID ETH FILTERLVL=1]: %LIGHT_GRAY%ETH %GOLD%Crown of Ages%NL%%BASENAME%

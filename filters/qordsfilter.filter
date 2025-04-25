@@ -68,27 +68,46 @@ TextMacro[upb4slamsetarm1]:   %RED%Upgrade (Eld Ith PTopaz) before corrupting fo
 TextMacro[upb4slamsetarm2]:   %RED%Upgrade (Hel Io PTopaz) before corrupting for chance at max sockets
 
 TextMacro[pcm]:               %GRAY%Possible Corruption Mods 
-TextMacro[shopping]:          %RED%@@@@@  // %!shopping!%
-TextMacro[tansocks]:          %TAN%[%SOCKETS%] // %!tansocks!%
-TextMacro[graysocks]:         %GRAY%[%SOCKETS%] // %!graysocks!%
-TextMacro[stripedsocks]:      %WHITE%[%RED%%SOCKETS%%WHITE%] // %!stripedsocks!%
-TextMacro[runename]:          %ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]  // %!runename!%
-TextMacro[mapmacro]:          %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%] [%CODE%] // %!mapmacro!%
-TextMacro[qspecial]:          %SAGE%    %NAME%     //Qord special // %!qspecial!% "Qords special"
-TextMacro[gguueth]:           %NL%%GRAY% »      Eth %GOLD%%NAME%%GRAY%      « %NL% // %!gguueth!% "GG Unid'd Unique Ethereal"
-TextMacro[ethuniq]:           %GRAY%Eth %GOLD%%NAME% // %!ethuniq!%
-TextMacro[gguunoeth]:         %NL%%PURPLE%»»%RED%»» %ORANGE%»»  %YELLOW%»     %RED%%NAME%%YELLOW%     «%ORANGE%  «« %RED%««%PURPLE%««%NL% // %!gguunoeth!% "GG Unid'd Unique Not Ethereal"
-TextMacro[ggidun]:            %NL%%GOLD%%NAME%%NL%%NL% // %!ggidun!% "GG ID'd Uniques"
-TextMacro[okuniq]:            %YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«  // %!okuniq!% "Ok Uniques"
-TextMacro[okuniqid]:          %GOLD%%NAME%%NL%  // %!okuniqid!% "Ok Uniques, ID'd'"
-TextMacro[okuniqeth]:         %YELLOW%»%TAN%»%GRAY%ETH»     %GOLD%%NAME%%GRAY%     «%TAN%«%YELLOW%« // %!okuniqeth!% "Ok Uniques, ethereal"
-TextMacro[setmacro]:          %GREEN%    %NAME%     %GREEN% // %!setmacro!%
-TextMacro[cubesoxwep]:        %NL% { Ral + Amn + P Amethyst %NL% Cube recipe for adding sockets to non-superior weapons %NL% }  // %!cubesoxwep!%
-TextMacro[cubesoxarm]:        %NL% { Tal + Thul + P Topaz %NL% Cube recipe for adding sockets to non-superior armor %NL% }  // %!cubesoxarm!%
-TextMacro[cubesoxhat]:        %NL% { Ral + Thul + P Sapphire %NL% Cube recipe for adding sockets to non-superior helmets %NL% } // %!cubesoxhat!%
-TextMacro[cubesoxshld]:       %NL% { Tal + Amn + P Ruby %NL% Cube recipe for adding sockets to non-superior shields %NL% } // %!cubesoxshld!%
+TextMacro[shopping]:          %RED%@@@@@  
+// %!shopping!%
+TextMacro[tansocks]:          %TAN%[%SOCKETS%] 
+// %!tansocks!%
+TextMacro[graysocks]:         %GRAY%[%SOCKETS%] 
+// %!graysocks!%
+TextMacro[stripedsocks]:      %WHITE%[%RED%%SOCKETS%%WHITE%] 
+// %!stripedsocks!%
+TextMacro[runename]:          %ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]  
+// %!runename!%
+TextMacro[mapmacro]:          %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%] [%CODE%] 
+// %!mapmacro!%
+TextMacro[qspecial]:          %SAGE%    %NAME%     
+//Qord special // %!qspecial!% "Qords special"
+TextMacro[gguueth]:           %NL%%GRAY% »      Eth %GOLD%%NAME%%GRAY%      « %NL% 
+// %!gguueth!% "GG Unid'd Unique Ethereal"
+TextMacro[ethuniq]:           %GRAY%Eth %GOLD%%NAME% 
+// %!ethuniq!%
+TextMacro[gguunoeth]:         %NL%%PURPLE%»»%RED%»» %ORANGE%»»  %YELLOW%»     %RED%%NAME%%YELLOW%     «%ORANGE%  «« %RED%««%PURPLE%««%NL% 
+// %!gguunoeth!% "GG Unid'd Unique Not Ethereal"
+TextMacro[ggidun]:            %NL%%GOLD%%NAME%%NL%%NL% 
+// %!ggidun!% "GG ID'd Uniques"
+TextMacro[okuniq]:            %YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«  
+// %!okuniq!% "Ok Uniques"
+TextMacro[okuniqid]:          %GOLD%%NAME%%NL%  
+// %!okuniqid!% "Ok Uniques, ID'd'"
+TextMacro[okuniqeth]:         %YELLOW%»%TAN%»%GRAY%ETH»     %GOLD%%NAME%%GRAY%     «%TAN%«%YELLOW%« 
+// %!okuniqeth!% "Ok Uniques, ethereal"
+TextMacro[setmacro]:          %GREEN%    %NAME%     %GREEN% 
+TextMacro[cubesoxwep]:        %NL% { Ral + Amn + P Amethyst %NL% Cube recipe for adding sockets to non-superior weapons %NL% }  
+// %!cubesoxwep!%
+TextMacro[cubesoxarm]:        %NL% { Tal + Thul + P Topaz %NL% Cube recipe for adding sockets to non-superior armor %NL% }  
+// %!cubesoxarm!%
+TextMacro[cubesoxhat]:        %NL% { Ral + Thul + P Sapphire %NL% Cube recipe for adding sockets to non-superior helmets %NL% } 
+// %!cubesoxhat!%
+TextMacro[cubesoxshld]:       %NL% { Tal + Amn + P Ruby %NL% Cube recipe for adding sockets to non-superior shields %NL% } 
+// %!cubesoxshld!%
 TextMacro[cubesox]:           %NL% Weapons: Ral + Amn + P Amethyst %NL% Armor: Tal + Thul + P Topaz %NL% Helmets: Ral + Thul + P Sapphire %NL% Shields: Tal + Amn + P Ruby %NL% Cube recipies for adding sockets to: 
-TextMacro[shugnite]:          %NL% %SAGE%  { Changed in patch Shugnite } // %!shugnite!%
+TextMacro[shugnite]:          %NL% %SAGE%  { Changed in patch Shugnite } 
+// %!shugnite!%
 
 //Custom display styles
 //inline example: <:pelt: BorderColor = 99, BorderSize = 4, NotificationSound = SoundFile>
@@ -101,9 +120,9 @@ ItemStyle[pelt]:              MapIcon = 4, MapIconColor = 5, BorderColor = 4, Bo
 //ItemStyle[qnique]:          MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@local\sfx\Act5\Soldier\sol_overhere", NotificationPriority = HIGH //<<qnique>>
 ItemStyle[qnique]:            MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Act5\Soldier\sol_overhere", NotificationPriority = HIGH //<<qnique>>
 //ItemStyle[gguniqs]:         MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@local\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  //<<gguniqs>>
-ItemStyle[gguniqs]:           MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  //<<gguniqs>>
+ItemStyle[gguniqs]:           MapIcon = 4, BorderColor = 111, BorderSize = 2, BackgroundColor = 197, NotificationColor = PURPLE, NotificationSound = "@global\sfx\Common\Cain\Cain_hello", NotificationPriority = HIGH  
 ItemStyle[okuniqs]:           BorderColor=111, BorderSize=2, BackgroundColor=203, NotificationColor=ORANGE //<<okuniqs>>
-ItemStyle[ggsets]:            BorderColor = 111, BorderSize = 2, NotificationColor = GREEN //<<ggsets>>
+ItemStyle[ggsets]:            BorderColor = 111, BorderSize = 2, NotificationColor = GREEN 
 ItemStyle[orbs]:              BorderColor = 111, BorderSize = 2 //<<orbs>>  //not in use, to be deleted?
 ItemStyle[stack]:             NotificationColor = PURPLE //<<stack>>
 ItemStyle[notify]:            NotificationColor = WHITE //<<notify>>
@@ -391,7 +410,7 @@ ItemDisplay[UNI !ID FILTERLVL<5]: %NAME% // [%CODE%]
 
 //Sets
 //Good set parts
-ItemDisplay[(7ma OR amu OR uar OR ci3 OR 7qr OR uth OR ulg OR xtb OR xhm OR xmg OR ult OR xhl OR 7ls OR upl) SET]: %!setmacro!% <<ggsets>> //%CONTINUE%
+ItemDisplay[(7ma OR amu OR uar OR ci3 OR 7qr OR uth OR ulg OR xtb OR xhm OR xmg OR ult OR xhl OR 7ls OR upl) SET]: %!setmacro!%  <<ggsets>> 
 //Set catch all
 ItemDisplay[SET !ID FILTERLVL<5]: %NAME% // %CONTINUE%// [%CODE%]
 

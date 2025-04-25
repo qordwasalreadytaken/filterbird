@@ -34,7 +34,7 @@ var github_data = [];
 var filter_text = "";
 var border = "";
 var bgcolor = "";
-//let mappedbgcolor = "";
+let mappedbgcolor = "";
 let mappedborder = "";
 
 // startup - runs when the page loads
@@ -276,6 +276,7 @@ function setItem(value) {
 // ---------------------------------
 function simulate(manual) {
 	settings.nowrap_width = 800;
+	console.log("background color line 279: ",mappedbgcolor)
 	//document.body.style.cursor = "wait";
 	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "Auto-Simulate is disabled. Click the 'ground' to simulate manually." }
 	else { document.getElementById("o5").innerHTML = "Auto-Simulate is enabled - the simulation updates when character/item changes are made. Click the 'ground' to simulate manually." }
@@ -325,6 +326,9 @@ function simulate(manual) {
 			var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
 			document.getElementById("output_"+num).style.left = wid+"px"
 			document.getElementById("output_"+num).style.top = hei+"px"
+			// dynamic add mappedbgcolor for the entire area?
+//			document.getElementById("output_"+num).style.backgroundColor = "Black"
+//			document.getElementById("output_"+num).style.backgroundColor = mappedbgcolor
 			if (num == 1 && document.getElementById("filter_text_2").value != "") { document.getElementById("output_spacing").innerHTML = "<br>" }
 			if (settings.nowrap == true) { document.getElementById("o"+num).style.width = settings.nowrap_width+"px" }
 			else { document.getElementById("o"+num).style.width = "auto" }
@@ -371,6 +375,25 @@ function clearText(num) {
 	document.getElementById("filter_text_"+num).value = "";
 }
 
+function extractStyleFromFile(file) {
+    const stmacros = {}; // Dictionary to store extracted macros
+
+    // Updated regex: handles line breaks properly between parts of the macro definition
+    const styleRegex = /ItemStyle\s*\[(.*?)\]\s*:\s*(.+)/g;
+
+    let match;
+
+    // Safely iterate over all matches in the file
+    while ((match = styleRegex.exec(file)) !== null) {
+        const styleName = match[1].trim(); // Extract macro name
+        const styleValue = match[2].trim(); // Extract macro value
+        stmacros[styleName] = styleValue;
+//		console.log("style found: ", styleName)
+    }
+//	console.log("styles found: ", stmacros)
+    return stmacros;
+}
+
 function extractMacrosFromFile(file) {
     const macros = {}; // Dictionary to store extracted macros
 
@@ -391,7 +414,6 @@ function extractMacrosFromFile(file) {
 
 
 
-
 //// Example definitions for macros and styles
 //var textMacros = {
 //    okuniq: '%YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«',
@@ -409,6 +431,7 @@ function extractMacrosFromFile(file) {
 // ---------------------------------
 function parseFile(file,num) {
 	const textMacros = extractMacrosFromFile(file);
+	const styleMacros = extractStyleFromFile(file);
 	var errors = 0;
 	var display = "";
 	var description = "";
@@ -459,6 +482,7 @@ function parseFile(file,num) {
 		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
 		if (line_num !== -1) {
+			mappedbgcolor = "";
             // Extract the ItemDisplay line
             var itemDisplayLine = rule_with_tabs;
 
@@ -468,12 +492,43 @@ function parseFile(file,num) {
             });
 
             // Step 2: Replace styles (<<style>>)
-//            itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, (match, styleName) => {
-//                return itemStyles[styleName] || match;
-//            });
-			itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, () => {
+            itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, (match, styleName) => {
+				return styleMacros[styleName] || match;
+            });
+			// remove extra spaces on either side of an equal sign so we can remove things better
+			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
+			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
+			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?),/g, () => {
 				return ""; // Replace with an empty string
 			});
+			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?) /g, () => {
+				return ""; // Replace with an empty string
+			});
+//			itemDisplayLine = itemDisplayLine.replace(/MapIconColor(.*?) /g, () => {
+//				return ""; // Replace with an empty string
+//			});
+			itemDisplayLine = itemDisplayLine.replace(/\bBackgroundColor\s*=\s*(\d+)\b/g, '%bgcolor($1)%');
+			itemDisplayLine = itemDisplayLine.replace(/\bBorderColor\s*=\s*(\d+)\b/g, '%BORDER($1)%');
+			itemDisplayLine = itemDisplayLine.replace("NotificationPriority=HIGH,", "").replace("NotificationPriority=MEDIUM,", "").replace("NotificationPriority=LOW,", "").replace("NotificationPriority=HIGH", "").replace("NotificationPriority=MEDIUM", "").replace("NotificationPriority=LOW", "");
+			itemDisplayLine = itemDisplayLine.replace("NotificationSoundPriority=HIGH,", "").replace("NotificationSoundPriority=MEDIUM,", "").replace("NotificationSoundPriority=LOW,", "").replace("NotificationSoundPriority=HIGH", "").replace("NotificationSoundPriority=MEDIUM", "").replace("NotificationSoundPriority=LOW", "");
+			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b/g, "").replace(/MapIconColor\s*=\s*(\d+)\b/g, "");
+			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(\d+)\b/g, "").replace(/NotificationSound\s*=\s*(\d+)\b/g, "");
+			itemDisplayLine = itemDisplayLine.replace(/MapIcon\s*=\s*(\d+)\b/g, "").replace(/MapIcon\s*=\s*(\d+)\b/g, "");
+			itemDisplayLine = itemDisplayLine.replace(/BorderSize\s*=\s*(\d+)\b/g, "").replace(/BorderSize\s*=\s*(\d+)\b/g, "");
+			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
+			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
+			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
+			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
+
+//			itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, () => {
+//				return ""; // Replace with an empty string
+//			});
+			// itemname and basename "fixes", really just replacing them with %name% for now
+			itemDisplayLine = itemDisplayLine.replace('%ITEMNAME%', '%NAME%');
+			itemDisplayLine = itemDisplayLine.replace('%BASENAME%', '%NAME%');
+
+			// remove some style elements
+//			itemDisplayLine = itemDisplayLine.replace('%BASENAME%', '%NAME%');
 
             // Step 3: Update `rule_with_tabs` with the substituted line for further processing
 //            rule_with_tabs = itemDisplayLine.split("­").join("•").split("\n");
@@ -531,6 +586,8 @@ function parseFile(file,num) {
 			if (index_end > index+12 && rule.substring(0,index).length == 0) {
 				conditions = conditions.split(",").join("‚")	// Refactors "MULTI" conditions since they use commas (uses the "Single low-9 quotation mark" instead of "comma")
 				conditions = conditions.replace(/%NOTIFY.*?%/g, '');
+//				conditions = conditions.replace(/%ITEMNAM*?%/g, '%NAME%');
+//				conditions = conditions.replace(/%BASENAM*?%/g, '%NAME%');
 				var match_override = false;
 //				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" and ").join(" ").split(" OR ").join(",|,").split(" or ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_format;
@@ -671,6 +728,11 @@ function parseFile(file,num) {
 								cond_list[cond] = ("SK"+Number(cr.slice(2)))
 								c = cond_list[cond]
 							} }
+							if (cr.substr(0,2) == "OS") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 500) {
+								recognized = true
+								cond_list[cond] = ("SK"+Number(cr.slice(2)))
+								c = cond_list[cond]
+							} }
 							if (pod_conditions == true) {
 								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 								notices.pod_conditions = 1
@@ -774,7 +836,7 @@ function parseFile(file,num) {
 				
 
 
-				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY.*?%/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
+				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_ITEMNAME,").split("%BASENAME%").join(",ref_BASENAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY.*?%/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
@@ -847,14 +909,14 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
-					if (out_format.includes("<<"))  {
-						const macroPattern = /<<.*?>>/g;
-						let match;
-						while ((match = macroPattern.exec(out_format)) !== null) {
-							let matchStr = match[0];
-							out_format = out_format.split(matchStr).join(",ignore_notification,");
-						}
-					}
+//					if (out_format.includes("<<"))  {
+//						const macroPattern = /<<.*?>>/g;
+//						let match;
+//						while ((match = macroPattern.exec(out_format)) !== null) {
+//							let matchStr = match[0];
+//							out_format = out_format.split(matchStr).join(",ignore_notification,");
+//						}
+//					}
 // Regex for %BORDER(x)% or %BORDER(x,y)% (case-insensitive)
 					const borderRegex = /%border\([^)]+\)%/gi;
 					out_format = out_format.replace(borderRegex, (match, bordercolorIdxStr, borderwidthStr) => {
@@ -875,15 +937,6 @@ function parseFile(file,num) {
 //						}
 //					}
 
-					// This ignores the bgcolor, need to remove this when html fixing happens
-//					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
-//						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
-//						let match;
-//						while ((match = mapiconPattern.exec(out_format)) !== null) {
-//							let matchStr = match[0];
-//							out_format = out_format.split(matchStr).join(",ignore_notification,");
-//						}
-//					}
 					
 					const bgroundRegex = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
 					out_format = out_format.replace(bgroundRegex, (match, colorIdxStr, widthStr) => {
@@ -895,13 +948,13 @@ function parseFile(file,num) {
 						return mappedbgcolor
 					});
 
-					const bg2roundRegex = /BackgroundColor\s*=\s*(\d+),/gi;
+					const bg2roundRegex = /BackgroundColor\s*=\s*(\d+)/gi;
 
 					out_format = out_format.replace(bg2roundRegex, (match, colorIdxStr) => {
 						let colorIdx = parseInt(colorIdxStr); // Parse the numeric value for color index
 						let mappedbgcolor = colorIndexMap[colorIdx] || "#000000"; // Fallback to black if undefined
 					
-						console.log("Mapped background color is " + mappedbgcolor);
+						console.log("Mapped background color line 950 is " + mappedbgcolor);
 						return mappedbgcolor // Replace with the mapped color
 					});
 					
@@ -915,11 +968,21 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
-					if (out_format.match(/BackgroundColor\s*=\s*(\d+),/gi)) {
+					if (out_format.match(/BackgroundColor\s*=\s*(\d+)/gi)) {
 						console.log("Ignoring background2 color");
 						const bgcolor2Pattern = /BackgroundColor\s*=\s*(\d+),/gi;
 						let match;
 						while ((match = bgcolor2Pattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+
+					// This ignores the bgcolor, need to remove this when html fixing happens
+					if (out_format.match(/%bgcolor\((\d+)(?:,(\d+))?\)%/gi)) {
+						const bgcolorPattern = /%bgcolor\((\d+)(?:,(\d+))?\)%/gi;
+						let match;
+						while ((match = bgcolorPattern.exec(out_format)) !== null) {
 							let matchStr = match[0];
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
@@ -933,6 +996,15 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
+					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
+						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
+						let match;
+						while ((match = mapiconPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+//					out_format = out_format.replace(/%bgcolor\([^)]+\)%/i, "")
 				}
 				for (let lvl = 0; lvl <= 9; lvl++) {
 					out_format = out_format.split("%TIER-"+lvl+"%").join(",ignore_TIER-"+lvl+",")
@@ -1158,7 +1230,7 @@ function parseFile(file,num) {
 	var description_active = false;
 	if (output_total.includes("{") == true && output_total.includes("}") == true) { if (output_total.indexOf("{") < output_total.lastIndexOf("}")) { description_active = true } }
 	
-	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
+	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_ITEMNAME,").split("%BASENAME%").join(",ref_BASENAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
 	if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
 	if (settings.version == 0) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
@@ -1167,7 +1239,7 @@ function parseFile(file,num) {
 	//Add new keywords 
 	if (settings.version == 0) { out_format = out_format}	// TODO: organize keywords for different versions - these lines are a mess
 	if (settings.version == 0) {
-		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER","STORAGE(","%NOTIFY("];
+		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER(","STORAGE(","%NOTIFY("];
 		for (n in notifs) {
 			if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 				for (let a = 0; a < 16; a++) {
@@ -1189,7 +1261,23 @@ function parseFile(file,num) {
 		} }
 		//This gets rid of "notifyXX" in item name displays
 		if (out_format.includes("%NOTIFY") || out_format.includes("%notify")) {
-			const notifyPattern = /%NOTIFY.*?%/g;
+			const notifyPattern = /%NOTIFY.*?%/gi;
+			let match;
+			while ((match = notifyPattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
+		if (out_format.includes("%BORDER") || out_format.includes("%border")) {
+			const notifyPattern = /%BORDER.*?%/gi;
+			let match;
+			while ((match = notifyPattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
+		if (out_format.includes("%bgcolor") || out_format.includes("%BGCOLOR")) {
+			const notifyPattern = /%bgcolor.*?%/gi;
 			let match;
 			while ((match = notifyPattern.exec(out_format)) !== null) {
 				let matchStr = match[0];
@@ -1216,7 +1304,9 @@ function parseFile(file,num) {
 		if (out_format.includes("%MAPICON(") || out_format.includes("%mapicon(")) { for (let a = 0; a < 500; a++) {
 			var av = a.toString(16);
 			out_format = out_format.split("%MAPICON("+av+")%").join(",ignore_notification,").split("%MAPICON("+av.toUpperCase()+")%").join(",ignore_notification,").split("%mapicon("+av+")%").join(",ignore_notification,").split("%mapicon("+av.toUpperCase()+")%").join(",ignore_notification,")
-		} }
+			} 
+		}
+//		out_format = out_format.replace(', ,', ', ')
 	}
 	for (let lvl = 0; lvl <= 9; lvl++) {
 		out_format = out_format.split("%TIER-"+lvl+"%").join(",ignore_TIER-"+lvl+",")
@@ -1313,7 +1403,7 @@ function parseFile(file,num) {
 		if (description_braces != 1) {
 			if (o == "misc_NL" || o == "‗") { display += "<br>" }
 			if (mappedbgcolor != "") {
-				console.log("background color log 3 is "+ mappedbgcolor)
+				console.log("background color log line 1360 is "+ mappedbgcolor)
 
 				if (o == " ") {
 					display += "<l style='color:Black; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +"; '>_</l>";
@@ -1336,6 +1426,7 @@ function parseFile(file,num) {
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
 			if (mappedbgcolor != "") {
+				console.log("background color log line 1385 is "+ mappedbgcolor)
 				if (o == " ") { description += "<l style='color:Black; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +"; '>_</l>";}
 				else if (blank == false) { description += "<l style='color:" + color + "; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +";'>" + temp + "</l>" }
 			}
@@ -1354,6 +1445,14 @@ function parseFile(file,num) {
 			const bgcolorPattern = /%bgcolor\(([^)]+)\)%/gi;
 			let match;
 			while ((match = bgcolorPattern.exec(out_format)) !== null) {
+				let matchStr = match[0];
+				out_format = out_format.split(matchStr).join(",ignore_notification,");
+			}
+		}
+		if (out_format.match(/BackgroundColor\s*=\s*(\d+)/gi)) {
+			const bg2colorPattern = /BackgroundColor\s*=\s*(\d+)/gi;
+			let match;
+			while ((match = bg2colorPattern.exec(out_format)) !== null) {
 				let matchStr = match[0];
 				out_format = out_format.split(matchStr).join(",ignore_notification,");
 			}
@@ -1385,7 +1484,11 @@ function parseFile(file,num) {
 	if (display.includes("�") || display.includes("�")) { notices.encoding = 1 }
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
 	else if (settings.error_limit == 0 && errors >= 500) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
-	return [display,description]
+	document.getElementById("output_"+num).style.backgroundColor = mappedbgcolor
+	document.getElementById("output_"+num).style.borderColor = mappedborder
+	 
+
+	return [display,description,mappedbgcolor,mappedborder]
 }
 
 // getColor - gets the default color for a given item
