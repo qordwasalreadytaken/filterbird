@@ -6,11 +6,8 @@ This version in not up to date, but has been updated enough to not crash (as muc
 
 Includes limited support for TextMacros and ItemStyles.
 
+
 Please see the original ReadMe below for more information on FilterBird. 
-
-No refunds.
-
-
 
 
 # [FilterBird](https://betweenwalls.github.io/filterbird/)

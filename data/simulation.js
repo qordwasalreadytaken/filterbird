@@ -497,6 +497,9 @@ function parseFile(file,num) {
             });
 			// separate double %'s
 			itemDisplayLine = itemDisplayLine.replace('%%', '% %')
+			// make sure there's a space after any closing elipse
+			itemDisplayLine = itemDisplayLine.replace(')', ') ')
+
 			// remove extra spaces on either side of an equal sign so we can remove things better
 			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
 			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
