@@ -671,7 +671,7 @@ function parseFile(file,num) {
 						c = itemToCompare.CODE;
 					}
 					if (c == "SPECIAL") { c = "UNI" }
-
+					// Named uniques
 					if (c == "UNIQUE") {
 						// Extract the name within the UNIQUE parentheses
 						const nameMatch = itemDisplay.match(/UNIQUE\("([^"]+)"\)/);

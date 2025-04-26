@@ -468,7 +468,7 @@ function setCustomBase() {
 			}
 		}
 	} else {
-		if (rarity == "Set" || rarity == "Unique") {
+		if (rarity == "Set" || rarity == "Unique" || rarity == "Synth") {
 			for (group in equipment) {
 				for (itemNew in equipment[group]) {
 					if (equipment[group][itemNew].name == name) {
@@ -511,7 +511,7 @@ function setCustomBase() {
 				}
 			}
 		}
-		if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
+		if (rarity == "Set" || rarity == "Unique" || rarity == "Synth") { itemCustom.name = name }
 		else if (rarity == "Regular" || rarity == "Magic") { itemCustom.name = base }
 		else if (rarity == "Rare" || rarity == "Craft") {
 			var suffix = "";
@@ -521,7 +521,7 @@ function setCustomBase() {
 			else { suffix = rare_suffix["other"][Math.floor(Math.random()*rare_suffix["other"].length)] }
 			itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " " + suffix
 		}
-		if (rarity == "Set" || rarity == "Unique") {
+		if (rarity == "Set" || rarity == "Unique" || rarity == "Synth") {
 			for (group in equipment) {
 				for (itemNew in equipment[group]) {
 					if (equipment[group][itemNew].name == name) {
