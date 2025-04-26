@@ -500,28 +500,50 @@ function parseFile(file,num) {
 			// separate double %'s
 			itemDisplayLine = itemDisplayLine.replace('%%', '% %')
 			// make sure there's a space after any closing elipse
-			itemDisplayLine = itemDisplayLine.replace(')', ') ')
+//			itemDisplayLine = itemDisplayLine.replace(')', ') ')
+			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
 
 			// remove extra spaces on either side of an equal sign so we can remove things better
-			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
-			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
+//			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
+			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
 
 //			itemDisplayLine = itemDisplayLine.replace(/AND !PLRCLASS\(.*?\)|AND PLRCLASS\(.*?\)|PLRCLASS\(.*?\)|!PLRCLASS\(.*?\),/g, "");
-			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?), /g, "")
-			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?) /g, "")
-			itemDisplayLine = itemDisplayLine.replace(/\bBackgroundColor\s*=\s*(\d+)\b/g, '%bgcolor($1)%');
-			itemDisplayLine = itemDisplayLine.replace(/\bBorderColor\s*=\s*(\d+)\b/g, '%BORDER($1)%');
-			itemDisplayLine = itemDisplayLine.replace("NotificationPriority=HIGH,", "").replace("NotificationPriority=MEDIUM,", "").replace("NotificationPriority=LOW,", "").replace("NotificationPriority=HIGH", "").replace("NotificationPriority=MEDIUM", "").replace("NotificationPriority=LOW", "");
-			itemDisplayLine = itemDisplayLine.replace("NotificationSoundPriority=HIGH,", "").replace("NotificationSoundPriority=MEDIUM,", "").replace("NotificationSoundPriority=LOW,", "").replace("NotificationSoundPriority=HIGH", "").replace("NotificationSoundPriority=MEDIUM", "").replace("NotificationSoundPriority=LOW", "");
-			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(\d+)\b/g, "").replace(/NotificationSound\s*=\s*(\d+)\b/g, "");
-			itemDisplayLine = itemDisplayLine.replace(/MapIcon\s*=\s*(\d+)\b/g, "").replace(/MapIcon\s*=\s*(\d+)\b/g, "");
-			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b/g, "").replace(/MapIconColor\s*=\s*(\d+)\b/g, "");
-			itemDisplayLine = itemDisplayLine.replace(/BorderSize\s*=\s*(\d+)\b/g, "").replace(/BorderSize\s*=\s*(\d+)\b/g, "");
-			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
-			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
-			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
-			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
-
+			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?)[\),]?\s+/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/Notif.*?\)\,?/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/\bBackgroundColor\s*=\s*(\d+),?/g, '%bgcolor($1)%');
+			// itemDisplayLine = itemDisplayLine.replace(/\bBorderColor\s*=\s*(\d+)\b/g, '%BORDER($1)%');
+			itemDisplayLine = itemDisplayLine.replace("NotificationPriority=HIGH,", " ")
+				.replace("NotificationPriority=MEDIUM,", "")
+				.replace("NotificationPriority=LOW,", "")
+				.replace("NotificationPriority=HIGH", "")
+				.replace("NotificationPriority=MEDIUM", "")
+				.replace("NotificationPriority=LOW", "");
+			itemDisplayLine = itemDisplayLine.replace("NotificationSoundPriority=HIGH,", " ")
+				.replace("NotificationSoundPriority=MEDIUM,", "")
+				.replace("NotificationSoundPriority=LOW,", "")
+				.replace("NotificationSoundPriority=HIGH", "")
+				.replace("NotificationSoundPriority=MEDIUM", "")
+				.replace("NotificationSoundPriority=LOW", "");
+//			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(\d+)\b/g, " ").replace(/NotificationSound\s*=\s*(\d+)\b/g, "");
+//			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(".*?"|\S+)/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(".*?"|\S+),?/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/MapIcon\s*=\s*(\d+)\b[\),]*/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b[\),]*/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/BorderSize\s*=\s*(\d+)\b[\),]*/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/BorderColor\s*=\s*\d+,?/g, " ");
+//			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b/g, "").replace(/MapIconColor\s*=\s*(\d+)\b/g, "");
+//			itemDisplayLine = itemDisplayLine.replace(/BorderSize\s*=\s*(\d+)\b/g, "").replace(/BorderSize\s*=\s*(\d+)\b/g, "");
+			// remove extra spaces
+			itemDisplayLine = itemDisplayLine.replace(/\s{2,}/g, " ");
+			// replace double commas with single comma
+			itemDisplayLine = itemDisplayLine.replace(/,\s*,+/g, ", ");
+//			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
+//			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
+//			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
+//			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
+			itemDisplayLine = itemDisplayLine.replace(/%SPACE%,?|%SPACE%/g, " ");
+			itemDisplayLine = itemDisplayLine.replace("%BOLD%", "%BLACK%");
+			
 //			itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, () => {
 //				return ""; // Replace with an empty string
 //			});
