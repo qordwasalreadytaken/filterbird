@@ -209,6 +209,9 @@ function setBase(value) {						// TODO: generalize the hardcoded indexes used he
 		} else if (most_recent_rarity == "Unique" && document.getElementById("dropdown_rarity").options.length > 4) {
 			document.getElementById("dropdown_rarity").selectedIndex = 4;
 			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[4].innerHTML;
+		} else if (most_recent_rarity == "Synth" && document.getElementById("dropdown_rarity").options.length > 4) {
+			document.getElementById("dropdown_rarity").selectedIndex = 4;
+			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[4].innerHTML;
 		} else {
 			document.getElementById("dropdown_rarity").selectedIndex = 1;
 			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[1].innerHTML;
@@ -220,7 +223,7 @@ function setBase(value) {						// TODO: generalize the hardcoded indexes used he
 // ---------------------------------
 function loadRarity(value) {
 	var options = "";
-	var rarities = ["Regular","Magic","Rare","Craft"];
+	var rarities = ["Regular","Magic","Rare","Craft","Synth"];
 	for (rarity in rarities) {
 		options += "<option class='gray-all'>" + rarities[rarity] + "</option>"
 	}
@@ -237,7 +240,7 @@ function loadRarity(value) {
 			for (itemNew in equipment[group]) {
 				var item = equipment[group][itemNew];
 				if (item.base == value) {
-					if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { capable_unique = true }
+					if (typeof(item.rarity) == 'undefined' || item.rarity == "unique" || item.rarity == "synth") { capable_unique = true }
 					else if (item.rarity == "set") { capable_set = true }
 				}
 			}
@@ -259,7 +262,7 @@ function loadRarity(value) {
 	
 	// keeps the previous rarity if possible
 	var new_index = document.getElementById("dropdown_rarity").length-1;
-	if (typeof(itemCustom.rarity) != 'undefined' && !(value == "any" && itemCustom.rarity != "unique" && itemCustom.rarity != "set")) {
+	if (typeof(itemCustom.rarity) != 'undefined' && !(value == "any" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && itemCustom.rarity != "synth")) {
 		for (let i = 0; i < document.getElementById("dropdown_rarity").length; i++) {
 			var i_rarity = document.getElementById("dropdown_rarity").options[i].value;
 			if (itemCustom.rarity == i_rarity.toLowerCase()) { new_index = i }
@@ -280,7 +283,7 @@ function loadRarity(value) {
 // ---------------------------------
 function setRarity(value) {
 	var base = document.getElementById("dropdown_base").value;
-	if (base == "any" && value != "Unique" && value != "Set") {
+	if (base == "any" && value != "Unique" && value != "Set" && value != "Synth") {
 		// set base to match the previously selected unique/set item
 		var group = document.getElementById("dropdown_group").value;
 		var new_index = 1;
@@ -306,11 +309,11 @@ function setRarity(value) {
 		for (itemNew in equipment[group]) {
 			var item = equipment[group][itemNew];
 			if (item.base == document.getElementById("dropdown_base").value) {
-				if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { capable_unique = true }
+				if (typeof(item.rarity) == 'undefined' || item.rarity == "unique" || item.rarity == "synth") { capable_unique = true }
 				else if (item.rarity == "set") { capable_set = true }
 			}
 		}
-		if (capable_unique == true) { options += "<option class='gray-all'>" + "Unique" + "</option>" }
+		if (capable_unique == true) { options += "<option class='gray-all'>" + "Unique" + "</option>"; options += "<option class='gray-all'>" + "Synth" + "</option>" }
 		if (capable_set == true) { options += "<option class='gray-all'>" + "Set" + "</option>" }
 		document.getElementById("dropdown_rarity").innerHTML = options
 		var new_index = 0;
@@ -328,7 +331,7 @@ function setRarity(value) {
 function loadName(value) {
 	var options = "";
 	var base = document.getElementById("dropdown_base").value;
-	if (value == "Unique" || value == "Set") {
+	if (value == "Unique" || value == "Set" || value == "Synth") {
 		var group = document.getElementById("dropdown_group").value;
 		var type = document.getElementById("dropdown_type").value;
 		if (base == "any") {
@@ -339,7 +342,7 @@ function loadName(value) {
 				if (group == "helm" || group == "offhand") { for (item_base in item_types[type.split(" ").join("_")]) { if (item.base == item_types[type.split(" ").join("_")][item_base]) { toLoad = true } } }
 				if (itemNew != 0 && item.special != 1 && group == "weapon" && (item.type == type || (item.type == "thrown" && type == "throwing weapon") || (item.type == "club" && type == "mace") || (item.type == "hammer" && type == "mace"))) { toLoad = true }
 				if (toLoad == true) {
-					if (value == "Unique") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { options += "<option class='gray-all'>" + item.name + "</option>" } }
+					if (value == "Unique" || value == "Synth") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique" || item.rarity == "synth") { options += "<option class='gray-all'>" + item.name + "</option>" } }
 					else { if (item.rarity == "set") { options += "<option class='gray-all'>" + item.name + "</option>" } }
 				}
 			}
@@ -348,7 +351,7 @@ function loadName(value) {
 				for (itemNew in equipment[group]) {
 					var item = equipment[group][itemNew];
 					if (item.base == base || (itemNew != 0 && item.special != 1 && ((base == "Amulet" && group == "amulet") || (base == "Ring" && group == "ring") || (base == "Jewel" && item.type == "jewel") || (type == "charm" && group == "charms" && base.toLowerCase().split(" ")[0] == item.size) || (type == "quiver" && item.type == "quiver")))) {
-						if (value == "Unique") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { options += "<option class='gray-all'>" + item.name + "</option>" } }
+						if (value == "Unique" || value == "Synth") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique" || item.rarity == "synth") { options += "<option class='gray-all'>" + item.name + "</option>" } }
 						else { if (item.rarity == "set") { options += "<option class='gray-all'>" + item.name + "</option>" } }
 					}
 				}
@@ -1727,8 +1730,8 @@ function setItemFromCustom() {
 	else if (itemTemp.rarity == "Rare") { itemTemp.rarity = "rare" }
 	else if (itemTemp.rarity == "Set") { itemTemp.rarity = "set" }
 	else if (itemTemp.rarity == "Unique") { itemTemp.rarity = "unique" }
-	else if (itemTemp.rarity == "Synthesized") { itemTemp.rarity = "unique" }
-	else if (itemTemp.rarity == "Synth") { itemTemp.rarity = "unique" }
+	else if (itemTemp.rarity == "Synthesized") { itemTemp.rarity = "synth" }
+	else if (itemTemp.rarity == "Synth") { itemTemp.rarity = "synth" }
 	else if (itemTemp.rarity == "Craft") { itemTemp.rarity = "craft" }
 	itemToCompare = {}
 	for (affix in itemTemp) { itemToCompare[affix] = itemTemp[affix] }
@@ -1802,7 +1805,8 @@ function setItemCodes() {
 		else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
 		else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
-		else if (itemToCompare.rarity == "synthesized") { itemToCompare.UNI = true }
+		else if (itemToCompare.rarity == "synthesized") { itemToCompare.SYNTH = true }
+		else if (itemToCompare.rarity == "synth") { itemToCompare.SYNTH = true }
 		else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
 	} else {itemToCompare.UNI = true }
@@ -1945,7 +1949,7 @@ function setItemCodes() {
 // ---------------------------------
 function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
-	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON","AMA","PAL","ASS","QUEST","UNIQUE"];
+	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON","AMA","PAL","ASS","QUEST","UNIQUE","SYNTH"];
 	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE",max_durability:"MAXDUR"};
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_bonus:"ARPER"};
 	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;

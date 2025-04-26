@@ -15,7 +15,7 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 /* misc					*/	bonus_corpse_explosion:0, phys_Lightning_Surge:0, extraValkyrie:0, extraGrizzly:0, extraFireGolem:0, extraHydra:0, radius_FreezingArrow:0, reset_cooldown_on_kill:0, cdr_on_striking:0, reanimate:0, half_Battle_Orders:0, bonus_sanctuary_rate:0, extra_Bone_Spears:0, extra_arrows_Cold_Arrow:0, extra_arrows_Magic_Arrow:0, extra_arrows_Fire_Arrow:0, extra_arrows_Ice_Arrow:0, extra_conversion_Magic_Arrow:0, 
 /* misc (non-item)		*/	flamme:0, ias_skill:0, ar_shrine_bonus:0, charge_ember:0, charge_thunder:0, charge_ice:0, summon_damage_bonus:0, hammer_bonus:0, hammer_on_hit:0, redeem_chance:0, redeem_amount:0, absorb_elemental:0, absorb_melee:0, absorb_es_redirect:0, absorb_es_deplete:0, duration:0, radius:0, amountSummoned:0, enemy_damage:0, enemy_attack:0, enemy_physRes:0, enemy_allRes:0, fleeing:0, flee_distance:0, dimmedVision:0, confused:0, attraction:0, enemy_ias:0, enemy_frw:0, 
 
-							quest:0, UNIQUE:0, basename:"", itemname:"",
+							quest:0, UNIQUE:0, basename:"", itemname:"", synth:0,
 
 /* skill tabs			*/	skills_javelins:0, skills_passives:0, skills_bows:0, skills_martial:0, skills_shadow:0, skills_traps:0, skills_warcries:0, skills_masteries:0, skills_combat_barbarian:0, skills_elemental:0, skills_shapeshifting:0, skills_summoning_druid:0, skills_summoning_necromancer:0, skills_poisonBone:0, skills_curses:0, skills_offensive:0, skills_defensive:0, skills_combat_paladin:0, skills_cold:0, skills_lightning:0, skills_fire:0, skills_amazon:0, skills_assassin:0, skills_barbarian:0, skills_druid:0, skills_necromancer:0, skills_paladin:0, skills_sorceress:0, skills_fire_all:0, skills_cold_all:0, skills_poison_all:0,
 /* skills   amazon		*/	skill_Jab:0, skill_Power_Strike:0, skill_Poison_Javelin:0, skill_Fend:0, skill_Lightning_Bolt:0, skill_Charged_Strike:0, skill_Plague_Javelin:0, skill_Molten_Strike:0, skill_Lightning_Strike:0, skill_Lightning_Fury:0, skill_Inner_Sight:0, skill_Lethal_Strike:0, skill_Phase_Run:0, skill_Dodge:0, skill_Avoid:0, skill_Penetrate:0, skill_Evade:0, skill_Decoy:0, skill_Valkyrie:0, skill_Pierce:0, skill_Cold_Arrow:0, skill_Magic_Arrow:0, skill_Multiple_Shot:0, skill_Fire_Arrow:0, skill_Ice_Arrow:0, skill_Guided_Arrow:0, skill_Exploding_Arrow:0, skill_Strafe:0, skill_Immolation_Arrow:0, skill_Freezing_Arrow:0, 
@@ -1529,6 +1529,13 @@ var equipment = {
 {rarity:"rare", name:"Heavenly Blade", req_level:54, ctc:[[10,1,"Amplify Damage","on striking"]], ias:40, e_damage:450, ar:250, ar_per_level:16.5, max_damage_per_level:0.5, req:-30, type:"sword", base:"Phase Blade"},
 {rarity:"craft", name:"Cruel Master's Blood Axe", req_level:64, ctc:[[10,1,"Amplify Damage","on striking"]], ias:40, e_damage:510, ar:250, ar_per_level:16.5, max_damage_per_level:0.5, life_leech:4, life:20, req:-30, type:"axe", base:"Berserker Axe"},
 {rarity:"craft", name:"Grandmaster's Hitpower Maul", req_level:65, ctc:[[5,4,"Frost Nova","when hit"]], ias:40, e_damage:510, ar:250, ar_per_level:16.5, max_damage_per_level:0.5, damage_max:20, thorns:7, req:-30, twoHanded:1, type:"hammer", base:"Thunder Maul"},
+// Synths
+{synth:"true", rarity:"synth", name:"Synth Aramex's Gargoyle's Bite", req_level:70, damage_min:15, damage_max:45, pDamage_all:1039, pDamage_duration:10, pDamage:14, owounds:30, skill_Desecrate:4, skill_Deadly_Poison:5, slows_target:50, cRes:5, lRes:5, fRes:5, pRes:100, autoreplenish:1, type:"javelin", base:"Winged Harpoon", img:"Gargoyle's_Bite", cskill:[[11,"Plague Javelin",60]]},
+{synth:"true", rarity:"synth", name:"Synth Chaos' Bloodrise", req_level:15, all_skills:2, skills_fire:3, ias:10, e_damage:175, ar_bonus:50, owounds:25, skill_Sacrifice:3, skill_Teleport:3, defense:450, melee_defense:200, all_res:16, damage_to_mana:30, type:"mace", base:"Morning Star", img:"Bloodrise"},
+{synth:"true", rarity:"synth", name:"Synth Kg's Fleshripper", req_level:68, all_skills:4, fcr:45, e_damage:276, cblow:25, owounds:50, oskill_Ball_Lightning:20, type:"dagger", base:"Fanged Knife", img:"The_Jade_Tan_Do"},
+{synth:"true", rarity:"synth", name:"Synth Zardoz's Hexfire", req_level:33, ctc:[[25,19,"fissure","on striking"]], skills_fire_all:3, skills_elemental:7, explosive_attack:6, e_damage:467, itd:1, dexterity:38, energy:10, fres:25, type:"sword", base:"Shamshir", pod_changes:1, img:"Hexfire"},
+
+
 	],
     offhand: [
 {name:"Offhand"},

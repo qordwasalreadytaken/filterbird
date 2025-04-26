@@ -222,6 +222,8 @@ function setItem(value) {
 				else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 				else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
 				else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
+				else if (itemToCompare.rarity == "synth") { itemToCompare.SYNTH = true; itemToCompare.always_id = true; }
+				else if (itemToCompare.rarity == "synthesized") { itemToCompare.SYNTH = true; itemToCompare.always_id = true; }
 			} else { itemToCompare.UNI = true }
 			if (itemToCompare.RW == true) {
 				var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
@@ -504,6 +506,7 @@ function parseFile(file,num) {
 			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
 			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
 
+//			itemDisplayLine = itemDisplayLine.replace(/AND !PLRCLASS\(.*?\)|AND PLRCLASS\(.*?\)|PLRCLASS\(.*?\)|!PLRCLASS\(.*?\),/g, "");
 			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?), /g, "")
 			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?) /g, "")
 			itemDisplayLine = itemDisplayLine.replace(/\bBackgroundColor\s*=\s*(\d+)\b/g, '%bgcolor($1)%');
@@ -848,7 +851,7 @@ function parseFile(file,num) {
 				if (settings.version == 0) {
 //					if (out_format.includes("QUEST")) {out_format = out_format.split("QUEST").join(",misc_QUEST")};
 //					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER-","STORAGE("];
-					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE(","%NOTIFY(","PLRCLASS("];
+					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE(","%NOTIFY(","PLRCLASS(","!PLRCLASS("];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 							for (let a = 0; a < 16; a++) {
@@ -863,6 +866,14 @@ function parseFile(file,num) {
 					}
 					//ignore PLRCLASS
 					if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
+						const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
+						let match;
+						while ((match = plrclassPattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					if (out_format.includes("!PLRCLASS(") || out_format.includes("plrclass(")) {
 						const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
 						let match;
 						while ((match = plrclassPattern.exec(out_format)) !== null) {
@@ -1503,6 +1514,7 @@ function getColor(item) {
 	else if (item.SET == true) { color = "GREEN" }
 	else if (item.NMAG == true && (item.ETH == true || item.SOCK != 0)) { color = "GRAY" }
 	else if (item.CRAFT == true || item.rarity == "craft" || ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true)) { color = "ORANGE" }
+	else if (item.SYNTH == true) { color = "GOLD" }
 	return color
 }
 
