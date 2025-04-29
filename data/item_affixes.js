@@ -2431,6 +2431,10 @@ var affix_item_types = {
 //	ajav:["CL7","WP6"],	// unused
 	quiv:"quiv",
 	shield:"shield",	// created specifically to simplify functions that use affixes_corruption
+
+	onehandonly: "WP15",
+	twohandonly: "WP16",
+	ambi:"WP17",
 };
 
 var affix_item_mods = {

@@ -2711,7 +2711,7 @@ ItemDisplay[7fl NMAG ETH SOCK>3]: ETH %NAME% %WHITE%[%SOCKETS%]
 // -------------------------------------------------------------------------------------------------------------
 //					Legendary Mallet
 // -------------------------------------------------------------------------------------------------------------
-ItemDisplay[7wh NMAG !ETH] %RED%%NAME% %NOTIFY(ITEM,HIGH)%
+ItemDisplay[7wh NMAG !ETH]: %RED%%NAME% %NOTIFY(ITEM,HIGH)%
 ItemDisplay[7wh NMAG ETH ED=15 !SOCK=1 !SOCK=2 !SOCK=4]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +15ED %PURPLE%[%SOCKETS%]
 ItemDisplay[7wh NMAG ETH ED>0 ED<15 !SOCK=1 !SOCK=2 !SOCK=4]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +ED %RED%[%SOCKETS%]
 ItemDisplay[7wh NMAG !ETH ED=15 !SOCK=1 !SOCK=2 !SOCK=4]: %DGREEN%%NAME%%BLUE% +15ED %PURPLE%[%SOCKETS%]

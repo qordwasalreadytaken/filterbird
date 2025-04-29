@@ -711,6 +711,9 @@ var bases = {	// Note: damage_vs_undead:50 is included for blunt weapons, but ot
 	Special_1:{group:"weapon", type:"axe", base_damage_min:3, base_damage_max:6, req_level:5, durability:42, baseSpeed:0, range:0, max_sockets:2, downgrade:"Special_0", upgrade:"Special_2", tier:1},						// Hand Axe
 	Special_2:{group:"weapon", type:"axe", base_damage_min:10, base_damage_max:21, req_level:29, req_strength:25, req_dexterity:25, durability:28, baseSpeed:0, range:0, max_sockets:2, downgrade:"Special_1", upgrade:"Special_3", tier:2},	// Hatchet
 	Special_3:{group:"weapon", type:"axe", base_damage_min:33, base_damage_max:58, req_level:55, req_strength:125, req_dexterity:67, durability:28, baseSpeed:0, range:0, max_sockets:2, downgrade:"Special_2", tier:3},				// Tomahawk
+
+	Ring:{CODE:"rin"},
+	Amulet:{CODE:"amu"}
 };
 
 var stats = {
@@ -1564,7 +1567,7 @@ var item_types = {
 
 var all_codes = {
 	NORM:3,EXC:3,ELT:3,NMAG:3,MAG:3,RARE:3,UNI:3,SET:3,ID:3,ETH:3,INF:3,SUP:3,RW:3,
-	CL1:3,CL2:3,CL3:3,CL4:3,CL5:3,CL6:3,CL7:3,
+	CL1:3,CL2:3,CL3:3,CL4:3,CL5:1,CL6:3,CL7:3,
 	EQ1:3,EQ2:3,EQ3:3,EQ4:3,EQ5:3,EQ6:3,EQ7:3,ARMOR:3,
 	WP1:3,WP2:3,WP3:3,WP4:3,WP5:3,WP6:3,WP7:3,WP8:3,WP9:3,WP10:3,WP11:3,WP12:3,WP13:3,WEAPON:3,
 	amu:3,rin:3,aqv:3,cqv:3,aq2:1,cq2:1,
@@ -1587,7 +1590,7 @@ var all_codes = {
 	SK96:3,SK97:3,SK98:3,SK99:3,SK100:3,SK101:3,SK102:3,SK103:3,SK104:3,SK105:3,SK106:3,SK107:3,SK108:3,SK109:3,SK110:3,SK111:3,SK112:3,SK113:3,SK114:3,SK115:3,SK116:3,SK117:3,SK118:3,SK119:3,SK120:3,SK121:3,SK122:3,SK123:3,SK124:3,SK125:3,
 	SK126:3,SK127:3,SK128:3,SK129:3,SK130:3,SK131:3,SK132:3,SK133:3,SK134:3,SK135:3,SK136:3,SK137:3,SK138:3,SK139:3,SK140:3,SK141:3,SK142:3,SK143:3,SK144:3,SK145:3,SK146:3,SK147:3,SK148:3,SK149:3,SK150:3,SK151:3,SK152:3,SK153:3,SK154:3,SK155:3,
 	SK221:3,SK222:3,SK223:3,SK224:3,SK225:3,SK226:3,SK227:3,SK228:3,SK229:3,SK230:3,SK231:3,SK232:3,SK233:3,SK234:3,SK235:3,SK236:3,SK237:3,SK238:3,SK239:3,SK240:3,SK241:3,SK242:3,SK243:3,SK244:3,SK245:3,SK246:3,SK247:3,SK248:3,SK249:3,
-	SK250:3,SK251:3,SK252:3,SK253:3,SK254:3,SK255:3,SK256:3,SK257:3,SK258:3,SK259:3,SK260:3,SK261:3,SK262:3,SK263:3,SK264:3,SK265:3,SK266:3,SK267:3,SK268:3,SK269:3,SK270:3,SK271:3,SK272:3,SK273:3,SK274:3,SK275:3,SK276:3,SK277:3,SK278:3,SK279:3,SK280:3,
+	SK250:3,SK251:3,SK252:3,SK253:3,SK254:3,SK255:3,SK256:3,SK257:3,SK258:3,SK259:3,SK260:3,SK261:3,SK262:3,SK263:3,SK264:3,SK265:3,SK266:3,SK267:3,SK268:3,SK269:3,SK270:3,SK271:3,SK272:3,SK273:3,SK274:3,SK275:3,SK276:3,SK277:1,SK278:3,SK279:3,SK280:3,
 	SK364:2,SK365:2,SK366:2,SK367:2,SK368:2,SK369:2,SK370:2,SK371:2,SK372:2,SK373:2,SK374:2,SK375:2,SK376:2,SK377:2,SK378:2,SK379:2,SK380:2,SK381:2,SK382:2,SK383:2,SK384:2,
 	ALLSK:3,CLSK0:3,TABSK0:3,TABSK1:3,TABSK2:3,CLSK1:3,TABSK8:3,TABSK9:3,TABSK10:3,CLSK2:3,TABSK16:3,TABSK17:3,TABSK18:3,CLSK3:3,TABSK24:3,TABSK25:3,TABSK26:3,CLSK4:3,TABSK32:3,TABSK33:3,TABSK34:3,CLSK5:3,TABSK40:3,TABSK41:3,TABSK42:3,CLSK6:3,TABSK48:3,TABSK49:3,TABSK50:3,
 	DIFFICULTY:1,GOLD:3,CLVL:3,ILVL:3,SOCK:3,DEF:3,GEMTYPE:3,GEMLEVEL:3,RUNE:3,RES:3,ED:3,LIFE:3,MANA:3,IAS:3,FCR:3,FHR:3,FBR:3,ALVL:3,
@@ -1625,8 +1628,10 @@ var all_codes = {
 	CHARSTAT14:3,CHARSTAT15:3,MAPTIER:2,SOCKETS:2,EDEF:2,EDAM:2,AUTOMOD:2,CLASS:2,CLUB:2,TMACE:2,HAMMER:2,
 	
 // Trying to add newer PoD filter options, adding these removed the Unrecognized conditions and resulted in only Invalid formatting, a step in the right direction
-	STORAGE:1, GAMBLE:1,MAPTIER:1,MAPTIER:2,MAPTIER:3,MAPTIER:4,MAPTIER:5,MAPTIER:6,MAPTIER:7,MAPTIER:8,MAPTIER:9,MAPTIER:10,MAPTIER:11,
+	STORAGE:1, GAMBLE:1,MAPTIER:1,
 	ma12:1, ma13:1, ma14:1, SK477:1, SKILL121:1, SK121:1, GEMTIER:3,
+	WP15:1, WP16:1, WP17:1, TPSCROLLS:1, IDSCROLLS:1, ASS:1, SYNTH:1,
+	CHSK91:1, CHSK53:1, CHSK82:1, ALLSK0:1, UNIQUE_PLACEHOLDER:1,
 };
 
 // TODO: Create list of mutually exclusive condition groups to expand syntax/error checking ...might be better to have a list of incompatible codes for all codes (except item codes, which could be handled separately) - there can only be 1 item code, and all codes are incompatible with any item code that is a subset of its' other incompatible codes (e.g. HELM is incompatible with SHIELD and all item codes that inherit SHIELD such as buc or kit)

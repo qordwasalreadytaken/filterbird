@@ -2301,8 +2301,8 @@ ItemDisplay[ETH SOCK>0 ID]: %NAME% [%SOCKETS%]%ORANGE%ETH <<BASIC>>
 ItemDisplay[ETH SOCK=0 ID]: %NAME%%ORANGE%ETH <<BASIC>>
 ItemDisplay[SOCK>0]: %NAME% [%SOCKETS%]<<BASIC>>
 //ItemDisplay[tsc]: %GREEN%!%WHITE%TP
-ItemDisplay[tsc CLVL<41]: %GREEN%!%WHITE%TP <<BASIC>>
-ItemDisplay[tsc CLVL>40 TPSCROLLS<5]: %BLUE%!%BLACK%TP <<BASIC>>
+ItemDisplay[tsc CLVL<41]: %GREEN%!%WHITE%TP<<BASIC>>
+ItemDisplay[tsc CLVL>40 TPSCROLLS<5]: %BLUE%!%BLACK%TP<<BASIC>>
 ItemDisplay[tsc CLVL>40 TPSCROLLS>4]:
 //ItemDisplay[isc]: %GREEN%!%WHITE%ID
 ItemDisplay[isc CLVL<41]: %GREEN%!%WHITE%ID<<BASIC>>

@@ -65,20 +65,34 @@ TextMacro[upb4slamsetarm1]:   %RED%Upgrade (Eld Ith PTopaz) before corrupting fo
 TextMacro[upb4slamsetarm2]:   %RED%Upgrade (Hel Io PTopaz) before corrupting for chance at max sockets
 
 TextMacro[pcm]:               %GRAY%Possible Corruption Mods 
-TextMacro[shopping]:          %RED%@@@@@  // %!shopping!%
-TextMacro[tansocks]:          %TAN%[%SOCKETS%] // %!tansocks!%
-TextMacro[graysocks]:         %GRAY%[%SOCKETS%] // %!graysocks!%
-TextMacro[stripedsocks]:      %WHITE%[%RED%%SOCKETS%%WHITE%] // %!stripedsocks!%
-TextMacro[runename]:          %ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]  // %!runename!%
-TextMacro[mapmacro]:          %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%] [%CODE%] // %!mapmacro!%
-TextMacro[qspecial]:          %SAGE%    %NAME%     //Qord special // %!qspecial!% "Qords special"
-TextMacro[gguueth]:           %NL%%GRAY% »      Eth %GOLD%%NAME%%GRAY%      « %NL% // %!gguueth!% "GG Unid'd Unique Ethereal"
-TextMacro[ethuniq]:           %GRAY%Eth %GOLD%%NAME% // %!ethuniq!%
-TextMacro[gguunoeth]:         %NL%%PURPLE%»»%RED%»» %ORANGE%»»  %YELLOW%»     %RED%%NAME%%YELLOW%     «%ORANGE%  «« %RED%««%PURPLE%««%NL% // %!gguunoeth!% "GG Unid'd Unique Not Ethereal"
-TextMacro[ggidun]:            %NL%%GOLD%%NAME%%NL%%NL% // %!ggidun!% "GG ID'd Uniques"
-TextMacro[okuniq]:            %YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«  // %!okuniq!% "Ok Uniques"
-TextMacro[okuniqid]:          %GOLD%%NAME%%NL%  // %!okuniqid!% "Ok Uniques, ID'd'"
-TextMacro[okuniqeth]:         %YELLOW%»%TAN%»%GRAY%ETH»     %GOLD%%NAME%%GRAY%     «%TAN%«%YELLOW%« // %!okuniqeth!% "Ok Uniques, ethereal"
+TextMacro[shopping]:          %RED%@@@@@  
+// %!shopping!%
+TextMacro[tansocks]:          %TAN%[%SOCKETS%] 
+// %!tansocks!%
+TextMacro[graysocks]:         %GRAY%[%SOCKETS%] 
+// %!graysocks!%
+TextMacro[stripedsocks]:      %WHITE%[%RED%%SOCKETS%%WHITE%] 
+// %!stripedsocks!%
+TextMacro[runename]:          %ORANGE%  %RUNENAME%  %GOLD%[%RUNETIER%]  
+// %!runename!%
+TextMacro[mapmacro]:          %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%] [%CODE%] 
+// %!mapmacro!%
+TextMacro[qspecial]:          %SAGE%    %NAME%     
+//Qord special // %!qspecial!% "Qords special"
+TextMacro[gguueth]:           %NL%%GRAY% »      Eth %GOLD%%NAME%%GRAY%      « %NL% 
+// %!gguueth!% "GG Unid'd Unique Ethereal"
+TextMacro[ethuniq]:           %GRAY%Eth %GOLD%%NAME% 
+// %!ethuniq!%
+TextMacro[gguunoeth]:         %NL%%PURPLE%»»%RED%»» %ORANGE%»»  %YELLOW%»     %RED%%NAME%%YELLOW%     «%ORANGE%  «« %RED%««%PURPLE%««%NL% 
+// %!gguunoeth!% "GG Unid'd Unique Not Ethereal"
+TextMacro[ggidun]:            %NL%%GOLD%%NAME%%NL%%NL% 
+// %!ggidun!% "GG ID'd Uniques"
+TextMacro[okuniq]:            %YELLOW%»%TAN%»%GRAY%»     %RED%%NAME%%GRAY%     «%TAN%«%YELLOW%«  
+// %!okuniq!% "Ok Uniques"
+TextMacro[okuniqid]:          %GOLD%%NAME%%NL%  
+// %!okuniqid!% "Ok Uniques, ID'd'"
+TextMacro[okuniqeth]:         %YELLOW%»%TAN%»%GRAY%ETH»     %GOLD%%NAME%%GRAY%     «%TAN%«%YELLOW%« 
+// %!okuniqeth!% "Ok Uniques, ethereal"
 TextMacro[setmacro]:          %GREEN%    %NAME%     %GREEN% // %!setmacro!%
 TextMacro[cubesoxwep]:        %NL% { Ral + Amn + P Amethyst %NL% Cube recipe for adding sockets to non-superior weapons %NL% }  // %!cubesoxwep!%
 TextMacro[cubesoxarm]:        %NL% { Tal + Thul + P Topaz %NL% Cube recipe for adding sockets to non-superior armor %NL% }  // %!cubesoxarm!%
@@ -121,6 +135,15 @@ SkillList[testlist]: "Meteor" "Energy Shield"
 //ItemDisplay[r08]: %TAN%Ral [%RUNETIER%] %RED%oo {%WHITE%Ral + Thul + %WHITE%P.%PURPLE%Ame %WHITE%+ %YELLOW%Norm Rare Arm %WHITE%-> %YELLOW%Exc Ver Rare Arm%NL%%WHITE%Ral + Sol + %WHITE%P.%GREEN%Eme %WHITE%+ %TAN%Norm Uniq Wea %WHITE%-> %TAN%Exc Ver of Wea%NL%%WHITE%Ral + Amn + %WHITE%P.%PURPLE%Ame %WHITE%+ Norm Wea -> Sock Wea of same type%NL%Ral + Thul + %WHITE%P.%BLUE%Sa %WHITE%+ Norm Helm -> Sock Helm of same type%NL%%NL%%PURPLE%[Caster]:%WHITE% Mag %BLUE%Amulet %WHITE%+ P.%PURPLE%Ame %WHITE%+ Jewel%NL%%RED%[Blood]:%WHITE% Mag %BLUE%Helm %WHITE%+ P.%RED%Ruby %WHITE%+ Jewel%NL%%ORANGE%Best Crafts Info%WHITE%%NL%}
 //ItemDisplay[rvs]: %PURPLE%R %WHITE%70% <:notify: NotificationSoundPriority = HIGH, NotificationSound = "@global\sfx\object\shrine\warping">
 
+//ItemDisplay[SKILL("Blade Shield")>2 7qr]: %NAME% %LIGHT_GRAY%+3 Blade Shield%CONTINUE%
+//ItemDisplay[SK277>2 7qr]: %NAME% %LIGHT_GRAY%+3 Blade Shield 
+//ItemDisplay[MAG CL5 CLSK6>0 OR TABSK48>0 OR TABSK49>0 OR TABSK50>0 OR SKILL("Dragon Claw")>2 OR SKILL("Tiger Strike")>2 OR SKILL("Dragon Talon")>2 OR SKILL("Fists of Fire")>2 OR SKILL("Cobra Strike")>2 OR SKILL("Claws of Thunder")>2 OR SKILL("Dragon Flight")>2 OR SKILL("Blades of Ice")>2 OR SKILL("Claw Mastery")>2 OR SKILL("Psychic Hammer")>2 OR SKILL("Burst of Speed")>2 OR SKILL("Weapon Block")>2 OR SKILL("Cloak of Shadows")>2 OR SKILL("Fade")>2 OR SKILL("Shadow Warrior")>2 OR SKILL("Mind Blast")>2 OR SKILL("Venom")>2 OR SKILL("Shadow Master")>2 OR SKILL("Fire Blast")>2 OR SKILL("Shock Web")>2 OR SKILL("Blade Throw")>2 OR SKILL("Charged Bolt Sentry")>2 OR SKILL("Wake of Fire")>2 OR SKILL("Blade Fury")>2 OR SKILL("Lightning Sentry")>2 OR SKILL("Wake of Inferno")>2 OR SKILL("Death Sentry")>2 OR SKILL("Blade Shield")>2]: %NAME% %!tansocks!% <:notify: NotificationPriority = HIGH, NotificationColor = ITEM>
+//ItemDisplay[NMAG 7qr !INF !NORM SK277>2]: %NAME% %TAN%[%SOCKETS%]
+ItemDisplay[SKILL("Blade Shield")>2 AND 7qr]: %NAME% %!tansocks!%
+ItemDisplay[NMAG 7qr FILTERLVL<4 (SK260>2 OR SK254>2 OR SK255>2 OR SK259>2 OR SK265>2 OR SK269>2 OR SK275>2 OR SK274>2 OR SK252>2 OR SK253>2 OR SK258>2 OR SK263>2 OR SK264>2 OR SK267>2 OR SK268>2 OR SK273>2 OR SK278>2 OR SK279>2 OR SK251>2 OR SK256>2 OR SK257>2 OR SK261>2 OR SK262>2 OR SK266>2 OR SK271>2 OR SK272>2 OR SK276>2 OR SK277>2)]: %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7qr FILTERLVL<4 (SKILL("Dragon Claw")>2 OR SKILL("Tiger Strike")>2 OR SKILL("Dragon Talon")>2 OR SKILL("Fists of Fire")>2 OR SKILL("Cobra Strike")>2 OR SKILL("Claws of Thunder")>2 OR SKILL("Dragon Flight")>2 OR SKILL("Blades of Ice")>2 OR SKILL("Claw Mastery")>2 OR SKILL("Psychic Hammer")>2 OR SKILL("Burst of Speed")>2 OR SKILL("Weapon Block")>2 OR SKILL("Cloak of Shadows")>2 OR SKILL("Fade")>2 OR SKILL("Shadow Warrior")>2 OR SKILL("Mind Blast")>2 OR SKILL("Venom")>2 OR SKILL("Shadow Master")>2 OR SKILL("Fire Blast")>2 OR SKILL("Shock Web")>2 OR SKILL("Blade Throw")>2 OR SKILL("Charged Bolt Sentry")>2 OR SKILL("Wake of Fire")>2 OR SKILL("Blade Fury")>2 OR SKILL("Lightning Sentry")>2 OR SKILL("Wake of Inferno")>2 OR SKILL("Death Sentry")>2 OR SKILL("Blade Shield")>2)]: %NAME% 
+ItemDisplay[NMAG 7qr CL5 FILTERLVL<3 (SKILL("Dragon Claw")>1 OR SKILL("Tiger Strike")>1 OR SKILL("Dragon Talon")>1 OR SKILL("Fists of Fire")>1 OR SKILL("Cobra Strike")>1 OR SKILL("Claws of Thunder")>1 OR SKILL("Dragon Flight")>1 OR SKILL("Blades of Ice")>1 OR SKILL("Claw Mastery")>1 OR SKILL("Psychic Hammer")>1 OR SKILL("Burst of Speed")>1 OR SKILL("Weapon Block")>1 OR SKILL("Cloak of Shadows")>1 OR SKILL("Fade")>1 OR SKILL("Shadow Warrior")>1 OR SKILL("Mind Blast")>1 OR SKILL("Venom")>1 OR SKILL("Shadow Master")>1 OR SKILL("Fire Blast")>1 OR SKILL("Shock Web")>1 OR SKILL("Blade Throw")>1 OR SKILL("Charged Bolt Sentry")>1 OR SKILL("Wake of Fire")>1 OR SKILL("Blade Fury")>1 OR SKILL("Lightning Sentry")>1 OR SKILL("Wake of Inferno")>1 OR SKILL("Death Sentry")>1 OR SKILL("Blade Shield")>1)]: %NAME% %!graysocks!%
+
 //Gambling screen
 ItemDisplay[STORAGE(GAMBLE) NMAG !ID (7wa)]: %NAME% <:notify: NotificationColor = RED>
 ItemDisplay[STORAGE(GAMBLE) NMAG !ID (amu OR rin OR EQ7 OR aar)]: Gamble %NAME% <:notify: NotificationColor = RED>
@@ -158,7 +181,8 @@ ItemDisplay[wms (FILTERLVL=1)]: %WHITE%thaw
 ItemDisplay[wms CLVL>60]:
 ItemDisplay[yps FILTERLVL=1]: %WHITE%antidote
 //ItemDisplay[key (FILTERLVL=1 AND PLRCLASS=0)]: %GRAY%key
-ItemDisplay[key (FILTERLVL=1 AND !PLRCLASS(ASS))]: %GRAY%key
+ItemDisplay[key FILTERLVL=1 AND ASS]: %GRAY%key
+ItemDisplay[key FILTERLVL=1 AND PLRCLASS(ASS)]: %GRAY%key
 //ItemDisplay[key FILTERLVL=1]: %GRAY%key
 //Choking, Exploding, Fulminating, Oil, Rancid, Strangling
 ItemDisplay[(gpm OR opm OR opl OR ops OR gps OR gpl) FILTERLVL=1]: %NAME%
@@ -191,7 +215,7 @@ ItemDisplay[box]: %TAN%%NAME% { %!cubesox!% } <:notify: NotificationColor = GOLD
 ItemDisplay[QUEST]: %TAN%%NAME% <:notify: NotificationColor = GOLD> //%NOTIFY(GOLD)%
 
 //PoD Items
-ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
+//ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
 ItemDisplay[SYNTH]: %GOLD%%NAME% <<qspecials>> //failsafe forsynthesized items, the above *should* catch them though
 ItemDisplay[std]: %NAME%
 ItemDisplay[cx5]: %NL%%GRAY%»     %PURPLE% %NAME% %GRAY%      «%NL%%NL% {  - Charms and Jewels%NL%  - Ethereal Items%NL%  - Socketed Items%NL%  - Non-magical Items%NL%%WHITE%Any item can be corrupted except:%NL%with another item and press the Transmute button twice.%NL%Place the Orb of Corruption%WHITE% into the Horadric Cube%WHITE%%NL%} <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(128/0/128), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
@@ -395,7 +419,7 @@ ItemDisplay[SET !ID FILTERLVL<5]: %NAME% // %CONTINUE%// [%CODE%]
 //trim old lines, no need enflame-frig since pre-buff is no more
 ItemDisplay[NMAG (SOCK=0 OR SOCK=3) CL6]: %NAME% %CONTINUE%
 //Combo
-ItemDisplay[NMAG (SK62>1 AND SK64>1) (SOCK=0 OR SOCK=3) CL6]: %SAGE%Hydra/Orb Orb %!qspecial!% %!stripedsocks!% <<qspecials>>
+ItemDisplay[NMAG (SK62>1 AND SK64>1) (SOCK=0 OR SOCK=3) CL6]: %SAGE%Hydra Orb Orb %!qspecial!% %!stripedsocks!% <<qspecials>>
 ItemDisplay[NMAG (SK40>2 AND SK52>2) (SOCK=0 OR SOCK=3) CL6]: %NAME% %ORANGE%GG +3 Enflame +3 Frigerate Pick me! %!stripedsocks!%
 //Cold with mastery
 ItemDisplay[NMAG (SK44>1 AND SK65>1) (SOCK=0 OR SOCK=3) CL6]: %ORANGE%Frost Nova Cold Mastery Orb %PURPLE%[%SOCKETS%] <:orbs: BorderColor = 151>

@@ -278,7 +278,7 @@ function setItem(value) {
 // ---------------------------------
 function simulate(manual) {
 	settings.nowrap_width = 800;
-	console.log("background color line 279: ",mappedbgcolor)
+//	console.log("background color line 279: ",mappedbgcolor)
 	//document.body.style.cursor = "wait";
 	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "Auto-Simulate is disabled. Click the 'ground' to simulate manually." }
 	else { document.getElementById("o5").innerHTML = "Auto-Simulate is enabled - the simulation updates when character/item changes are made. Click the 'ground' to simulate manually." }
@@ -478,7 +478,7 @@ function parseFile(file,num) {
 	for (line in lines) { if (done == false) {
 		line_num = Number(line)+1;
 
-		document.getElementById("o3").innerHTML += "<br>ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>Please copy/paste that line and give it to Qord, or just tell him the filter and line # that fails"	// gets displayed if the function halts unexpectedly at any point
+		document.getElementById("o3").innerHTML += "<br>ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>Please copy/paste that line and give it to Qord, or just tell him the filter and line # that fails<br>Failure is from " + itemDisplayLine	// gets displayed if the function halts unexpectedly at any point
 //		console.log("Invalid formatting: ", line)
 		var rule = lines[line].split("/")[0];
 		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
@@ -528,6 +528,9 @@ function parseFile(file,num) {
 //			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(".*?"|\S+)/g, " ");
 			itemDisplayLine = itemDisplayLine.replace(/NotificationSound\s*=\s*(".*?"|\S+),?/g, " ");
 			itemDisplayLine = itemDisplayLine.replace(/MapIcon\s*=\s*(\d+)\b[\),]*/g, " ");
+			itemDisplayLine = itemDisplayLine.replace(/%mapicon\(\s*([0-9a-fA-F]{1,2})(?:\s*,\s*[0-9a-fA-F]{1,2})?\s*\)%/gi, " ");
+
+//			itemDisplayLine = itemDisplayLine.replace(/%?MapIcon\s*=\s*\d+[\),]*%?/g, " ");
 			itemDisplayLine = itemDisplayLine.replace(/MapIconColor\s*=\s*(\d+)\b[\),]*/g, " ");
 			itemDisplayLine = itemDisplayLine.replace(/BorderSize\s*=\s*(\d+)\b[\),]*/g, " ");
 			itemDisplayLine = itemDisplayLine.replace(/BorderColor\s*=\s*\d+,?/g, " ");
@@ -543,7 +546,8 @@ function parseFile(file,num) {
 //			itemDisplayLine = itemDisplayLine.replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ').replace(', ,', ', ')
 			itemDisplayLine = itemDisplayLine.replace(/%SPACE%,?|%SPACE%/g, " ");
 			itemDisplayLine = itemDisplayLine.replace("%BOLD%", "%BLACK%");
-			
+
+//			itemDisplayLine = itemDisplayLine.replace(/!?PLRCLASS\((.*?)\)/g, "$1");			
 //			itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, () => {
 //				return ""; // Replace with an empty string
 //			});
@@ -551,18 +555,151 @@ function parseFile(file,num) {
 			itemDisplayLine = itemDisplayLine.replace('%ITEMNAME%', '%NAME%');
 			itemDisplayLine = itemDisplayLine.replace('%BASENAME%', '%NAME%');
 
+			itemDisplayLine = itemDisplayLine.replace(/SKILL\("([^"]+)"\)/g, (match, skillName) => {
+				const skillCode = skillIndexMap[skillName]; // Lookup the skill code
+				if (skillCode !== undefined) {
+					console.warn("Skill " + skillName + " replaced by SK" + skillCode)
+					return `SK${skillCode}`; // Replace with SK##
+				} else {
+					console.warn(`Skill not found in map: ${skillName}`);
+					return match; // Leave it unchanged if not in the map
+				}
+			});
+			console.log("New DisplayLine after skill sub: " + itemDisplayLine);
+
 			// remove some style elements
 //			itemDisplayLine = itemDisplayLine.replace('%BASENAME%', '%NAME%');
 
+			// Proof of concept for finding item based on name, but fails where ring or amulet
+			// Need to do this differently
+			// Step 1: Extract the item name from the filter line
+			let unimatch = itemDisplayLine.match(/UNIQUE\("([^"]+)"\)/);
+			if (unimatch) {
+				const itemName = unimatch[1]; // Extracted name ("Heavenly Garb")
+				console.log("UNIQUE match found:", unimatch[0], ",", itemName);
+			
+				let item = null;
+			
+				// Search through all equipment subcategories
+				for (const subcategory of Object.keys(equipment)) {
+					item = equipment[subcategory].find(e => e.name === itemName);
+					if (item) break; // Stop early if found
+				}
+			
+				if (item) {
+					console.log("Found item in subcategory:", item);
+			
+					// Normalize the base name
+					const baseName = item.base.replace(/\s+/g, "_"); // "Light Plate" -> "Light_Plate"
+					const base = bases[baseName];
+			
+					if (base) {
+						const code = base.CODE; // Get the CODE ("ltp")
+						console.log("UNIQUE item code found:", code);
+			
+						// Replace UNIQUE(...) correctly
+						itemDisplayLine = itemDisplayLine.replace(
+							/UNIQUE\("([^"]+)"\)/,
+							`UNI ${code}`
+						);
+			
+						console.log("UNIQUE line changed to:", itemDisplayLine);
+					} else {
+						console.error(`Base "${baseName}" not found in bases.`);
+					}
+				} else {
+					console.error(`Item "${itemName}" not found in any subcategory of equipment.`);
+				}
+			} else {
+				// No UNIQUE(...) match found
+			}
+
+			let setmatch = itemDisplayLine.match(/SET\("([^"]+)"\)/);
+			if (setmatch) {
+				const itemName = setmatch[1]; // Extracted name ("Heavenly Garb")
+				console.log("SET match found:", setmatch[0], ",", itemName);
+			
+				let item = null;
+			
+				// Search through all equipment subcategories
+				for (const subcategory of Object.keys(equipment)) {
+					item = equipment[subcategory].find(e => e.name === itemName);
+					if (item) break; // Stop early if found
+				}
+			
+				if (item) {
+					console.log("Found SET item in subcategory:", item);
+			
+					// Normalize the base name
+					const baseName = item.base.replace(/\s+/g, "_"); // "Light Plate" -> "Light_Plate"
+					const base = bases[baseName];
+			
+					if (base) {
+						const code = base.CODE; // Get the CODE ("ltp")
+						console.log("SET item code found:", code);
+			
+						// Replace UNIQUE(...) correctly
+						itemDisplayLine = itemDisplayLine.replace(
+							/SET\("([^"]+)"\)/,
+							`SET ${code}`
+						);
+			
+						console.log("SET line changed to:", itemDisplayLine);
+					} else {
+						console.error(`Base "${baseName}" not found in bases.`);
+					}
+				} else {
+					console.error(`Item "${itemName}" not found in any subcategory of equipment.`);
+				}
+			} else {
+				// No SET(...) match found
+			}
+
+			// Replace generic quoted item names with their item/base CODE, if possible
+			itemDisplayLine = itemDisplayLine.replace(/"([^"]+)"/g, (match, name) => {
+				// Skip if already handled elsewhere (optional: add exclusions)
+				if (name.startsWith('%') || name.endsWith('%')) return match;
+
+				let foundCode = null;
+
+				// Search for matching item name in equipment
+				Object.keys(equipment).forEach(subcategory => {
+					const item = equipment[subcategory].find(e => e.name === name);
+					if (item) {
+						// If item has a base and no CODE, try looking up code via base
+						if (!item.CODE && item.base) {
+							const baseName = item.base.replace(/\s+/g, "_");
+							if (bases[baseName]) {
+								foundCode = bases[baseName].CODE;
+							}
+						} else if (item.CODE) {
+							foundCode = item.CODE;
+						}
+					}
+				});
+
+				// Only replace if we successfully found a code
+				if (foundCode) {
+					console.log(`Replaced "${name}" with code: ${foundCode}`);
+					return foundCode;
+				} else {
+					return match; // Leave unchanged
+				}
+			});
+
+
+			console.warn("The final displayline before rule with tabs: " + itemDisplayLine)
             // Step 3: Update `rule_with_tabs` with the substituted line for further processing
 //            rule_with_tabs = itemDisplayLine.split("­").join("•").split("\n");
+
             rule_with_tabs = itemDisplayLine.split("/")[0];
-			
-			console.log(rule_with_tabs)
+//			rule_with_tabs = itemDisplayLine;			
+		console.log("Rule with tabs: "  + rule_with_tabs)
             // Process the updated `rule_with_tabs` string dynamically in subsequent logic
 		}
-		
+// SKILL Fails after here		
 		var index_with_tabs = rule_with_tabs.indexOf("ItemDisplay[");
+//		console.log("Index with tabs: " + index_with_tabs)
 		var index_end = rule.indexOf("]:");
 		
 		if (settings.validation == 1 && errors < settings.max_errors) {
@@ -574,8 +711,10 @@ function parseFile(file,num) {
 			rules_checked += 1
 			var match = false;
 			var formula = "";
-			var conditions = rule.substring(0,index).concat(rule.substring(index+12)).split("]:")[0];
-	
+//			var conditions = rule.substring(0,index).concat(rule.substring(index+12)).split("]:")[0];
+			var conditions = rule_with_tabs.substring(0,index_with_tabs).concat(rule_with_tabs.substring(index_with_tabs+12)).split("]:")[0];
+//			console.log("condition: " + conditions)
+// SKILL Fails before here
 			while (conditions.includes("  ")) { conditions = conditions.split("  ").join(" "); }	// remove multiple spaces within conditions
 			conditions = conditions.split("( ").join("(").split(" )").join(")")						// removes extra spaces within parentheses
 //			var output = lines_with_tabs[line].substring(0,index).concat(lines_with_tabs[line].substring(index+12)).split("]:")[1];
@@ -583,6 +722,7 @@ function parseFile(file,num) {
 			if (conditions[0] == " " || conditions[conditions.length-1] == " ") {
 				//if (settings.validation == 1 && errors < settings.max_errors) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule's conditions have space on either side (cosmetic only)
 				conditions = conditions.trim()
+//				console.log("condition: " + conditions)
 			}
 			// check duplicate conditions
 			if (settings.validation == 1 && errors < settings.max_errors) {
@@ -620,22 +760,18 @@ function parseFile(file,num) {
 				var untouchedSegments = [];
 
 				// Step 1: Check for SET("...") or UNIQUE("...")
-				if (conditions.includes('SET(')) {
-					const match = conditions.match(/SET\("([^"]+)"\)/); // Extract the text inside SET(...)
-					if (match) {
-						untouchedSegments.push(match[1]); // Add untouched text to the array
-						conditions = conditions.replace(match[0], 'SET_PLACEHOLDER'); // Replace with placeholder
-					}
+				let setMatch;
+				while ((setMatch = conditions.match(/SET\("([^"]+)"\)/))) { // Extract all SET(...) instances
+					untouchedSegments.push({ type: 'SET', value: setMatch[1] }); // Track type and value
+					conditions = conditions.replace(setMatch[0], `SET_PLACEHOLDER_${untouchedSegments.length - 1}`); // Add unique placeholder
 				}
-
-				if (conditions.includes('UNIQUE(')) {
-					const match = conditions.match(/UNIQUE\("([^"]+)"\)/); // Extract the text inside UNIQUE(...)
-					if (match) {
-						untouchedSegments.push(match[1]); // Add untouched text to the array
-						conditions = conditions.replace(match[0], 'UNIQUE_PLACEHOLDER'); // Replace with placeholder
-					}
+				
+				let uniqueMatch;
+				while ((uniqueMatch = conditions.match(/UNIQUE\("([^"]+)"\)/))) { // Extract all UNIQUE(...) instances
+					untouchedSegments.push({ type: 'UNIQUE', value: uniqueMatch[1] }); // Track type and value
+					conditions = conditions.replace(uniqueMatch[0], `UNIQUE_PLACEHOLDER_${untouchedSegments.length - 1}`); // Add unique placeholder
 				}
-
+				
 				// Step 2: Apply transformations to the remaining conditions
 				cond_format = conditions.split("  ").join(" ")
 					.split("(").join(",(,")
@@ -653,15 +789,16 @@ function parseFile(file,num) {
 					.split("+").join(",+,")
 					.split(" ").join(",&,")
 					.split(",,").join(",");
-
+				
 				// Step 3: Reinsert untouched segments into the formatted string
-				if (untouchedSegments.length) {
-					untouchedSegments.forEach((segment, index) => {
-						const placeholder = index === 0 ? 'SET_PLACEHOLDER' : 'UNIQUE_PLACEHOLDER';
-						cond_format = cond_format.replace(placeholder, `"${segment}"`);
-					});
-				}
-
+				untouchedSegments.forEach((segment, index) => {
+					const placeholder = segment.type === 'SET'
+						? `SET_PLACEHOLDER_${index}`
+						: `UNIQUE_PLACEHOLDER_${index}`;
+					cond_format = cond_format.replace(placeholder, `"${segment.value}"`);
+//					console.log(cond_format);
+				});
+				
 				// Output
 //				console.log(cond_format);
 
@@ -675,13 +812,16 @@ function parseFile(file,num) {
 				var unrecognized_list = [];
 				var unrecognized_conditions = false;
 				for (cond in cond_list) {
+//					console.log("cond: " + cond)
 					cond = Number(cond)
 					var c = cond_list[cond];
 					// TODO: Check whether the "BETEEN" operator is present and reconfigure it to use multiple conditions with ">" and "<" (may need a different solution for PREFIX/SUFFIX/AUTOMOD)
-					var nonbool_conditions = ["GOLD","RUNE","GEM","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK","QUEST","SYNTH","SPECIAL","UNIQUE"];
+					var nonbool_conditions = ["GOLD","RUNE","GEM","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK","QUEST","SYNTH","SPECIAL","UNIQUE","PLRCLASS"];
 					if (c == "GEM") { c = "GEMLEVEL" }
 					if (c == "RUNENUM" || c == "RUNENAME" || c == "RUNETIER") { c = "RUNE" }
 					if (c == "STORAGE") { c = "" }
+					if (c == "PLRCLASS" || c == "!PLRCLASS") { c = "" }
+					
 //					if (c == "PLRCLASS" || c == "!PLRCLASS" || c == "AMA" || c == "BAR" || c == "DRU" || c == "NEC" || c == "ASS" || c == "PAL" || c == "SOR") { c = "" }
 //					if (c == "MAPTIER" || c == "MAP") { c = "" }
 //					if (c == "SYNTH") { c = "UNI" }
@@ -697,15 +837,15 @@ function parseFile(file,num) {
 					if (c == "UNIQUE") {
 						// Extract the name within the UNIQUE parentheses
 						const nameMatch = itemDisplay.match(/UNIQUE\("([^"]+)"\)/);
-						console.log("Name to match " + nameMatch)
+						console.log("UNIQUE Name to match " + nameMatch)
 						const variableName = nameMatch ? nameMatch[1] : null; // Dynamically captured name
-						console.log("Name to match2 " + variableName)
+						console.log("UNIQUE Name to match2 " + variableName)
 					
 						// Extract the optional code (e.g., "lst") after the name
 						const codeMatch = itemDisplay.match(/\b([a-zA-Z0-9]+)\b(?=\]?$)/);
-						console.log("Name to match3 " + codeMatch)
+						console.log("UNIQUE Name to match3 " + codeMatch)
 						const variableCode = codeMatch ? codeMatch[1] : null; // Dynamically captured code
-						console.log("Name to match4 " + variableCode)
+						console.log("UNIQUE Name to match4 " + variableCode)
 
 						// Search across all sections of equipment
 						const matchingItem = Object.values(equipment).flat().find(item => 
@@ -714,7 +854,7 @@ function parseFile(file,num) {
 					
 						// Update 'c' if a matching item is found
 						if (matchingItem) {
-							c = matchingItem.CODE;
+							c = matchingItem.name;
 						}
 						else{ c = "" }
 					}
@@ -860,7 +1000,7 @@ function parseFile(file,num) {
 				
 
 
-				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_ITEMNAME,").split("%BASENAME%").join(",ref_BASENAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY.*?%/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "");
+				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%ITEMNAME%").join(",ref_ITEMNAME,").split("%BASENAME%").join(",ref_BASENAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%PURPLE%").join(",color_PURPLE,").split("%COBALT%").join(",color_COBALT,").split("%PINK%").join(",color_PINK,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNETIER%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTIER%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,").replace(/%NOTIFY.*?%/g, "").replace(/%?STORAGE\([^)]*\)%?/gi, "").replace(/%?PLRCLASS\([^)]*\)%?/gi, "").replace(/%?!PLRCLASS\([^)]*\)%?/gi, "");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DPURPLE%").join(",color_DPURPLE,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
@@ -868,12 +1008,12 @@ function parseFile(file,num) {
 				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
 				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 //				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,"),split("%NOTIFY(ITEM)%").join(",ignore_NOTIFY(ITEM,").split("%NOTIFY(WHITE)%").join(",ignore_NOTIFY(WHITE,").split("%NOTIFY(GRAY)%").join(",ignore_NOTIFY(GRAY,").split("%NOTIFY(BLUE)%").join(",ignore_NOTIFY(BLUE,").split("%NOTIFY(YELLOW)%").join(",ignore_NOTIFY(YELLOW,").split("%NOTIFY(TAN)%").join(",ignore_NOTIFY(TAN,").split("%NOTIFY(GOLD)%").join(",ignore_NOTIFY(GOLD,").split("%NOTIFY(GREEN)%").join(",ignore_NOTIFY(GREEN,").split("%NOTIFY(DARK_GREEN)%").join(",ignore_NOTIFY(DARK_GREEN,").split("%NOTIFY(BLACK)%").join(",ignore_NOTIFY(BLACK,").split("%NOTIFY(PURPLE)%").join(",ignore_NOTIFY(PURPLE,").split("%NOTIFY(RED)%").join(",ignore_NOTIFY(RED,").split("%NOTIFY(ORANGE)%").join(",ignore_NOTIFY(ORANGE,").split(/%NOTIFYS[^%]*%/g).join(",ignore_NOTIFY(ORANGE,")}
-				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("PLRCLASS").join(",ref_PLRCLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
-				if (settings.version == 0) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("PLRCLASS").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
+				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
+				if (settings.version == 0) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
 				if (settings.version == 0) {
 //					if (out_format.includes("QUEST")) {out_format = out_format.split("QUEST").join(",misc_QUEST")};
 //					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER-","STORAGE("];
-					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE(","%NOTIFY(","PLRCLASS(","!PLRCLASS("];
+					var notifs = ["%PX-","%DOT-","%MAP-","%MAPICON(","STORAGE(","%NOTIFY(","PLRCLASS(","!PLRCLASS"];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 							for (let a = 0; a < 16; a++) {
@@ -887,22 +1027,14 @@ function parseFile(file,num) {
 						}
 					}
 					//ignore PLRCLASS
-					if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
-						const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
-						let match;
-						while ((match = plrclassPattern.exec(out_format)) !== null) {
-							let matchStr = match[0];
-							out_format = out_format.split(matchStr).join(",ignore_notification,");
-						}
-					}
-					if (out_format.includes("!PLRCLASS(") || out_format.includes("plrclass(")) {
-						const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
-						let match;
-						while ((match = plrclassPattern.exec(out_format)) !== null) {
-							let matchStr = match[0];
-							out_format = out_format.split(matchStr).join(",ignore_notification,");
-						}
-					}
+//					if (out_format.includes("!PLRCLASS(") || out_format.includes("PLRCLASS(")) {
+//						const plrclassPattern = /!?PLRCLASS\((.*?)\)/gi;
+//						let match;
+//						while ((match = plrclassPattern.exec(out_format)) !== null) {
+//							let matchStr = match[0];
+//							out_format = out_format.split(matchStr).join(",ignore_notification,");
+//						}
+//					}
 					if (out_format.includes("%NOTIFY(") || out_format.includes("%notify(")) {
 						const notifylassPattern = /%NOTIFY.*?%/g;
 						let match;
@@ -920,6 +1052,14 @@ function parseFile(file,num) {
 						const storagePattern = /(?:%?)storage\([^)]*\)(?:%?)/gi;
 						let match;
 						while ((match = storagePattern.exec(out_format)) !== null) {
+							let matchStr = match[0];
+							out_format = out_format.split(matchStr).join(",ignore_notification,");
+						}
+					}
+					if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
+						const plrPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
+						let match;
+						while ((match = plrPattern.exec(out_format)) !== null) {
 							let matchStr = match[0];
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
@@ -956,7 +1096,7 @@ function parseFile(file,num) {
 						let width = borderwidthStr ? parseInt(borderwidthStr) : 1;
 						mappedborder = colorIndexMap[bordercolorIdx] || "#000000"; // fallback to black if undefined
 
-						console.log("border color log 1 is " + mappedborder);
+//						console.log("border color log 1 is " + mappedborder);
 						return mappedborder
 					});
 					// This ignores the border, need to remove this when html fixing happens
@@ -976,7 +1116,7 @@ function parseFile(file,num) {
 						let width = widthStr ? parseInt(widthStr) : 1;
 						mappedbgcolor = colorIndexMap[colorIdx] || "#000000"; // fallback to black if undefined
 
-						console.log("background color log 1 is " + mappedbgcolor);
+//						console.log("background color log 1 is " + mappedbgcolor);
 						return mappedbgcolor
 					});
 
@@ -1028,6 +1168,8 @@ function parseFile(file,num) {
 							out_format = out_format.split(matchStr).join(",ignore_notification,");
 						}
 					}
+					out_format = out_format.replace(/%mapicon\(\s*([0-9a-fA-F]{1,2})(?:\s*,\s*[0-9a-fA-F]{1,2})?\s*\)%/gi, ",ignore_notification,");
+
 					if (out_format.match(/%bgcolor\([^)]+\)%/i)) {
 						const mapiconPattern = /%bgcolor\(([^)]+)\)%/gi;
 						let match;
@@ -1267,11 +1409,11 @@ function parseFile(file,num) {
 	if (settings.version == 0) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("MAPTIER").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
 	if (settings.version == 0) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
 	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
-	if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("PLRCLASS").join(",ref_PLRCLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
+	if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
 	//Add new keywords 
 	if (settings.version == 0) { out_format = out_format}	// TODO: organize keywords for different versions - these lines are a mess
 	if (settings.version == 0) {
-		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER(","STORAGE(","%NOTIFY("];
+		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-","%MAPICON(","%BORDER(","STORAGE(","%NOTIFY(","PLRCLASS","!PLRCLASS"];
 		for (n in notifs) {
 			if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
 				for (let a = 0; a < 16; a++) {
@@ -1317,14 +1459,14 @@ function parseFile(file,num) {
 			}
 		}
 		// ignore plrclass
-		if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
-			const plrclassPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
-			let match;
-			while ((match = plrclassPattern.exec(out_format)) !== null) {
-				let matchStr = match[0];
-				out_format = out_format.split(matchStr).join(",ignore_notification,");
-			}
-		}
+//		if (out_format.includes("PLRCLASS(") || out_format.includes("!PLRCLASS(")) {
+//			const plrclassPattern = /!?PLRCLASS\((.*?)\)/gi;
+//			let match;
+//			while ((match = plrclassPattern.exec(out_format)) !== null) {
+//				let matchStr = match[0];
+//				out_format = out_format.split(matchStr).join(",ignore_notification,");
+//			}
+//		}
 		if (out_format.includes("STORAGE(") || out_format.includes("storage(")) {
 			const storagePattern = /(?:%?)storage\([^)]*\)(?:%?)/gi;
 			let match;
@@ -1333,11 +1475,21 @@ function parseFile(file,num) {
 				out_format = out_format.split(matchStr).join(",ignore_notification,");
 			}
 		}
-		if (out_format.includes("%MAPICON(") || out_format.includes("%mapicon(")) { for (let a = 0; a < 500; a++) {
-			var av = a.toString(16);
-			out_format = out_format.split("%MAPICON("+av+")%").join(",ignore_notification,").split("%MAPICON("+av.toUpperCase()+")%").join(",ignore_notification,").split("%mapicon("+av+")%").join(",ignore_notification,").split("%mapicon("+av.toUpperCase()+")%").join(",ignore_notification,")
-			} 
-		}
+//		if (out_format.includes("PLRCLASS(") || out_format.includes("plrclass(")) {
+//			const plrPattern = /(?:%?)plrclass\([^)]*\)(?:%?)/gi;
+//			let match;
+//			while ((match = plrPattern.exec(out_format)) !== null) {
+//				let matchStr = match[0];
+//				out_format = out_format.split(matchStr).join(",ignore_notification,");
+//			}
+//		}
+//		if (out_format.includes("%MAPICON(") || out_format.includes("%mapicon(")) { for (let a = 0; a < 500; a++) {
+//			var av = a.toString(16);
+//			out_format = out_format.split("%MAPICON("+av+")%").join(",ignore_notification,").split("%MAPICON("+av.toUpperCase()+")%").join(",ignore_notification,").split("%mapicon("+av+")%").join(",ignore_notification,").split("%mapicon("+av.toUpperCase()+")%").join(",ignore_notification,")
+//			} 
+//		}
+		out_format = out_format.replace(/%MAPICON\(\s*([0-9a-fA-F]{1,2})(?:\s*,\s*[0-9a-fA-F]{1,2})?\s*\)%/gi, ",ignore_notification,");
+
 //		out_format = out_format.replace(', ,', ', ')
 	}
 	for (let lvl = 0; lvl <= 9; lvl++) {
@@ -1435,7 +1587,7 @@ function parseFile(file,num) {
 		if (description_braces != 1) {
 			if (o == "misc_NL" || o == "‗") { display += "<br>" }
 			if (mappedbgcolor != "") {
-				console.log("background color log line 1360 is "+ mappedbgcolor)
+//				console.log("background color log line 1360 is "+ mappedbgcolor)
 
 				if (o == " ") {
 					display += "<l style='color:Black; background-color:" + mappedbgcolor + "; border-color:" + mappedborder +"; '>_</l>";

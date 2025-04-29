@@ -1876,7 +1876,7 @@ function setItemCodes() {
 	if (typeof(itemToCompare.baseSpeed) == 'undefined') { itemToCompare.baseSpeed = 0 }
 	
 	var two_handers_1 = ["lax","bax","btx","gax","gix","9la","9ba","9bt","9ga","9gi","7la","7ba","7bt","7ga","7gi","mau","gma","9m9","9gm","7m7","7gm","2hs","clm","gis","bsw","flb","gsd","92h","9cm","9gs","9b9","9fb","9gd","72h","7cm","7gs","7b7","7fb","7gd","spr","tri","brn","spt","pik","9sr","9tr","9br","9st","9p9","7sr","7tr","7br","7st","7p7","am3","am4","am8","am9","amd","ame"];
-	var two_handers_2 = ["WP8","WP9","WP10","WP11"];
+	var two_handers_2 = ["WP8","WP9","WP10","WP11","WP16","WP17"];
 	itemToCompare["2H"] = false;
 	itemToCompare["1H"] = false;
 	for (th in two_handers_1) { if (itemToCompare.CODE == two_handers_1[th]) { itemToCompare["2H"] = true; } }
@@ -1949,7 +1949,7 @@ function setItemCodes() {
 // ---------------------------------
 function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
-	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON","AMA","PAL","ASS","QUEST","UNIQUE","SYNTH"];
+	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON","AMA","PAL","ASS","QUEST","UNIQUE","SYNTH","WP15","WP16","WP17"];
 	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE",max_durability:"MAXDUR"};
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_bonus:"ARPER"};
 	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;
