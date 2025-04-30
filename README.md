@@ -4,8 +4,17 @@ FilterBird, originally by toolmaster BW, is a tool to allow you to "use" an item
 
 This version in not up to date, but has been updated enough to not crash (as much?) with PoD's newer filtering options. 
 
-Includes limited support for TextMacros and ItemStyles.
+Added features:
+* Limited support for TextMacros and ItemStyles.
+* Limited support for named items
+* Limited support for named skills
 
+Known filtering issues:
+* In-line stying not supported
+* If blocks (if you remove leading tabs and spaces from them they might work)
+* Border colors, while present, do not render in the html
+* Output display can have some oddities, extra spaces, underscores, line breaks, and off-center content
+* Most newer PoD filter keywords and conditions not yet added
 
 Please see the original ReadMe below for more information on FilterBird. 
 

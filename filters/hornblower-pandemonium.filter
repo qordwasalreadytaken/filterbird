@@ -810,7 +810,7 @@ ItemDisplay[ETH UNI !ID ulm]: %ORANGE%ETH %GOLD%%NAME% <<GG>>
 //G Face
 ItemDisplay[SET !ID xhm !FILTERLVL=3]: %ORANGE%G Face%NL%%GREEN%%NAME%<<GG1>>
 //Nightwings Veil of steel 
-ItemDisplay[!ETH UNI !ID uhm]: %ORANGE%Nightwing \ Veil%NL%       %GOLD%%NAME%       %GOLD%<<GG>>
+ItemDisplay[!ETH UNI !ID uhm]: %ORANGE%Nightwing Veil%NL%       %GOLD%%NAME%       %GOLD%<<GG>>
 ItemDisplay[!ETH UNIQUE("Nightwing's Veil") ID SOCK=0]: %GOLD%%NAME%%NL%%BLUE%+%STAT(331,0)%% Cold Damage<<GG>>
 ItemDisplay[!ETH UNIQUE("Nightwing's Veil") ID]: %GOLD%%NAME%%NL%%BLUE%+%STAT(331,0)%% Cold Damage%GREEN%[%SOCKETS%] <<GG>>
 //Valkyrie Wing

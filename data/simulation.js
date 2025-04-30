@@ -432,6 +432,37 @@ function extractMacrosFromFile(file) {
 //	num: filter number (1 or 2)
 // ---------------------------------
 function parseFile(file,num) {
+	file = file.replace(
+		/EnableIf\[(.*?)\]\s*([\s\S]*?)\s*EndIf\[\]/g,
+		(fullMatch, enableCondition, blockContent) => {
+		  const condition = enableCondition.trim();
+	  
+		  const updatedBlock = blockContent
+			.split("\n")
+			.map(line => {
+				line = line.replace(/^\s+/, ""); // remove all leading whitespace
+				line = line.replace(/%?STAT\((\d+)\)%?/g, "ITEMSTAT$1");
+				const match = line.match(/^(\s*ItemDisplay\[\s*)([^\]]*)(\s*\]:.*)$/);
+				if (match) {
+				  const prefix = match[1];
+				  const currentConditions = match[2].trim();
+				  const suffix = match[3];
+			  
+				  const newConditions = currentConditions
+					? `${condition} ${currentConditions}`
+					: condition;
+			  
+				  return `${prefix}${newConditions}${suffix}`;
+				}
+				return line;
+			  })
+							  .join("\n");
+	  
+		  // 🔁 Re-wrap the updated block in EnableIf and EndIf lines to preserve line numbers
+		  return `EnableIf[${condition}]\n${updatedBlock}\nEndIf[]`;
+		}
+	  );
+		
 	const textMacros = extractMacrosFromFile(file);
 	const styleMacros = extractStyleFromFile(file);
 	var errors = 0;
@@ -507,6 +538,8 @@ function parseFile(file,num) {
 //			itemDisplayLine = itemDisplayLine.replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ');
 			itemDisplayLine = itemDisplayLine.replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=').replace(' = ', '=');
 
+			
+			console.warn("Updated display line after ifs: " + itemDisplayLine)
 //			itemDisplayLine = itemDisplayLine.replace(/AND !PLRCLASS\(.*?\)|AND PLRCLASS\(.*?\)|PLRCLASS\(.*?\)|!PLRCLASS\(.*?\),/g, "");
 			itemDisplayLine = itemDisplayLine.replace(/Notifica(.*?)[\),]?\s+/g, " ");
 			itemDisplayLine = itemDisplayLine.replace(/Notif.*?\)\,?/g, " ");
@@ -565,7 +598,7 @@ function parseFile(file,num) {
 					return match; // Leave it unchanged if not in the map
 				}
 			});
-			console.log("New DisplayLine after skill sub: " + itemDisplayLine);
+//			console.log("New DisplayLine after skill sub: " + itemDisplayLine);
 
 			// remove some style elements
 //			itemDisplayLine = itemDisplayLine.replace('%BASENAME%', '%NAME%');
@@ -688,7 +721,7 @@ function parseFile(file,num) {
 			});
 
 
-			console.warn("The final displayline before rule with tabs: " + itemDisplayLine)
+//			console.warn("The final displayline before rule with tabs: " + itemDisplayLine)
             // Step 3: Update `rule_with_tabs` with the substituted line for further processing
 //            rule_with_tabs = itemDisplayLine.split("­").join("•").split("\n");
 
@@ -882,11 +915,13 @@ function parseFile(file,num) {
 								if (settings.version == 0) { recognized = true }
 								else { pod_conditions = true }
 							} }
-							if (cr.substr(0,4) == "STAT") { if (Number(cr.slice(4)) >= 0 && Number(cr.slice(4)) <= 504) {
-								recognized = true
-								cond_list[cond] = ("STAT"+Number(cr.slice(4)))
-								c = cond_list[cond]
-							} }
+							if (cr.substr(0,4) == "STAT") {
+								if (Number(cr.slice(4)) >= 0 && Number(cr.slice(4)) <= 504) {
+									recognized = true;
+									cond_list[cond] = `STAT(${Number(cr.slice(4))})`; // ✅ parentheses instead of plain number
+									c = cond_list[cond];
+								}
+							}
 							if (cr.substr(0,2) == "SK") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 500) {
 								recognized = true
 								cond_list[cond] = ("SK"+Number(cr.slice(2)))
