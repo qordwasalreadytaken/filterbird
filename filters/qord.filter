@@ -565,42 +565,42 @@ EndIf[]
 
 //Barb hats
 EnableIf[NMAG CL2]
-        ItemDisplay[NMAG SKILL("Howl")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Howl%CONTINUE%
-        ItemDisplay[NMAG SKILL("Find Potion")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Find Potion%CONTINUE%
-        ItemDisplay[NMAG SKILL("Taunt")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Taunt%CONTINUE%
-        ItemDisplay[NMAG SKILL("Shout")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Shout%CONTINUE%
-        ItemDisplay[NMAG SKILL("Find Item")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Find Item%CONTINUE%
-        ItemDisplay[NMAG SKILL("Battle Cry")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Battle Cry%CONTINUE%
-        ItemDisplay[NMAG SKILL("Battle Orders")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Battle Orders%CONTINUE%
-        ItemDisplay[NMAG SKILL("Grim Ward")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Grim Ward%CONTINUE%
-        ItemDisplay[NMAG SKILL("War Cry")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 War Cry%CONTINUE%
-        ItemDisplay[NMAG SKILL("Battle Command")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Battle Command%CONTINUE%
-        ItemDisplay[NMAG SKILL("Edged Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Edged Mastery%CONTINUE%
-        ItemDisplay[NMAG SKILL("Pole Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Pole Mastery%CONTINUE%
-        ItemDisplay[NMAG SKILL("Blunt Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Blunt Mastery%CONTINUE%
-        ItemDisplay[NMAG SKILL("Thrown Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Thrown Mastery%CONTINUE%
-        ItemDisplay[NMAG SKILL("Increased Stamina")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Increased Stamina%CONTINUE%
-        ItemDisplay[NMAG SKILL("Counter Attack")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Counter Attack%CONTINUE%
-        ItemDisplay[NMAG SKILL("Iron Skin")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Iron Skin%CONTINUE%
-        ItemDisplay[NMAG SKILL("Increased Speed")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Increased Speed%CONTINUE%
-        ItemDisplay[NMAG SKILL("Puncture")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Puncture%CONTINUE%
-        ItemDisplay[NMAG SKILL("Natural Resistance")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Natural Resistance%CONTINUE%
-        ItemDisplay[NMAG SKILL("Whirling Axes")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Whirling Axes%CONTINUE%
-        ItemDisplay[NMAG SKILL("Double Swing")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Double Swing%CONTINUE%
-        ItemDisplay[NMAG SKILL("Concentrate")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Concentrate%CONTINUE%
-        ItemDisplay[NMAG SKILL("Cleave")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Cleave%CONTINUE%
-        ItemDisplay[NMAG SKILL("Frenzy")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Frenzy%CONTINUE%
-        ItemDisplay[NMAG SKILL("Stun")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Stun%CONTINUE%
-        ItemDisplay[NMAG SKILL("Leap Slam")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Leap%CONTINUE%
-        ItemDisplay[NMAG SKILL("Double Throw")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Power Throw%CONTINUE%
-//        ItemDisplay[NMAG SKILL("Leap")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Leap%CONTINUE%
-//        ItemDisplay[NMAG SKILL("Power Throw")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Power Throw%CONTINUE%
-        ItemDisplay[NMAG SKILL("Bash")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Bash%CONTINUE%
-        ItemDisplay[NMAG SKILL("Ethereal Throw")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Ethereal Throw%CONTINUE%
-        ItemDisplay[NMAG SKILL("Whirlwind")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Whirlwind%CONTINUE%
-//        ItemDisplay[(CL2 NMAG) SKILL("Howl")>2 OR SKILL("Find Potion")>2 OR SKILL("Taunt")>2 OR SKILL("Shout")>2 OR SKILL("Find Item")>2 OR SKILL("Battle Cry")>2 OR SKILL("Battle Orders")>2 OR SKILL("Grim Ward")>2 OR SKILL("War Cry")>2 OR SKILL("Battle Command")>2 OR SKILL("Edged Weapon Mastery")>2 OR SKILL("Pole Weapon Mastery")>2 OR SKILL("Blunt Weapon Mastery")>2 OR SKILL("Thrown Weapon Mastery")>2 OR SKILL("Increased Stamina")>2 OR SKILL("Counter Attack")>2 OR SKILL("Iron Skin")>2 OR SKILL("Increased Speed")>2 OR SKILL("Puncture")>2 OR SKILL("Natural Resistance")>2 OR SKILL("Whirling Axes")>2 OR SKILL("Double Swing")>2 OR SKILL("Concentrate")>2 OR SKILL("Cleave")>2 OR SKILL("Frenzy")>2 OR SKILL("Stun")>2 OR SKILL("Leap")>2 OR SKILL("Power Throw")>2 OR SKILL("Bash")>2 OR SKILL("Ethereal Throw")>2 OR SKILL("Whirlwind")>2]:  %NAME%
-//    SKILL("Battle Orders")>2 OR SKILL("Grim Ward")>2 OR SKILL("War Cry")>2 OR SKILL("Battle Command")>2 OR SKILL("Edged Weapon Mastery")>2 OR SKILL("Pole Weapon Mastery")>2 OR SKILL("Blunt Weapon Mastery")>2 OR SKILL("Thrown Weapon Mastery")>2 OR SKILL("Increased Stamina")>2 OR SKILL("Counter Attack")>2 OR SKILL("Iron Skin")>2 OR SKILL("Increased Speed")>2 OR SKILL("Puncture")>2 OR SKILL("Natural Resistance")>2 OR SKILL("Whirling Axes")>2 OR SKILL("Double Swing")>2 OR SKILL("Concentrate")>2 OR SKILL("Cleave")>2 OR SKILL("Frenzy")>2 OR SKILL("Stun")>2 OR SKILL("Leap")>2 OR SKILL("Bash")>2 OR SKILL("Ethereal Throw")>2 OR SKILL("Whirlwind")>2]:  %NAME%
-        ItemDisplay[(CL2 NMAG) SKILL("Howl")>2 OR SKILL("Find Potion")>2 OR SKILL("Taunt")>2 OR SKILL("Shout")>2 OR SKILL("Find Item")>2 OR SKILL("Battle Cry")>2 OR SKILL("Battle Orders")>2 OR SKILL("Grim Ward")>2 OR SKILL("War Cry")>2 OR SKILL("Battle Command")>2 OR SKILL("Edged Weapon Mastery")>2 OR SKILL("Pole Weapon Mastery")>2 OR SKILL("Blunt Weapon Mastery")>2 OR SKILL("Thrown Weapon Mastery")>2 OR SKILL("Increased Stamina")>2 OR SKILL("Counter Attack")>2 OR SKILL("Iron Skin")>2 OR SKILL("Increased Speed")>2 OR SKILL("Puncture")>2 OR SKILL("Natural Resistance")>2 OR SKILL("Whirling Axes")>2 OR SKILL("Double Swing")>2 OR SKILL("Concentrate")>2 OR SKILL("Cleave")>2 OR SKILL("Frenzy")>2 OR SKILL("Stun")>2 OR SKILL("Leap Slam")>2 OR SKILL("Double Throw")>2 OR SKILL("Bash")>2 OR SKILL("Ethereal Throw")>2 OR SKILL("Whirlwind")>2]:  %NAME%
+     ItemDisplay[NMAG SKILL("Howl")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Howl%CONTINUE%
+     ItemDisplay[NMAG SKILL("Find Potion")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Find Potion%CONTINUE%
+     ItemDisplay[NMAG SKILL("Taunt")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Taunt%CONTINUE%
+     ItemDisplay[NMAG SKILL("Shout")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Shout%CONTINUE%
+     ItemDisplay[NMAG SKILL("Find Item")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Find Item%CONTINUE%
+     ItemDisplay[NMAG SKILL("Battle Cry")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Battle Cry%CONTINUE%
+     ItemDisplay[NMAG SKILL("Battle Orders")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Battle Orders%CONTINUE%
+     ItemDisplay[NMAG SKILL("Grim Ward")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Grim Ward%CONTINUE%
+     ItemDisplay[NMAG SKILL("War Cry")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 War Cry%CONTINUE%
+     ItemDisplay[NMAG SKILL("Battle Command")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Battle Command%CONTINUE%
+     ItemDisplay[NMAG SKILL("Edged Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Edged Mastery%CONTINUE%
+     ItemDisplay[NMAG SKILL("Pole Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Pole Mastery%CONTINUE%
+     ItemDisplay[NMAG SKILL("Blunt Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Blunt Mastery%CONTINUE%
+     ItemDisplay[NMAG SKILL("Thrown Weapon Mastery")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Thrown Mastery%CONTINUE%
+     ItemDisplay[NMAG SKILL("Increased Stamina")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Increased Stamina%CONTINUE%
+     ItemDisplay[NMAG SKILL("Counter Attack")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Counter Attack%CONTINUE%
+     ItemDisplay[NMAG SKILL("Iron Skin")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Iron Skin%CONTINUE%
+     ItemDisplay[NMAG SKILL("Increased Speed")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Increased Speed%CONTINUE%
+     ItemDisplay[NMAG SKILL("Puncture")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Puncture%CONTINUE%
+     ItemDisplay[NMAG SKILL("Natural Resistance")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Natural Resistance%CONTINUE%
+     ItemDisplay[NMAG SKILL("Whirling Axes")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Whirling Axes%CONTINUE%
+     ItemDisplay[NMAG SKILL("Double Swing")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Double Swing%CONTINUE%
+     ItemDisplay[NMAG SKILL("Concentrate")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Concentrate%CONTINUE%
+     ItemDisplay[NMAG SKILL("Cleave")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Cleave%CONTINUE%
+     ItemDisplay[NMAG SKILL("Frenzy")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Frenzy%CONTINUE%
+     ItemDisplay[NMAG SKILL("Stun")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Stun%CONTINUE%
+     ItemDisplay[NMAG SKILL("Leap Slam")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Leap%CONTINUE%
+     ItemDisplay[NMAG SKILL("Double Throw")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Power Throw%CONTINUE%
+     //        ItemDisplay[NMAG SKILL("Leap")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Leap%CONTINUE%
+     //        ItemDisplay[NMAG SKILL("Power Throw")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Power Throw%CONTINUE%
+     ItemDisplay[NMAG SKILL("Bash")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Bash%CONTINUE%
+     ItemDisplay[NMAG SKILL("Ethereal Throw")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Ethereal Throw%CONTINUE%
+     ItemDisplay[NMAG SKILL("Whirlwind")>2 CL2 !SOCK=1]: %NAME% %LIGHT_GRAY% +3 Whirlwind%CONTINUE%
+     //        ItemDisplay[(CL2 NMAG) SKILL("Howl")>2 OR SKILL("Find Potion")>2 OR SKILL("Taunt")>2 OR SKILL("Shout")>2 OR SKILL("Find Item")>2 OR SKILL("Battle Cry")>2 OR SKILL("Battle Orders")>2 OR SKILL("Grim Ward")>2 OR SKILL("War Cry")>2 OR SKILL("Battle Command")>2 OR SKILL("Edged Weapon Mastery")>2 OR SKILL("Pole Weapon Mastery")>2 OR SKILL("Blunt Weapon Mastery")>2 OR SKILL("Thrown Weapon Mastery")>2 OR SKILL("Increased Stamina")>2 OR SKILL("Counter Attack")>2 OR SKILL("Iron Skin")>2 OR SKILL("Increased Speed")>2 OR SKILL("Puncture")>2 OR SKILL("Natural Resistance")>2 OR SKILL("Whirling Axes")>2 OR SKILL("Double Swing")>2 OR SKILL("Concentrate")>2 OR SKILL("Cleave")>2 OR SKILL("Frenzy")>2 OR SKILL("Stun")>2 OR SKILL("Leap")>2 OR SKILL("Power Throw")>2 OR SKILL("Bash")>2 OR SKILL("Ethereal Throw")>2 OR SKILL("Whirlwind")>2]:  %NAME%
+     //    SKILL("Battle Orders")>2 OR SKILL("Grim Ward")>2 OR SKILL("War Cry")>2 OR SKILL("Battle Command")>2 OR SKILL("Edged Weapon Mastery")>2 OR SKILL("Pole Weapon Mastery")>2 OR SKILL("Blunt Weapon Mastery")>2 OR SKILL("Thrown Weapon Mastery")>2 OR SKILL("Increased Stamina")>2 OR SKILL("Counter Attack")>2 OR SKILL("Iron Skin")>2 OR SKILL("Increased Speed")>2 OR SKILL("Puncture")>2 OR SKILL("Natural Resistance")>2 OR SKILL("Whirling Axes")>2 OR SKILL("Double Swing")>2 OR SKILL("Concentrate")>2 OR SKILL("Cleave")>2 OR SKILL("Frenzy")>2 OR SKILL("Stun")>2 OR SKILL("Leap")>2 OR SKILL("Bash")>2 OR SKILL("Ethereal Throw")>2 OR SKILL("Whirlwind")>2]:  %NAME%
+     ItemDisplay[(CL2 NMAG) SKILL("Howl")>2 OR SKILL("Find Potion")>2 OR SKILL("Taunt")>2 OR SKILL("Shout")>2 OR SKILL("Find Item")>2 OR SKILL("Battle Cry")>2 OR SKILL("Battle Orders")>2 OR SKILL("Grim Ward")>2 OR SKILL("War Cry")>2 OR SKILL("Battle Command")>2 OR SKILL("Edged Weapon Mastery")>2 OR SKILL("Pole Weapon Mastery")>2 OR SKILL("Blunt Weapon Mastery")>2 OR SKILL("Thrown Weapon Mastery")>2 OR SKILL("Increased Stamina")>2 OR SKILL("Counter Attack")>2 OR SKILL("Iron Skin")>2 OR SKILL("Increased Speed")>2 OR SKILL("Puncture")>2 OR SKILL("Natural Resistance")>2 OR SKILL("Whirling Axes")>2 OR SKILL("Double Swing")>2 OR SKILL("Concentrate")>2 OR SKILL("Cleave")>2 OR SKILL("Frenzy")>2 OR SKILL("Stun")>2 OR SKILL("Leap Slam")>2 OR SKILL("Double Throw")>2 OR SKILL("Bash")>2 OR SKILL("Ethereal Throw")>2 OR SKILL("Whirlwind")>2]:  %NAME%
 
 EndIf[]
 
