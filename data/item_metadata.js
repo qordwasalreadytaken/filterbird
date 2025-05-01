@@ -1512,7 +1512,7 @@ var codes = {
 	skill_Cold_Enchant:"SK40", skill_Inferno:"SK41", skill_Lightning:"SK49", skill_Enchant_Fire:"SK52", skill_Skeleton_Mastery:"SK69", skill_Poison_Dagger:"SK73", skill_Golem_Mastery:"SK79", skill_Bone_Prison:"SK88", skill_Thorns:"SK103", skill_General_Mastery:"SK128", skill_Throwing_Mastery:"SK135", skill_Polearm_and_Spear_Mastery:"SK136", skill_Double_Throw:"SK140", skill_Combat_Reflexes:"SK141", skill_Berserk:"SK152", skill_Tiger_Strike:"SK254", skill_Blade_Sentinel:"SK257", skill_Fists_of_Fire:"SK259", skill_Dragon_Claw:"SK260", skill_Cobra_Strike:"SK265", skill_Claws_of_Thunder:"SK269", skill_Chain_Lightning_Sentry:"SK271", skill_Phoenix_Strike:"SK280", 
 	skill_Ice_Barrage:"SK369", skill_Combustion:"SK376", skill_Lesser_Hydra:"SK383", skill_Blood_Warp:"SK367", skill_Curse_Mastery:"SK374", skill_Dark_Pact:"SK381", skill_Holy_Nova:"SK364", skill_Holy_Light:"SK371", skill_Joust:"SK378", skill_Gust:"SK370", 
 	// qord updating
-	skill_Holy_Bolt:"SK477", skill_Holy_Bolt:"%SKILL(477)%", skill_Fist_of_the_Heavens:"SK121", skill_Fist_of_the_Heavens:"%SKILL(121)%", 
+	skill_Holy_Bolt:["SK477","%SKILL(477)%"], skill_Fist_of_the_Heavens:["SK121","%SKILL(121)%","SKILL(121)"], 
 };
 
 var item_groups = {
