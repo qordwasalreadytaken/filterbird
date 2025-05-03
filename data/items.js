@@ -42,6 +42,7 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 /* Vanilla skills		*/	skill_Critical_Strike:0, skill_Tiger_Strike:0, skill_Cobra_Strike:0, skill_Phoenix_Strike:0, skill_Dragon_Claw:0, skill_Fists_of_Fire:0, skill_Claws_of_Thunder:0, skill_Blade_Sentinel:0, skill_Double_Throw:0, skill_Berserk:0, skill_Skeleton_Mastery:0, skill_Golem_Mastery:0, skill_Poison_Dagger:0, skill_Bone_Prison:0, skill_Thorns:0, skill_Lightning:0, skill_Inferno:0, 
 /* PD2 skills			*/	skill_Javelin_and_Spear_Mastery:0, skill_Slow_Movement:0, skill_Claw_and_Dagger_Mastery:0, skill_Chain_Lightning_Sentry:0, skill_General_Mastery:0, skill_Throwing_Mastery:0, skill_Polearm_and_Spear_Mastery:0, skill_Combat_Reflexes:0, skill_Gust:0, skill_Blood_Warp:0, skill_Raise_Skeleton_Archer:0, skill_Poison_Strike:0, skill_Curse_Mastery:0, skill_Dark_Pact:0, skill_Holy_Light:0, skill_Joust:0, skill_Holy_Nova:0, skill_Cold_Enchant:0, skill_Ice_Barrage:0, skill_Lesser_Hydra:0, skill_Enchant_Fire:0, skill_Combustion:0, 
 					leap_speed:0, gust_cdr:0, extra_golems:0, enemy_pdr:0, description:"", 
+					tacos:"",charged:"",
 };
 
 /*
@@ -1522,6 +1523,7 @@ var equipment = {
 {rarity:"regular", name:"Cracked Phase Blade", inferior:true, type:"sword", base:"Phase Blade"},
 {rarity:"regular", name:"Thunder Maul", sup:15, ethereal:1, sockets:6, type:"mace", base:"Thunder Maul"},
 {rarity:"regular", name:"Grave Wand", skill_Convocation:3, skill_Desecrate:3, skill_Corpse_Explosion:3, type:"wand", base:"Grave Wand"},
+{rarity:"magic", name:"Charged Wand of Lower Resistance", cskill:[[3,"Lower Resistance",60]], itd:1, charged:[[6,"Lower Resistance",66]], tacos:1, type:"wand", base:"Grave Wand"},
 {rarity:"regular", name:"Shillelagh", skill_Shiver_Armor:3, skill_Energy_Shield:3, skill_Chain_Lightning:3, type:"staff", base:"Shillelagh"},
 {rarity:"regular", name:"War Scepter", skill_Holy_Shock:3, skill_Vigor:3, skill_Charge:3, sockets:4, type:"scepter", base:"War Scepter"},
 {only:"necromancer", rarity:"magic", name:"Golemlord's Lich Wand", type:"wand", req_level:65, skills_summoning_necromancer:3, skill_Summon_Mastery:3, skill_Raise_Skeleton_Warrior:3, skill_Raise_Skeletal_Mage:3, base:"Lich Wand"},

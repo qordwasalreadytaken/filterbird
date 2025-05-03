@@ -2369,6 +2369,7 @@ var affixes_corruption = [
 [	"dmgP",	35,	50,	"",	0,	0,	"weap"	],
 [	"dstrike",	10,	10,	"",	0,	0,	"weap"	],
 [	"cblow",	10,	10,	"",	0,	0,	"weap"	],
+[	"tacos",	10,	10,	"",	0,	0,	"weap"	], // Qord testing
 [	"swing",	10,	15,	"",	0,	0,	"weap"	],
 [	"sock",	1,	4,	"",	0,	0,	"shield"	],
 [	"block",	10,	10,	"",	0,	0,	"shield"	],
@@ -2621,6 +2622,9 @@ var affix_item_mods = {
 	att_skill_Chain_Lightning_lvl:"att_skill_Chain_Lightning_lvl",
 	gethit_skill_Hydra_lvl:"gethit_skill_Hydra_lvl",
 	hit_skill_Amplify_Damage_lvl:"hit_skill_Amplify_Damage_lvl",
+
+	tacos:"tacos",
+
 };
 
 

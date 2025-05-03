@@ -64,7 +64,7 @@ var rare_suffix = {
 	bow:["Bolt", "Branch", "Fletch", "Flight", "Horn", "Nock", "Quarrel", "Quill", "Song", "Stinger", "Thirst"],
 	staff:["Branch", "Call", "Chant", "Cry", "Goad", "Gnarl", "Spell", "Spire", "Song", "Weaver"],
 	scepter:["Blow", "Breaker", "Call", "Chant", "Crack", "Crusher", "Cry", "Gnarl", "Grinder", "Knell", "Ram", "Smasher", "Song", "Spell", "Star", "Weaver"],
-	other:["Scratch","Fang","Thirst","Rend","Star","Bane","Spike","Scourge","Barb","Horn","Song","Brand","Loom"],	// dagger, throwing weapon, javelin, polearm, crossbow, wand, claw, orb, amazon weapon, quiver, jewel	(none of these were listed in the source I found, so they just use this list of generic-sounding suffixes)	...TOCHECK: determine which suffix names should actually apply
+	other:["Scratch","Fang","Thirst","Rend","Star","Bane","Spike","Scourge","Barb","Horn","Song","Brand","Loom","Charged","of Lower Resistance"," of Tacos"],	// dagger, throwing weapon, javelin, polearm, crossbow, wand, claw, orb, amazon weapon, quiver, jewel	(none of these were listed in the source I found, so they just use this list of generic-sounding suffixes)	...TOCHECK: determine which suffix names should actually apply
 };
 
 var most_recent_rarity = "Set";		// which item rarity was most recently selected

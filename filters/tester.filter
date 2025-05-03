@@ -125,6 +125,17 @@ ItemStyle[test]:              BorderColor = RGB(245/2/19), BorderSize = 4, Backg
 
 SkillList[testlist]: "Meteor" "Energy Shield"
 
+ItemList[orbsss]:ob4 ob9 obe ob5 oba obf
+ItemList[trangarm]:xul
+ItemList[necroitems]:ne1 ne6 neb ne2 ne7 neg ne3 ne8 ned
+
+
+//ItemDisplay[SKILLS("Nova" "Frost Nova")]: %NAME% hello sorc items! 
+
+ItemDisplay[ITEMS(necroitems)]: %NAME% hello necro items!
+ItemDisplay[ITEMS(trangarm)]: %NAME% hello trang arm!
+ItemDisplay[ITEMS(orbsss)]: %NAME% hello sorc items! 
+
 //<NotificationSoundPriority = HIGH, NotificationSound = "@global\sfx\item\rune"><NotificationSoundPriority = HIGH, NotificationSound = "@global\sfx\item\rune">
 //"@local\sfx\Common\Cain\Cain_hello.wav"
 // "@global\sfx\object\shrine\warping.wav"
@@ -144,55 +155,20 @@ ItemDisplay[SKILL("Blade Shield")>2 AND 7qr]: %NAME% %!tansocks!%
 //ItemDisplay[NMAG 7qr FILTERLVL<4 (SKILL("Dragon Claw")>2 OR SKILL("Tiger Strike")>2 OR SKILL("Dragon Talon")>2 OR SKILL("Fists of Fire")>2 OR SKILL("Cobra Strike")>2 OR SKILL("Claws of Thunder")>2 OR SKILL("Dragon Flight")>2 OR SKILL("Blades of Ice")>2 OR SKILL("Claw Mastery")>2 OR SKILL("Psychic Hammer")>2 OR SKILL("Burst of Speed")>2 OR SKILL("Weapon Block")>2 OR SKILL("Cloak of Shadows")>2 OR SKILL("Fade")>2 OR SKILL("Shadow Warrior")>2 OR SKILL("Mind Blast")>2 OR SKILL("Venom")>2 OR SKILL("Shadow Master")>2 OR SKILL("Fire Blast")>2 OR SKILL("Shock Web")>2 OR SKILL("Blade Throw")>2 OR SKILL("Charged Bolt Sentry")>2 OR SKILL("Wake of Fire")>2 OR SKILL("Blade Fury")>2 OR SKILL("Lightning Sentry")>2 OR SKILL("Wake of Inferno")>2 OR SKILL("Death Sentry")>2 OR SKILL("Blade Shield")>2)]: %NAME% 
 //ItemDisplay[NMAG 7qr CL5 FILTERLVL<3 (SKILL("Dragon Claw")>1 OR SKILL("Tiger Strike")>1 OR SKILL("Dragon Talon")>1 OR SKILL("Fists of Fire")>1 OR SKILL("Cobra Strike")>1 OR SKILL("Claws of Thunder")>1 OR SKILL("Dragon Flight")>1 OR SKILL("Blades of Ice")>1 OR SKILL("Claw Mastery")>1 OR SKILL("Psychic Hammer")>1 OR SKILL("Burst of Speed")>1 OR SKILL("Weapon Block")>1 OR SKILL("Cloak of Shadows")>1 OR SKILL("Fade")>1 OR SKILL("Shadow Warrior")>1 OR SKILL("Mind Blast")>1 OR SKILL("Venom")>1 OR SKILL("Shadow Master")>1 OR SKILL("Fire Blast")>1 OR SKILL("Shock Web")>1 OR SKILL("Blade Throw")>1 OR SKILL("Charged Bolt Sentry")>1 OR SKILL("Wake of Fire")>1 OR SKILL("Blade Fury")>1 OR SKILL("Lightning Sentry")>1 OR SKILL("Wake of Inferno")>1 OR SKILL("Death Sentry")>1 OR SKILL("Blade Shield")>1)]: %NAME% %!graysocks!%
 //ItemDisplay[UNIQUE("Arkaine's Valor")]: %NAME% %!graysocks!%
-EnableIf[cm3 MAG ID]
-    ItemDisplay[TABSK8>0]: %NAME% %LIGHT_GRAY% Fire Skiller %CONTINUE%
-    ItemDisplay[TABSK10>0]: %NAME% %LIGHT_GRAY% Cold Skiller %CONTINUE%
-    ItemDisplay[TABSK9>0]: %NAME% %LIGHT_GRAY% Light Skiller %CONTINUE%
-    ItemDisplay[TABSK17>0]: %NAME% %LIGHT_GRAY% PnB Skiller %CONTINUE%
-    ItemDisplay[TABSK18>0]: %NAME% %LIGHT_GRAY% NSummon Skiller %CONTINUE%
-    ItemDisplay[TABSK16>0]: %NAME% %LIGHT_GRAY% Curse Skiller %CONTINUE%
-    ItemDisplay[TABSK24>0]: %NAME% %LIGHT_GRAY% PCombat Skiller %CONTINUE%
-    ItemDisplay[TABSK25>0]: %NAME% %LIGHT_GRAY% Off Aura Skiller %CONTINUE%
-    ItemDisplay[TABSK26>0]: %NAME% %LIGHT_GRAY% Def Aura Skiller %CONTINUE%
-    ItemDisplay[TABSK48>0]: %NAME% %LIGHT_GRAY% Trap Skiller %CONTINUE%
-    ItemDisplay[TABSK50>0]: %NAME% %LIGHT_GRAY% MA Skiller %CONTINUE%
-    ItemDisplay[TABSK42>0]: %NAME% %LIGHT_GRAY% Ele Skiller %CONTINUE%
-    ItemDisplay[TABSK41>0]: %NAME% %LIGHT_GRAY% ShapeShift Skiller %CONTINUE%
-    ItemDisplay[TABSK40>0]: %NAME% %LIGHT_GRAY% DSummon Skiller %CONTINUE%
-    ItemDisplay[TABSK32>0]: %NAME% %LIGHT_GRAY% BCombat Skiller %CONTINUE%
-    ItemDisplay[TABSK33>0]: %NAME% %LIGHT_GRAY% Masteries Skiller %CONTINUE%
-    ItemDisplay[TABSK34>0]: %NAME% %LIGHT_GRAY% WC Skiller %CONTINUE%
-    ItemDisplay[TABSK2>0]: %NAME% %LIGHT_GRAY% Java Skiller %CONTINUE%
-    ItemDisplay[TABSK0>0]: %NAME% %LIGHT_GRAY% Bow Skiller %CONTINUE%
-    ItemDisplay[STAT(0)>0]: %NAME% %LIGHT_GRAY% %STAT(0)% STR %CONTINUE%
-    ItemDisplay[STAT(2)>1]: %NAME% %LIGHT_GRAY% %STAT(2)%  %CONTINUE%
-    ItemDisplay[STAT(7)>0]: %NAME% %LIGHT_GRAY% %STAT(7)% Life %CONTINUE%
-    ItemDisplay[STAT(9)>13]: %NAME% %LIGHT_GRAY% %STAT(9)% Mana %CONTINUE%
-    ItemDisplay[RES>0]: %NAME% %LIGHT_GRAY% %RES% AllRes %CONTINUE%
-    ItemDisplay[STAT(19)>0]: %NAME% %LIGHT_GRAY% %STAT(19)% AR %CONTINUE%
-    ItemDisplay[STAT(22)>0]: %NAME% %LIGHT_GRAY% %STAT(22)% MaxDmg %CONTINUE%
-    ItemDisplay[STAT(39)>3]: %NAME% %LIGHT_GRAY% %STAT(39)% FRes %CONTINUE%
-    ItemDisplay[STAT(41)>3]: %NAME% %LIGHT_GRAY% %STAT(41)% LRes %CONTINUE%
-    ItemDisplay[STAT(43)>3]: %NAME% %LIGHT_GRAY% %STAT(43)% CRes %CONTINUE%
-    ItemDisplay[STAT(45)>3]: %NAME% %LIGHT_GRAY% %STAT(45)% PRes %CONTINUE%
-    ItemDisplay[RES>60]: %NAME% %LIGHT_GRAY% %ALLRES% Total resists! %CONTINUE%
-    ItemDisplay[STAT(80)>3]: %NAME% %LIGHT_GRAY% %STAT(80)% MF %CONTINUE%
-    ItemDisplay[STAT(96)>0]: %NAME% %LIGHT_GRAY% %STAT(96)% FRW %CONTINUE%
-    ItemDisplay[STAT(99)>0]: %NAME% %LIGHT_GRAY% %STAT(99)% FHR %CONTINUE%
-    ItemDisplay[MAG ID cm3]: %NAME%
-EndIf[]
-ItemDisplay[MAG ID cm3]: %NAME%
 
+//ItemDisplay[ne1 OR ne6 OR neb OR ne2 OR ne7 OR neg OR ne3 OR ne8 OR ned]: %NAME% hello necro items!
 
 ItemDisplay[UNIQUE("Shaftstop") !ETH ID xhn SOCK=0]: %GOLD%%NAME%{%PURPLE%Upgrade: %ORANGE%Ko %SAGE%+ %RED%Lem %SAGE%+ %WHITE%PDiamond%NL%%CORAL%Upgrade Before Slam}<<GG1>>
 ItemDisplay[!ETH UNIQUE("Ormus' Robes") ID uui SK44>1]: %NAME% %BLUE%Frost Nova %CONTINUE% %MAPICON(88,21)%
 ItemDisplay["Super Healing Potion"]:  %RED%!%WHITE%Hp
-ItemDisplay["Full Rejuvenation Potion"]: %PURPLE%R %WHITE%70%
+ItemDisplay["Full Rejuvenation Potion"]: %PURPLE%R %WHITE%70% <:gguniqs: NotificationColor = RED>
 ItemDisplay[UNIQUE("The Stone of Jordan")]: %NAME% 
 ItemDisplay[SET("Tal Rasha's Guardianship")]: %NAME% 
 ItemDisplay[!ETH UNIQUE("Ormus' Robes") ID uui]: %NAME% <<qnique>>
 ItemDisplay[UNIQUE("Highlord's Wrath")]: %NAME% Highlord
 ItemDisplay[UNIQUE("Mara's Kaleidoscope")]: %NAME% Maras
+ItemDisplay[WP12 MAG ID CHSK91>0]: %GREEN% Lower Resist Wand %!shopping!% <<notify>>
+ItemDisplay[WP12 MAG ID CSKILL91>0]: %GREEN% Lower Resist Wand %!shopping!% <<notify>>
 
 
 

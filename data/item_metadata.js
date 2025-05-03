@@ -1404,7 +1404,7 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	hit_skill:{index:[""], format:["Chance to cast Level "," [skill] on striking"]},
 	att_skill:{index:[""], format:["Chance to cast Level "," [skill] on attack"]},
 	gethit_skill:{index:[""], format:["Chance to cast Level "," [skill] when struck"]},
-	charged:{index:["",""], format:["Level "," [skill] ("," charges)"]},
+//	charged:{index:["",""], format:["Level "," [skill] ("," charges)"]},
 	//dmg_ac:{index:[], format:["(dmg-ac)"]},
 	//dmgP_lvl:{index:[], format:["(dmg%/lvl)"]},
 	//ac_time:{index:[], format:["(ac-time)"]},
@@ -1477,6 +1477,10 @@ skill_Holy_Nova:{index:["skill_Holy_Nova"], format:["+"," to Holy Nova (Paladin 
 skill_Holy_Light:{index:["skill_Holy_Light"], format:["+"," to Holy Light (Paladin only)"]},
 skill_Joust:{index:["skill_Joust"], format:["+"," to Joust (Paladin only)"]},
 skill_Gust:{index:["skill_Gust"], format:["+"," to Gust (Druid only)"]},
+
+// Qord testing
+tacos:{index:["tacos"], format:["Chance of Tacos"]},
+//chsk91:{index:["",""], format:["Level "," Lower Resistances ("," charges)"]},
 };
 
 var stats_alternate = {
@@ -1631,7 +1635,7 @@ var all_codes = {
 	STORAGE:1, GAMBLE:1,MAPTIER:1,
 	ma12:1, ma13:1, ma14:1, SK477:1, SKILL121:1, SK121:1, GEMTIER:3,
 	WP15:1, WP16:1, WP17:1, TPSCROLLS:1, IDSCROLLS:1, ASS:1, SYNTH:1,
-	CHSK91:1, CHSK53:1, CHSK82:1, ALLSK0:1, UNIQUE_PLACEHOLDER:1,
+	CHSK53:1, CHSK82:1, ALLSK0:1, UNIQUE_PLACEHOLDER:1,
 };
 
 // TODO: Create list of mutually exclusive condition groups to expand syntax/error checking ...might be better to have a list of incompatible codes for all codes (except item codes, which could be handled separately) - there can only be 1 item code, and all codes are incompatible with any item code that is a subset of its' other incompatible codes (e.g. HELM is incompatible with SHIELD and all item codes that inherit SHIELD such as buc or kit)

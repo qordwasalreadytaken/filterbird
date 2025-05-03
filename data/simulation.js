@@ -414,6 +414,20 @@ function extractMacrosFromFile(file) {
     return macros;
 }
 
+function extractItemListsFromFile(file) {
+    const itemLists = {};
+
+    const listRegex = /ItemList\[(\w+)\]:([^\n\r]*)/g;
+    let match;
+    while ((match = listRegex.exec(file)) !== null) {
+        const listName = match[1].trim();
+        const items = match[2].trim();
+        itemLists[listName] = items;
+    }
+
+    return itemLists;
+}
+
 
 
 //// Example definitions for macros and styles
@@ -465,6 +479,7 @@ function parseFile(file,num) {
 		
 	const textMacros = extractMacrosFromFile(file);
 	const styleMacros = extractStyleFromFile(file);
+	const itemLists = extractItemListsFromFile(file);
 	var errors = 0;
 	var display = "";
 	var description = "";
@@ -524,10 +539,45 @@ function parseFile(file,num) {
                 return textMacros[macroName] || match;
             });
 
+			itemDisplayLine = itemDisplayLine.replace(/ItemDisplay\[\s*ITEMS\(([^)\]]+)\)\s*\]/g, (match, listName) => {
+				if (itemLists[listName]) {
+					const orSeparated = itemLists[listName].split(/\s+/).join(" OR ");
+					return `ItemDisplay[${orSeparated}]`;
+				}
+				return match;
+			});
+						
             // Step 2: Replace styles (<<style>>)
             itemDisplayLine = itemDisplayLine.replace(/<<(.*?)>>/g, (match, styleName) => {
 				return styleMacros[styleName] || match;
             });
+
+			itemDisplayLine = itemDisplayLine.replace(/<:(.*?):(.*?)>/g, (match, styleName, overrides) => {
+				const baseStyle = styleMacros[styleName.trim()];
+				if (!baseStyle) return match; // unknown style fallback
+			
+				// Parse base style into a map
+				const styleMap = {};
+				baseStyle.split(',').forEach(entry => {
+					const [key, value] = entry.split('=').map(part => part.trim());
+					if (key && value !== undefined) styleMap[key] = value;
+				});
+			
+				// Robust key=value parser that allows complex values like RGB(...) or quoted strings
+				const overrideRegex = /(\w+)\s*=\s*((".*?"|'[^']*?'|RGB\([^)]*\)|[^,]+))/g;
+				let matchOverride;
+				while ((matchOverride = overrideRegex.exec(overrides)) !== null) {
+					const [, key, rawValue] = matchOverride;
+					const value = rawValue.trim();
+					styleMap[key] = value;
+				}
+			
+				// Rebuild result
+				return Object.entries(styleMap)
+					.map(([k, v]) => `${k} = ${v}`)
+					.join(', ');
+			});
+						
 			// separate double %'s
 			itemDisplayLine = itemDisplayLine.replace('%%', '% %')
 			// make sure there's a space after any closing elipse
@@ -732,7 +782,7 @@ function parseFile(file,num) {
 		}
 // SKILL Fails after here		
 		var index_with_tabs = rule_with_tabs.indexOf("ItemDisplay[");
-//		console.log("Index with tabs: " + index_with_tabs)
+		console.log("Index with tabs: " + index_with_tabs)
 		var index_end = rule.indexOf("]:");
 		
 		if (settings.validation == 1 && errors < settings.max_errors) {
@@ -1829,7 +1879,8 @@ function getAffixLine(affix) {
 				affix_line += line
 				if (i < source[affix].length-1) { affix_line += "<br>" }
 			}
-		} else if (affix == "cskill") {
+		} else if (affix == "cskill" || affix == "charged") { //qord testing
+//		} else if (affix == "cskill") {
 			for (let i = 0; i < source[affix].length; i++) {
 				var line = "Level "+source[affix][i][0]+" "+source[affix][i][1]+" ("+source[affix][i][2]+" charges)";
 				affix_line += line
