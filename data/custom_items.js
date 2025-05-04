@@ -1855,9 +1855,12 @@ function setItemCodes() {
 		if (i < 10) {
 			if (typeof(itemToCompare["STAT00"+i]) != 'undefined') { itemToCompare["STAT00"+i] = itemToCompare["STAT"+i] }
 			if (typeof(itemToCompare["SK00"+i]) != 'undefined') { itemToCompare["SK00"+i] = itemToCompare["SK"+i] }
+			if (typeof(itemToCompare["CHSK00"+i]) != 'undefined') { itemToCompare["CHSK00"+i] = itemToCompare["CHSK"+i] }
 		}
 		if (typeof(itemToCompare["STAT0"+i]) != 'undefined') { itemToCompare["STAT0"+i] = itemToCompare["STAT"+i] }
 		if (typeof(itemToCompare["SK0"+i]) != 'undefined') { itemToCompare["SK0"+i] = itemToCompare["SK"+i] }
+		if (typeof(itemToCompare["CHSK0"+i]) != 'undefined') { itemToCompare["CHSK0"+i] = itemToCompare["CHSK"+i] }
+		if (typeof(itemToCompare["CHSK"+i]) != 'undefined') { itemToCompare["CHSK"+i] = itemToCompare["CHSK"+i] }
 	}
 	// TODO: Validate ILVL
 	if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }

@@ -977,6 +977,11 @@ function parseFile(file,num) {
 								cond_list[cond] = ("SK"+Number(cr.slice(2)))
 								c = cond_list[cond]
 							} }
+							if (cr.substr(0,2) == "CHSK") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 500) {
+								recognized = true
+								cond_list[cond] = ("CHSK"+Number(cr.slice(2)))
+								c = cond_list[cond]
+							} }
 							if (cr.substr(0,2) == "OS") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 500) {
 								recognized = true
 								cond_list[cond] = ("SK"+Number(cr.slice(2)))
@@ -1005,7 +1010,7 @@ function parseFile(file,num) {
 							if (typeof(character[c]) == 'undefined') { character[c] = 0 }
 							else if (~~Number(character[c]) < 0) { value_is_negative = true }
 						}
-						else if (typeof(itemToCompare[c]) == 'undefined' && (c.substr(0,4) == "STAT" || c.substr(0,5) == "TABSK" || c.substr(0,4) == "CLSK" || c.substr(0,2) == "SK" || c.substr(0,4) == "CHSK" || c.substr(0,2) == "OS")) { itemToCompare[c] = 0 }
+						else if (typeof(itemToCompare[c]) == 'undefined' && (c.substr(0,4) == "STAT" || c.substr(0,5) == "TABSK" || c.substr(0,4) == "CLSK" || c.substr(0,2) == "SK" || c.substr(0,2) == "CHSK" || c.substr(0,2) == "OS")) { itemToCompare[c] = 0 }
 						else if (typeof(itemToCompare[c]) == 'undefined') {
 							for (let i = 0; i < nonbool_conditions.length; i++) {
 								if (c == nonbool_conditions[i]) { itemToCompare[c] = 0 }
@@ -1329,6 +1334,10 @@ function parseFile(file,num) {
 						if (stat == 280) { stat = 363 }
 					}
 					for (let stat = 6; stat <= 384; stat++) {
+						if (typeof(itemToCompare["CHSK"+stat]) != 'undefined') { out_format = out_format.split("CHSK"+stat).join(",ref_CHSK"+stat) }
+						else { out_format = out_format.split("CHSK"+stat).join(",0,") }
+					}
+					for (let stat = 6; stat <= 384; stat++) {
 						if (typeof(itemToCompare["OS"+stat]) != 'undefined') { out_format = out_format.split("OS"+stat).join(",ref_SK"+stat+",") }
 						else { out_format = out_format.split("OS"+stat).join(",0,") }
 						if (stat == 155) { stat = 220 }
@@ -1600,6 +1609,10 @@ function parseFile(file,num) {
 			else { out_format = out_format.split("%SK"+stat+"%").join(",0,") }
 			if (stat == 155) { stat = 220 }
 			if (stat == 280) { stat = 363 }
+		}
+		for (let stat = 6; stat <= 384; stat++) {
+			if (typeof(itemToCompare["CHSK"+stat]) != 'undefined') { out_format = out_format.split("CHSK"+stat).join(",ref_CHSK"+stat) }
+			else { out_format = out_format.split("CHSK"+stat).join(",0,") }
 		}
 		for (let stat = 0; stat <= 50; stat++) {
 			if (typeof(itemToCompare["TABSK"+stat]) != 'undefined') { out_format = out_format.split("%TABSK"+stat+"%").join(",ref_TABSK"+stat+",") }
@@ -1879,8 +1892,8 @@ function getAffixLine(affix) {
 				affix_line += line
 				if (i < source[affix].length-1) { affix_line += "<br>" }
 			}
-		} else if (affix == "cskill" || affix == "charged") { //qord testing
-//		} else if (affix == "cskill") {
+//		} else if (affix == "cskill" || affix == "charged") { //qord testing
+		} else if (affix == "cskill") {
 			for (let i = 0; i < source[affix].length; i++) {
 				var line = "Level "+source[affix][i][0]+" "+source[affix][i][1]+" ("+source[affix][i][2]+" charges)";
 				affix_line += line

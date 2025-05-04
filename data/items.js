@@ -42,7 +42,16 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 /* Vanilla skills		*/	skill_Critical_Strike:0, skill_Tiger_Strike:0, skill_Cobra_Strike:0, skill_Phoenix_Strike:0, skill_Dragon_Claw:0, skill_Fists_of_Fire:0, skill_Claws_of_Thunder:0, skill_Blade_Sentinel:0, skill_Double_Throw:0, skill_Berserk:0, skill_Skeleton_Mastery:0, skill_Golem_Mastery:0, skill_Poison_Dagger:0, skill_Bone_Prison:0, skill_Thorns:0, skill_Lightning:0, skill_Inferno:0, 
 /* PD2 skills			*/	skill_Javelin_and_Spear_Mastery:0, skill_Slow_Movement:0, skill_Claw_and_Dagger_Mastery:0, skill_Chain_Lightning_Sentry:0, skill_General_Mastery:0, skill_Throwing_Mastery:0, skill_Polearm_and_Spear_Mastery:0, skill_Combat_Reflexes:0, skill_Gust:0, skill_Blood_Warp:0, skill_Raise_Skeleton_Archer:0, skill_Poison_Strike:0, skill_Curse_Mastery:0, skill_Dark_Pact:0, skill_Holy_Light:0, skill_Joust:0, skill_Holy_Nova:0, skill_Cold_Enchant:0, skill_Ice_Barrage:0, skill_Lesser_Hydra:0, skill_Enchant_Fire:0, skill_Combustion:0, 
 					leap_speed:0, gust_cdr:0, extra_golems:0, enemy_pdr:0, description:"", 
-					tacos:"",charged:"",
+					tacos:"",charged:"", 
+					CHSK6:0,CHSK7:0,CHSK8:0,CHSK9:0,CHSK10:0,CHSK11:0,CHSK12:0,CHSK13:0,CHSK14:0,CHSK15:0,CHSK16:0,CHSK17:0,CHSK18:0,CHSK19:0,CHSK20:0,CHSK21:0,CHSK22:0,CHSK23:0,CHSK24:0,CHSK25:0,CHSK26:0,CHSK27:0,CHSK28:0,CHSK29:0,CHSK30:0,CHSK31:0,CHSK32:0,CHSK33:0,CHSK34:0,CHSK35:0,
+	CHSK36:0,CHSK37:0,CHSK38:0,CHSK39:0,CHSK40:0,CHSK41:0,CHSK42:0,CHSK43:0,CHSK44:0,CHSK45:0,CHSK46:0,CHSK47:0,CHSK48:0,CHSK49:0,CHSK50:0,CHSK51:0,CHSK52:0,CHSK53:0,CHSK54:0,CHSK55:0,CHSK56:0,CHSK57:0,CHSK58:0,CHSK59:0,CHSK60:0,CHSK61:0,CHSK62:0,CHSK63:0,CHSK64:0,CHSK65:0,
+	CHSK66:0,CHSK67:0,CHSK68:0,CHSK69:0,CHSK70:0,CHSK71:0,CHSK72:0,CHSK73:0,CHSK74:0,CHSK75:0,CHSK76:0,CHSK77:0,CHSK78:0,CHSK79:0,CHSK80:0,CHSK81:0,CHSK82:0,CHSK83:0,CHSK84:0,CHSK85:0,CHSK86:0,CHSK87:0,CHSK88:0,CHSK89:0,CHSK90:0,CHSK91:0,CHSK92:0,CHSK93:0,CHSK94:0,CHSK95:0,
+	CHSK96:0,CHSK97:0,CHSK98:0,CHSK99:0,CHSK100:0,CHSK101:0,CHSK102:0,CHSK103:0,CHSK104:0,CHSK105:0,CHSK106:0,CHSK107:0,CHSK108:0,CHSK109:0,CHSK110:0,CHSK111:0,CHSK112:0,CHSK113:0,CHSK114:0,CHSK115:0,CHSK116:0,CHSK117:0,CHSK118:0,CHSK119:0,CHSK120:0,CHSK121:0,CHSK122:0,CHSK123:0,CHSK124:0,CHSK125:0,
+	CHSK126:0,CHSK127:0,CHSK128:0,CHSK129:0,CHSK130:0,CHSK131:0,CHSK132:0,CHSK133:0,CHSK134:0,CHSK135:0,CHSK136:0,CHSK137:0,CHSK138:0,CHSK139:0,CHSK140:0,CHSK141:0,CHSK142:0,CHSK143:0,CHSK144:0,CHSK145:0,CHSK146:0,CHSK147:0,CHSK148:0,CHSK149:0,CHSK150:0,CHSK151:0,CHSK152:0,CHSK153:0,CHSK154:0,CHSK155:0,
+	CHSK221:0,CHSK222:0,CHSK223:0,CHSK224:0,CHSK225:0,CHSK226:0,CHSK227:0,CHSK228:0,CHSK229:0,CHSK230:0,CHSK231:0,CHSK232:0,CHSK233:0,CHSK234:0,CHSK235:0,CHSK236:0,CHSK237:0,CHSK238:0,CHSK239:0,CHSK240:0,CHSK241:0,CHSK242:0,CHSK243:0,CHSK244:0,CHSK245:0,CHSK246:0,CHSK247:0,CHSK248:0,CHSK249:0,CHSK250:0,
+	CHSK251:0,CHSK252:0,CHSK253:0,CHSK254:0,CHSK255:0,CHSK256:0,CHSK257:0,CHSK258:0,CHSK259:0,CHSK260:0,CHSK261:0,CHSK262:0,CHSK263:0,CHSK264:0,CHSK265:0,CHSK266:0,CHSK267:0,CHSK268:0,CHSK269:0,CHSK270:0,CHSK271:0,CHSK272:0,CHSK273:0,CHSK274:0,CHSK275:0,CHSK276:0,CHSK277:0,CHSK278:0,CHSK279:0,CHSK280:0,
+	CHSK357:0,CHSK364:0,CHSK367:0,CHSK369:0,CHSK371:0,CHSK381:0,CHSK383:0,CHSK366:0,CHSK374:0,CHSK376:0,CHSK378:0,CHSK370:0,CHSK445:0,CHSK447:0,
+
 };
 
 /*
@@ -1523,7 +1532,8 @@ var equipment = {
 {rarity:"regular", name:"Cracked Phase Blade", inferior:true, type:"sword", base:"Phase Blade"},
 {rarity:"regular", name:"Thunder Maul", sup:15, ethereal:1, sockets:6, type:"mace", base:"Thunder Maul"},
 {rarity:"regular", name:"Grave Wand", skill_Convocation:3, skill_Desecrate:3, skill_Corpse_Explosion:3, type:"wand", base:"Grave Wand"},
-{rarity:"magic", name:"Charged Wand of Lower Resistance", cskill:[[3,"Lower Resistance",60]], itd:1, charged:[[6,"Lower Resistance",66]], tacos:1, type:"wand", base:"Grave Wand"},
+{rarity:"magic", name:"Lower Resistance Wand", all_skills:2, CHSK91:1, cskill:[[3,"Lower Resistance",60]], itd:1, type:"wand", base:"Grave Wand"},
+{rarity:"magic", name:"Teleport Wand", all_skills:2, CHSK53:1, cskill:[[3,"Teleport",60]], itd:1, type:"wand", base:"Grave Wand"},
 {rarity:"regular", name:"Shillelagh", skill_Shiver_Armor:3, skill_Energy_Shield:3, skill_Chain_Lightning:3, type:"staff", base:"Shillelagh"},
 {rarity:"regular", name:"War Scepter", skill_Holy_Shock:3, skill_Vigor:3, skill_Charge:3, sockets:4, type:"scepter", base:"War Scepter"},
 {only:"necromancer", rarity:"magic", name:"Golemlord's Lich Wand", type:"wand", req_level:65, skills_summoning_necromancer:3, skill_Summon_Mastery:3, skill_Raise_Skeleton_Warrior:3, skill_Raise_Skeletal_Mage:3, base:"Lich Wand"},
