@@ -5,6 +5,7 @@
 // TODO: update mutual compatibility of superior mod options (ar_bonus & req)
 // TODO: add known item prices?
 // TODO: add selectable affixes for skill charges (especially for PD2, since they can be searched with conditions e.g. CHSK91>0 for Lower Resist)
+//		Regarding item charges, added support for charges but it needs item changes, CHSK##:1 enables skill charges for ## skill on an item -Qord
 
 var itemTemp = {};
 var itemCustom = {};

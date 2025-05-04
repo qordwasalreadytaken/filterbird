@@ -1333,7 +1333,7 @@ function parseFile(file,num) {
 						if (stat == 155) { stat = 220 }
 						if (stat == 280) { stat = 363 }
 					}
-					for (let stat = 6; stat <= 384; stat++) {
+					for (let stat = 6; stat <= 500; stat++) {
 						if (typeof(itemToCompare["CHSK"+stat]) != 'undefined') { out_format = out_format.split("CHSK"+stat).join(",ref_CHSK"+stat) }
 						else { out_format = out_format.split("CHSK"+stat).join(",0,") }
 					}
@@ -1610,7 +1610,7 @@ function parseFile(file,num) {
 			if (stat == 155) { stat = 220 }
 			if (stat == 280) { stat = 363 }
 		}
-		for (let stat = 6; stat <= 384; stat++) {
+		for (let stat = 6; stat <= 500; stat++) {
 			if (typeof(itemToCompare["CHSK"+stat]) != 'undefined') { out_format = out_format.split("CHSK"+stat).join(",ref_CHSK"+stat) }
 			else { out_format = out_format.split("CHSK"+stat).join(",0,") }
 		}

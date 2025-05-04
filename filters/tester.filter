@@ -167,10 +167,17 @@ ItemDisplay[SET("Tal Rasha's Guardianship")]: %NAME%
 ItemDisplay[!ETH UNIQUE("Ormus' Robes") ID uui]: %NAME% <<qnique>>
 ItemDisplay[UNIQUE("Highlord's Wrath")]: %NAME% Highlord
 ItemDisplay[UNIQUE("Mara's Kaleidoscope")]: %NAME% Maras
-ItemDisplay[WP12 MAG ID CHSK91>0]: %GREEN% Lower Resist Wand %!shopping!% <<notify>>
-//ItemDisplay[RW CHSK53>0]: %GREEN% Teleport Charges!! %!shopping!% <<notify>>
-ItemDisplay[MAG ID CHSK53>0]: %GREEN% Teleport Charges!! %!shopping!% <<notify>>
-//ItemDisplay[WP12 MAG ID CSKILL91>0]: %GREEN% Lower Resist Wand %!shopping!% <<notify>>
+ItemDisplay[WP12 MAG ID CHSK91>0]: %NAME% %GREEN% Lower Resist Charges!! %CONTINUE% 
+//ItemDisplay[WP12 MAG ID CHSK53>0]: %NAME% %BLUE% Teleport Charges!! %CONTINUE% 
+ItemDisplay[NMAG CHSK53>0]: %NAME% %GREEN% Teleport Charges!! %CONTINUE% %!shopping!% <<notify>>
+ItemDisplay[RW CHSK91>0]: %NAME% %GREEN% Lower Resist Charges!! %CONTINUE% %!shopping!% <<notify>>
+ItemDisplay[NMAG CHSK91>0]: %NAME% %GREEN% Lower Resist Charges!! %CONTINUE% %!shopping!% <<notify>>
+ItemDisplay[UNI CHSK53>0]: %NAME% %GREEN% Teleport Charges!! %CONTINUE% %!shopping!% <<notify>>
+ItemDisplay[MAG ID CHSK53>0]: %NAME% %GREEN% Teleport Charges!! %CONTINUE% %!shopping!% <<notify>>
+//ItemDisplay[WP12 MAG ID CSKILL91>0]: %NAME% %GREEN% Lower Resist Wand %!shopping!% <<notify>>
+
+
+ItemDisplay[MAG RARE UNI NMAG RW]: %NAME% %!shopping!% <<notify>>
 
 
 

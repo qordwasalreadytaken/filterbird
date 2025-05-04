@@ -1637,7 +1637,7 @@ var all_codes = {
 	STORAGE:1, GAMBLE:1,MAPTIER:1,
 	ma12:1, ma13:1, ma14:1, SK477:1, SKILL121:1, SK121:1, GEMTIER:3,
 	WP15:1, WP16:1, WP17:1, TPSCROLLS:1, IDSCROLLS:1, ASS:1, SYNTH:1,
-	CHSK53:1, CHSK82:1, ALLSK0:1, UNIQUE_PLACEHOLDER:1,
+	ALLSK0:1, UNIQUE_PLACEHOLDER:1,
 };
 
 // TODO: Create list of mutually exclusive condition groups to expand syntax/error checking ...might be better to have a list of incompatible codes for all codes (except item codes, which could be handled separately) - there can only be 1 item code, and all codes are incompatible with any item code that is a subset of its' other incompatible codes (e.g. HELM is incompatible with SHIELD and all item codes that inherit SHIELD such as buc or kit)
