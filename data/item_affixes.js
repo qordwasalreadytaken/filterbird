@@ -2046,7 +2046,7 @@ var affixes_pointmod = [
 [	37,	99,	30,	20,	"skill_Poison_Nova",	1,	3,	"wand",	"head"	],
 [	1,	24,	1,	21,	"skill_Amplify_Damage",	1,	3,	"wand",	"head"	],
 [	1,	36,	6,	22,	"skill_Dim_Vision",	1,	3,	"wand",	"head"	],
-//[	1,	99,	6,	23,	"skill_Hemorrhage",	1,	3,	"wand",	"head"	],	// no code
+[	1,	99,	6,	23,	"skill_Hemorrhage",	1,	3,	"wand",	"head"	],	// no code
 [	1,	36,	6,	24,	"skill_Weaken",	1,	3,	"wand",	"head"	],
 [	12,	99,	12,	25,	"skill_Iron_Maiden",	1,	3,	"wand",	"head"	],
 [	12,	99,	12,	26,	"skill_Terror",	1,	3,	"wand",	"head"	],
@@ -2242,6 +2242,7 @@ var affixes_pointmod_pd2 = [
 [	37,	99,	30,	20,	"skill_Poison_Nova",	1,	3,	"wand",	"head"	],
 [	1,	99,	1,	21,	"skill_Amplify_Damage",	1,	3,	"wand",	"head"	],
 [	1,	99,	6,	22,	"skill_Dim_Vision",	1,	3,	"wand",	"head"	],
+[	1,	99,	6,	23,	"skill_Hemorrhage",	1,	3,	"wand",	"head"	],	// no code
 [	1,	99,	6,	24,	"skill_Weaken",	1,	3,	"wand",	"head"	],
 [	12,	99,	12,	25,	"skill_Iron_Maiden",	1,	3,	"wand",	"head"	],
 [	12,	99,	12,	26,	"skill_Terror",	1,	3,	"wand",	"head"	],
