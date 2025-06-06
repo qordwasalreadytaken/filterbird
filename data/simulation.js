@@ -247,6 +247,7 @@ function setItem(value) {
 				itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
 				itemToCompare.BLOCK = ~~itemToCompare.block + ~~itemToCompare.ibc
 				itemToCompare.ITEMSTAT17 = ~~itemToCompare.e_damage + ~~itemToCompare.damage_bonus
+				itemToCompare.ITEMSTAT7 = itemToCompare.life
 				// TODO: Add more codes that aren't handled properly by codes[code]
 			} else {
 				itemToCompare.SUP = false
@@ -264,6 +265,8 @@ function setItem(value) {
 			}
 			itemToCompare.ITEMSTAT31 = itemToCompare.DEF
 			itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
+			itemToCompare.ITEMSTAT7 = itemToCompare.life
+			
 			// TODO: Validate ILVL
 		} } }
 		if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
