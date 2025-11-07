@@ -1035,9 +1035,9 @@ class FilterPhoenixAI {
         const commonItems = [
             'rings', 'ring', 'amulets', 'amulet', 'gloves', 'boots', 'helmet', 'helm',
             'armor', 'shield', 'belt', 'sword', 'axe', 'mace', 'bow', 'crossbow',
-            'staff', 'wand', 'javelin', 'spear', 'polearm', 'dagger', 'knife',
+            'staff', 'wand', 'javelin', 'spear', 'polearm', 'dagger', 'knife', 'pike',
             'short sword', 'long sword', 'broad sword', 'war sword', 'two handed sword',
-            'hand axe', 'war axe', 'battle axe', 'large axe', 'broad axe',
+            'hand axe', 'war axe', 'battle axe', 'large axe', 'broad axe', 'war pike',
             'club', 'war club', 'mace', 'war mace', 'flail', 'war hammer',
             'short bow', 'hunter bow', 'long bow', 'composite bow', 'short battle bow',
             'light crossbow', 'crossbow', 'heavy crossbow', 'repeating crossbow',
@@ -1052,14 +1052,33 @@ class FilterPhoenixAI {
         ];
 
         const found = [];
-        const requestLower = request.toLowerCase();
-        console.log('Request in lowercase:', requestLower);
+        
+        // Clean the request - remove ItemDisplay lines and common filter keywords to focus on item names
+        let cleanRequest = request.toLowerCase();
+        cleanRequest = cleanRequest.replace(/itemdisplay\[[^\]]*\]:[^\n]*/g, ''); // Remove filter lines
+        cleanRequest = cleanRequest.replace(/\b(add|to|this|line|filter)\b/g, ''); // Remove common words
+        
+        console.log('Cleaned request:', cleanRequest);
+
+        // Check for direct item codes first (3-character codes like 7p7, wsd, etc.)
+        const itemCodePattern = /\b[a-z0-9]{3}\b/g;
+        const potentialCodes = cleanRequest.match(itemCodePattern);
+        if (potentialCodes) {
+            console.log('Found potential item codes:', potentialCodes);
+            for (const code of potentialCodes) {
+                // Verify this is actually an item code by checking if it's in the database
+                if (this.isValidItemCode(code)) {
+                    found.push(code); // Add the code directly
+                    console.log('Confirmed item code:', code);
+                }
+            }
+        }
 
         // Sort by length descending to match longer phrases first
         const sortedItems = commonItems.sort((a, b) => b.length - a.length);
 
         for (const item of sortedItems) {
-            if (requestLower.includes(item) && !found.some(foundItem => foundItem.includes(item) || item.includes(foundItem))) {
+            if (cleanRequest.includes(item) && !found.some(foundItem => foundItem.includes(item) || item.includes(foundItem))) {
                 found.push(item);
                 console.log('Found item:', item);
             }
@@ -1068,9 +1087,9 @@ class FilterPhoenixAI {
         // If nothing found, try to extract manually from common words
         if (found.length === 0) {
             console.log('No items found in common list, trying manual extraction');
-            const words = request.toLowerCase().split(/\s+/);
+            const words = cleanRequest.split(/\s+/);
             for (const word of words) {
-                if (word.length > 3 && !['this', 'line', 'filter', 'code', 'item', 'how', 'add', 'itemdisplay'].includes(word)) {
+                if (word.length > 2 && !['this', 'line', 'filter', 'code', 'item', 'how', 'add', 'itemdisplay'].includes(word)) {
                     found.push(word);
                     console.log('Manually extracted word:', word);
                 }
@@ -1079,6 +1098,27 @@ class FilterPhoenixAI {
 
         console.log('Final extracted items:', found);
         return found;
+    }
+
+    /**
+     * Check if a string is a valid item code
+     */
+    isValidItemCode(code) {
+        // Check if it's in the hardcoded list first
+        if (['wsd', 'ssd', 'lsd', 'bsd', '2hs', 'rin', 'amu', '7p7'].includes(code)) {
+            return true;
+        }
+        
+        // Check in the dynamic database if available
+        if (typeof window !== 'undefined' && window.bases) {
+            for (const [itemKey, itemData] of Object.entries(window.bases)) {
+                if (itemData && itemData.CODE === code) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     /**
@@ -1132,13 +1172,24 @@ class FilterPhoenixAI {
             'wand': ['wnd', 'ywn', 'bwn', 'gwn'],
             'javelin': ['jav', 'pil', 'spt', 'glv', 'tsp'],
             'spear': ['spr', 'tri', 'brn', 'spt', 'pik'],
+            'pike': ['pik', '7p7'],
+            'war pike': ['7p7'],
             'polearm': ['bar', 'vou', 'scy', 'pax', 'hal', 'wsc']
         };
 
         for (const itemName of itemNames) {
-            const codes = mappings[itemName.toLowerCase()] || [];
+            const normalizedName = itemName.toLowerCase();
+            
+            // Check if this is already an item code (like "7p7")
+            if (this.isValidItemCode(normalizedName)) {
+                itemCodes[normalizedName] = [normalizedName];
+                continue;
+            }
+            
+            // Otherwise look up in mappings
+            const codes = mappings[normalizedName] || [];
             if (codes.length > 0) {
-                itemCodes[itemName.toLowerCase()] = codes;
+                itemCodes[normalizedName] = codes;
             }
         }
 
