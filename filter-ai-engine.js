@@ -335,6 +335,7 @@ class FilterPhoenixAI {
             'modify': ['modify', 'change', 'update', 'edit', 'adjust'],
             'hide': ['hide', 'remove', 'exclude', 'filter out'],
             'show': ['show', 'display', 'include', 'highlight'],
+            'show_check': ['does this show', 'will this show', 'would this show', 'does this display', 'will this display', 'would this display'],
             'explain': ['explain', 'what does', 'how does', 'understand', 'what is', 'analyze', 'describe', 'tell me about'],
             'help': ['help', 'how to', 'tutorial', 'guide']
         };
@@ -342,6 +343,13 @@ class FilterPhoenixAI {
         // Check for filter line explanation patterns first
         if (input.includes('itemdisplay[') && (input.includes('what does') || input.includes('explain') || input.includes('what is'))) {
             return 'explain';
+        }
+
+        // Check for show_check requests with filter lines (must come before general 'show' check)
+        if ((input.includes('does this show') || input.includes('will this show') || input.includes('would this show') || 
+             input.includes('does this display') || input.includes('will this display') || input.includes('would this display')) 
+             && input.includes('itemdisplay[')) {
+            return 'show_check';
         }
 
         // Check for add requests with filter lines
@@ -495,6 +503,9 @@ class FilterPhoenixAI {
             case 'show':
                 response = this.handleShowRequest(entities, modifiers, currentFilter);
                 break;
+            case 'show_check':
+                response = this.handleShowCheckRequest(request.originalInput);
+                break;
             case 'modify':
                 response = this.handleModifyRequest(entities, modifiers, currentFilter);
                 break;
@@ -618,6 +629,69 @@ class FilterPhoenixAI {
                 "Add more display categories"
             ]
         };
+    }
+
+    /**
+     * Handle "does this show" or "will this show" questions
+     */
+    handleShowCheckRequest(input) {
+        try {
+            // Extract the filter line
+            const filterLineMatch = input.match(/ItemDisplay\[[^\]]*\]:[^\n]*/);
+            if (!filterLineMatch) {
+                return {
+                    message: "I couldn't find a filter line in your question. Please include the full ItemDisplay line you want me to check.",
+                    filter: '',
+                    suggestions: ['Try: "will this show war sword? ItemDisplay[wsd UNI]: %NAME%"'],
+                    explanation: ''
+                };
+            }
+
+            const filterLine = filterLineMatch[0];
+
+            // Extract the item being asked about - look for item names after "show" and before "?"
+            const itemNameMatch = input.match(/(?:show|display)\s+([^?]+)\?/i);
+            if (!itemNameMatch) {
+                return {
+                    message: "I couldn't identify which item you're asking about. Please specify the item name in your question.",
+                    filter: '',
+                    suggestions: ['Try: "will this show war sword? ItemDisplay[...]: ..."'],
+                    explanation: ''
+                };
+            }
+
+            const itemName = itemNameMatch[1].trim();
+            
+            // Find the item codes for this item name
+            const matchingItems = this.findItemsByName(itemName);
+            
+            if (matchingItems.length === 0) {
+                return {
+                    message: `I couldn't find any items matching "${itemName}". Could you check the spelling or try a different name?`,
+                    filter: '',
+                    suggestions: [`Try searching for variations of "${itemName}"`],
+                    explanation: 'Note: Make sure the item database is loaded properly.'
+                };
+            }
+
+            // Analyze the filter line to see if it would match the item
+            const analysisResult = this.analyzeFilterMatch(filterLine, matchingItems);
+            
+            return {
+                message: analysisResult.message,
+                filter: '',
+                suggestions: analysisResult.suggestions,
+                explanation: analysisResult.explanation
+            };
+        } catch (error) {
+            console.error('Error in handleShowCheckRequest:', error);
+            return {
+                message: "Sorry, I encountered an error processing your request. Please try rephrasing or being more specific.",
+                filter: '',
+                suggestions: ['Check the filter line syntax', 'Try with a simpler item name'],
+                explanation: `Error: ${error.message}`
+            };
+        }
     }
 
     /**
@@ -871,11 +945,19 @@ class FilterPhoenixAI {
             };
         }
 
-        // Add codes to filter line
-        result.newFilterLine = this.addCodesToFilterLine(originalLine, foundItems);
+        // Check if we have a valid filter line to modify
+        const hasValidFilterLine = originalLine && originalLine.trim() && originalLine.includes('ItemDisplay[');
+        
+        if (hasValidFilterLine) {
+            // Add codes to existing filter line
+            result.newFilterLine = this.addCodesToFilterLine(originalLine, foundItems);
+        } else {
+            // Create a new filter line from scratch
+            result.newFilterLine = this.createNewFilterLine(foundItems, itemsToAdd);
+        }
 
         // Build response message
-        let message = `<strong>To add ${items.join(' and ')} to your filter line:</strong><br><br>`;
+        let message = `<strong>To add ${items.join(' and ')} to your filter:</strong><br><br>`;
         
         foundItems.forEach(item => {
             message += `• <strong>${item.name}</strong>: Add "${item.codes.join('" OR "')}"<br>`;
@@ -886,16 +968,62 @@ class FilterPhoenixAI {
             message += `<br><strong>Could not find codes for:</strong> ${notFound.map(item => item.name).join(', ')}<br>`;
         }
 
-        message += `<br><strong>Updated filter line:</strong><br><code>${result.newFilterLine}</code>`;
+        if (hasValidFilterLine) {
+            message += `<br><strong>Updated filter line:</strong><br><code>${result.newFilterLine}</code>`;
+        } else {
+            message += `<br><strong>New filter line:</strong><br><code>${result.newFilterLine}</code>`;
+        }
 
         return {
             message: message,
+            filter: result.newFilterLine, // Add the filter to the response so it appears in the preview
             suggestions: [
                 "Add more items to this line",
-                "Explain this updated line",
-                "Create a new filter line"
+                "Explain this filter line",
+                "Customize colors and styling"
             ]
         };
+    }
+
+    /**
+     * Create a new filter line from scratch for the given items
+     */
+    createNewFilterLine(foundItems, originalRequest) {
+        // Collect all item codes
+        const allCodes = [];
+        foundItems.forEach(item => {
+            allCodes.push(...item.codes);
+        });
+
+        // Create the condition part
+        let condition;
+        if (allCodes.length === 1) {
+            condition = allCodes[0];
+        } else {
+            condition = `(${allCodes.join(' OR ')})`;
+        }
+
+        // Determine quality filters based on the request
+        const requestLower = originalRequest.toLowerCase();
+        let qualityCondition = '';
+        
+        if (requestLower.includes('normal') || requestLower.includes('white')) {
+            qualityCondition = 'NMAG ';
+        } else if (requestLower.includes('magic') || requestLower.includes('blue')) {
+            qualityCondition = 'MAG ';
+        } else if (requestLower.includes('rare') || requestLower.includes('yellow')) {
+            qualityCondition = 'RARE ';
+        } else if (requestLower.includes('unique') || requestLower.includes('brown')) {
+            qualityCondition = 'UNI ';
+        } else if (requestLower.includes('set') || requestLower.includes('green')) {
+            qualityCondition = 'SET ';
+        }
+
+        // Combine quality and item conditions
+        const fullCondition = qualityCondition + condition;
+
+        // Create a basic display format
+        return `ItemDisplay[${fullCondition}]: %WHITE%%NAME% %CONTINUE%`;
     }
 
     /**
@@ -1036,11 +1164,20 @@ class FilterPhoenixAI {
             newCodes.push(...item.codes);
         });
 
-        // Add codes to condition
-        if (newCodes.length > 0) {
+        if (newCodes.length === 0) {
+            return originalLine;
+        }
+
+        // Smart logic to determine how to add codes
+        const shouldAddToExistingOR = this.shouldAddToExistingORGroup(condition, newCodes);
+        
+        if (shouldAddToExistingOR) {
+            // Add to existing OR group
+            condition = this.addToORGroup(condition, newCodes);
+        } else {
+            // Add as AND condition
             const codeCondition = newCodes.length === 1 ? newCodes[0] : `(${newCodes.join(' OR ')})`;
             
-            // If condition already has parentheses or OR statements, wrap the whole thing
             if (condition.includes('OR') || condition.includes('AND')) {
                 condition = `(${condition}) AND (${codeCondition})`;
             } else {
@@ -1049,6 +1186,79 @@ class FilterPhoenixAI {
         }
 
         return `ItemDisplay[${condition}]:${restOfLine}`;
+    }
+
+    /**
+     * Determine if new codes should be added to existing OR group
+     */
+    shouldAddToExistingORGroup(condition, newCodes) {
+        // Check if condition contains item codes in OR groups
+        const orGroupMatch = condition.match(/\(([^)]+)\)/);
+        if (!orGroupMatch) {
+            // No parentheses group, check for simple OR
+            if (condition.includes(' OR ')) {
+                return this.containsItemCodes(condition);
+            }
+            return false;
+        }
+
+        const groupContent = orGroupMatch[1];
+        
+        // If the OR group contains item codes, we should add to it
+        return this.containsItemCodes(groupContent);
+    }
+
+    /**
+     * Check if a condition string contains item codes (3-character codes)
+     */
+    containsItemCodes(conditionPart) {
+        // Look for 3-character item codes (like aq2, cq2, ssd, etc.)
+        const itemCodePattern = /\b[a-z0-9]{3}\b/g;
+        const matches = conditionPart.match(itemCodePattern);
+        
+        if (!matches) return false;
+
+        // Verify these are actually item codes by checking against known patterns
+        const knownItemCodePatterns = [
+            /^[a-z]{2}[0-9]$/, // aq2, cq2, etc.
+            /^[a-z]{3}$/, // ssd, rin, amu, etc.
+            /^r[0-9]{2}$/, // r01, r02, etc. (runes)
+            /^[0-9][a-z]{2}$/ // 9fb, etc.
+        ];
+
+        return matches.some(match => 
+            knownItemCodePatterns.some(pattern => pattern.test(match))
+        );
+    }
+
+    /**
+     * Add new codes to existing OR group
+     */
+    addToORGroup(condition, newCodes) {
+        // Find the main OR group (could be in parentheses or not)
+        const orGroupMatch = condition.match(/\(([^)]+)\)/);
+        
+        if (orGroupMatch) {
+            // Replace the parentheses group
+            const oldGroup = orGroupMatch[1];
+            const newGroup = `${oldGroup} OR ${newCodes.join(' OR ')}`;
+            return condition.replace(orGroupMatch[0], `(${newGroup})`);
+        } else {
+            // Simple OR without parentheses - need to be careful about operator precedence
+            const parts = condition.split(' OR ');
+            if (parts.length > 1 && this.containsItemCodes(parts[0])) {
+                // Add to the OR chain
+                return condition + ' OR ' + newCodes.join(' OR ');
+            }
+        }
+
+        // Fallback to AND logic if we can't safely add to OR
+        const codeCondition = newCodes.length === 1 ? newCodes[0] : `(${newCodes.join(' OR ')})`;
+        if (condition.includes('OR') || condition.includes('AND')) {
+            return `(${condition}) AND (${codeCondition})`;
+        } else {
+            return `${condition} AND (${codeCondition})`;
+        }
     }
 
     /**
@@ -1648,6 +1858,111 @@ class FilterPhoenixAI {
         }
         
         return filterCode;
+    }
+
+    /**
+     * Find items by name using the existing item database
+     */
+    findItemsByName(itemName) {
+        const normalizedName = itemName.toLowerCase().trim();
+        const results = [];
+        
+        // Check if item database is available
+        if (typeof window !== 'undefined' && window.bases) {
+            // bases is an object, not an array - iterate over entries
+            for (const [itemKey, itemData] of Object.entries(window.bases)) {
+                if (itemData && itemData.CODE) {
+                    // Use the key name (like "War_Sword") as the item name, converted to readable format
+                    const itemNameReadable = itemKey.replace(/_/g, ' ').toLowerCase();
+                    
+                    // Exact match
+                    if (itemNameReadable === normalizedName) {
+                        results.push({
+                            name: itemKey.replace(/_/g, ' '),
+                            codes: [itemData.CODE]
+                        });
+                        break; // Exact match found, use it
+                    }
+                    
+                    // Partial match - item name contains the search term
+                    if (itemNameReadable.includes(normalizedName)) {
+                        results.push({
+                            name: itemKey.replace(/_/g, ' '),
+                            codes: [itemData.CODE]
+                        });
+                    }
+                }
+            }
+        } else {
+            // Fallback: Basic known item mappings if database isn't loaded
+            const basicMappings = {
+                'war sword': ['wsd'],
+                'short sword': ['ssd'],
+                'long sword': ['lsd'],
+                'broad sword': ['bsd'],
+                'two handed sword': ['2hs'],
+                'ring': ['rin'],
+                'amulet': ['amu']
+            };
+            
+            if (basicMappings[normalizedName]) {
+                results.push({
+                    name: normalizedName,
+                    codes: basicMappings[normalizedName]
+                });
+            }
+        }
+
+        return results;
+    }
+
+    /**
+     * Analyze if a filter line would match the given items
+     */
+    analyzeFilterMatch(filterLine, matchingItems) {
+        // Extract the condition from the filter line
+        const conditionMatch = filterLine.match(/ItemDisplay\[(.*?)\]:/);
+        if (!conditionMatch) {
+            return {
+                message: "I couldn't parse the filter line condition.",
+                suggestions: ["Check the filter line syntax"],
+                explanation: "The filter line should be in format: ItemDisplay[condition]: display"
+            };
+        }
+
+        const condition = conditionMatch[1];
+        const itemCodes = [];
+        matchingItems.forEach(item => itemCodes.push(...item.codes));
+
+        // Check if any of the item codes are present in the condition
+        const hasMatchingCode = itemCodes.some(code => condition.includes(code));
+        
+        if (hasMatchingCode) {
+            const matchingCodes = itemCodes.filter(code => condition.includes(code));
+            const itemName = matchingItems[0].name;
+            
+            return {
+                message: `✅ Yes! This filter line WILL show ${itemName}. The condition matches item code(s): ${matchingCodes.join(', ')}`,
+                suggestions: [
+                    "Test with other items",
+                    "Modify the display format",
+                    "Add additional conditions"
+                ],
+                explanation: `The filter condition "${condition}" includes the item code(s) "${matchingCodes.join(', ')}" which correspond to ${itemName}, so this item will be displayed.`
+            };
+        } else {
+            const itemName = matchingItems[0].name;
+            
+            return {
+                message: `❌ No, this filter line will NOT show ${itemName}. The condition doesn't include any matching item codes.`,
+                suggestions: [
+                    `Add "${itemCodes.join(' OR ')}" to the condition to include ${itemName}`,
+                    "Check if there are other filter lines that might show this item",
+                    "Verify the item code spelling"
+                ],
+                explanation: `The filter condition "${condition}" does not include any of the item codes for ${itemName} (${itemCodes.join(', ')}), so this item will not be displayed by this rule.`
+            };
+        }
     }
 }
 
