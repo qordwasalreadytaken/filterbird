@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flying Axe Filter Debug</title>
+</head>
+<body>
+    <h1>Flying Axe Filter Evaluation Debug</h1>
+    <div id="results"></div>
+    
+    <script src="data/item_metadata.js"></script>
+    <script src="data/custom_items.js"></script>
+    <script src="data/simulation.js"></script>
+    
+    <script>
+        console.log("=== Debugging Flying Axe Filter Evaluation ===");
+        
+        function debugFlyingAxe() {
+            const results = document.getElementById('results');
+            
+            try {
+                // Create a Flying Axe item with our fix
+                const testItem = {
+                    CODE: "7ta",
+                    NAME: "Flying Axe",
+                    WEAPON: true,
+                    WP5: true,
+                    WP1: true,
+                    type: "thrown",
+                    FILTERLVL: 1  // Set to 1 for testing
+                };
+                
+                // Apply our rarity fix
+                setItemCodes(testItem);
+                
+                console.log("Flying Axe item:", testItem);
+                results.innerHTML += "<h3>Flying Axe Item Properties:</h3>";
+                results.innerHTML += "<pre>" + JSON.stringify(testItem, null, 2) + "</pre>";
+                
+                // Test the specific filter condition manually
+                console.log("=== Testing Filter Conditions ===");
+                
+                // Test line 186: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3
+                const condition1 = (testItem.CODE === "7tk" || testItem.CODE === "7bk" || testItem.CODE === "7ta");
+                const condition2 = (testItem.MAG === true || testItem.RARE === true || testItem.NMAG === true);
+                const condition3 = (!(testItem.ETH === true) && !(testItem.INF === true));
+                const condition4 = (testItem.FILTERLVL < 3);
+                
+                console.log("Line 186 conditions:");
+                console.log("  (7tk OR 7bk OR 7ta):", condition1);
+                console.log("  (MAG OR RARE OR NMAG):", condition2);
+                console.log("  (!ETH AND !INF):", condition3);
+                console.log("  FILTERLVL<3:", condition4);
+                
+                const line186Match = condition1 && condition2 && condition3 && condition4;
+                console.log("  FULL LINE 186 MATCH:", line186Match);
+                
+                results.innerHTML += "<h3>Line 186 Filter Conditions:</h3>";
+                results.innerHTML += "<p>(7tk OR 7bk OR 7ta): " + condition1 + "</p>";
+                results.innerHTML += "<p>(MAG OR RARE OR NMAG): " + condition2 + "</p>";
+                results.innerHTML += "<p>(!ETH AND !INF): " + condition3 + "</p>";
+                results.innerHTML += "<p>FILTERLVL&lt;3: " + condition4 + "</p>";
+                results.innerHTML += "<p><strong>FULL MATCH: " + line186Match + "</strong></p>";
+                
+                // Test line 851: WP1 NMAG (SOCK=0 OR SOCK=4) FILTERLVL=1
+                const wp1Condition1 = (testItem.WP1 === true);
+                const wp1Condition2 = (testItem.NMAG === true);
+                const wp1Condition3 = (testItem.SOCK === 0 || testItem.SOCK === 4 || testItem.SOCK === undefined);
+                const wp1Condition4 = (testItem.FILTERLVL === 1);
+                
+                console.log("Line 851 conditions:");
+                console.log("  WP1:", wp1Condition1);
+                console.log("  NMAG:", wp1Condition2);
+                console.log("  (SOCK=0 OR SOCK=4):", wp1Condition3);
+                console.log("  FILTERLVL=1:", wp1Condition4);
+                
+                const line851Match = wp1Condition1 && wp1Condition2 && wp1Condition3 && wp1Condition4;
+                console.log("  FULL LINE 851 MATCH:", line851Match);
+                
+                results.innerHTML += "<h3>Line 851 Filter Conditions:</h3>";
+                results.innerHTML += "<p>WP1: " + wp1Condition1 + "</p>";
+                results.innerHTML += "<p>NMAG: " + wp1Condition2 + "</p>";
+                results.innerHTML += "<p>(SOCK=0 OR SOCK=4): " + wp1Condition3 + "</p>";
+                results.innerHTML += "<p>FILTERLVL=1: " + wp1Condition4 + "</p>";
+                results.innerHTML += "<p><strong>FULL MATCH: " + line851Match + "</strong></p>";
+                
+                // Show what should happen
+                if (line186Match && !line851Match) {
+                    results.innerHTML += "<p style='color: green; font-size: 18px;'>✅ Should match line 186 ONLY</p>";
+                } else if (line851Match && !line186Match) {
+                    results.innerHTML += "<p style='color: orange; font-size: 18px;'>⚠️ Should match line 851 ONLY</p>";
+                } else if (line186Match && line851Match) {
+                    results.innerHTML += "<p style='color: red; font-size: 18px;'>❌ BOTH rules match - precedence issue!</p>";
+                } else {
+                    results.innerHTML += "<p style='color: red; font-size: 18px;'>❌ NO rules match - will fall through!</p>";
+                }
+                
+            } catch (error) {
+                console.error("Test failed:", error);
+                results.innerHTML += "<p style='color: red;'>Error: " + error.message + "</p>";
+            }
+        }
+        
+        window.addEventListener('load', debugFlyingAxe);
+    </script>
+</body>
+</html>

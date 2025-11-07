@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flying Axe Direct Test</title>
+    <script src="./data/items.js"></script>
+    <script src="./data/item_metadata.js"></script>
+    <script src="./data/item_affixes.js"></script>
+    <script src="./data/custom_items.js"></script>
+    <script src="./data/simulation.js"></script>
+    <script src="./data/colormap.js"></script>
+    <script src="./data/skillmap.js"></script>
+</head>
+<body>
+    <h1>Flying Axe Direct Test</h1>
+    <button onclick="testFlyingAxe()">Test Flying Axe Setup</button>
+    <div id="results"></div>
+
+    <script>
+        function testFlyingAxe() {
+            try {
+                console.log("=== Flying Axe Direct Test ===");
+                
+                // Reset the global state
+                itemToCompare = {};
+                
+                // Test 1: Check if Flying_Axe exists in bases
+                if (!bases || !bases.Flying_Axe) {
+                    document.getElementById('results').innerHTML = "❌ Flying_Axe not found in bases object";
+                    return;
+                }
+                
+                console.log("Flying_Axe metadata:", bases.Flying_Axe);
+                
+                // Test 2: Manually set up itemCustom like the UI would
+                itemCustom = {
+                    base: "Flying Axe",
+                    rarity: "regular",  // This is what gets set when user selects "Regular"
+                    type_affix: "throwing weapon",
+                    ILVL: 85,
+                    name_prefix: "",
+                    name_suffix: "",
+                    req_level: 0
+                };
+                
+                // Copy base properties like setCustomBase does
+                var base_id = bases.Flying_Axe;
+                for (var affix in base_id) { 
+                    itemCustom[affix] = base_id[affix]; 
+                }
+                
+                console.log("itemCustom after base copy:", itemCustom);
+                
+                // Test 3: Call setItemFromCustom like the UI would
+                setItemFromCustom();
+                
+                console.log("itemToCompare after setItemFromCustom:", itemToCompare);
+                
+                // Test 4: Check the results
+                const results = [];
+                results.push("Item CODE: " + itemToCompare.CODE);
+                results.push("Item rarity: " + itemToCompare.rarity);
+                results.push("Item NMAG: " + itemToCompare.NMAG);
+                results.push("Item MAG: " + itemToCompare.MAG);
+                results.push("Item RARE: " + itemToCompare.RARE);
+                results.push("Item UNI: " + itemToCompare.UNI);
+                results.push("Item 7ta flag: " + itemToCompare["7ta"]);
+                
+                // Test 5: Manual condition check
+                const codeMatch = (itemToCompare.CODE == "7tk" || itemToCompare.CODE == "7bk" || itemToCompare.CODE == "7ta");
+                const qualityMatch = (itemToCompare.MAG || itemToCompare.RARE || itemToCompare.NMAG);
+                const ethInfMatch = (!itemToCompare.ETH && !itemToCompare.INF);
+                const filtLvlMatch = (character.FILTLVL < 3);
+                
+                results.push("");
+                results.push("=== Condition Tests ===");
+                results.push("Code match (7tk OR 7bk OR 7ta): " + codeMatch);
+                results.push("Quality match (MAG OR RARE OR NMAG): " + qualityMatch);
+                results.push("ETH/INF match (!ETH AND !INF): " + ethInfMatch);
+                results.push("FILTLVL match (<3): " + filtLvlMatch + " (current: " + character.FILTLVL + ")");
+                results.push("Overall match: " + (codeMatch && qualityMatch && ethInfMatch && filtLvlMatch));
+                
+                if (codeMatch && qualityMatch && ethInfMatch && filtLvlMatch) {
+                    results.push("");
+                    results.push("✅ SUCCESS! Flying Axe should match the filter condition!");
+                } else {
+                    results.push("");
+                    results.push("❌ FAILED! Flying Axe does not match the filter condition.");
+                }
+                
+                document.getElementById('results').innerHTML = '<pre>' + results.join('\n') + '</pre>';
+                
+            } catch (e) {
+                document.getElementById('results').innerHTML = "❌ Error: " + e.message + "\n\nStack: " + e.stack;
+                console.error("Error in testFlyingAxe:", e);
+            }
+        }
+        
+        // Wait for all scripts to load
+        window.addEventListener('load', function() {
+            console.log("Page loaded, scripts available");
+        });
+    </script>
+</body>
+</html>

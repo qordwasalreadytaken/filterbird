@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FilterBird Debug Test</title>
+    <script src="./data/items.js"></script>
+    <script src="./data/item_metadata.js"></script>
+    <script src="./data/item_affixes.js"></script>
+    <script src="./data/simulation.js"></script>
+    <script src="./data/custom_items.js"></script>
+    <script src="./data/colormap.js"></script>
+    <script src="./data/skillmap.js"></script>
+</head>
+<body>
+    <h1>FilterBird Debug Test</h1>
+    <div id="debug-info"></div>
+    
+    <script>
+        // Set up a Flying Axe manually
+        function setupFlyingAxe() {
+            // Reset
+            itemToCompare = {};
+            
+            // Copy Flying_Axe base properties
+            var base = bases.Flying_Axe;
+            for (var affix in base) { 
+                itemToCompare[affix] = base[affix]; 
+            }
+            
+            // Set rarity (this was the original issue)
+            itemToCompare.rarity = "regular";  // Force regular quality
+            
+            // Apply the setItemCodes logic
+            setItemCodes();
+            
+            return itemToCompare;
+        }
+        
+        // Test the condition parsing
+        function testCondition() {
+            var item = setupFlyingAxe();
+            
+            console.log("=== Flying Axe Test ===");
+            console.log("Item:", item);
+            console.log("Item CODE:", item.CODE);
+            console.log("Item NMAG:", item.NMAG);
+            console.log("Item MAG:", item.MAG);
+            console.log("Item RARE:", item.RARE);
+            console.log("Item ETH:", item.ETH);
+            console.log("Item INF:", item.INF);
+            console.log("Character FILTLVL:", character.FILTLVL);
+            
+            // Now test the filter line
+            var filterLine = "ItemDisplay[(7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3]: %GRAY% throw %TAN%[35k]";
+            
+            document.getElementById('debug-info').innerHTML = `
+                <h2>Flying Axe Properties:</h2>
+                <p>CODE: ${item.CODE}</p>
+                <p>NMAG: ${item.NMAG}</p>
+                <p>MAG: ${item.MAG}</p>
+                <p>RARE: ${item.RARE}</p>
+                <p>ETH: ${item.ETH}</p>
+                <p>INF: ${item.INF}</p>
+                <p>Character FILTLVL: ${character.FILTLVL}</p>
+                
+                <h2>Manual Condition Test:</h2>
+                <p>Code match (7tk OR 7bk OR 7ta): ${item.CODE == "7tk" || item.CODE == "7bk" || item.CODE == "7ta"}</p>
+                <p>Quality match (MAG OR RARE OR NMAG): ${item.MAG || item.RARE || item.NMAG}</p>
+                <p>Not ETH and Not INF: ${!item.ETH && !item.INF}</p>
+                <p>FILTLVL < 3: ${character.FILTLVL < 3}</p>
+                
+                <h2>Test Filter Line:</h2>
+                <p>${filterLine}</p>
+                <p>Check the browser console for detailed parsing debug info.</p>
+            `;
+            
+            // Try to parse this filter line using the app's logic
+            // This will trigger the debugging we added
+            try {
+                parseFile(filterLine, 1);
+            } catch (e) {
+                console.error("Error parsing filter:", e);
+            }
+        }
+        
+        // Wait for everything to load, then run the test
+        window.addEventListener('load', function() {
+            setTimeout(testCondition, 1000);
+        });
+    </script>
+</body>
+</html>

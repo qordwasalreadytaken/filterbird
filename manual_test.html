@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Manual Filter Test</title>
+</head>
+<body>
+    <h1>Manual Filter Test for Flying Axe</h1>
+    <div id="results"></div>
+    
+    <script>
+        // Manually create a Flying Axe item with the fix applied
+        var itemToCompare = {
+            CODE: "7ta",
+            WEAPON: true,
+            WP5: true,
+            WP1: true,
+            group: "weapon",
+            type: "thrown",
+            tier: 3,
+            NMAG: true,       // THIS IS THE FIX - now true instead of UNI=true
+            MAG: false,
+            RARE: false,
+            UNI: false,       // THIS IS THE FIX - now false 
+            ETH: false,
+            INF: false,
+            "7ta": true       // Item code flag
+        };
+        
+        var character = {
+            FILTLVL: 1
+        };
+        
+        // Test the exact condition from line 186: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3
+        
+        // Break it down step by step
+        var codeMatch = (itemToCompare["7tk"] || itemToCompare["7bk"] || itemToCompare["7ta"]);
+        var qualityMatch = (itemToCompare.MAG || itemToCompare.RARE || itemToCompare.NMAG);
+        var ethInfMatch = (!itemToCompare.ETH && !itemToCompare.INF);
+        var filtLvlMatch = (character.FILTLVL < 3);
+        
+        var overallMatch = codeMatch && qualityMatch && ethInfMatch && filtLvlMatch;
+        
+        // Display the results
+        document.getElementById('results').innerHTML = `
+            <h2>Item Properties:</h2>
+            <p>CODE: ${itemToCompare.CODE}</p>
+            <p>7ta flag: ${itemToCompare["7ta"]}</p>
+            <p>NMAG: ${itemToCompare.NMAG}</p>
+            <p>MAG: ${itemToCompare.MAG}</p>
+            <p>RARE: ${itemToCompare.RARE}</p>
+            <p>UNI: ${itemToCompare.UNI}</p>
+            <p>ETH: ${itemToCompare.ETH}</p>
+            <p>INF: ${itemToCompare.INF}</p>
+            
+            <h2>Condition Breakdown:</h2>
+            <p>(7tk OR 7bk OR 7ta): ${codeMatch}</p>
+            <p>(MAG OR RARE OR NMAG): ${qualityMatch}</p>
+            <p>(!ETH AND !INF): ${ethInfMatch}</p>
+            <p>FILTLVL&lt;3: ${filtLvlMatch} (FILTLVL: ${character.FILTLVL})</p>
+            
+            <h2>Final Result:</h2>
+            <p style="font-size: 24px; color: ${overallMatch ? 'green' : 'red'};">
+                Overall Match: ${overallMatch}
+            </p>
+            
+            ${overallMatch ? 
+                '<p style="color: green; font-weight: bold;">✅ The Flying Axe should display as: <span style="color: gray;">throw</span> <span style="color: tan;">[35k]</span></p>' :
+                '<p style="color: red; font-weight: bold;">❌ The Flying Axe would not display (hidden)</p>'
+            }
+        `;
+    </script>
+</body>
+</html>

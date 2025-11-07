@@ -1788,6 +1788,7 @@ function setItemFromCustom() {
 // setItemCodes - sets item codes
 // ---------------------------------
 function setItemCodes() {
+	console.log("DEREK DEBUG: setItemCodes called, itemToCompare.rarity =", itemToCompare.rarity);
 	var name_stripped = itemTemp.name.split(" (")[0].split(" ­ ")[0];
 	if (name_stripped == "infinity") { name_stripped = "Infinity" }
 	itemToCompare.NAME = itemTemp.name_prefix + name_stripped + itemTemp.name_suffix
@@ -1796,9 +1797,9 @@ function setItemCodes() {
 	var is_premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { is_premade = true };
 	if (is_premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
 		var base = bases[itemTemp.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
-		if (base.tier == 1) { itemToCompare.NORM = true }
-		else if (base.tier == 2) { itemToCompare.EXC = true }
-		else if (base.tier == 3) { itemToCompare.ELT = true }
+		if (base.tier == 1) { itemToCompare.NORM = true; }
+		else if (base.tier == 2) { itemToCompare.EXC = true; }
+		else if (base.tier == 3) { itemToCompare.ELT = true; }
 	}
 	if (typeof(itemToCompare.rarity) != 'undefined') {
 		if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
@@ -1810,7 +1811,23 @@ function setItemCodes() {
 		else if (itemToCompare.rarity == "synth") { itemToCompare.SYNTH = true }
 		else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
-	} else {itemToCompare.UNI = true }
+	} else {
+		// DEREK'S FIX: Default to normal quality (NMAG) for base items instead of unique
+		console.log("DEREK'S FIX APPLIED: Setting NMAG=true for item with undefined rarity");
+		itemToCompare.NMAG = true; 
+		itemToCompare.always_id = true;
+	}
+	console.log("DEREK DEBUG: Item properties for", itemToCompare.NAME || itemToCompare.CODE, ":", {
+		CODE: itemToCompare.CODE,
+		NMAG: itemToCompare.NMAG,
+		MAG: itemToCompare.MAG,
+		RARE: itemToCompare.RARE,
+		ETH: itemToCompare.ETH,
+		INF: itemToCompare.INF,
+		WP1: itemToCompare.WP1,
+		WP5: itemToCompare.WP5
+	});
+	console.log("DEREK DEBUG: Current filter level (character.FILTLVL):", typeof character !== 'undefined' ? character.FILTLVL : 'character undefined');
 	if (itemToCompare.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
 	itemToCompare[itemToCompare.CODE] = true
 	//if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Step-by-Step Flying Axe Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .step { background: #f0f8ff; border-left: 4px solid #0066cc; padding: 10px; margin: 10px 0; }
+        .result { background: #f0fff0; border-left: 4px solid #00aa00; padding: 10px; margin: 10px 0; }
+        .issue { background: #fff0f0; border-left: 4px solid #aa0000; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Step-by-Step Flying Axe Test Instructions</h1>
+    
+    <div class="step">
+        <h3>Step 1: Open FilterBird</h3>
+        <p>Navigate to <a href="http://localhost:8001" target="_blank">http://localhost:8001</a></p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 2: Set Version to Path of Diablo</h3>
+        <p>Click on "Version" in the menu and select "Path of Diablo" (not Project D2)</p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 3: Load the Filter</h3>
+        <p>In Filter #1 text area, paste this single line:</p>
+        <code>ItemDisplay[(7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL&lt;3]: %GRAY% throw %TAN%[35k]</code>
+    </div>
+    
+    <div class="step">
+        <h3>Step 4: Set Up Flying Axe</h3>
+        <p>In the item selection area:</p>
+        <ul>
+            <li>Group: weapon</li>
+            <li>Type: throwing weapon</li>
+            <li>Base: Flying Axe</li>
+            <li>Rarity: Regular (this is crucial!)</li>
+        </ul>
+    </div>
+    
+    <div class="step">
+        <h3>Step 5: Check FILTERLVL</h3>
+        <p>Make sure FILTERLVL is set to 1 or 2 (anything less than 3)</p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 6: Expected Result</h3>
+        <p>You should see: <span style="color: gray;">throw</span> <span style="color: tan;">[35k]</span></p>
+    </div>
+    
+    <div class="result">
+        <h3>What the Fix Does</h3>
+        <p>Before the fix: Flying Axe defaulted to unique quality (UNI=true), which doesn't match (MAG OR RARE OR NMAG)</p>
+        <p>After the fix: Flying Axe defaults to normal quality (NMAG=true), which matches the condition</p>
+    </div>
+    
+    <div class="issue">
+        <h3>If It Still Doesn't Work</h3>
+        <p>Possible issues:</p>
+        <ul>
+            <li>Make sure you're using "Regular" rarity, not leaving it unset</li>
+            <li>Check that the version is set to Path of Diablo (not Project D2)</li>
+            <li>Verify FILTERLVL is less than 3</li>
+            <li>Make sure there are no typos in the filter line</li>
+            <li>Check browser console for JavaScript errors</li>
+        </ul>
+    </div>
+    
+    <div class="step">
+        <h3>Alternative Test - Try This Filter Line Instead</h3>
+        <p>If the above doesn't work, try this simpler version:</p>
+        <code>ItemDisplay[7ta NMAG]: Flying Axe Test</code>
+        <p>This should definitely show "Flying Axe Test" if the fix is working.</p>
+    </div>
+    
+    <h2>Technical Details</h2>
+    <p>The fix changes this code in <code>custom_items.js</code> line ~1813:</p>
+    <pre>
+// BEFORE (broken):
+} else {itemToCompare.UNI = true }
+
+// AFTER (fixed):  
+} else {
+    // Default to normal quality (NMAG) for base items instead of unique
+    itemToCompare.NMAG = true; 
+    itemToCompare.always_id = true;
+}
+    </pre>
+</body>
+</html>

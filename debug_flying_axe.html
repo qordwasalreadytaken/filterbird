@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flying Axe Filter Debug</title>
+</head>
+<body>
+    <h1>Flying Axe Filter Debug</h1>
+    <div id="debug-output"></div>
+    
+    <script>
+        // Simplified debug test
+        var itemToCompare = {
+            CODE: "7ta",
+            MAG: false,
+            RARE: false,
+            NMAG: true,
+            ETH: false,
+            INF: false
+        };
+        
+        var character = {
+            FILTLVL: 1
+        };
+        
+        // Test the condition from line 186: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3
+        
+        // Build the formula step by step
+        var codeMatch = (itemToCompare.CODE == "7tk" || itemToCompare.CODE == "7bk" || itemToCompare.CODE == "7ta");
+        var qualityMatch = (itemToCompare.MAG == true || itemToCompare.RARE == true || itemToCompare.NMAG == true);
+        var notEthNotInf = (!itemToCompare.ETH && !itemToCompare.INF);
+        var filtLvlMatch = character.FILTLVL < 3;
+        
+        var overallMatch = codeMatch && qualityMatch && notEthNotInf && filtLvlMatch;
+        
+        var debugOutput = document.getElementById('debug-output');
+        debugOutput.innerHTML = `
+            <p>Item CODE: ${itemToCompare.CODE}</p>
+            <p>Code Match (7tk OR 7bk OR 7ta): ${codeMatch}</p>
+            <p>Quality Match (MAG OR RARE OR NMAG): ${qualityMatch} (MAG: ${itemToCompare.MAG}, RARE: ${itemToCompare.RARE}, NMAG: ${itemToCompare.NMAG})</p>
+            <p>Not ETH and Not INF: ${notEthNotInf} (ETH: ${itemToCompare.ETH}, INF: ${itemToCompare.INF})</p>
+            <p>FILTLVL < 3: ${filtLvlMatch} (FILTLVL: ${character.FILTLVL})</p>
+            <p><strong>Overall Match: ${overallMatch}</strong></p>
+        `;
+    </script>
+</body>
+</html>

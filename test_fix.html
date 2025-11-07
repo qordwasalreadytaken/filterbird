@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flying Axe Fix Test</title>
+</head>
+<body>
+    <h1>Flying Axe Fix Test</h1>
+    <div id="results"></div>
+    
+    <script src="data/item_metadata.js"></script>
+    <script src="data/custom_items.js"></script>
+    <script src="data/simulation.js"></script>
+    
+    <script>
+        console.log("=== Testing Flying Axe Fix ===");
+        
+        // Test the fix by simulating the exact scenario
+        function testFlyingAxeFix() {
+            const results = document.getElementById('results');
+            
+            try {
+                // 1. Verify Flying Axe exists in metadata
+                console.log("1. Checking Flying_Axe metadata:", bases.Flying_Axe);
+                results.innerHTML += "<p>✓ Flying_Axe exists in metadata: " + JSON.stringify(bases.Flying_Axe) + "</p>";
+                
+                // 2. Test setItemCodes function with Flying Axe
+                console.log("2. Testing setItemCodes with Flying Axe");
+                const testItem = {
+                    CODE: "7ta",
+                    NAME: "Flying Axe"
+                };
+                
+                // This should trigger our fix
+                setItemCodes(testItem);
+                console.log("Item after setItemCodes:", testItem);
+                results.innerHTML += "<p>✓ Item after setItemCodes: " + JSON.stringify(testItem) + "</p>";
+                
+                // 3. Check if NMAG is set correctly
+                if (testItem.NMAG === true) {
+                    console.log("✓ SUCCESS: Flying Axe has NMAG=true");
+                    results.innerHTML += "<p style='color: green; font-weight: bold;'>✓ SUCCESS: Flying Axe has NMAG=true</p>";
+                } else {
+                    console.log("✗ FAILED: Flying Axe does not have NMAG=true");
+                    results.innerHTML += "<p style='color: red; font-weight: bold;'>✗ FAILED: Flying Axe does not have NMAG=true</p>";
+                }
+                
+                // 4. Test the filter condition manually
+                console.log("3. Testing filter condition (7ta NMAG)");
+                const conditionResult = (testItem.CODE === "7ta") && testItem.NMAG;
+                console.log("Condition (7ta NMAG) result:", conditionResult);
+                results.innerHTML += "<p>✓ Filter condition (7ta NMAG) result: " + conditionResult + "</p>";
+                
+                if (conditionResult) {
+                    results.innerHTML += "<p style='color: green; font-weight: bold; font-size: 18px;'>🎉 FLYING AXE FIX IS WORKING! 🎉</p>";
+                } else {
+                    results.innerHTML += "<p style='color: red; font-weight: bold; font-size: 18px;'>❌ Flying Axe fix is not working</p>";
+                }
+                
+            } catch (error) {
+                console.error("Test failed:", error);
+                results.innerHTML += "<p style='color: red;'>Error: " + error.message + "</p>";
+            }
+        }
+        
+        // Run test when page loads
+        window.addEventListener('load', testFlyingAxeFix);
+    </script>
+</body>
+</html>

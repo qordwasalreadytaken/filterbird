@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flying Axe Rarity Debug</title>
+</head>
+<body>
+    <h1>Flying Axe Rarity Debug</h1>
+    <div id="debug-output"></div>
+    
+    <script>
+        // Load the base Flying Axe data
+        var Flying_Axe = {
+            qlvl:61,
+            CODE:"7ta",
+            WEAPON:true,
+            WP5:true,
+            WP1:true,
+            group:"weapon", 
+            type:"thrown", 
+            base_damage_min:17, 
+            base_damage_max:65, 
+            throw_min:15, 
+            throw_max:66, 
+            req_level:42, 
+            req_strength:88, 
+            req_dexterity:108, 
+            durability:15, 
+            baseSpeed:10, 
+            downgrade:"Francisca", 
+            subtype:"axe", 
+            tier:3
+        };
+
+        // Simulate how the app would set up a basic Flying Axe
+        var itemToCompare = {};
+        
+        // Copy base properties
+        for (var prop in Flying_Axe) {
+            itemToCompare[prop] = Flying_Axe[prop];
+        }
+
+        // Default rarity if not set
+        if (typeof(itemToCompare.rarity) == 'undefined') {
+            // Check what the default would be - from the code it looks like it's not set by default
+        }
+
+        // Set default quality flags based on rarity
+        if (typeof(itemToCompare.rarity) != 'undefined') {
+            if (itemToCompare.rarity == "magic") { 
+                itemToCompare.MAG = true; 
+                itemToCompare.always_id = true; 
+            } else if (itemToCompare.rarity == "rare") { 
+                itemToCompare.RARE = true; 
+                itemToCompare.always_id = true; 
+            } else if (itemToCompare.rarity == "regular") { 
+                itemToCompare.NMAG = true; 
+                itemToCompare.always_id = true; 
+            } else if (itemToCompare.rarity == "rw") { 
+                itemToCompare.NMAG = true; 
+                itemToCompare.RW = true; 
+                itemToCompare.always_id = true; 
+            }
+        }
+
+        // Set defaults for undefined quality flags
+        if (typeof(itemToCompare.MAG) == 'undefined') { itemToCompare.MAG = false }
+        if (typeof(itemToCompare.RARE) == 'undefined') { itemToCompare.RARE = false }
+        if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
+        if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
+        if (typeof(itemToCompare.INF) == 'undefined') { itemToCompare.INF = false }
+
+        var character = {
+            FILTLVL: 1
+        };
+        
+        // Test the condition from line 186: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3
+        var codeMatch = (itemToCompare.CODE == "7tk" || itemToCompare.CODE == "7bk" || itemToCompare.CODE == "7ta");
+        var qualityMatch = (itemToCompare.MAG == true || itemToCompare.RARE == true || itemToCompare.NMAG == true);
+        var notEthNotInf = (!itemToCompare.ETH && !itemToCompare.INF);
+        var filtLvlMatch = character.FILTLVL < 3;
+        
+        var overallMatch = codeMatch && qualityMatch && notEthNotInf && filtLvlMatch;
+        
+        var debugOutput = document.getElementById('debug-output');
+        debugOutput.innerHTML = `
+            <h2>Base Item Properties:</h2>
+            <p>Item CODE: ${itemToCompare.CODE}</p>
+            <p>Item rarity: ${itemToCompare.rarity || 'undefined'}</p>
+            <p>Item group: ${itemToCompare.group}</p>
+            <p>Item type: ${itemToCompare.type}</p>
+            
+            <h2>Quality Flags:</h2>
+            <p>MAG: ${itemToCompare.MAG}</p>
+            <p>RARE: ${itemToCompare.RARE}</p>
+            <p>NMAG: ${itemToCompare.NMAG}</p>
+            <p>ETH: ${itemToCompare.ETH}</p>
+            <p>INF: ${itemToCompare.INF}</p>
+            
+            <h2>Filter Condition Test:</h2>
+            <p>Code Match (7tk OR 7bk OR 7ta): ${codeMatch}</p>
+            <p>Quality Match (MAG OR RARE OR NMAG): ${qualityMatch}</p>
+            <p>Not ETH and Not INF: ${notEthNotInf}</p>
+            <p>FILTLVL < 3: ${filtLvlMatch} (FILTLVL: ${character.FILTLVL})</p>
+            <p><strong>Overall Match: ${overallMatch}</strong></p>
+            
+            <h2>The Problem:</h2>
+            <p style="color: red;">The Flying Axe has no rarity set by default, so all quality flags (MAG, RARE, NMAG) are false!</p>
+            <p style="color: green;">The filter expects at least one of MAG, RARE, or NMAG to be true.</p>
+        `;
+    </script>
+</body>
+</html>

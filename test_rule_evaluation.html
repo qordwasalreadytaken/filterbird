@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filter Rule Evaluation Test</title>
+</head>
+<body>
+    <h1>Filter Rule Evaluation Test</h1>
+    <div id="results"></div>
+    
+    <script src="data/item_metadata.js"></script>
+    <script src="data/custom_items.js"></script>
+    <script src="data/simulation.js"></script>
+    
+    <script>
+        function testFilterEvaluation() {
+            const results = document.getElementById('results');
+            
+            // Create a Flying Axe item
+            const testItem = {
+                CODE: "7ta",
+                NAME: "Flying Axe",
+                WEAPON: true,
+                WP5: true,
+                WP1: true,
+                type: "thrown",
+                NMAG: true,
+                always_id: true
+            };
+            
+            // Set up character with filter level 1
+            if (typeof character === 'undefined') {
+                window.character = { FILTLVL: 1, FILTERLVL: 1 };
+            } else {
+                character.FILTLVL = 1;
+                character.FILTERLVL = 1;
+            }
+            
+            console.log("=== Testing Filter Rule Evaluation ===");
+            console.log("Test item:", testItem);
+            console.log("Character filter level:", character.FILTLVL || character.FILTERLVL);
+            
+            results.innerHTML += "<h3>Test Item Properties:</h3>";
+            results.innerHTML += "<pre>" + JSON.stringify(testItem, null, 2) + "</pre>";
+            
+            // Test line 851: WP1 NMAG (SOCK=0 OR SOCK=4) FILTERLVL=1
+            console.log("=== Testing Line 851 ===");
+            const line851_wp1 = testItem.WP1 === true;
+            const line851_nmag = testItem.NMAG === true;
+            const line851_sock = (testItem.SOCK === 0 || testItem.SOCK === 4 || typeof testItem.SOCK === 'undefined');
+            const line851_filtlvl = (character.FILTLVL === 1 || character.FILTERLVL === 1);
+            const line851_match = line851_wp1 && line851_nmag && line851_sock && line851_filtlvl;
+            
+            console.log("Line 851 - WP1:", line851_wp1);
+            console.log("Line 851 - NMAG:", line851_nmag);
+            console.log("Line 851 - (SOCK=0 OR SOCK=4):", line851_sock, "(SOCK value:", testItem.SOCK, ")");
+            console.log("Line 851 - FILTERLVL=1:", line851_filtlvl);
+            console.log("Line 851 - TOTAL MATCH:", line851_match);
+            
+            results.innerHTML += "<h3>Line 851: WP1 NMAG (SOCK=0 OR SOCK=4) FILTERLVL=1</h3>";
+            results.innerHTML += "<p>WP1: " + line851_wp1 + "</p>";
+            results.innerHTML += "<p>NMAG: " + line851_nmag + "</p>";
+            results.innerHTML += "<p>(SOCK=0 OR SOCK=4): " + line851_sock + " (SOCK=" + testItem.SOCK + ")</p>";
+            results.innerHTML += "<p>FILTERLVL=1: " + line851_filtlvl + "</p>";
+            results.innerHTML += "<p><strong>LINE 851 MATCH: " + line851_match + "</strong></p>";
+            
+            // Test line 186: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3
+            console.log("=== Testing Line 186 ===");
+            const line186_codes = (testItem.CODE === "7tk" || testItem.CODE === "7bk" || testItem.CODE === "7ta");
+            const line186_rarity = (testItem.MAG === true || testItem.RARE === true || testItem.NMAG === true);
+            const line186_noteth = (testItem.ETH !== true);
+            const line186_notinf = (testItem.INF !== true);
+            const line186_filtlvl = ((character.FILTLVL || character.FILTERLVL) < 3);
+            const line186_match = line186_codes && line186_rarity && line186_noteth && line186_notinf && line186_filtlvl;
+            
+            console.log("Line 186 - (7tk OR 7bk OR 7ta):", line186_codes);
+            console.log("Line 186 - (MAG OR RARE OR NMAG):", line186_rarity);
+            console.log("Line 186 - !ETH:", line186_noteth, "(ETH value:", testItem.ETH, ")");
+            console.log("Line 186 - !INF:", line186_notinf, "(INF value:", testItem.INF, ")");
+            console.log("Line 186 - FILTERLVL<3:", line186_filtlvl);
+            console.log("Line 186 - TOTAL MATCH:", line186_match);
+            
+            results.innerHTML += "<h3>Line 186: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL&lt;3</h3>";
+            results.innerHTML += "<p>(7tk OR 7bk OR 7ta): " + line186_codes + "</p>";
+            results.innerHTML += "<p>(MAG OR RARE OR NMAG): " + line186_rarity + "</p>";
+            results.innerHTML += "<p>!ETH: " + line186_noteth + " (ETH=" + testItem.ETH + ")</p>";
+            results.innerHTML += "<p>!INF: " + line186_notinf + " (INF=" + testItem.INF + ")</p>";
+            results.innerHTML += "<p>FILTERLVL&lt;3: " + line186_filtlvl + "</p>";
+            results.innerHTML += "<p><strong>LINE 186 MATCH: " + line186_match + "</strong></p>";
+            
+            // Summary
+            results.innerHTML += "<h3>Summary</h3>";
+            if (line851_match && line186_match) {
+                results.innerHTML += "<p style='color: red; font-weight: bold;'>BOTH rules match! Line 851 wins due to order precedence.</p>";
+                results.innerHTML += "<p>This is why Flying Axe matches line 851 instead of line 186.</p>";
+            } else if (line851_match) {
+                results.innerHTML += "<p style='color: orange; font-weight: bold;'>Only line 851 matches.</p>";
+            } else if (line186_match) {
+                results.innerHTML += "<p style='color: green; font-weight: bold;'>Only line 186 matches (as intended).</p>";
+            } else {
+                results.innerHTML += "<p style='color: red; font-weight: bold;'>Neither rule matches!</p>";
+            }
+        }
+        
+        window.addEventListener('load', testFilterEvaluation);
+    </script>
+</body>
+</html>

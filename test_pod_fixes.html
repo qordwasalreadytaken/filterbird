@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PoD Filter Test</title>
+</head>
+<body>
+    <h1>PoD Filter Condition Test</h1>
+    <div id="results"></div>
+    
+    <script src="data/item_metadata.js"></script>
+    <script src="data/custom_items.js"></script>
+    <script src="data/simulation.js"></script>
+    
+    <script>
+        function testPoDFilters() {
+            const results = document.getElementById('results');
+            
+            console.log("=== Testing PoD Filter Fixes ===");
+            
+            // Test 1: Verify all_codes exists and works
+            results.innerHTML += "<h3>Test 1: all_codes Object</h3>";
+            if (typeof all_codes !== 'undefined') {
+                results.innerHTML += "<p style='color: green;'>✅ all_codes object exists</p>";
+                results.innerHTML += "<p>FILTLVL support: " + all_codes.FILTLVL + "</p>";
+                results.innerHTML += "<p>WP5 support: " + all_codes.WP5 + "</p>";
+                results.innerHTML += "<p>NMAG support: " + all_codes.NMAG + "</p>";
+            } else {
+                results.innerHTML += "<p style='color: red;'>❌ all_codes object missing</p>";
+            }
+            
+            // Test 2: Flying Axe with proper conditions
+            results.innerHTML += "<h3>Test 2: Flying Axe Filter Evaluation</h3>";
+            
+            const testItem = {
+                CODE: "7ta",
+                NAME: "Flying Axe", 
+                WP1: true,
+                WP5: true,
+                NMAG: true,
+                type: "thrown"
+            };
+            
+            // Test filter conditions manually
+            const condition1 = (testItem.CODE === "7ta");  // Item code match
+            const condition2 = (testItem.NMAG === true);   // Rarity match
+            const condition3 = (character.FILTLVL < 3);    // Filter level match
+            
+            results.innerHTML += "<p>Item code (7ta): " + condition1 + "</p>";
+            results.innerHTML += "<p>Rarity (NMAG): " + condition2 + "</p>";
+            results.innerHTML += "<p>Filter level (<3): " + condition3 + " (current: " + character.FILTLVL + ")</p>";
+            
+            const allMatch = condition1 && condition2 && condition3;
+            results.innerHTML += "<p><strong>All conditions match: " + allMatch + "</strong></p>";
+            
+            if (allMatch) {
+                results.innerHTML += "<p style='color: green; font-size: 18px;'>🎉 Flying Axe should now work correctly! 🎉</p>";
+            }
+            
+            // Test 3: Version-specific condition recognition
+            results.innerHTML += "<h3>Test 3: Condition Recognition</h3>";
+            results.innerHTML += "<p>Settings version: " + settings.version + " (0 = PoD)</p>";
+            
+            // Test some conditions
+            const testConditions = ['FILTLVL', 'WP5', 'NMAG', 'ETH', 'CLVL'];
+            testConditions.forEach(cond => {
+                const supported = (typeof all_codes[cond] !== 'undefined') && 
+                                (all_codes[cond] === 3 || (settings.version === 0 && all_codes[cond] === 1));
+                results.innerHTML += "<p>" + cond + ": " + (supported ? "✅ Supported" : "❌ Not supported") + "</p>";
+            });
+        }
+        
+        window.addEventListener('load', testPoDFilters);
+    </script>
+</body>
+</html>

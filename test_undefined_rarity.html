@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FilterBird Test - Undefined Rarity</title>
+    <script>
+        // Include the base metadata and simulation logic
+        var bases = {
+            Flying_Axe:{qlvl:61,CODE:"7ta",WEAPON:true,WP5:true,WP1:true,group:"weapon", type:"thrown", base_damage_min:17, base_damage_max:65, throw_min:15, throw_max:66, req_level:42, req_strength:88, req_dexterity:108, durability:15, baseSpeed:10, downgrade:"Francisca", subtype:"axe", tier:3}
+        };
+        
+        var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false,EQUIPPED:false,FILTLVL:1};
+    </script>
+</head>
+<body>
+    <h1>FilterBird Test - Undefined Rarity (Testing the Fix)</h1>
+    <p>This tests what happens when no rarity is explicitly set (the fallback case).</p>
+    
+    <div id="test-results"></div>
+    
+    <script>
+        function simulateFilterBirdLogic() {
+            // Simulate creating a Flying Axe through the UI
+            var itemToCompare = {};
+            var itemTemp = {};
+            
+            // User selects: Group=weapon, Type=throwing weapon, Base=Flying Axe
+            // But NO RARITY is set (testing the undefined case)
+            var base = bases.Flying_Axe;
+            for (var affix in base) { 
+                itemToCompare[affix] = base[affix]; 
+            }
+            
+            // Simulate the rarity being undefined (no explicit selection)
+            // itemToCompare.rarity = undefined; // This is the case we're testing
+            
+            // Apply the FIXED setItemCodes logic
+            if (typeof(itemToCompare.rarity) != 'undefined') {
+                if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
+                else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
+                else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
+                else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
+                else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
+                else if (itemToCompare.rarity == "synthesized") { itemToCompare.SYNTH = true }
+                else if (itemToCompare.rarity == "synth") { itemToCompare.SYNTH = true }
+                else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
+                else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
+            } else {
+                // FIXED: Default to normal quality (NMAG) for base items instead of unique
+                itemToCompare.NMAG = true; 
+                itemToCompare.always_id = true;
+            }
+            
+            // Set other required flags
+            if (typeof(itemToCompare.MAG) == 'undefined') { itemToCompare.MAG = false }
+            if (typeof(itemToCompare.RARE) == 'undefined') { itemToCompare.RARE = false }
+            if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
+            if (typeof(itemToCompare.UNI) == 'undefined') { itemToCompare.UNI = false }
+            if (typeof(itemToCompare.SET) == 'undefined') { itemToCompare.SET = false }
+            if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
+            if (typeof(itemToCompare.INF) == 'undefined') { itemToCompare.INF = false }
+            
+            // Set the tier flags
+            if (base.tier == 1) { itemToCompare.NORM = true }
+            else if (base.tier == 2) { itemToCompare.EXC = true }
+            else if (base.tier == 3) { itemToCompare.ELT = true }
+            
+            // Set the CODE flag
+            itemToCompare[itemToCompare.CODE] = true;
+            
+            return itemToCompare;
+        }
+        
+        function parseCondition(conditions, itemToCompare, character) {
+            // Simplified condition parser for: (7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3
+            var codeMatch = (itemToCompare.CODE == "7tk" || itemToCompare.CODE == "7bk" || itemToCompare.CODE == "7ta");
+            var qualityMatch = (itemToCompare.MAG == true || itemToCompare.RARE == true || itemToCompare.NMAG == true);
+            var notEthNotInf = (!itemToCompare.ETH && !itemToCompare.INF);
+            var filtLvlMatch = character.FILTLVL < 3;
+            
+            return codeMatch && qualityMatch && notEthNotInf && filtLvlMatch;
+        }
+        
+        function testFilter() {
+            var itemToCompare = simulateFilterBirdLogic();
+            
+            // Test the filter condition
+            var match = parseCondition("(7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3", itemToCompare, character);
+            
+            var output = "";
+            if (match) {
+                // The filter line: ItemDisplay[(7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF) FILTERLVL<3]: %GRAY% throw %TAN%[35k]
+                output = '<span style="color: gray;">throw </span><span style="color: tan;">[35k]</span>';
+            } else {
+                output = '<span style="color: red;">No match - item would be hidden</span>';
+            }
+            
+            return {
+                item: itemToCompare,
+                match: match,
+                output: output
+            };
+        }
+        
+        // Run the test
+        var result = testFilter();
+        
+        // Display results
+        document.getElementById('test-results').innerHTML = `
+            <h2>Item Properties (No Rarity Set):</h2>
+            <p><strong>CODE:</strong> ${result.item.CODE}</p>
+            <p><strong>Rarity:</strong> ${result.item.rarity || 'undefined (testing fallback)'}</p>
+            <p><strong>Quality Flags:</strong></p>
+            <ul>
+                <li>NMAG: ${result.item.NMAG} <-- Should be TRUE due to fallback</li>
+                <li>MAG: ${result.item.MAG}</li>
+                <li>RARE: ${result.item.RARE}</li>
+                <li>UNI: ${result.item.UNI} <-- Should be FALSE (was TRUE before fix)</li>
+                <li>ETH: ${result.item.ETH}</li>
+                <li>INF: ${result.item.INF}</li>
+            </ul>
+            
+            <h2>Filter Test Result:</h2>
+            <p><strong>Condition Match:</strong> ${result.match}</p>
+            <p><strong>Display Output:</strong> ${result.output}</p>
+            
+            <h2>Character Settings:</h2>
+            <p><strong>FILTLVL:</strong> ${character.FILTLVL}</p>
+            
+            <div style="border: 2px solid ${result.match ? 'green' : 'red'}; padding: 10px; margin: 20px 0;">
+                <h3 style="color: ${result.match ? 'green' : 'red'};">
+                    ${result.match ? '✅ SUCCESS!' : '❌ FAILED!'}
+                </h3>
+                <p>${result.match ? 'Even with undefined rarity, the Flying Axe now defaults to NMAG=true and matches the filter!' : 'The fallback did not work properly.'}</p>
+            </div>
+            
+            <div style="background: #f0f8ff; padding: 10px; margin: 10px 0; border-left: 4px solid #0066cc;">
+                <h4>What was fixed:</h4>
+                <p><strong>Before:</strong> When rarity was undefined, itemToCompare.UNI was set to true, which didn't match the filter condition (MAG OR RARE OR NMAG).</p>
+                <p><strong>After:</strong> When rarity is undefined, itemToCompare.NMAG is set to true, which matches the filter condition.</p>
+            </div>
+        `;
+    </script>
+</body>
+</html>

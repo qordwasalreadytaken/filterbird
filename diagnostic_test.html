@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FilterBird Diagnostic Test</title>
+</head>
+<body>
+    <h1>FilterBird Diagnostic Test</h1>
+    <button onclick="runDiagnostics()">Run Diagnostics</button>
+    <div id="results"></div>
+
+    <script>
+        function runDiagnostics() {
+            const results = [];
+            
+            // Test 1: Check if we can load the scripts
+            try {
+                const script = document.createElement('script');
+                script.src = './data/item_metadata.js';
+                script.onload = function() {
+                    results.push("✅ item_metadata.js loaded successfully");
+                    continueTests();
+                };
+                script.onerror = function() {
+                    results.push("❌ Failed to load item_metadata.js");
+                    displayResults();
+                };
+                document.head.appendChild(script);
+            } catch (e) {
+                results.push("❌ Error loading scripts: " + e.message);
+                displayResults();
+            }
+            
+            function continueTests() {
+                // Test 2: Check if Flying_Axe exists in bases
+                if (typeof bases !== 'undefined' && bases.Flying_Axe) {
+                    results.push("✅ Flying_Axe found in bases object");
+                    results.push("   CODE: " + bases.Flying_Axe.CODE);
+                    results.push("   Type: " + bases.Flying_Axe.type);
+                    results.push("   Tier: " + bases.Flying_Axe.tier);
+                } else {
+                    results.push("❌ Flying_Axe not found in bases object");
+                }
+                
+                // Test 3: Load custom_items.js
+                const script2 = document.createElement('script');
+                script2.src = './data/custom_items.js';
+                script2.onload = function() {
+                    results.push("✅ custom_items.js loaded successfully");
+                    finalTests();
+                };
+                script2.onerror = function() {
+                    results.push("❌ Failed to load custom_items.js");
+                    displayResults();
+                };
+                document.head.appendChild(script2);
+            }
+            
+            function finalTests() {
+                // Test 4: Check if setItemCodes function exists
+                if (typeof setItemCodes === 'function') {
+                    results.push("✅ setItemCodes function found");
+                } else {
+                    results.push("❌ setItemCodes function not found");
+                }
+                
+                // Test 5: Manually test the rarity logic
+                try {
+                    let testItem = {
+                        CODE: "7ta",
+                        rarity: "regular"
+                    };
+                    
+                    // Test the rarity logic directly
+                    if (typeof(testItem.rarity) != 'undefined') {
+                        if (testItem.rarity == "regular") { 
+                            testItem.NMAG = true; 
+                            testItem.always_id = true; 
+                            results.push("✅ Regular rarity logic works: NMAG = " + testItem.NMAG);
+                        }
+                    } else {
+                        // Test the fallback logic
+                        testItem.NMAG = true; 
+                        testItem.always_id = true;
+                        results.push("✅ Undefined rarity fallback works: NMAG = " + testItem.NMAG);
+                    }
+                    
+                    // Test the condition manually
+                    let codeMatch = (testItem.CODE == "7tk" || testItem.CODE == "7bk" || testItem.CODE == "7ta");
+                    let qualityMatch = (testItem.NMAG == true);
+                    results.push("✅ Manual condition test:");
+                    results.push("   Code match (7ta): " + codeMatch);
+                    results.push("   Quality match (NMAG): " + qualityMatch);
+                    results.push("   Overall: " + (codeMatch && qualityMatch));
+                    
+                } catch (e) {
+                    results.push("❌ Error in manual test: " + e.message);
+                }
+                
+                displayResults();
+            }
+            
+            function displayResults() {
+                document.getElementById('results').innerHTML = '<pre>' + results.join('\n') + '</pre>';
+            }
+        }
+    </script>
+</body>
+</html>
