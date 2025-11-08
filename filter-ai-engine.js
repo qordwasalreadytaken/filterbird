@@ -2185,6 +2185,7 @@ class FilterPhoenixAI {
         const lines = filterContent.split('\n');
         const relevantLines = [];
         const matchingLines = [];
+        const enableIfStack = []; // Track nested EnableIf conditions
 
         // Find all ItemDisplay lines that could affect the requested items
         for (let i = 0; i < lines.length; i++) {
@@ -2192,33 +2193,68 @@ class FilterPhoenixAI {
             const trimmedLine = line.trim();
             const lineNumber = i + 1; // Convert to 1-based line numbering
             
+            // Handle EnableIf blocks
+            if (trimmedLine.startsWith('EnableIf[') && trimmedLine.includes(']')) {
+                const conditionMatch = trimmedLine.match(/EnableIf\[(.*?)\]/);
+                if (conditionMatch) {
+                    enableIfStack.push({
+                        condition: conditionMatch[1],
+                        lineNumber: lineNumber
+                    });
+                }
+                continue;
+            }
+            
+            // Handle EndIf blocks
+            if (trimmedLine.startsWith('EndIf[]')) {
+                enableIfStack.pop();
+                continue;
+            }
+            
+            // Handle ItemDisplay lines
             if (trimmedLine.startsWith('ItemDisplay[') && trimmedLine.includes(']:')) {
                 const conditionMatch = trimmedLine.match(/ItemDisplay\[(.*?)\]:/);
                 if (conditionMatch) {
-                    const condition = conditionMatch[1];
+                    const itemDisplayCondition = conditionMatch[1];
                     const displayPart = trimmedLine.substring(trimmedLine.indexOf(']:') + 2);
                     
+                    // Build combined condition including any EnableIf blocks
+                    let fullCondition = itemDisplayCondition;
+                    if (enableIfStack.length > 0) {
+                        const enableIfConditions = enableIfStack.map(block => `(${block.condition})`).join(' AND ');
+                        fullCondition = enableIfConditions + (itemDisplayCondition ? ` AND (${itemDisplayCondition})` : '');
+                    }
+                    
                     // Check if this line affects any of the requested items
-                    const affectsRequestedItems = this.doesConditionAffectItems(condition, itemQuery);
+                    const affectsRequestedItems = this.doesConditionAffectItems(fullCondition, itemQuery);
                     
                     if (affectsRequestedItems) {
+                        const enableIfInfo = enableIfStack.length > 0 ? 
+                            ` (within EnableIf block: ${enableIfStack.map(b => b.condition).join(' AND ')})` : '';
+                        
                         relevantLines.push({
                             line: trimmedLine,
                             lineNumber: lineNumber,
-                            condition: condition,
+                            condition: fullCondition,
+                            itemDisplayCondition: itemDisplayCondition,
+                            enableIfConditions: enableIfStack.map(b => b.condition),
                             display: displayPart,
                             shows: displayPart.trim() !== '',
-                            priority: this.getLinePriority(condition)
+                            priority: this.getLinePriority(fullCondition),
+                            enableIfInfo: enableIfInfo
                         });
                         
                         if (affectsRequestedItems.matches) {
                             matchingLines.push({
                                 line: trimmedLine,
                                 lineNumber: lineNumber,
-                                condition: condition,
+                                condition: fullCondition,
+                                itemDisplayCondition: itemDisplayCondition,
+                                enableIfConditions: enableIfStack.map(b => b.condition),
                                 display: displayPart,
                                 shows: displayPart.trim() !== '',
-                                matchType: affectsRequestedItems.matchType
+                                matchType: affectsRequestedItems.matchType,
+                                enableIfInfo: enableIfInfo
                             });
                         }
                     }
@@ -2363,17 +2399,30 @@ class FilterPhoenixAI {
             let message = `✅ Yes! This filter WILL show ${itemDescription}.<br><br>`;
             message += `<strong>Matching rule (Line ${bestShowLine.lineNumber}):</strong><br><code>${bestShowLine.line}</code><br><br>`;
             
+            // Add EnableIf block information if applicable
+            if (bestShowLine.enableIfConditions && bestShowLine.enableIfConditions.length > 0) {
+                message += `<strong>Note:</strong> This rule is within an EnableIf block that only applies to: <code>${bestShowLine.enableIfConditions.join(' AND ')}</code><br><br>`;
+            }
+            
             if (showingLines.length > 1) {
                 message += `<strong>Additional showing rules found:</strong><br><br>`;
                 showingLines.slice(1).forEach(line => {
-                    message += `• Line ${line.lineNumber}: <code>${line.line}</code><br><br>`;
+                    message += `• Line ${line.lineNumber}: <code>${line.line}</code>`;
+                    if (line.enableIfConditions && line.enableIfConditions.length > 0) {
+                        message += ` (EnableIf: ${line.enableIfConditions.join(' AND ')})`;
+                    }
+                    message += `<br><br>`;
                 });
             }
             
             if (hidingLines.length > 0) {
                 message += `<strong>Note:</strong> Found ${hidingLines.length} hiding rule(s) but the showing rule(s) take precedence.<br><br>`;
                 hidingLines.forEach(line => {
-                    message += `• Line ${line.lineNumber}: <code>${line.line}</code><br><br>`;
+                    message += `• Line ${line.lineNumber}: <code>${line.line}</code>`;
+                    if (line.enableIfConditions && line.enableIfConditions.length > 0) {
+                        message += ` (EnableIf: ${line.enableIfConditions.join(' AND ')})`;
+                    }
+                    message += `<br><br>`;
                 });
             }
 
@@ -2391,7 +2440,11 @@ class FilterPhoenixAI {
             
             message += `<strong>Hiding rules:</strong><br><br>`;
             hidingLines.forEach(line => {
-                message += `• Line ${line.lineNumber}: <code>${line.line}</code><br><br>`;
+                message += `• Line ${line.lineNumber}: <code>${line.line}</code>`;
+                if (line.enableIfConditions && line.enableIfConditions.length > 0) {
+                    message += ` (EnableIf: ${line.enableIfConditions.join(' AND ')})`;
+                }
+                message += `<br><br>`;
             });
 
             return {
