@@ -336,9 +336,16 @@ class FilterPhoenixAI {
             'hide': ['hide', 'remove', 'exclude', 'filter out'],
             'show': ['show', 'display', 'include', 'highlight'],
             'show_check': ['does this show', 'will this show', 'would this show', 'does this display', 'will this display', 'would this display'],
+            'filter_analysis': ['will', 'does', 'would', 'filter show', 'filter display'],
             'explain': ['explain', 'what does', 'how does', 'understand', 'what is', 'analyze', 'describe', 'tell me about'],
             'help': ['help', 'how to', 'tutorial', 'guide']
         };
+
+        // Check for filter analysis questions (like "will macks filter show unique rings")
+        if ((input.includes('will') || input.includes('does') || input.includes('would')) && 
+            input.includes('filter') && (input.includes('show') || input.includes('display'))) {
+            return 'filter_analysis';
+        }
 
         // Check for filter line explanation patterns first
         if (input.includes('itemdisplay[') && (input.includes('what does') || input.includes('explain') || input.includes('what is'))) {
@@ -505,6 +512,9 @@ class FilterPhoenixAI {
                 break;
             case 'show_check':
                 response = this.handleShowCheckRequest(request.originalInput);
+                break;
+            case 'filter_analysis':
+                response = await this.handleFilterAnalysisRequest(request.originalInput);
                 break;
             case 'modify':
                 response = this.handleModifyRequest(entities, modifiers, currentFilter);
@@ -689,6 +699,69 @@ class FilterPhoenixAI {
                 message: "Sorry, I encountered an error processing your request. Please try rephrasing or being more specific.",
                 filter: '',
                 suggestions: ['Check the filter line syntax', 'Try with a simpler item name'],
+                explanation: `Error: ${error.message}`
+            };
+        }
+    }
+
+    /**
+     * Handle filter analysis requests like "will macks filter show unique rings"
+     */
+    async handleFilterAnalysisRequest(input) {
+        try {
+            // Extract filter name from the input (allowing hyphens in filter names)
+            const filterNameMatch = input.match(/(?:will|does|would)\s+([a-zA-Z0-9-]+)(?:'s)?\s+filter/i);
+            if (!filterNameMatch) {
+                return {
+                    message: "I couldn't identify which filter you're asking about. Please specify the filter name (e.g., 'mack', 'pilla', 'arniml').",
+                    filter: '',
+                    suggestions: ['Try: "will macks filter show unique rings?"', 'Available filters: mack, magfilter3, qord, arniml, kyv, pilla, josko'],
+                    explanation: ''
+                };
+            }
+
+            const filterName = filterNameMatch[1].toLowerCase();
+            
+            // Extract what items they're asking about
+            const itemQuery = this.extractItemQuery(input);
+            if ((!itemQuery.items || itemQuery.items.length === 0) && 
+                (!itemQuery.specific_items || itemQuery.specific_items.length === 0)) {
+                return {
+                    message: "I couldn't identify what items you're asking about. Please specify item types (e.g., 'unique rings', 'rare amulets', 'magic jewelry') or specific items (e.g., 'unique shako', 'rare war pike').",
+                    filter: '',
+                    suggestions: ['Try: "will macks filter show unique rings?"', 'Try: "does qords filter show unique shako?"'],
+                    explanation: ''
+                };
+            }
+
+            // Load and analyze the filter
+            const filterContent = await this.loadFilter(filterName);
+            if (!filterContent) {
+                const availableFilters = ['mack', 'magfilter3', 'qord', 'arniml', 'kyv', 'pilla', 'josko-sp', 'hornblower-pandemonium', 'rented'];
+                return {
+                    message: `I couldn't find a filter named "${filterName}". Available filters: ${availableFilters.join(', ')}`,
+                    filter: '',
+                    suggestions: [`Try: "will ${availableFilters[0]} filter show ${itemQuery.items[0]}?"`],
+                    explanation: ''
+                };
+            }
+
+            // Analyze if the filter shows the requested items
+            const analysis = this.analyzeFilterForItems(filterContent, itemQuery);
+            
+            return {
+                message: analysis.message,
+                filter: '',
+                suggestions: analysis.suggestions,
+                explanation: analysis.explanation
+            };
+            
+        } catch (error) {
+            console.error('Error in handleFilterAnalysisRequest:', error);
+            return {
+                message: "Sorry, I encountered an error analyzing the filter. Please try rephrasing your question.",
+                filter: '',
+                suggestions: ['Check the filter name spelling', 'Try with a different filter'],
                 explanation: `Error: ${error.message}`
             };
         }
@@ -2014,6 +2087,446 @@ class FilterPhoenixAI {
                 explanation: `The filter condition "${condition}" does not include any of the item codes for ${itemName} (${itemCodes.join(', ')}), so this item will not be displayed by this rule.`
             };
         }
+    }
+
+    /**
+     * Extract what items the user is asking about from the query
+     */
+    extractItemQuery(input) {
+        const query = {
+            items: [],
+            qualities: [],
+            specific_stats: [],
+            specific_items: []  // New field for specific item codes
+        };
+
+        // Extract quality types
+        if (input.includes('unique')) query.qualities.push('UNI');
+        if (input.includes('set')) query.qualities.push('SET');
+        if (input.includes('rare')) query.qualities.push('RARE');
+        if (input.includes('magic') || input.includes('blue')) query.qualities.push('MAG');
+        if (input.includes('normal') || input.includes('white')) query.qualities.push('NMAG');
+
+        // Check for specific items in the bases object
+        if (typeof bases !== 'undefined') {
+            for (const [itemName, itemData] of Object.entries(bases)) {
+                const normalizedItemName = itemName.toLowerCase().replace(/_/g, ' ');
+                if (input.toLowerCase().includes(normalizedItemName)) {
+                    query.specific_items.push({
+                        name: itemName,
+                        code: itemData.CODE,
+                        type: itemData.type || itemData.group
+                    });
+                }
+            }
+        }
+
+        // Extract general item types (only if no specific items found)
+        if (query.specific_items.length === 0) {
+            if (input.includes('ring')) query.items.push('rin');
+            if (input.includes('amulet')) query.items.push('amu');
+            if (input.includes('jewelry')) query.items.push('rin', 'amu');
+            if (input.includes('charm')) query.items.push('cm1', 'cm2', 'cm3');
+            if (input.includes('rune')) query.items.push('RUNE');
+            if (input.includes('gem')) query.items.push('GEM');
+
+            // Extract weapon/armor categories
+            if (input.includes('weapon')) query.items.push('WEAPON');
+            if (input.includes('armor')) query.items.push('ARMOR');
+            if (input.includes('sword')) query.items.push('sword_codes');
+            if (input.includes('axe')) query.items.push('axe_codes');
+        }
+
+        return query;
+    }
+
+    /**
+     * Load a filter file from the filters directory
+     */
+    async loadFilter(filterName) {
+        try {
+            // Map common filter name variations to actual filenames
+            const filterMap = {
+                'mack': 'mack.filter',
+                'macks': 'mack.filter',
+                'mag': 'MagFilter3.filter',
+                'magfilter': 'MagFilter3.filter',
+                'magfilter3': 'MagFilter3.filter',
+                'qord': 'qord.filter',
+                'qords': 'qord.filter',
+                'arniml': 'arniml.filter',
+                'kyv': 'kyv.filter',
+                'pilla': 'pilla.filter',
+                'rented': 'RenTed.filter',
+                'josko': 'josko-sp.filter',
+                'south park': 'josko-sp.filter',
+                'hornblower': 'hornblower-pandemonium.filter'
+            };
+
+            const fileName = filterMap[filterName] || `${filterName}.filter`;
+            const response = await fetch(`./filters/${fileName}`);
+            
+            if (!response.ok) {
+                console.log(`Filter file not found: ${fileName}`);
+                return null;
+            }
+
+            return await response.text();
+        } catch (error) {
+            console.error(`Error loading filter ${filterName}:`, error);
+            return null;
+        }
+    }
+
+    /**
+     * Analyze if a filter shows specific items
+     */
+    analyzeFilterForItems(filterContent, itemQuery) {
+        const lines = filterContent.split('\n');
+        const relevantLines = [];
+        const matchingLines = [];
+
+        // Find all ItemDisplay lines that could affect the requested items
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const trimmedLine = line.trim();
+            const lineNumber = i + 1; // Convert to 1-based line numbering
+            
+            if (trimmedLine.startsWith('ItemDisplay[') && trimmedLine.includes(']:')) {
+                const conditionMatch = trimmedLine.match(/ItemDisplay\[(.*?)\]:/);
+                if (conditionMatch) {
+                    const condition = conditionMatch[1];
+                    const displayPart = trimmedLine.substring(trimmedLine.indexOf(']:') + 2);
+                    
+                    // Check if this line affects any of the requested items
+                    const affectsRequestedItems = this.doesConditionAffectItems(condition, itemQuery);
+                    
+                    if (affectsRequestedItems) {
+                        relevantLines.push({
+                            line: trimmedLine,
+                            lineNumber: lineNumber,
+                            condition: condition,
+                            display: displayPart,
+                            shows: displayPart.trim() !== '',
+                            priority: this.getLinePriority(condition)
+                        });
+                        
+                        if (affectsRequestedItems.matches) {
+                            matchingLines.push({
+                                line: trimmedLine,
+                                lineNumber: lineNumber,
+                                condition: condition,
+                                display: displayPart,
+                                shows: displayPart.trim() !== '',
+                                matchType: affectsRequestedItems.matchType
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        return this.generateFilterAnalysisResponse(itemQuery, matchingLines, relevantLines);
+    }
+
+    /**
+     * Check if a filter condition affects the requested items
+     */
+    doesConditionAffectItems(condition, itemQuery) {
+        let hasItemMatch = false;
+        let hasQualityMatch = false;
+        let hasSpecificItemMatch = false;
+        let matchType = [];
+
+        // Check for specific item code matches (highest priority)
+        if (itemQuery.specific_items && itemQuery.specific_items.length > 0) {
+            for (const specificItem of itemQuery.specific_items) {
+                if (condition.includes(specificItem.code)) {
+                    hasSpecificItemMatch = true;
+                    hasItemMatch = true;
+                    matchType.push(`specific_item:${specificItem.name}(${specificItem.code})`);
+                    break;
+                }
+            }
+        }
+
+        // Check for general item code matches (only if no specific item found)
+        if (!hasSpecificItemMatch) {
+            for (const itemCode of itemQuery.items) {
+                if (condition.includes(itemCode)) {
+                    hasItemMatch = true;
+                    matchType.push(`item:${itemCode}`);
+                    break;
+                }
+            }
+        }
+
+        // Check for quality matches
+        for (const quality of itemQuery.qualities) {
+            if (condition.includes(quality)) {
+                hasQualityMatch = true;
+                matchType.push(`quality:${quality}`);
+                break;
+            }
+        }
+
+        // Check for catch-all conditions
+        if (condition.trim() === '' || condition === '*') {
+            return { matches: true, matchType: ['catch-all'] };
+        }
+
+        // Handle specific items (highest priority)
+        if (itemQuery.specific_items && itemQuery.specific_items.length > 0) {
+            if (itemQuery.qualities.length > 0) {
+                // Must match both specific item and quality
+                return {
+                    matches: hasSpecificItemMatch && hasQualityMatch,
+                    affects: hasSpecificItemMatch || hasQualityMatch,
+                    matchType: matchType
+                };
+            } else {
+                // Just need specific item match
+                return {
+                    matches: hasSpecificItemMatch,
+                    affects: hasSpecificItemMatch,
+                    matchType: matchType
+                };
+            }
+        }
+
+        // Handle general items (fallback)
+        if (itemQuery.items.length > 0 && itemQuery.qualities.length > 0) {
+            return {
+                matches: hasItemMatch && hasQualityMatch,
+                affects: hasItemMatch || hasQualityMatch,
+                matchType: matchType
+            };
+        } else if (itemQuery.items.length > 0) {
+            return {
+                matches: hasItemMatch,
+                affects: hasItemMatch,
+                matchType: matchType
+            };
+        } else if (itemQuery.qualities.length > 0) {
+            return {
+                matches: hasQualityMatch,
+                affects: hasQualityMatch,
+                matchType: matchType
+            };
+        }
+
+        return { matches: false, affects: false, matchType: [] };
+    }
+
+    /**
+     * Get priority of a filter line (lower number = higher priority)
+     */
+    getLinePriority(condition) {
+        if (condition.includes('FILTERLVL')) return 1;
+        if (condition.includes('UNI') || condition.includes('SET')) return 2;
+        if (condition.includes('RARE')) return 3;
+        if (condition.includes('MAG')) return 4;
+        if (condition.trim() === '') return 999; // Catch-all has lowest priority
+        return 5;
+    }
+
+    /**
+     * Generate the response for filter analysis
+     */
+    generateFilterAnalysisResponse(itemQuery, matchingLines, relevantLines) {
+        const itemDescription = this.getItemDescription(itemQuery);
+        
+        if (matchingLines.length === 0) {
+            const suggestedFilterLine = this.generateSuggestedFilterLine(itemQuery);
+            const message = `❌ No, this filter does NOT appear to show ${itemDescription}. No matching rules were found.<br><br>` +
+                          `<strong>To add ${itemDescription}, add this line:</strong><br>` +
+                          `<code>${suggestedFilterLine}</code>`;
+            
+            return {
+                message: message,
+                suggestions: [
+                    "Try asking about a different item type",
+                    "Check if the filter has catch-all rules",
+                    "Compare with another filter"
+                ],
+                explanation: `I analyzed the filter and found no ItemDisplay rules that specifically target ${itemDescription}.`
+            };
+        }
+
+        // Find the most relevant showing line (highest priority that shows items)
+        const showingLines = matchingLines.filter(line => line.shows);
+        const hidingLines = matchingLines.filter(line => !line.shows);
+
+        if (showingLines.length > 0) {
+            const bestShowLine = showingLines.sort((a, b) => a.priority - b.priority)[0];
+            
+            let message = `✅ Yes! This filter WILL show ${itemDescription}.<br><br>`;
+            message += `<strong>Matching rule (Line ${bestShowLine.lineNumber}):</strong><br><code>${bestShowLine.line}</code><br><br>`;
+            
+            if (showingLines.length > 1) {
+                message += `<strong>Additional showing rules found:</strong><br><br>`;
+                showingLines.slice(1).forEach(line => {
+                    message += `• Line ${line.lineNumber}: <code>${line.line}</code><br><br>`;
+                });
+            }
+            
+            if (hidingLines.length > 0) {
+                message += `<strong>Note:</strong> Found ${hidingLines.length} hiding rule(s) but the showing rule(s) take precedence.<br><br>`;
+                hidingLines.forEach(line => {
+                    message += `• Line ${line.lineNumber}: <code>${line.line}</code><br><br>`;
+                });
+            }
+
+            return {
+                message: message,
+                suggestions: [
+                    "Ask about other item types",
+                    "Compare with another filter",
+                    "Analyze the filter's other rules"
+                ],
+                explanation: `The filter contains specific rules that will display ${itemDescription} when they drop.`
+            };
+        } else {
+            let message = `❌ No, this filter will NOT show ${itemDescription}. Found ${hidingLines.length} rule(s) that hide these items.<br><br>`;
+            
+            message += `<strong>Hiding rules:</strong><br><br>`;
+            hidingLines.forEach(line => {
+                message += `• Line ${line.lineNumber}: <code>${line.line}</code><br><br>`;
+            });
+
+            return {
+                message: message,
+                suggestions: [
+                    "Ask about a different filter",
+                    "Check if there are exceptions in the filter",
+                    "Try a less restrictive filter"
+                ],
+                explanation: `All matching rules in this filter hide ${itemDescription} rather than display them.`
+            };
+        }
+    }
+
+    /**
+     * Get human-readable description of the requested items
+     */
+    getItemDescription(itemQuery) {
+        let description = '';
+        
+        // Handle specific items first (highest priority)
+        if (itemQuery.specific_items && itemQuery.specific_items.length > 0) {
+            if (itemQuery.qualities.length > 0) {
+                const qualityNames = {
+                    'UNI': 'unique',
+                    'SET': 'set',
+                    'RARE': 'rare',
+                    'MAG': 'magic',
+                    'NMAG': 'normal'
+                };
+                description += itemQuery.qualities.map(q => qualityNames[q]).join('/') + ' ';
+            }
+            
+            const itemNames = itemQuery.specific_items.map(item => 
+                item.name.replace(/_/g, ' ').toLowerCase()
+            ).join('/');
+            description += itemNames;
+            
+            return description.trim();
+        }
+        
+        // Fallback to general item types
+        if (itemQuery.qualities.length > 0) {
+            const qualityNames = {
+                'UNI': 'unique',
+                'SET': 'set',
+                'RARE': 'rare',
+                'MAG': 'magic',
+                'NMAG': 'normal'
+            };
+            description += itemQuery.qualities.map(q => qualityNames[q]).join('/') + ' ';
+        }
+
+        if (itemQuery.items.length > 0) {
+            const itemNames = {
+                'rin': 'rings',
+                'amu': 'amulets',
+                'RUNE': 'runes',
+                'GEM': 'gems',
+                'WEAPON': 'weapons',
+                'ARMOR': 'armor'
+            };
+            description += itemQuery.items.map(i => itemNames[i] || i).join('/');
+        }
+
+        return description.trim() || 'the requested items';
+    }
+
+    /**
+     * Generate a suggested filter line for items that aren't shown
+     */
+    generateSuggestedFilterLine(itemQuery) {
+        let condition = '';
+        let displayFormat = '';
+
+        // Build the condition based on the query
+        if (itemQuery.specific_items && itemQuery.specific_items.length > 0) {
+            // Handle specific items with their exact codes
+            const itemCodes = itemQuery.specific_items.map(item => item.code);
+            if (itemQuery.qualities && itemQuery.qualities.length > 0) {
+                condition = `${itemQuery.qualities.join(' OR ')} ${itemCodes.join(' OR ')}`;
+            } else {
+                condition = itemCodes.join(' OR ');
+            }
+            
+            // Create display format based on quality
+            if (itemQuery.qualities.includes('UNI')) {
+                displayFormat = '%GOLD%* %NAME% *';
+            } else if (itemQuery.qualities.includes('SET')) {
+                displayFormat = '%GREEN%+ %NAME% +';
+            } else if (itemQuery.qualities.includes('RARE')) {
+                displayFormat = '%YELLOW%~ %NAME% ~';
+            } else if (itemQuery.qualities.includes('MAG')) {
+                displayFormat = '%BLUE%◦ %NAME% ◦';
+            } else {
+                displayFormat = '%WHITE%%NAME%';
+            }
+        } else {
+            // Handle general item types
+            let itemPart = '';
+            if (itemQuery.items && itemQuery.items.length > 0) {
+                // Convert general item codes to filter conditions
+                const itemMap = {
+                    'rin': 'RIN',
+                    'amu': 'AMU',
+                    'RUNE': 'RUNE',
+                    'GEM': 'GEM',
+                    'WEAPON': 'WEAPON',
+                    'ARMOR': 'ARMOR'
+                };
+                itemPart = itemQuery.items.map(item => itemMap[item] || item.toUpperCase()).join(' OR ');
+            }
+
+            if (itemQuery.qualities && itemQuery.qualities.length > 0) {
+                const qualityPart = itemQuery.qualities.join(' OR ');
+                condition = itemPart ? `${qualityPart} ${itemPart}` : qualityPart;
+            } else {
+                condition = itemPart || 'ITEM_TYPE';
+            }
+
+            // Create display format based on quality
+            if (itemQuery.qualities.includes('UNI')) {
+                displayFormat = '%GOLD%* %NAME% *';
+            } else if (itemQuery.qualities.includes('SET')) {
+                displayFormat = '%GREEN%+ %NAME% +';
+            } else if (itemQuery.qualities.includes('RARE')) {
+                displayFormat = '%YELLOW%~ %NAME% ~';
+            } else if (itemQuery.qualities.includes('MAG')) {
+                displayFormat = '%BLUE%◦ %NAME% ◦';
+            } else {
+                displayFormat = '%WHITE%%NAME%';
+            }
+        }
+
+        return `ItemDisplay[${condition}]: ${displayFormat}`;
     }
 }
 

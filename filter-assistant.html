@@ -184,7 +184,7 @@
 <body style="background-color:black;" onload="initializeAssistant()">
     <div class="chat-container">
         <div class="chat-header">
-            <h1>🔥 FilterPhoenix AI Assistant Beta</h1>
+            <h1>FilterPhoenix AI Assistant Beta</h1>
             <p>Create and edit Path of Diablo item filters with natural language</p>
         </div>
         
@@ -200,15 +200,19 @@
         
         <div class="chat-messages" id="chatMessages">
             <div class="message system-message">
-                Welcome! I'm your FilterBird AI Assistant. I can help you create, modify, and understand Path of Diablo item filters.
+                Welcome! I'm your FilterPhoenix AI Assistant. I can help you create, modify, analyze, and understand Path of Diablo item filters.
                 <br><br>
                 Try asking me things like:
                 <ul style="text-align: left; display: inline-block;">
-                    <li>"Create a filter that shows only high runes and uniques"</li>
-                    <li>"Hide all normal and magic items except jewelry"</li>
-                    <li>"Make runes show with a bright border and sound"</li>
-                    <li>"Add a rule for showing 4+ socket items"</li>
+                    <li><strong>Filter Creation:</strong> "Create a filter that shows only high runes and uniques"</li>
+                    <li><strong>Filter Modification:</strong> "Add unique rings to this filter line: ItemDisplay[SET]: %GREEN%"</li>
+                    <li><strong>Filter Analysis:</strong> "Does this show war swords? ItemDisplay[UNI WEAPON]: %GOLD%"</li>
+                    <li><strong>Community Filter Comparison:</strong> "Will mack filter show unique shako?"</li>
+                    <li><strong>Specific Item Lookup:</strong> "Does josko filter show rare diadem?"</li>
+                    <li><strong>General Questions:</strong> "What does this filer line do?", followed by paste of a filter line</li>
                 </ul>
+                <br>
+                <em>I can analyze any of these community filters: mack, magfilter3, qord, arniml, kyv, pilla, josko, hornblower, rented</em>
             </div>
         </div>
         
