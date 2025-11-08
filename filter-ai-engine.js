@@ -5,11 +5,200 @@
  * Rising from the ashes of FilterBird to help users create better filters.
  */
 
+/**
+ * Enhanced Suggestion System
+ * Provides context-aware, categorized, and progressive suggestions
+ */
+class EnhancedSuggestionSystem {
+    constructor() {
+        this.userContext = {
+            hasFilter: false,
+            filterLength: 0,
+            lastAction: null,
+            skillLevel: 'beginner', // beginner, intermediate, advanced
+            completedActions: new Set(),
+            preferredCategories: []
+        };
+        
+        this.categories = {
+            beginner: {
+                label: "🌟 Getting Started",
+                description: "Perfect for new users learning filter basics",
+                suggestions: [
+                    "Create a filter to hide low quality items",
+                    "Show all unique items with special colors",
+                    "Hide normal and magic quality potions", 
+                    "Will mack filter show unique rings?",
+                    "Check what items hornblower filter displays",
+                    "Create a simple rune filter"
+                ]
+            },
+            intermediate: {
+                label: "🔧 Customization",
+                description: "Modify and enhance existing filters",
+                suggestions: [
+                    "Add items to an existing filter line",
+                    "Show check for a specific filter line",
+                    "Hide all normal quality armor",
+                    "Show rare amulets with yellow text",
+                    "Compare josko filter with kyv filter", 
+                    "Create color-coded gem display rules"
+                ]
+            },
+            advanced: {
+                label: "🎯 Expert Features", 
+                description: "Advanced techniques for filter optimization",
+                suggestions: [
+                    "Analyze arniml filter for unique items",
+                    "Create conditional filters with EnableIf blocks",
+                    "Build character-specific filter variations",
+                    "Optimize filter performance and readability",
+                    "Create level-progression filter rules",
+                    "Design endgame farming filters"
+                ]
+            },
+            analysis: {
+                label: "📊 Filter Analysis",
+                description: "Deep analysis of community filters and items",
+                suggestions: [
+                    "Does pilla filter show Shako?",
+                    "Will RenTed filter display War Traveler?", 
+                    "Check if qord filter shows Raven Frost",
+                    "Compare all community filters for unique rings",
+                    "Analyze filter coverage for high runes",
+                    "Find which filters show specific base items"
+                ]
+            }
+        };
+        
+        this.followUpMap = {
+            'filter_creation': [
+                "Test your new filter with specific items",
+                "Add items to an existing filter line",
+                "Compare your filter with community filters",
+                "Show check for a specific filter line"
+            ],
+            'community_analysis': [
+                "Create a filter based on these results",
+                "Analyze another community filter",
+                "Check specific items in this filter",
+                "Compare with a different filter style"
+            ],
+            'item_lookup': [
+                "Check this item in other community filters", 
+                "Create a filter line for similar items",
+                "Analyze what makes this item valuable",
+                "Find filters optimized for this item type"
+            ],
+            'filter_modification': [
+                "Show check to verify your changes",
+                "Add more items to this filter line", 
+                "Create additional filter lines",
+                "Test the modified filter thoroughly"
+            ]
+        };
+    }
+    
+    // Get contextual suggestions based on current state
+    getContextualSuggestions(context = {}) {
+        this.updateContext(context);
+        
+        if (!this.userContext.hasFilter) {
+            return this.categories.beginner.suggestions.slice(0, 4);
+        }
+        
+        if (this.userContext.filterLength < 5) {
+            return [
+                ...this.categories.beginner.suggestions.slice(-2),
+                ...this.categories.intermediate.suggestions.slice(0, 2)
+            ];
+        }
+        
+        if (this.userContext.lastAction === 'community_analysis') {
+            return [
+                ...this.categories.analysis.suggestions.slice(0, 3),
+                "Create a filter based on analysis results"
+            ];
+        }
+        
+        // Advanced suggestions for established users
+        return [
+            ...this.categories.intermediate.suggestions.slice(0, 2),
+            ...this.categories.advanced.suggestions.slice(0, 2)
+        ];
+    }
+    
+    // Get all categories for tutorial mode
+    getAllCategories() {
+        return this.categories;
+    }
+    
+    // Get follow-up suggestions after completing an action
+    getFollowUpSuggestions(completedAction, context = {}) {
+        this.userContext.completedActions.add(completedAction);
+        this.updateSkillLevel();
+        
+        return this.followUpMap[completedAction] || this.getContextualSuggestions(context);
+    }
+    
+    // Update user context
+    updateContext(context) {
+        Object.assign(this.userContext, context);
+        this.updateSkillLevel();
+    }
+    
+    // Automatically update skill level based on completed actions
+    updateSkillLevel() {
+        const completedCount = this.userContext.completedActions.size;
+        
+        if (completedCount < 3) {
+            this.userContext.skillLevel = 'beginner';
+        } else if (completedCount < 8) {
+            this.userContext.skillLevel = 'intermediate';
+        } else {
+            this.userContext.skillLevel = 'advanced';
+        }
+    }
+    
+    // Get progressive tutorial suggestions
+    getProgressiveSuggestions() {
+        const { skillLevel, completedActions } = this.userContext;
+        
+        // Filter out already completed similar actions
+        const availableSuggestions = this.categories[skillLevel].suggestions.filter(suggestion => {
+            return !this.isActionCompleted(suggestion);
+        });
+        
+        return availableSuggestions.slice(0, 4);
+    }
+    
+    // Check if a similar action has been completed
+    isActionCompleted(suggestion) {
+        const actionType = this.categorizeAction(suggestion);
+        return this.userContext.completedActions.has(actionType);
+    }
+    
+    // Categorize action type from suggestion text
+    categorizeAction(suggestion) {
+        if (suggestion.includes('filter show') || suggestion.includes('filter display')) {
+            return 'community_analysis';
+        }
+        if (suggestion.includes('Create') || suggestion.includes('hide') || suggestion.includes('Show')) {
+            return 'filter_creation';
+        }
+        if (suggestion.includes('Add items') || suggestion.includes('check')) {
+            return 'filter_modification';
+        }
+        return 'general';
+    }
+}
+
 class FilterPhoenixAI {
     constructor() {
         this.knowledgeBase = this.initializeKnowledgeBase();
         this.templates = this.initializeTemplates();
         this.conversationContext = [];
+        this.suggestionSystem = new EnhancedSuggestionSystem();
     }
 
     /**
@@ -530,35 +719,86 @@ class FilterPhoenixAI {
     }
 
     /**
+     * Get categorized suggestions for tutorial/exploration mode
+     * Public method for HTML interface integration
+     */
+    getCategorizedSuggestions() {
+        return this.suggestionSystem.getAllCategories();
+    }
+
+    /**
+     * Get contextual suggestions based on current state
+     * Public method for dynamic suggestion updates
+     */
+    getContextualSuggestions(context = {}) {
+        return this.suggestionSystem.getContextualSuggestions(context);
+    }
+
+    /**
+     * Update user context for better suggestions
+     * Public method for tracking user progress
+     */
+    updateUserContext(context) {
+        this.suggestionSystem.updateContext(context);
+    }
+
+    /**
+     * Get user progress and achievements
+     * Public method for tracking learning journey
+     */
+    getUserProgress() {
+        const context = this.suggestionSystem.userContext;
+        const totalActions = Object.keys(this.suggestionSystem.followUpMap).length;
+        const completedActions = context.completedActions.size;
+        const progressPercentage = Math.round((completedActions / totalActions) * 100);
+        
+        const achievements = [];
+        if (completedActions >= 1) achievements.push("🎯 First Steps");
+        if (completedActions >= 3) achievements.push("🔧 Filter Creator");
+        if (completedActions >= 5) achievements.push("📊 Filter Analyst");
+        if (completedActions >= 8) achievements.push("🏆 FilterPhoenix Expert");
+        
+        return {
+            skillLevel: context.skillLevel,
+            completedActions: Array.from(context.completedActions),
+            progressPercentage,
+            achievements,
+            nextSuggestion: this.suggestionSystem.getProgressiveSuggestions()[0]
+        };
+    }
+
+    /**
      * Handle create filter requests
      */
     handleCreateRequest(entities, modifiers) {
         if (entities.itemTypes.length === 0) {
             // Create basic filter
+            const contextualSuggestions = this.suggestionSystem.getContextualSuggestions({
+                hasFilter: true,
+                filterLength: 5,
+                lastAction: 'filter_creation'
+            });
+            
             return {
                 message: "I'll create a basic filter for you! This will show important items while hiding common junk.",
                 filter: this.ensureProperFilterTermination(this.templates.basic.rules.join('\n')),
-                suggestions: [
-                    "Customize rune display colors",
-                    "Add socket-based filtering", 
-                    "Hide specific item types",
-                    "Add sound notifications"
-                ]
+                suggestions: contextualSuggestions
             };
         }
 
         // Create specific filter based on entities
         // Check for itemstyles request
         if (entities.itemTypes.includes('itemstyles') || entities.itemTypes.includes('advanced')) {
+            const advancedSuggestions = this.suggestionSystem.getFollowUpSuggestions('filter_creation', {
+                hasFilter: true,
+                filterLength: 15,
+                skillLevel: 'advanced'
+            });
+            
             return {
                 message: "I'll create an advanced filter with comprehensive itemstyles! This includes map icons, borders, background colors, and notification sounds.",
                 filter: this.ensureProperFilterTermination(this.templates.itemstyles.rules.join('\n')),
-                suggestions: [
-                    "Customize map icon colors",
-                    "Add more notification sounds",
-                    "Create custom style definitions",
-                    "Fine-tune border and background colors"
-                ]
+                suggestions: advancedSuggestions
             };
         }
         
@@ -568,10 +808,10 @@ class FilterPhoenixAI {
                 message: "I'll create a currency filter showing valuable trading items like perfect gems, orb of corruption, orb of alteration, and runes with enhanced itemstyles!",
                 filter: this.ensureProperFilterTermination(this.templates.currency.rules.join('\n')),
                 suggestions: [
-                    "Add gem quality filtering",
-                    "Customize rune display",
-                    "Include additional orbs",
-                    "Add hiding rules for junk"
+                    "Will this filter show perfect gems?",
+                    "Does qord filter show magic rings?",
+                    "Add unique amulets to this filter",
+                    "Create a strict endgame filter"
                 ]
             };
         }
@@ -581,10 +821,10 @@ class FilterPhoenixAI {
                 message: "I'll create a comprehensive rune filter with different tiers and advanced itemstyles including map icons and notification sounds!",
                 filter: this.ensureProperFilterTermination(this.templates.runes.rules.join('\n')),
                 suggestions: [
-                    "Add different notification sounds",
-                    "Customize color schemes",
-                    "Add currency item rules",
-                    "Include gem filtering"
+                    "Will mack filter show high runes?",
+                    "Does this show Ber rune? ItemDisplay[r30]: %NAME%",
+                    "Compare qord vs kyv filter for runes",
+                    "Create a gem and currency filter"
                 ]
             };
         }
@@ -595,10 +835,10 @@ class FilterPhoenixAI {
             message: `I've created a custom filter based on your request for ${entities.itemTypes.join(', ')}!`,
             filter: this.ensureProperFilterTermination(rules.join('\n')),
             suggestions: [
-                "Add hiding rules for junk items",
-                "Customize display colors",
-                "Add more item categories",
-                "Include socket filtering"
+                "Will this filter show unique jewelry?",
+                "Does josko filter show rare amulets?",
+                "Explain this filter line",
+                "Add set items to this filter"
             ]
         };
     }
@@ -614,10 +854,10 @@ class FilterPhoenixAI {
             message: `I've added hiding rules to remove ${entities.itemTypes.join(', ')} from your display!`,
             filter: this.ensureProperFilterTermination(newFilter),
             suggestions: [
-                "Add exceptions for valuable items",
-                "Include level-based hiding",
-                "Add ethereal item exceptions",
-                "Hide more item categories"
+                "Will this hide normal weapons?",
+                "Does qord filter show magic weapons?",
+                "Create a strict endgame filter",
+                "Add unique items to show exceptions"
             ]
         };
     }
@@ -633,10 +873,10 @@ class FilterPhoenixAI {
             message: `I've added display rules to highlight ${entities.itemTypes.join(', ')}!`,
             filter: this.ensureProperFilterTermination(newFilter),
             suggestions: [
-                "Customize colors and effects",
-                "Add notification sounds",
-                "Include quality-based filtering",
-                "Add more display categories"
+                "Will this show unique rings?",
+                "Does mack filter show magic jewelry?",
+                "Explain this filter line",
+                "Create a comprehensive jewelry filter"
             ]
         };
     }
@@ -679,7 +919,12 @@ class FilterPhoenixAI {
                 return {
                     message: `I couldn't find any items matching "${itemName}". Could you check the spelling or try a different name?`,
                     filter: '',
-                    suggestions: [`Try searching for variations of "${itemName}"`],
+                    suggestions: [
+                        'Try "unique war sword" or "rare rings"',
+                        'Ask "will mack filter show unique jewelry?"',
+                        'Explain this filter: ItemDisplay[UNI]: %NAME%',
+                        'Create a filter for specific items'
+                    ],
                     explanation: 'Note: Make sure the item database is loaded properly.'
                 };
             }
@@ -1051,9 +1296,10 @@ class FilterPhoenixAI {
             message: message,
             filter: result.newFilterLine, // Add the filter to the response so it appears in the preview
             suggestions: [
-                "Add more items to this line",
+                "Does this show unique jewelry?",
+                "Will mack filter show rare amulets?",
                 "Explain this filter line",
-                "Customize colors and styling"
+                "Add set items to this filter line"
             ]
         };
     }
@@ -2381,9 +2627,10 @@ class FilterPhoenixAI {
             return {
                 message: message,
                 suggestions: [
-                    "Try asking about a different item type",
-                    "Check if the filter has catch-all rules",
-                    "Compare with another filter"
+                    "Will mack filter show unique rings?",
+                    "Does this show war sword? ItemDisplay[wsd UNI]: %NAME%",
+                    "Try a different community filter",
+                    "Create a filter that shows these items"
                 ],
                 explanation: `I analyzed the filter and found no ItemDisplay rules that specifically target ${itemDescription}.`
             };
@@ -2429,9 +2676,10 @@ class FilterPhoenixAI {
             return {
                 message: message,
                 suggestions: [
-                    "Ask about other item types",
-                    "Compare with another filter",
-                    "Analyze the filter's other rules"
+                    "Does kyv filter show unique jewelry?",
+                    "Will this show rare diadem? ItemDisplay[RARE usk]: %NAME%",
+                    "Compare mack vs qord filter for uniques",
+                    "Create a filter that shows these items"
                 ],
                 explanation: `The filter contains specific rules that will display ${itemDescription} when they drop.`
             };
@@ -2450,9 +2698,10 @@ class FilterPhoenixAI {
             return {
                 message: message,
                 suggestions: [
-                    "Ask about a different filter",
-                    "Check if there are exceptions in the filter",
-                    "Try a less restrictive filter"
+                    "Will kyv filter show unique jewelry?",
+                    "Try a more permissive community filter",
+                    "Does this show magic rings? ItemDisplay[MAG rin]: %NAME%",
+                    "Create a custom filter for these items"
                 ],
                 explanation: `All matching rules in this filter hide ${itemDescription} rather than display them.`
             };

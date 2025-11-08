@@ -173,6 +173,166 @@
             background-color: #5a5a5a;
         }
         
+        .categorized-suggestions {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #444;
+        }
+        
+        .categorized-suggestions h3 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+        
+        .suggestion-category {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #555;
+        }
+        
+        .suggestion-category h4 {
+            color: #fff;
+            margin: 0 0 8px 0;
+            font-size: 16px;
+        }
+        
+        .category-description {
+            color: #bbb;
+            font-size: 13px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        
+        .category-suggestions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 8px;
+        }
+        
+        .category-suggestion-item {
+            background-color: #4a4a4a;
+            border: 1px solid #666;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.2s ease;
+            font-size: 13px;
+        }
+        
+        .category-suggestion-item:hover {
+            background-color: #5a5a5a;
+            border-color: #777;
+            transform: translateY(-1px);
+        }
+        
+        .progress-display {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #444;
+        }
+        
+        .progress-display h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .skill-level {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .skill-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .skill-beginner { background-color: #4CAF50; }
+        .skill-intermediate { background-color: #2196F3; }
+        .skill-advanced { background-color: #9C27B0; }
+        
+        .progress-text {
+            color: #fff;
+            font-size: 14px;
+        }
+        
+        .progress-bar {
+            background-color: #444;
+            border-radius: 10px;
+            height: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #2196F3, #9C27B0);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .achievements {
+            margin: 15px 0;
+        }
+        
+        .achievements h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .achievement-badge {
+            display: inline-block;
+            background-color: #FFD700;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 2px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .completed-actions, .next-suggestion {
+            margin: 15px 0;
+        }
+        
+        .completed-actions h4, .next-suggestion h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .completed-action {
+            background-color: #4a4a4a;
+            color: #fff;
+            padding: 6px 10px;
+            margin: 3px;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 12px;
+            text-transform: capitalize;
+        }
+        
+        .no-actions {
+            color: #bbb;
+            font-style: italic;
+            margin: 0;
+        }
+        
         .explanation {
             font-size: 12px;
             color: #ccc;
@@ -192,6 +352,8 @@
             <button class="quick-action-btn" onclick="quickAction('create-new')">🆕 Create New Filter</button>
             <button class="quick-action-btn" onclick="quickAction('hide-junk')">🗑️ Hide Junk Items</button>
             <button class="quick-action-btn" onclick="quickAction('highlight-runes')">✨ Highlight Runes</button>
+            <button class="quick-action-btn" onclick="showCategorizedSuggestions()">📚 Browse Categories</button>
+            <button class="quick-action-btn" onclick="showUserProgress()">📈 My Progress</button>
             <button class="quick-action-btn" onclick="quickAction('show-uniques')">🌟 Show Uniques</button>
             <button class="quick-action-btn" onclick="quickAction('currency-items')">💰 Currency Items</button>
             <button class="quick-action-btn" onclick="quickAction('endgame-filter')">⚔️ Endgame Filter</button>
@@ -582,6 +744,96 @@
                 <strong>💡 Suggestions for next steps:</strong>
                 ${suggestionsHtml}
             </div>`);
+        }
+        
+        // Show categorized suggestions for exploration
+        function showCategorizedSuggestions() {
+            if (!window.filterPhoenixAI) return;
+            
+            const categories = window.filterPhoenixAI.getCategorizedSuggestions();
+            
+            let categoryHtml = '<div class="categorized-suggestions">';
+            categoryHtml += '<h3>🗂️ Explore FilterPhoenix Features</h3>';
+            
+            for (const [categoryId, category] of Object.entries(categories)) {
+                categoryHtml += `
+                    <div class="suggestion-category">
+                        <h4>${category.label}</h4>
+                        <p class="category-description">${category.description}</p>
+                        <div class="category-suggestions">
+                            ${category.suggestions.map(suggestion => 
+                                `<div class="category-suggestion-item" onclick="processUserRequest('${suggestion}')">${suggestion}</div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            categoryHtml += '</div>';
+            
+            addMessage('assistant', categoryHtml);
+        }
+        
+        // Show user progress and achievements
+        function showUserProgress() {
+            if (!window.filterPhoenixAI) {
+                addMessage('assistant', `
+                    <div class="progress-display">
+                        <h3>🚀 Welcome to FilterPhoenix!</h3>
+                        <p>Start creating filters to track your progress and unlock achievements!</p>
+                        <div class="next-suggestion">
+                            <strong>💡 Try this:</strong>
+                            <div class="category-suggestion-item" onclick="processUserRequest('Create a filter to hide low quality items')">
+                                Create a filter to hide low quality items
+                            </div>
+                        </div>
+                    </div>
+                `);
+                return;
+            }
+            
+            const progress = window.filterPhoenixAI.getUserProgress();
+            
+            let progressHtml = `
+                <div class="progress-display">
+                    <h3>📈 Your FilterPhoenix Journey</h3>
+                    
+                    <div class="skill-level">
+                        <span class="skill-badge skill-${progress.skillLevel}">${progress.skillLevel.toUpperCase()}</span>
+                        <span class="progress-text">${progress.progressPercentage}% Complete</span>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progress.progressPercentage}%"></div>
+                    </div>
+                    
+                    ${progress.achievements.length > 0 ? `
+                        <div class="achievements">
+                            <h4>🏆 Achievements Unlocked:</h4>
+                            ${progress.achievements.map(achievement => `<span class="achievement-badge">${achievement}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="completed-actions">
+                        <h4>✅ Actions Completed (${progress.completedActions.length}):</h4>
+                        ${progress.completedActions.length > 0 ? 
+                            progress.completedActions.map(action => `<div class="completed-action">${action.replace('_', ' ')}</div>`).join('') :
+                            '<p class="no-actions">No actions completed yet - start exploring!</p>'
+                        }
+                    </div>
+                    
+                    ${progress.nextSuggestion ? `
+                        <div class="next-suggestion">
+                            <h4>🎯 Recommended Next Step:</h4>
+                            <div class="category-suggestion-item" onclick="processUserRequest('${progress.nextSuggestion}')">
+                                ${progress.nextSuggestion}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            addMessage('assistant', progressHtml);
         }
         
         // Populate test items dropdown
