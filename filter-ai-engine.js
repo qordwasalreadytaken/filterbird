@@ -780,7 +780,7 @@ class FilterPhoenixAI {
             });
             
             return {
-                message: "I'll create a basic filter for you! This will show important items while hiding common junk.",
+                message: "Creating a basic filter! This will show important items while hiding common junk.",
                 filter: this.ensureProperFilterTermination(this.templates.basic.rules.join('\n')),
                 suggestions: contextualSuggestions
             };
@@ -796,7 +796,7 @@ class FilterPhoenixAI {
             });
             
             return {
-                message: "I'll create an advanced filter with comprehensive itemstyles! This includes map icons, borders, background colors, and notification sounds.",
+                message: "Creating an advanced filter with comprehensive itemstyles! This includes map icons, borders, background colors, and notification sounds.",
                 filter: this.ensureProperFilterTermination(this.templates.itemstyles.rules.join('\n')),
                 suggestions: advancedSuggestions
             };
@@ -805,7 +805,7 @@ class FilterPhoenixAI {
         // Check for currency first (more specific than individual items)
         if (entities.itemTypes.includes('currency')) {
             return {
-                message: "I'll create a currency filter showing valuable trading items like perfect gems, orb of corruption, orb of alteration, and runes with enhanced itemstyles!",
+                message: "Creating a currency filter showing valuable trading items like perfect gems, orb of corruption, orb of alteration, and runes with enhanced itemstyles!",
                 filter: this.ensureProperFilterTermination(this.templates.currency.rules.join('\n')),
                 suggestions: [
                     "Will this filter show perfect gems?",
@@ -818,7 +818,7 @@ class FilterPhoenixAI {
         
         if (entities.itemTypes.includes('runes')) {
             return {
-                message: "I'll create a comprehensive rune filter with different tiers and advanced itemstyles including map icons and notification sounds!",
+                message: "Creating a comprehensive rune filter with different tiers and advanced itemstyles including map icons and notification sounds!",
                 filter: this.ensureProperFilterTermination(this.templates.runes.rules.join('\n')),
                 suggestions: [
                     "Will mack filter show high runes?",
@@ -832,7 +832,7 @@ class FilterPhoenixAI {
         // Generate custom filter based on entities
         const rules = this.generateCustomRules(entities, modifiers);
         return {
-            message: `I've created a custom filter based on your request for ${entities.itemTypes.join(', ')}!`,
+            message: `Created a custom filter based on your request for ${entities.itemTypes.join(', ')}!`,
             filter: this.ensureProperFilterTermination(rules.join('\n')),
             suggestions: [
                 "Will this filter show unique jewelry?",
@@ -851,7 +851,7 @@ class FilterPhoenixAI {
         const newFilter = currentFilter ? currentFilter + '\n\n' + hideRules.join('\n') : hideRules.join('\n');
         
         return {
-            message: `I've added hiding rules to remove ${entities.itemTypes.join(', ')} from your display!`,
+            message: `Added hiding rules to remove ${entities.itemTypes.join(', ')} from display!`,
             filter: this.ensureProperFilterTermination(newFilter),
             suggestions: [
                 "Will this hide normal weapons?",
@@ -870,7 +870,7 @@ class FilterPhoenixAI {
         const newFilter = currentFilter ? currentFilter + '\n\n' + showRules.join('\n') : showRules.join('\n');
         
         return {
-            message: `I've added display rules to highlight ${entities.itemTypes.join(', ')}!`,
+            message: `Added display rules to highlight ${entities.itemTypes.join(', ')}!`,
             filter: this.ensureProperFilterTermination(newFilter),
             suggestions: [
                 "Will this show unique rings?",
@@ -890,7 +890,7 @@ class FilterPhoenixAI {
             const filterLineMatch = input.match(/ItemDisplay\[[^\]]*\]:[^\n]*/);
             if (!filterLineMatch) {
                 return {
-                    message: "I couldn't find a filter line in your question. Please include the full ItemDisplay line you want me to check.",
+                    message: "Couldn't find a filter line in your question. Please include the full ItemDisplay line to check.",
                     filter: '',
                     suggestions: ['Try: "will this show war sword? ItemDisplay[wsd UNI]: %NAME%"'],
                     explanation: ''
@@ -903,7 +903,7 @@ class FilterPhoenixAI {
             const itemNameMatch = input.match(/(?:show|display)\s+([^?]+)\?/i);
             if (!itemNameMatch) {
                 return {
-                    message: "I couldn't identify which item you're asking about. Please specify the item name in your question.",
+                    message: "Couldn't identify which item you're asking about. Please specify the item name in your question.",
                     filter: '',
                     suggestions: ['Try: "will this show war sword? ItemDisplay[...]: ..."'],
                     explanation: ''
@@ -917,7 +917,7 @@ class FilterPhoenixAI {
             
             if (matchingItems.length === 0) {
                 return {
-                    message: `I couldn't find any items matching "${itemName}". Could you check the spelling or try a different name?`,
+                    message: `Couldn't find any items matching "${itemName}". Could you check the spelling or try a different name?`,
                     filter: '',
                     suggestions: [
                         'Try "unique war sword" or "rare rings"',
@@ -958,7 +958,7 @@ class FilterPhoenixAI {
             const filterNameMatch = input.match(/(?:will|does|would)\s+([a-zA-Z0-9-]+)(?:'s)?\s+filter/i);
             if (!filterNameMatch) {
                 return {
-                    message: "I couldn't identify which filter you're asking about. Please specify the filter name (e.g., 'mack', 'pilla', 'arniml').",
+                    message: "Couldn't identify which filter you're asking about. Please specify the filter name (e.g., 'mack', 'pilla', 'arniml').",
                     filter: '',
                     suggestions: ['Try: "will macks filter show unique rings?"', 'Available filters: mack, magfilter3, qord, arniml, kyv, pilla, josko'],
                     explanation: ''
@@ -972,7 +972,7 @@ class FilterPhoenixAI {
             if ((!itemQuery.items || itemQuery.items.length === 0) && 
                 (!itemQuery.specific_items || itemQuery.specific_items.length === 0)) {
                 return {
-                    message: "I couldn't identify what items you're asking about. Please specify item types (e.g., 'unique rings', 'rare amulets', 'magic jewelry') or specific items (e.g., 'unique shako', 'rare war pike').",
+                    message: "Couldn't identify what items you're asking about. Please specify item types (e.g., 'unique rings', 'rare amulets', 'magic jewelry') or specific items (e.g., 'unique shako', 'rare war pike').",
                     filter: '',
                     suggestions: ['Try: "will macks filter show unique rings?"', 'Try: "does qords filter show unique shako?"'],
                     explanation: ''
@@ -984,7 +984,7 @@ class FilterPhoenixAI {
             if (!filterContent) {
                 const availableFilters = ['mack', 'magfilter3', 'qord', 'arniml', 'kyv', 'pilla', 'josko-sp', 'hornblower-pandemonium', 'rented'];
                 return {
-                    message: `I couldn't find a filter named "${filterName}". Available filters: ${availableFilters.join(', ')}`,
+                    message: `Couldn't find a filter named "${filterName}". Available filters: ${availableFilters.join(', ')}`,
                     filter: '',
                     suggestions: [`Try: "will ${availableFilters[0]} filter show ${itemQuery.items[0]}?"`],
                     explanation: ''
@@ -1258,7 +1258,7 @@ class FilterPhoenixAI {
         const foundItems = result.analyzedItems.filter(item => item.found);
         if (foundItems.length === 0) {
             return {
-                message: `Sorry, I couldn't find item codes for: ${items.join(', ')}`,
+                message: `Couldn't find item codes for: ${items.join(', ')}`,
                 suggestions: ["Try different item names", "Check spelling"]
             };
         }
@@ -2294,7 +2294,7 @@ class FilterPhoenixAI {
         const conditionMatch = filterLine.match(/ItemDisplay\[(.*?)\]:/);
         if (!conditionMatch) {
             return {
-                message: "I couldn't parse the filter line condition.",
+                message: "Couldn't parse the filter line condition.",
                 suggestions: ["Check the filter line syntax"],
                 explanation: "The filter line should be in format: ItemDisplay[condition]: display"
             };
