@@ -2425,6 +2425,181 @@ class FilterPhoenixAI {
     }
 
     /**
+     * Follow CONTINUE chains to build complete display output
+     */
+    followContinueChain(lines, startLineIndex) {
+        const chain = [];
+        let currentIndex = startLineIndex;
+        
+        while (currentIndex < lines.length) {
+            const line = lines[currentIndex].trim();
+            
+            if (!line.startsWith('ItemDisplay[')) {
+                break;
+            }
+            
+            const displayMatch = line.match(/ItemDisplay\[.*?\]:\s*(.*)$/);
+            if (!displayMatch) break;
+            
+            const displayPart = displayMatch[1].trim();
+            const hasContinue = displayPart.toUpperCase().includes('CONTINUE');
+            
+            chain.push({
+                lineNumber: currentIndex + 1,
+                line: line,
+                displayPart: displayPart.replace(/\s*CONTINUE\s*$/i, '').trim(),
+                hasContinue: hasContinue
+            });
+            
+            if (!hasContinue) {
+                break;
+            }
+            
+            currentIndex++;
+        }
+        
+        return chain;
+    }
+
+    /**
+     * Analyze filter structure to find smart insertion points
+     */
+    analyzeFilterStructure(filterContent) {
+        const lines = filterContent.split('\n');
+        const sections = [];
+        let currentSection = null;
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const trimmedLine = line.trim();
+            
+            // Detect section headers (comments with special markers)
+            if (trimmedLine.startsWith('//') && trimmedLine.length > 10) {
+                const commentText = trimmedLine.substring(2).trim();
+                
+                // Look for section markers
+                if (commentText.includes('===') || 
+                    commentText.includes('---') || 
+                    commentText.match(/^[A-Z\s]{10,}$/) ||
+                    commentText.toLowerCase().includes('rune') ||
+                    commentText.toLowerCase().includes('unique') ||
+                    commentText.toLowerCase().includes('rare') ||
+                    commentText.toLowerCase().includes('magic') ||
+                    commentText.toLowerCase().includes('weapon') ||
+                    commentText.toLowerCase().includes('armor') ||
+                    commentText.toLowerCase().includes('jewelry') ||
+                    commentText.toLowerCase().includes('gem')) {
+                    
+                    if (currentSection) {
+                        sections.push(currentSection);
+                    }
+                    
+                    currentSection = {
+                        name: commentText,
+                        startLine: i + 1,
+                        endLine: i + 1,
+                        type: this.detectSectionType(commentText),
+                        itemDisplayCount: 0
+                    };
+                }
+            }
+            
+            // Track ItemDisplay lines in current section
+            if (currentSection && trimmedLine.startsWith('ItemDisplay[')) {
+                currentSection.endLine = i + 1;
+                currentSection.itemDisplayCount++;
+            }
+        }
+        
+        if (currentSection) {
+            sections.push(currentSection);
+        }
+        
+        return sections;
+    }
+
+    /**
+     * Detect section type from comment text
+     */
+    detectSectionType(commentText) {
+        const lower = commentText.toLowerCase();
+        
+        if (lower.includes('rune')) return 'runes';
+        if (lower.includes('unique')) return 'uniques';
+        if (lower.includes('set')) return 'sets';
+        if (lower.includes('rare')) return 'rares';
+        if (lower.includes('magic')) return 'magic';
+        if (lower.includes('weapon')) return 'weapons';
+        if (lower.includes('armor')) return 'armors';
+        if (lower.includes('jewelry') || lower.includes('ring') || lower.includes('amulet')) return 'jewelry';
+        if (lower.includes('gem')) return 'gems';
+        if (lower.includes('currency') || lower.includes('orb')) return 'currency';
+        
+        return 'general';
+    }
+
+    /**
+     * Find smart insertion points for new filter lines
+     */
+    findInsertionPoints(filterContent, itemQuery, sections) {
+        const suggestions = [];
+        
+        // Determine what kind of item we're adding
+        const isRune = itemQuery.items.some(item => item.toLowerCase().includes('rune'));
+        const isGem = itemQuery.items.some(item => item.toLowerCase().includes('gem'));
+        const isJewelry = itemQuery.items.some(item => ['rin', 'amu', 'ring', 'amulet'].includes(item.toLowerCase()));
+        const hasQuality = itemQuery.qualities.length > 0;
+        const quality = itemQuery.qualities[0] || '';
+        
+        // Find relevant sections
+        for (const section of sections) {
+            let relevance = 0;
+            const reasons = [];
+            
+            // Match by quality
+            if (hasQuality && section.type === quality.toLowerCase() + 's') {
+                relevance += 50;
+                reasons.push(`matches quality (${quality})`);
+            }
+            
+            // Match by item type
+            if (isRune && section.type === 'runes') {
+                relevance += 100;
+                reasons.push('rune section');
+            }
+            if (isGem && section.type === 'gems') {
+                relevance += 100;
+                reasons.push('gem section');
+            }
+            if (isJewelry && section.type === 'jewelry') {
+                relevance += 80;
+                reasons.push('jewelry section');
+            }
+            
+            // Match by general item category
+            if (!isRune && !isGem && section.type === quality.toLowerCase() + 's') {
+                relevance += 60;
+                reasons.push(`${quality} items section`);
+            }
+            
+            if (relevance > 0) {
+                suggestions.push({
+                    lineNumber: section.endLine,
+                    sectionName: section.name,
+                    relevance: relevance,
+                    reasons: reasons,
+                    position: 'end'
+                });
+            }
+        }
+        
+        // Sort by relevance
+        suggestions.sort((a, b) => b.relevance - a.relevance);
+        
+        return suggestions;
+    }
+
+    /**
      * Analyze if a filter shows specific items
      */
     analyzeFilterForItems(filterContent, itemQuery) {
@@ -2508,7 +2683,7 @@ class FilterPhoenixAI {
             }
         }
 
-        return this.generateFilterAnalysisResponse(itemQuery, matchingLines, relevantLines);
+        return this.generateFilterAnalysisResponse(itemQuery, matchingLines, relevantLines, filterContent, lines);
     }
 
     /**
@@ -2615,14 +2790,31 @@ class FilterPhoenixAI {
     /**
      * Generate the response for filter analysis
      */
-    generateFilterAnalysisResponse(itemQuery, matchingLines, relevantLines) {
+    generateFilterAnalysisResponse(itemQuery, matchingLines, relevantLines, filterContent, lines) {
         const itemDescription = this.getItemDescription(itemQuery);
         
         if (matchingLines.length === 0) {
+            // Analyze filter structure for smart insertion suggestions
+            const sections = this.analyzeFilterStructure(filterContent);
+            const insertionPoints = this.findInsertionPoints(filterContent, itemQuery, sections);
             const suggestedFilterLine = this.generateSuggestedFilterLine(itemQuery);
-            const message = `❌ No, this filter does NOT appear to show ${itemDescription}. No matching rules were found.<br><br>` +
-                          `<strong>To add ${itemDescription}, add this line:</strong><br>` +
-                          `<code>${suggestedFilterLine}</code>`;
+            
+            let message = `❌ No, this filter does NOT show ${itemDescription}.<br><br>`;
+            message += `<strong>💡 Suggested filter line to add:</strong><br><code>${suggestedFilterLine}</code><br><br>`;
+            
+            if (insertionPoints.length > 0) {
+                message += `<strong>📍 Recommended insertion points:</strong><br>`;
+                
+                for (let i = 0; i < Math.min(3, insertionPoints.length); i++) {
+                    const point = insertionPoints[i];
+                    const priority = i === 0 ? '⭐ Best' : i === 1 ? 'Good' : 'Alternative';
+                    message += `<br><strong>${priority}:</strong> After line ${point.lineNumber}`;
+                    message += ` <em>(${point.sectionName})</em>`;
+                    message += `<br>Reason: ${point.reasons.join(', ')}<br>`;
+                }
+            } else {
+                message += `<strong>💡 Suggestion:</strong> Add this line near similar ${itemQuery.qualities.join('/')} items in the filter.`;
+            }
             
             return {
                 message: message,
@@ -2632,7 +2824,7 @@ class FilterPhoenixAI {
                     "Try a different community filter",
                     "Create a filter that shows these items"
                 ],
-                explanation: `I analyzed the filter and found no ItemDisplay rules that specifically target ${itemDescription}.`
+                explanation: `Analyzed the filter structure and found no rules targeting ${itemDescription}. Provided smart insertion points based on filter organization.`
             };
         }
 
@@ -2643,16 +2835,33 @@ class FilterPhoenixAI {
         if (showingLines.length > 0) {
             const bestShowLine = showingLines.sort((a, b) => a.priority - b.priority)[0];
             
+            // Follow CONTINUE chain to build complete display
+            const continueChain = this.followContinueChain(lines, bestShowLine.lineNumber - 1);
+            
             let message = `✅ Yes! This filter WILL show ${itemDescription}.<br><br>`;
-            message += `<strong>Matching rule (Line ${bestShowLine.lineNumber}):</strong><br><code>${bestShowLine.line}</code><br><br>`;
+            
+            if (continueChain.length > 1) {
+                message += `<strong>🔗 Complete display chain:</strong><br>`;
+                let fullDisplay = '';
+                
+                for (const chainItem of continueChain) {
+                    message += `<br>Line ${chainItem.lineNumber}: <code>${chainItem.line}</code>`;
+                    fullDisplay += chainItem.displayPart + ' ';
+                }
+                
+                message += `<br><br><strong>Final display result:</strong><br><div style="background-color:#2a2a2a; padding:10px; border-radius:4px; margin:5px 0;">${fullDisplay.trim()}</div>`;
+            } else {
+                message += `<strong>Matching rule (Line ${bestShowLine.lineNumber}):</strong><br><code>${bestShowLine.line}</code><br>`;
+                message += `<br><strong>Display:</strong> <div style="background-color:#2a2a2a; padding:10px; border-radius:4px; margin:5px 0;">${bestShowLine.display}</div>`;
+            }
             
             // Add EnableIf block information if applicable
             if (bestShowLine.enableIfConditions && bestShowLine.enableIfConditions.length > 0) {
-                message += `<strong>Note:</strong> This rule is within an EnableIf block that only applies to: <code>${bestShowLine.enableIfConditions.join(' AND ')}</code><br><br>`;
+                message += `<br><strong>⚠️ Conditional:</strong> This rule only applies when: <code>${bestShowLine.enableIfConditions.join(' AND ')}</code><br>`;
             }
             
             if (showingLines.length > 1) {
-                message += `<strong>Additional showing rules found:</strong><br><br>`;
+                message += `<br><strong>📋 Additional rules found (${showingLines.length - 1} more):</strong><br>`;
                 showingLines.slice(1).forEach(line => {
                     message += `• Line ${line.lineNumber}: <code>${line.line}</code>`;
                     if (line.enableIfConditions && line.enableIfConditions.length > 0) {
