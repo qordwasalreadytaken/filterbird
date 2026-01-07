@@ -323,6 +323,120 @@
             font-size: 12px;
             color: #999;
         }
+
+        .global-settings {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .global-settings h3 {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .filter-levels-config {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+        }
+
+        .filter-levels-config.active {
+            display: block;
+        }
+
+        .level-names-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .level-name-input {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .level-name-input label {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .level-name-input input {
+            padding: 6px 8px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 3px;
+            color: #e0e0e0;
+            font-size: 12px;
+        }
+
+        .levels-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        .levels-selector.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .levels-label {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .level-checkboxes {
+            display: flex;
+            gap: 4px;
+        }
+
+        .level-checkbox-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .level-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .level-checkbox-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            color: #666;
+            pointer-events: none;
+            font-weight: bold;
+        }
+
+        .level-checkbox:checked + .level-checkbox-label {
+            color: #0066cc;
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            font-size: 11px;
+            padding: 2px 6px;
+            text-decoration: underline;
+        }
+
+        .btn-link:hover {
+            color: #0052a3;
+        }
     </style>
 </head>
 <body>
@@ -334,6 +448,23 @@
 
         <div class="layout">
             <div class="editor-panel">
+                <!-- Global Settings -->
+                <div class="global-settings">
+                    <h3>Global Settings</h3>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="enable-filter-levels" onchange="toggleFilterLevels(this.checked)">
+                            Enable Filter Levels (1-10)
+                        </label>
+                    </div>
+                    <div class="filter-levels-config" id="filter-levels-config">
+                        <p style="font-size: 12px; color: #999; margin: 0 0 10px 0;">Name your filter levels (used for strictness control):</p>
+                        <div class="level-names-grid" id="level-names-grid">
+                            <!-- Level name inputs will be generated here -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Utility Items Section -->
                 <div class="section" id="utility-section">
                     <div class="section-header" onclick="toggleSection('utility-section')">
@@ -380,6 +511,54 @@
                             </select>
                         </div>
                         <div class="item-list" id="runes-items"></div>
+                    </div>
+                </div>
+
+                <!-- Gems Section -->
+                <div class="section" id="gems-section">
+                    <div class="section-header" onclick="toggleSection('gems-section')">
+                        <div>
+                            <span class="section-title">Gems</span>
+                            <span class="item-count" id="gems-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyGemPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="perfect-only">Perfect Only</option>
+                                <option value="flawless-plus">Flawless+</option>
+                                <option value="regular-plus">Regular+</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="gems-items"></div>
+                    </div>
+                </div>
+
+                <!-- PoD/Misc Section -->
+                <div class="section" id="misc-section">
+                    <div class="section-header" onclick="toggleSection('misc-section')">
+                        <div>
+                            <span class="section-title">PoD/Misc Items</span>
+                            <span class="item-count" id="misc-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyMiscPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="essentials">Essentials (Keys/Organs/Essences/Orbs)</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="misc-items"></div>
                     </div>
                 </div>
             </div>
@@ -476,10 +655,75 @@
             { name: "Zod Rune", code: "r33", level: 69, tier: 3 },
         ];
 
+        const gemItems = [
+            { name: "Perfect Sapphire", code: "gpb", level: 5, type: "sapphire" },
+            { name: "Perfect Emerald", code: "gpg", level: 5, type: "emerald" },
+            { name: "Perfect Topaz", code: "gpy", level: 5, type: "topaz" },
+            { name: "Perfect Ruby", code: "gpr", level: 5, type: "ruby" },
+            { name: "Perfect Amethyst", code: "gpv", level: 5, type: "amethyst" },
+            { name: "Perfect Diamond", code: "gpw", level: 5, type: "diamond" },
+            { name: "Perfect Skull", code: "skz", level: 5, type: "skull" },
+            { name: "Flawless Sapphire", code: "glb", level: 4, type: "sapphire" },
+            { name: "Flawless Emerald", code: "glg", level: 4, type: "emerald" },
+            { name: "Flawless Topaz", code: "gly", level: 4, type: "topaz" },
+            { name: "Flawless Ruby", code: "glr", level: 4, type: "ruby" },
+            { name: "Flawless Amethyst", code: "gzv", level: 4, type: "amethyst" },
+            { name: "Flawless Diamond", code: "glw", level: 4, type: "diamond" },
+            { name: "Flawless Skull", code: "skl", level: 4, type: "skull" },
+            { name: "Sapphire", code: "gsb", level: 3, type: "sapphire" },
+            { name: "Emerald", code: "gsg", level: 3, type: "emerald" },
+            { name: "Topaz", code: "gsy", level: 3, type: "topaz" },
+            { name: "Ruby", code: "gsr", level: 3, type: "ruby" },
+            { name: "Amethyst", code: "gsv", level: 3, type: "amethyst" },
+            { name: "Diamond", code: "gsw", level: 3, type: "diamond" },
+            { name: "Skull", code: "sku", level: 3, type: "skull" },
+            { name: "Flawed Sapphire", code: "gfb", level: 2, type: "sapphire" },
+            { name: "Flawed Emerald", code: "gfg", level: 2, type: "emerald" },
+            { name: "Flawed Topaz", code: "gfy", level: 2, type: "topaz" },
+            { name: "Flawed Ruby", code: "gfr", level: 2, type: "ruby" },
+            { name: "Flawed Amethyst", code: "gfv", level: 2, type: "amethyst" },
+            { name: "Flawed Diamond", code: "gfw", level: 2, type: "diamond" },
+            { name: "Flawed Skull", code: "skf", level: 2, type: "skull" },
+            { name: "Chipped Sapphire", code: "gcb", level: 1, type: "sapphire" },
+            { name: "Chipped Emerald", code: "gcg", level: 1, type: "emerald" },
+            { name: "Chipped Topaz", code: "gcy", level: 1, type: "topaz" },
+            { name: "Chipped Ruby", code: "gcr", level: 1, type: "ruby" },
+            { name: "Chipped Amethyst", code: "gcv", level: 1, type: "amethyst" },
+            { name: "Chipped Diamond", code: "gcw", level: 1, type: "diamond" },
+            { name: "Chipped Skull", code: "skc", level: 1, type: "skull" },
+        ];
+
+        const miscItems = [
+            { name: "Orb of Corruption", code: "cx5", category: "orb" },
+            { name: "Orb of Alteration", code: "cx9", category: "orb" },
+            { name: "Key of Terror", code: "pk1", category: "key" },
+            { name: "Key of Hatred", code: "pk2", category: "key" },
+            { name: "Key of Destruction", code: "pk3", category: "key" },
+            { name: "Diablo's Horn", code: "dhn", category: "organ" },
+            { name: "Baal's Eye", code: "bey", category: "organ" },
+            { name: "Mephisto's Brain", code: "mbr", category: "organ" },
+            { name: "Twisted Essence of Suffering", code: "tes", category: "essence" },
+            { name: "Charged Essence of Hatred", code: "ceh", category: "essence" },
+            { name: "Burning Essence of Terror", code: "bet", category: "essence" },
+            { name: "Festering Essence of Destruction", code: "fed", category: "essence" },
+            { name: "Token of Absolution", code: "toa", category: "essence" },
+        ];
+
+        // Global settings state
+        const globalSettings = {
+            enableFilterLevels: false,
+            levelNames: [
+                'Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5',
+                'Level 6', 'Level 7', 'Level 8', 'Level 9', 'Level 10'
+            ]
+        };
+
         // State management
         const filterState = {
             utility: {},
-            runes: {}
+            runes: {},
+            gems: {},
+            misc: {}
         };
 
         // Initialize utility items state
@@ -487,9 +731,11 @@
             filterState.utility[item.code] = {
                 show: true,
                 useCustomColors: false,
+                chatNotification: false,
                 fontColor: 'WHITE',
                 borderColor: null,
-                backgroundColor: null
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
             };
         });
 
@@ -498,9 +744,37 @@
             filterState.runes[item.code] = {
                 show: true,
                 useCustomColors: false,
+                chatNotification: false,
                 fontColor: 'ORANGE',
                 borderColor: null,
-                backgroundColor: null
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        // Initialize gems state
+        gemItems.forEach(item => {
+            filterState.gems[item.code] = {
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'WHITE',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        // Initialize misc items state
+        miscItems.forEach(item => {
+            filterState.misc[item.code] = {
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'PURPLE',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
             };
         });
 
@@ -519,6 +793,16 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
+                // Build filter levels checkboxes
+                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
+                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                        <input type="checkbox" class="level-checkbox" 
+                            ${checked ? 'checked' : ''}
+                            onchange="updateItemLevel('utility', '${item.code}', ${idx}, this.checked)">
+                        <span class="level-checkbox-label">${idx + 1}</span>
+                    </div>
+                `).join('');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -529,6 +813,20 @@
                             ${state.useCustomColors ? 'checked' : ''}
                             onchange="updateItemState('utility', '${item.code}', 'useCustomColors', this.checked)">
                         <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('utility', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
                     </div>
                     <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
                         <div class="color-picker-wrapper">
@@ -581,6 +879,16 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
+                // Build filter levels checkboxes
+                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
+                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                        <input type="checkbox" class="level-checkbox" 
+                            ${checked ? 'checked' : ''}
+                            onchange="updateItemLevel('runes', '${item.code}', ${idx}, this.checked)">
+                        <span class="level-checkbox-label">${idx + 1}</span>
+                    </div>
+                `).join('');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -591,6 +899,20 @@
                             ${state.useCustomColors ? 'checked' : ''}
                             onchange="updateItemState('runes', '${item.code}', 'useCustomColors', this.checked)">
                         <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('runes', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
                     </div>
                     <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
                         <div class="color-picker-wrapper">
@@ -628,6 +950,178 @@
             updateItemCount('runes');
         }
 
+        function renderGemsItems() {
+            const container = document.getElementById('gems-items');
+            container.innerHTML = '';
+            
+            gemItems.forEach(item => {
+                const state = filterState.gems[item.code];
+                const row = document.createElement('div');
+                row.className = 'item-row';
+                
+                // Build font color options
+                const fontOptions = FONT_COLORS.map(color => 
+                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
+                ).join('');
+                
+                // Build filter levels checkboxes
+                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
+                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                        <input type="checkbox" class="level-checkbox" 
+                            ${checked ? 'checked' : ''}
+                            onchange="updateItemLevel('gems', '${item.code}', ${idx}, this.checked)">
+                        <span class="level-checkbox-label">${idx + 1}</span>
+                    </div>
+                `).join('');
+                
+                row.innerHTML = `
+                    <input type="checkbox" class="item-checkbox" 
+                        ${state.show ? 'checked' : ''} 
+                        onchange="updateItemState('gems', '${item.code}', 'show', this.checked)">
+                    <span class="item-name">${item.name}</span>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateItemState('gems', '${item.code}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('gems', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
+                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Font</span>
+                            <select class="color-select" 
+                                onchange="updateItemState('gems', '${item.code}', 'fontColor', this.value)">
+                                ${fontOptions}
+                            </select>
+                            <button class="color-clear-btn" 
+                                onclick="clearFontColor('gems', '${item.code}')"
+                                title="Reset to default">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Border</span>
+                            <input type="color" class="color-input" value="${state.borderColor || '#808080'}"
+                                onchange="updateItemState('gems', '${item.code}', 'borderColor', this.value)"
+                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearColor('gems', '${item.code}', 'borderColor')"
+                                title="Clear border color">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">BG</span>
+                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
+                                onchange="updateItemState('gems', '${item.code}', 'backgroundColor', this.value)"
+                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearColor('gems', '${item.code}', 'backgroundColor')"
+                                title="Clear background color">×</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            updateItemCount('gems');
+        }
+
+        function renderMiscItems() {
+            const container = document.getElementById('misc-items');
+            container.innerHTML = '';
+            
+            miscItems.forEach(item => {
+                const state = filterState.misc[item.code];
+                const row = document.createElement('div');
+                row.className = 'item-row';
+                
+                // Build font color options
+                const fontOptions = FONT_COLORS.map(color => 
+                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
+                ).join('');
+                
+                // Build filter levels checkboxes
+                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
+                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                        <input type="checkbox" class="level-checkbox" 
+                            ${checked ? 'checked' : ''}
+                            onchange="updateItemLevel('misc', '${item.code}', ${idx}, this.checked)">
+                        <span class="level-checkbox-label">${idx + 1}</span>
+                    </div>
+                `).join('');
+                
+                row.innerHTML = `
+                    <input type="checkbox" class="item-checkbox" 
+                        ${state.show ? 'checked' : ''} 
+                        onchange="updateItemState('misc', '${item.code}', 'show', this.checked)">
+                    <span class="item-name">${item.name}</span>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateItemState('misc', '${item.code}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('misc', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
+                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Font</span>
+                            <select class="color-select" 
+                                onchange="updateItemState('misc', '${item.code}', 'fontColor', this.value)">
+                                ${fontOptions}
+                            </select>
+                            <button class="color-clear-btn" 
+                                onclick="clearFontColor('misc', '${item.code}')"
+                                title="Reset to default">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Border</span>
+                            <input type="color" class="color-input" value="${state.borderColor || '#808080'}"
+                                onchange="updateItemState('misc', '${item.code}', 'borderColor', this.value)"
+                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearColor('misc', '${item.code}', 'borderColor')"
+                                title="Clear border color">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">BG</span>
+                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
+                                onchange="updateItemState('misc', '${item.code}', 'backgroundColor', this.value)"
+                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearColor('misc', '${item.code}', 'backgroundColor')"
+                                title="Clear background color">×</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            updateItemCount('misc');
+        }
+
         // Update state and regenerate filter
         function updateItemState(category, code, property, value) {
             filterState[category][code][property] = value;
@@ -638,6 +1132,10 @@
                     renderUtilityItems();
                 } else if (category === 'runes') {
                     renderRuneItems();
+                } else if (category === 'gems') {
+                    renderGemsItems();
+                } else if (category === 'misc') {
+                    renderMiscItems();
                 }
             }
             
@@ -652,18 +1150,29 @@
                 renderUtilityItems();
             } else if (category === 'runes') {
                 renderRuneItems();
+            } else if (category === 'gems') {
+                renderGemsItems();
+            } else if (category === 'misc') {
+                renderMiscItems();
             }
             generateFilter();
         }
 
         // Clear font color to default
         function clearFontColor(category, code) {
-            const defaultColor = category === 'utility' ? 'WHITE' : 'ORANGE';
+            let defaultColor = 'WHITE';
+            if (category === 'runes') defaultColor = 'ORANGE';
+            else if (category === 'misc') defaultColor = 'PURPLE';
+            
             filterState[category][code].fontColor = defaultColor;
             if (category === 'utility') {
                 renderUtilityItems();
             } else if (category === 'runes') {
                 renderRuneItems();
+            } else if (category === 'gems') {
+                renderGemsItems();
+            } else if (category === 'misc') {
+                renderMiscItems();
             }
             generateFilter();
         }
@@ -751,20 +1260,92 @@
             generateFilter();
         }
 
+        function applyGemPreset(preset) {
+            if (!preset) return;
+
+            switch(preset) {
+                case 'show-all':
+                    Object.keys(filterState.gems).forEach(code => {
+                        filterState.gems[code].show = true;
+                    });
+                    break;
+                case 'hide-all':
+                    Object.keys(filterState.gems).forEach(code => {
+                        filterState.gems[code].show = false;
+                    });
+                    break;
+                case 'perfect-only':
+                    gemItems.forEach(item => {
+                        filterState.gems[item.code].show = item.level === 5;
+                    });
+                    break;
+                case 'flawless-plus':
+                    gemItems.forEach(item => {
+                        filterState.gems[item.code].show = item.level >= 4;
+                    });
+                    break;
+                case 'regular-plus':
+                    gemItems.forEach(item => {
+                        filterState.gems[item.code].show = item.level >= 3;
+                    });
+                    break;
+            }
+
+            renderGemsItems();
+            generateFilter();
+        }
+
+        function applyMiscPreset(preset) {
+            if (!preset) return;
+
+            const essentials = ['cx5', 'cx9', 'pk1', 'pk2', 'pk3', 'dhn', 'bey', 'mbr', 'tes', 'ceh', 'bet', 'fed'];
+
+            switch(preset) {
+                case 'show-all':
+                    Object.keys(filterState.misc).forEach(code => {
+                        filterState.misc[code].show = true;
+                    });
+                    break;
+                case 'hide-all':
+                    Object.keys(filterState.misc).forEach(code => {
+                        filterState.misc[code].show = false;
+                    });
+                    break;
+                case 'essentials':
+                    Object.keys(filterState.misc).forEach(code => {
+                        filterState.misc[code].show = essentials.includes(code);
+                    });
+                    break;
+            }
+
+            renderMiscItems();
+            generateFilter();
+        }
+
         // Generate filter output
         function generateFilter() {
             let filter = '// FilterPhoenix Visual Filter Builder\n';
             filter += '// Generated: ' + new Date().toLocaleString() + '\n\n';
+
+            // Add FilterLevel declarations if enabled
+            if (globalSettings.enableFilterLevels) {
+                filter += '// === FILTER LEVELS ===\n\n';
+                for (let i = 0; i < 10; i++) {
+                    filter += `FilterLevel[${i + 1}]: "${globalSettings.levelNames[i]}"\n`;
+                }
+                filter += '\n';
+            }
 
             // Check if any items need custom styles (for border/background colors)
             let needsCustomStyle = false;
             
             utilityItems.forEach(item => {
                 const state = filterState.utility[item.code];
-                if (state.show && state.useCustomColors) {
-                    const needsBorder = state.borderColor !== null;
-                    const needsBackground = state.backgroundColor !== null;
-                    if (needsBorder || needsBackground) {
+                if (state.show) {
+                    const needsBorder = state.useCustomColors && state.borderColor !== null;
+                    const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                    const needsNotification = state.chatNotification;
+                    if (needsBorder || needsBackground || needsNotification) {
                         needsCustomStyle = true;
                     }
                 }
@@ -772,10 +1353,35 @@
 
             runeItems.forEach(item => {
                 const state = filterState.runes[item.code];
-                if (state.show && state.useCustomColors) {
-                    const needsBorder = state.borderColor !== null;
-                    const needsBackground = state.backgroundColor !== null;
-                    if (needsBorder || needsBackground) {
+                if (state.show) {
+                    const needsBorder = state.useCustomColors && state.borderColor !== null;
+                    const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                    const needsNotification = state.chatNotification;
+                    if (needsBorder || needsBackground || needsNotification) {
+                        needsCustomStyle = true;
+                    }
+                }
+            });
+
+            gemItems.forEach(item => {
+                const state = filterState.gems[item.code];
+                if (state.show) {
+                    const needsBorder = state.useCustomColors && state.borderColor !== null;
+                    const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                    const needsNotification = state.chatNotification;
+                    if (needsBorder || needsBackground || needsNotification) {
+                        needsCustomStyle = true;
+                    }
+                }
+            });
+
+            miscItems.forEach(item => {
+                const state = filterState.misc[item.code];
+                if (state.show) {
+                    const needsBorder = state.useCustomColors && state.borderColor !== null;
+                    const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                    const needsNotification = state.chatNotification;
+                    if (needsBorder || needsBackground || needsNotification) {
                         needsCustomStyle = true;
                     }
                 }
@@ -792,7 +1398,9 @@
             utilityItems.forEach(item => {
                 const state = filterState.utility[item.code];
                 if (state.show) {
-                    let line = `ItemDisplay[${item.code}]:`;
+                    // Generate filter level condition if enabled
+                    const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                    let line = `ItemDisplay[${item.code}${filtLvlCondition}]:`;
                     
                     // Only add colors if custom colors are enabled
                     if (state.useCustomColors && state.fontColor !== 'WHITE') {
@@ -801,13 +1409,17 @@
                     
                     line += ` %NAME%`;
                     
-                    // Add style reference for border/background if needed
-                    if (state.useCustomColors) {
-                        const needsBorder = state.borderColor !== null;
-                        const needsBackground = state.backgroundColor !== null;
+                    // Add style reference for border/background/notification if needed
+                    if (state.useCustomColors || state.chatNotification) {
+                        const needsBorder = state.useCustomColors && state.borderColor !== null;
+                        const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                        const needsNotification = state.chatNotification;
                         
-                        if (needsBorder || needsBackground) {
+                        if (needsBorder || needsBackground || needsNotification) {
                             const rgbParts = [];
+                            if (needsNotification) {
+                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                            }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
                                 rgbParts.push(`BorderColor = RGB(${rgb})`);
@@ -831,7 +1443,9 @@
             runeItems.forEach(item => {
                 const state = filterState.runes[item.code];
                 if (state.show) {
-                    let line = `ItemDisplay[${item.code}]:`;
+                    // Generate filter level condition if enabled
+                    const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                    let line = `ItemDisplay[${item.code}${filtLvlCondition}]:`;
                     
                     // Only add colors if custom colors are enabled
                     if (state.useCustomColors && state.fontColor !== 'ORANGE') {
@@ -840,13 +1454,107 @@
                     
                     line += ` %NAME%`;
                     
-                    // Add style reference for border/background if needed
-                    if (state.useCustomColors) {
-                        const needsBorder = state.borderColor !== null;
-                        const needsBackground = state.backgroundColor !== null;
+                    // Add style reference for border/background/notification if needed
+                    if (state.useCustomColors || state.chatNotification) {
+                        const needsBorder = state.useCustomColors && state.borderColor !== null;
+                        const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                        const needsNotification = state.chatNotification;
                         
-                        if (needsBorder || needsBackground) {
+                        if (needsBorder || needsBackground || needsNotification) {
                             const rgbParts = [];
+                            if (needsNotification) {
+                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                            }
+                            if (needsBorder) {
+                                const rgb = hexToRGBSlash(state.borderColor);
+                                rgbParts.push(`BorderColor = RGB(${rgb})`);
+                            }
+                            if (needsBackground) {
+                                const rgb = hexToRGBSlash(state.backgroundColor);
+                                rgbParts.push(`BackgroundColor = RGB(${rgb})`);
+                            }
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                        }
+                    }
+                    
+                    filter += line + '\n';
+                } else {
+                    filter += `ItemDisplay[${item.code}]:\n`;
+                }
+            });
+
+            // Gems
+            filter += '\n// === GEMS ===\n\n';
+            gemItems.forEach(item => {
+                const state = filterState.gems[item.code];
+                if (state.show) {
+                    // Generate filter level condition if enabled
+                    const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                    let line = `ItemDisplay[${item.code}${filtLvlCondition}]:`;
+                    
+                    // Only add colors if custom colors are enabled
+                    if (state.useCustomColors && state.fontColor !== 'WHITE') {
+                        line += ` %${state.fontColor}%`;
+                    }
+                    
+                    line += ` %NAME%`;
+                    
+                    // Add style reference for border/background/notification if needed
+                    if (state.useCustomColors || state.chatNotification) {
+                        const needsBorder = state.useCustomColors && state.borderColor !== null;
+                        const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                        const needsNotification = state.chatNotification;
+                        
+                        if (needsBorder || needsBackground || needsNotification) {
+                            const rgbParts = [];
+                            if (needsNotification) {
+                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                            }
+                            if (needsBorder) {
+                                const rgb = hexToRGBSlash(state.borderColor);
+                                rgbParts.push(`BorderColor = RGB(${rgb})`);
+                            }
+                            if (needsBackground) {
+                                const rgb = hexToRGBSlash(state.backgroundColor);
+                                rgbParts.push(`BackgroundColor = RGB(${rgb})`);
+                            }
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                        }
+                    }
+                    
+                    filter += line + '\n';
+                } else {
+                    filter += `ItemDisplay[${item.code}]:\n`;
+                }
+            });
+
+            // PoD/Misc Items
+            filter += '\n// === POD/MISC ITEMS ===\n\n';
+            miscItems.forEach(item => {
+                const state = filterState.misc[item.code];
+                if (state.show) {
+                    // Generate filter level condition if enabled
+                    const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                    let line = `ItemDisplay[${item.code}${filtLvlCondition}]:`;
+                    
+                    // Only add colors if custom colors are enabled
+                    if (state.useCustomColors && state.fontColor !== 'PURPLE') {
+                        line += ` %${state.fontColor}%`;
+                    }
+                    
+                    line += ` %NAME%`;
+                    
+                    // Add style reference for border/background/notification if needed
+                    if (state.useCustomColors || state.chatNotification) {
+                        const needsBorder = state.useCustomColors && state.borderColor !== null;
+                        const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                        const needsNotification = state.chatNotification;
+                        
+                        if (needsBorder || needsBackground || needsNotification) {
+                            const rgbParts = [];
+                            if (needsNotification) {
+                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                            }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
                                 rgbParts.push(`BorderColor = RGB(${rgb})`);
@@ -867,6 +1575,48 @@
 
             document.getElementById('filter-output').value = filter;
             updateOutputStats();
+        }
+
+        // Helper function to generate FILTLVL condition from filterLevels array
+        function generateFilterLevelCondition(filterLevels) {
+            if (!globalSettings.enableFilterLevels) return '';
+            
+            // Check if all levels are enabled
+            const enabledLevels = filterLevels.map((enabled, idx) => enabled ? idx + 1 : null).filter(l => l !== null);
+            if (enabledLevels.length === 10) return ''; // All levels, no condition needed
+            if (enabledLevels.length === 0) return ''; // None enabled, item won't show anyway
+            
+            // Find consecutive ranges
+            const ranges = [];
+            let rangeStart = enabledLevels[0];
+            let rangeEnd = enabledLevels[0];
+            
+            for (let i = 1; i <= enabledLevels.length; i++) {
+                const currentLevel = enabledLevels[i];
+                
+                if (currentLevel === rangeEnd + 1) {
+                    rangeEnd = currentLevel;
+                } else {
+                    // End of range, save it
+                    if (rangeStart === rangeEnd) {
+                        ranges.push(`FILTLVL=${rangeStart}`);
+                    } else if (rangeEnd === rangeStart + 1) {
+                        ranges.push(`FILTLVL=${rangeStart}`);
+                        ranges.push(`FILTLVL=${rangeEnd}`);
+                    } else {
+                        ranges.push(`FILTLVL>=${rangeStart} FILTLVL<=${rangeEnd}`);
+                    }
+                    
+                    if (i < enabledLevels.length) {
+                        rangeStart = currentLevel;
+                        rangeEnd = currentLevel;
+                    }
+                }
+            }
+            
+            // If multiple ranges/levels, we need multiple ItemDisplay lines or complex conditions
+            // For simplicity, return conditions that can be combined with OR logic
+            return ranges.length > 0 ? ' ' + ranges.join(' OR ') : '';
         }
 
         // Convert hex color to RGB format for filter
@@ -935,9 +1685,84 @@
         // Allow manual edits to update stats
         document.getElementById('filter-output').addEventListener('input', updateOutputStats);
 
+        // Toggle filter levels feature
+        function toggleFilterLevels(enabled) {
+            globalSettings.enableFilterLevels = enabled;
+            const configSection = document.getElementById('filter-levels-config');
+            
+            if (enabled) {
+                configSection.classList.add('active');
+                renderLevelNamesConfig();
+            } else {
+                configSection.classList.remove('active');
+            }
+            
+            // Re-render all sections to update UI
+            renderUtilityItems();
+            renderRuneItems();
+            renderGemsItems();
+            renderMiscItems();
+            generateFilter();
+        }
+
+        // Render level names configuration inputs
+        function renderLevelNamesConfig() {
+            const container = document.getElementById('level-names-grid');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'level-name-input';
+                wrapper.innerHTML = `
+                    <label>Level ${i + 1}</label>
+                    <input type="text" 
+                        value="${globalSettings.levelNames[i]}" 
+                        onchange="updateLevelName(${i}, this.value)"
+                        placeholder="Level ${i + 1}">
+                `;
+                container.appendChild(wrapper);
+            }
+        }
+
+        // Update level name
+        function updateLevelName(level, name) {
+            globalSettings.levelNames[level] = name || `Level ${level + 1}`;
+            // Re-render all sections to update tooltips
+            renderUtilityItems();
+            renderRuneItems();
+            renderGemsItems();
+            renderMiscItems();
+        }
+
+        // Update item filter level
+        function updateItemLevel(category, code, level, checked) {
+            filterState[category][code].filterLevels[level] = checked;
+            generateFilter();
+        }
+
+        // Set all levels for an item
+        function setAllLevels(category, code, checked) {
+            for (let i = 0; i < 10; i++) {
+                filterState[category][code].filterLevels[i] = checked;
+            }
+            // Re-render the appropriate section to update checkboxes
+            if (category === 'utility') {
+                renderUtilityItems();
+            } else if (category === 'runes') {
+                renderRuneItems();
+            } else if (category === 'gems') {
+                renderGemsItems();
+            } else if (category === 'misc') {
+                renderMiscItems();
+            }
+            generateFilter();
+        }
+
         // Initialize
         renderUtilityItems();
         renderRuneItems();
+        renderGemsItems();
+        renderMiscItems();
         generateFilter();
     </script>
 </body>
