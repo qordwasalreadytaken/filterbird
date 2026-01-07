@@ -561,6 +561,382 @@
                         <div class="item-list" id="misc-items"></div>
                     </div>
                 </div>
+
+                <!-- Unique Jewelry & Charms Section -->
+                <div class="section" id="jewelry-charms-section">
+                    <div class="section-header" onclick="toggleSection('jewelry-charms-section')">
+                        <div>
+                            <span class="section-title">Unique Jewelry & Charms</span>
+                            <span class="item-count" id="jewelry-charms-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyJewelryCharmsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="jewelry-charms-items"></div>
+                    </div>
+                </div>
+
+                <!-- Class-Specific Uniques Section -->
+                <div class="section" id="class-uniques-section">
+                    <div class="section-header" onclick="toggleSection('class-uniques-section')">
+                        <div>
+                            <span class="section-title">Class-Specific Unique Items</span>
+                            <span class="item-count" id="class-uniques-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyClassUniquesPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="class-uniques-items"></div>
+                    </div>
+                </div>
+
+                <!-- Elite Unique Weapons Section -->
+                <div class="section" id="elite-weapons-section">
+                    <div class="section-header" onclick="toggleSection('elite-weapons-section')">
+                        <div>
+                            <span class="section-title">Elite Unique Weapons</span>
+                            <span class="item-count" id="elite-weapons-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyEliteWeaponsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="elite-weapons-items"></div>
+                    </div>
+                </div>
+
+                <!-- Elite Unique Armor Section -->
+                <div class="section" id="elite-armor-section">
+                    <div class="section-header" onclick="toggleSection('elite-armor-section')">
+                        <div>
+                            <span class="section-title">Elite Unique Armor</span>
+                            <span class="item-count" id="elite-armor-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyEliteArmorPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="elite-armor-items"></div>
+                    </div>
+                </div>
+
+                <!-- Exceptional Unique Weapons Section -->
+                <div class="section" id="exc-weapons-section">
+                    <div class="section-header" onclick="toggleSection('exc-weapons-section')">
+                        <div>
+                            <span class="section-title">Exceptional Unique Weapons</span>
+                            <span class="item-count" id="exc-weapons-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyExcWeaponsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="exc-weapons-items"></div>
+                    </div>
+                </div>
+
+                <!-- Exceptional Unique Armor Section -->
+                <div class="section" id="exc-armor-section">
+                    <div class="section-header" onclick="toggleSection('exc-armor-section')">
+                        <div>
+                            <span class="section-title">Exceptional Unique Armor</span>
+                            <span class="item-count" id="exc-armor-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyExcArmorPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="exc-armor-items"></div>
+                    </div>
+                </div>
+
+                <!-- Normal Unique Weapons Section -->
+                <div class="section" id="norm-weapons-section">
+                    <div class="section-header" onclick="toggleSection('norm-weapons-section')">
+                        <div>
+                            <span class="section-title">Normal Unique Weapons</span>
+                            <span class="item-count" id="norm-weapons-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNormWeaponsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="norm-weapons-items"></div>
+                    </div>
+                </div>
+
+                <!-- Normal Unique Armor Section -->
+                <div class="section" id="norm-armor-section">
+                    <div class="section-header" onclick="toggleSection('norm-armor-section')">
+                        <div>
+                            <span class="section-title">Normal Unique Armor</span>
+                            <span class="item-count" id="norm-armor-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNormArmorPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="norm-armor-items"></div>
+                    </div>
+                </div>
+
+                <!-- High-Level Sets Section -->
+                <div class="section" id="high-sets-section">
+                    <div class="section-header" onclick="toggleSection('high-sets-section')">
+                        <div>
+                            <span class="section-title">High-Level Set Items</span>
+                            <span class="item-count" id="high-sets-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyHighSetsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="high-sets-items"></div>
+                    </div>
+                </div>
+
+                <!-- Mid-Level Sets Section -->
+                <div class="section" id="mid-sets-section">
+                    <div class="section-header" onclick="toggleSection('mid-sets-section')">
+                        <div>
+                            <span class="section-title">Mid-Level Set Items</span>
+                            <span class="item-count" id="mid-sets-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyMidSetsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="mid-sets-items"></div>
+                    </div>
+                </div>
+
+                <!-- Low-Level Sets Section -->
+                <div class="section" id="low-sets-section">
+                    <div class="section-header" onclick="toggleSection('low-sets-section')">
+                        <div>
+                            <span class="section-title">Low-Level Set Items</span>
+                            <span class="item-count" id="low-sets-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyLowSetsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="low-sets-items"></div>
+                    </div>
+                </div>
+
+                <!-- Magic Jewelry Section -->
+                <div class="section" id="magic-jewelry-section">
+                    <div class="section-header" onclick="toggleSection('magic-jewelry-section')">
+                        <div>
+                            <span class="section-title">Magic Jewelry & Jewels</span>
+                            <span class="item-count" id="magic-jewelry-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyMagicJewelryPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="high-ilvl">High ILVL Only</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="magic-jewelry-items"></div>
+                    </div>
+                </div>
+
+                <!-- Magic Charms Section -->
+                <div class="section" id="magic-charms-section">
+                    <div class="section-header" onclick="toggleSection('magic-charms-section')">
+                        <div>
+                            <span class="section-title">Magic Charms</span>
+                            <span class="item-count" id="magic-charms-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyMagicCharmsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="high-ilvl">High ILVL Only</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="magic-charms-items"></div>
+                    </div>
+                </div>
+
+                <!-- Magic Crafting Bases Section -->
+                <div class="section" id="magic-crafting-section">
+                    <div class="section-header" onclick="toggleSection('magic-crafting-section')">
+                        <div>
+                            <span class="section-title">Magic Crafting Bases</span>
+                            <span class="item-count" id="magic-crafting-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyMagicCraftingPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="magic-crafting-items"></div>
+                    </div>
+                </div>
+
+                <!-- Rare Jewelry Section -->
+                <div class="section" id="rare-jewelry-section">
+                    <div class="section-header" onclick="toggleSection('rare-jewelry-section')">
+                        <div>
+                            <span class="section-title">Rare Jewelry & Jewels</span>
+                            <span class="item-count" id="rare-jewelry-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyRareJewelryPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="rare-jewelry-items"></div>
+                    </div>
+                </div>
+
+                <!-- Rare Class Items Section -->
+                <div class="section" id="rare-class-items-section">
+                    <div class="section-header" onclick="toggleSection('rare-class-items-section')">
+                        <div>
+                            <span class="section-title">Rare Class-Specific Items</span>
+                            <span class="item-count" id="rare-class-items-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyRareClassItemsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="rare-class-items-items"></div>
+                    </div>
+                </div>
+
+                <!-- Rare Elite Bases Section -->
+                <div class="section" id="rare-elite-bases-section">
+                    <div class="section-header" onclick="toggleSection('rare-elite-bases-section')">
+                        <div>
+                            <span class="section-title">Rare Elite Bases</span>
+                            <span class="item-count" id="rare-elite-bases-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyRareEliteBasesPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="rare-elite-bases-items"></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Output Panel -->
@@ -694,6 +1070,7 @@
         ];
 
         const miscItems = [
+            { name: "Synthesized Items", code: "SYNTH", category: "synth" },
             { name: "Orb of Corruption", code: "cx5", category: "orb" },
             { name: "Orb of Alteration", code: "cx9", category: "orb" },
             { name: "Key of Terror", code: "pk1", category: "key" },
@@ -707,14 +1084,637 @@
             { name: "Burning Essence of Terror", code: "bet", category: "essence" },
             { name: "Festering Essence of Destruction", code: "fed", category: "essence" },
             { name: "Token of Absolution", code: "toa", category: "essence" },
+            { name: "All Maps", code: "MAP", category: "map" },
+            { name: "All Quest Items", code: "QUEST", category: "quest" },
+            { name: "All Crafted Items", code: "CRAFT", category: "crafted" },
+        ];
+
+        // Unique items data - organized by category
+        const jewelryAndCharms = [
+            { name: "Unique Rings", code: "rin" },
+            { name: "Unique Amulets", code: "amu" },
+            { name: "Unique Jewels", code: "jew" },
+            { name: "Unique Small Charms", code: "cm1" },
+            { name: "Unique Large Charms", code: "cm2" },
+            { name: "Unique Grand Charms", code: "cm3" },
+        ];
+
+        const classSpecificUniques = [
+            { name: "Titan's Revenge", code: "7ja" },
+            { name: "Thunderstroke", code: "7ja" },
+            { name: "Lycander's Flank", code: "7ja" },
+            { name: "Stoneraven", code: "9ja" },
+            { name: "Blood Raven's Charge", code: "9am" },
+            { name: "Lycander's Aim", code: "8lw" },
+            { name: "Bartuc's Cut-Throat", code: "7bt" },
+            { name: "Jade Talon", code: "7wc" },
+            { name: "Shadow Killer", code: "9ar" },
+            { name: "Firelizard's Talons", code: "9wc" },
+            { name: "The Oculus", code: "6cs" },
+            { name: "Eschuta's Temper", code: "ob9" },
+            { name: "Death's Fathom", code: "obd" },
+            { name: "Homunculus", code: "ne9" },
+            { name: "Darkforce Spawn", code: "ned" },
+            { name: "Boneflame", code: "nee" },
+            { name: "Herald of Zakarum", code: "paf" },
+            { name: "Alma Negra", code: "paf" },
+            { name: "Dragonscale", code: "pae" },
+            { name: "Arreat's Face", code: "ba5" },
+            { name: "Demonhorn's Edge", code: "ba4" },
+            { name: "Wolfhowl", code: "baa" },
+            { name: "Halaberd's Reign", code: "bac" },
+            { name: "Jalal's Mane", code: "dr5" },
+            { name: "Cerebus' Bite", code: "dr9" },
+            { name: "Spirit Keeper", code: "dra" },
+            { name: "Ravenlore", code: "drb" },
+        ];
+
+        const eliteUniqueWeapons = [
+            { name: "Doombringer", code: "7cr" },
+            { name: "The Grandfather", code: "7fb" },
+            { name: "Lightsabre", code: "7gd" },
+            { name: "Azurewrath", code: "7gd" },
+            { name: "Frostwind", code: "7cs" },
+            { name: "Flamebellow", code: "7b7" },
+            { name: "Bloodmoon", code: "72h" },
+            { name: "Djinn Slayer", code: "7dj" },
+            { name: "Razor's Edge", code: "7ta" },
+            { name: "Rune Master", code: "7et" },
+            { name: "Cranebeak", code: "7ws" },
+            { name: "Death Cleaver", code: "7wa" },
+            { name: "Ethereal Edge", code: "7ha" },
+            { name: "Hellslayer", code: "7ga" },
+            { name: "Messerschmidt's Reaver", code: "7la" },
+            { name: "Executioner's Justice", code: "7gi" },
+            { name: "Nord's Tenderizer", code: "7tr" },
+            { name: "Demon Limb", code: "7wh" },
+            { name: "Baranar's Star", code: "7fl" },
+            { name: "Horizon's Tornado", code: "7sc" },
+            { name: "Stormlash", code: "7sc" },
+            { name: "Stone Crusher", code: "7m7" },
+            { name: "Schaefer's Hammer", code: "7m7" },
+            { name: "Windhammer", code: "7o7" },
+            { name: "Earth Shifter", code: "7gm" },
+            { name: "The Cranium Basher", code: "7gm" },
+            { name: "Wizardspike", code: "7dg" },
+            { name: "Fleshripper", code: "7kr" },
+            { name: "Ghostflame", code: "7di" },
+            { name: "Ondal's Wisdom", code: "6ss" },
+            { name: "Mang Song's Lesson", code: "6cs" },
+            { name: "Boneshade", code: "7wn" },
+            { name: "Death's Web", code: "7yw" },
+            { name: "Heaven's Light", code: "7sc" },
+            { name: "The Redeemer", code: "7sc" },
+            { name: "Astreon's Iron Ward", code: "7qs" },
+            { name: "Bonehew", code: "7o7" },
+            { name: "Stormspire", code: "7gt" },
+            { name: "The Reaper's Toll", code: "7s8" },
+            { name: "Tomb Reaver", code: "7pa" },
+            { name: "Arioc's Needle", code: "7h7" },
+            { name: "Viperfork", code: "7p7" },
+            { name: "Steel Pillar", code: "7vo" },
+            { name: "Demon's Arch", code: "7bk" },
+            { name: "Wraith Flight", code: "7gl" },
+            { name: "Gargoyle's Bite", code: "7ts" },
+            { name: "Gimmershred", code: "7ta" },
+            { name: "Lacerator", code: "7tw" },
+            { name: "Warshrike", code: "7bk" },
+            { name: "Eaglehorn", code: "6l7" },
+            { name: "Widowmaker", code: "6hb" },
+            { name: "Windforce", code: "6lw" },
+            { name: "Hellrack", code: "6hx" },
+            { name: "Gut Siphon", code: "6rx" },
+        ];
+
+        const eliteUniqueArmor = [
+            { name: "Andariel's Visage", code: "bac" },
+            { name: "Crown of Ages", code: "bah" },
+            { name: "Giant Skull", code: "baf" },
+            { name: "Griffon's Eye", code: "ci3" },
+            { name: "Nightwing's Veil", code: "ba9" },
+            { name: "Vampire Gaze", code: "ba7" },
+            { name: "Harlequin Crest", code: "ba8" },
+            { name: "Steel Shade", code: "ba6" },
+            { name: "Templar's Might", code: "uar" },
+            { name: "Tyrael's Might", code: "uar" },
+            { name: "Leviathan", code: "uui" },
+            { name: "Steel Carapace", code: "uul" },
+            { name: "Ormus' Robes", code: "uui" },
+            { name: "Arkaine's Valor", code: "utp" },
+            { name: "The Gladiator's Bane", code: "uea" },
+            { name: "Corpsemourn", code: "ung" },
+            { name: "Guardian Angel", code: "utp" },
+            { name: "Skullder's Ire", code: "urs" },
+            { name: "Stormshield", code: "uit" },
+            { name: "Head Hunter's Glory", code: "paf" },
+            { name: "Medusa's Gaze", code: "pae" },
+            { name: "Spirit Ward", code: "paf" },
+            { name: "Blackoak Shield", code: "paf" },
+            { name: "Spike Thorn", code: "paf" },
+            { name: "Steelrend", code: "uhg" },
+            { name: "Hellmouth", code: "ulg" },
+            { name: "Dracul's Grasp", code: "uvg" },
+            { name: "Soul Drainer", code: "umg" },
+            { name: "Shadowdancer", code: "umb" },
+            { name: "Sandstorm Trek", code: "uhb" },
+            { name: "Marrowwalk", code: "uvb" },
+            { name: "War Traveler", code: "utb" },
+            { name: "Gore Rider", code: "ulb" },
+            { name: "Arachnid Mesh", code: "ulc" },
+            { name: "Nosferatu's Coil", code: "uvc" },
+            { name: "Verdungo's Hearty Cord", code: "umc" },
+            { name: "String of Ears", code: "ulc" },
+            { name: "Thundergod's Vigor", code: "uhc" },
+        ];
+
+        const exceptionalUniqueWeapons = [
+            { name: "Bloodletter", code: "9ss" },
+            { name: "Coldsteel Eye", code: "9sm" },
+            { name: "Hexfire", code: "9sb" },
+            { name: "Blade of Ali Baba", code: "9fc" },
+            { name: "Ginther's Rift", code: "9cr" },
+            { name: "Headstriker", code: "9bs" },
+            { name: "Plague Bearer", code: "9ls" },
+            { name: "The Atlantean", code: "9wd" },
+            { name: "Crainte Vomir", code: "92h" },
+            { name: "Bing Sz Wang", code: "9cm" },
+            { name: "The Vile Husk", code: "9gs" },
+            { name: "Cloudcrack", code: "9b9" },
+            { name: "Todesfaelle Flamme", code: "9fb" },
+            { name: "Swordguard", code: "9gd" },
+            { name: "Coldkill", code: "9ha" },
+            { name: "Butcher's Pupil", code: "9ax" },
+            { name: "Islestrike", code: "92a" },
+            { name: "Pompeii's Wrath", code: "9mp" },
+            { name: "Guardian Naga", code: "9mt" },
+            { name: "Warlord's Trust", code: "9ma" },
+            { name: "Spellsteel", code: "9ba" },
+            { name: "Stormrider", code: "9bt" },
+            { name: "Boneslayer Blade", code: "9ga" },
+            { name: "The Minotaur", code: "9gi" },
+            { name: "Dark Clan Crusher", code: "9cl" },
+            { name: "Fleshrender", code: "9sp" },
+            { name: "Sureshrill Frost", code: "9ma" },
+            { name: "Moonfall", code: "9mt" },
+            { name: "Baezil's Vortex", code: "9fl" },
+            { name: "Earthshaker", code: "9wh" },
+            { name: "Bloodtree Stump", code: "9m9" },
+            { name: "The Gavel of Pain", code: "9mt" },
+            { name: "Spineripper", code: "9dg" },
+            { name: "Heart Carver", code: "9di" },
+            { name: "Blackbog's Sharp", code: "9kr" },
+            { name: "Stormspike", code: "9bl" },
+            { name: "Razorswitch", code: "9s8" },
+            { name: "Ribcracker", code: "9st" },
+            { name: "Chromatic Ire", code: "9s9" },
+            { name: "Warpspear", code: "9sb" },
+            { name: "Skull Collector", code: "9ss" },
+            { name: "Suicide Branch", code: "9bw" },
+            { name: "Carin Shard", code: "9gw" },
+            { name: "Arm of King Leoric", code: "9tw" },
+            { name: "Blackhand Key", code: "9qr" },
+            { name: "Zakarum's Hand", code: "9sc" },
+            { name: "The Fetid Sprinkler", code: "9qs" },
+            { name: "Hand of Blessed Light", code: "9ws" },
+            { name: "The Meat Scraper", code: "9pa" },
+            { name: "Blackleach Blade", code: "9h9" },
+            { name: "Athena's Wrath", code: "9s7" },
+            { name: "Pierre Tombale Couant", code: "9vo" },
+            { name: "Husoldal Evo", code: "9s8" },
+            { name: "Grim's Burning Dead", code: "9p9" },
+            { name: "The Impaler", code: "9sr" },
+            { name: "Kelpie Snare", code: "9tr" },
+            { name: "Soulfeast Tine", code: "9br" },
+            { name: "Hone Sundan", code: "9st" },
+            { name: "Spire of Honor", code: "9p9" },
+            { name: "Deathbit", code: "9b8" },
+            { name: "The Scalper", code: "9ta" },
+            { name: "Endlesshail", code: "8sb" },
+            { name: "Witchwild String", code: "8lb" },
+            { name: "Cliffkiller", code: "8cb" },
+            { name: "Magewrath", code: "8s8" },
+            { name: "Goldstrike Arch", code: "8l8" },
+            { name: "Langer Briser", code: "8lx" },
+            { name: "Pus Spitter", code: "8mx" },
+            { name: "Buriza-Do Kyanon", code: "8hx" },
+            { name: "Demon Machine", code: "8rx" },
+        ];
+
+        const exceptionalUniqueArmor = [
+            { name: "Blackhorn's Face", code: "xh9" },
+            { name: "Crown of Thieves", code: "xhm" },
+            { name: "Kira's Guardian", code: "ci2" },
+            { name: "Stealskull", code: "xrn" },
+            { name: "Veil of Steel", code: "xsk" },
+            { name: "Peasant Crown", code: "xow" },
+            { name: "Rockstopper", code: "xh9" },
+            { name: "Valkyrie Wing", code: "xlm" },
+            { name: "Duriel's Shell", code: "xrs" },
+            { name: "Shaftstop", code: "xpl" },
+            { name: "Toothrow", code: "xui" },
+            { name: "Atma's Wail", code: "xul" },
+            { name: "Black Hades", code: "xmb" },
+            { name: "Iron Pelt", code: "xlt" },
+            { name: "Crow Caw", code: "xtu" },
+            { name: "Spirit Forge", code: "xng" },
+            { name: "Skin of the Vipermagi", code: "xea" },
+            { name: "Skin of the Flayed One", code: "xla" },
+            { name: "Rattlecage", code: "xhb" },
+            { name: "Goldskin", code: "xtp" },
+            { name: "Silks of the Victor", code: "xth" },
+            { name: "The Spirit Shroud", code: "xuc" },
+            { name: "Radament's Sphere", code: "pa9" },
+            { name: "Lidless Wall", code: "paf" },
+            { name: "Stormchaser", code: "paf" },
+            { name: "Gerke's Sanctuary", code: "paf" },
+            { name: "Tiamat's Rebuke", code: "paf" },
+            { name: "Lance Guard", code: "paf" },
+            { name: "Venom Grip", code: "xlg" },
+            { name: "Gravepalm", code: "xmg" },
+            { name: "Ghoulhide", code: "xhg" },
+            { name: "Lava Gout", code: "xtg" },
+            { name: "Hellmouth", code: "ulg" },
+            { name: "Infernostride", code: "xlb" },
+            { name: "Waterwalk", code: "xmb" },
+            { name: "Silkweave", code: "xhb" },
+            { name: "War Traveler", code: "xtb" },
+            { name: "Gloomstrap", code: "zlb" },
+            { name: "Snowclash", code: "ztb" },
+            { name: "Goldwrap", code: "zmb" },
+            { name: "Bladebuckle", code: "zhb" },
+            { name: "String of Ears", code: "zlb" },
+        ];
+
+        const normalUniqueWeapons = [
+            { name: "Rixot's Keen", code: "ssd" },
+            { name: "Blood Crescent", code: "scm" },
+            { name: "Skewer of Krintiz", code: "sbr" },
+            { name: "Gleamscythe", code: "flc" },
+            { name: "Griswold's Edge", code: "bsd" },
+            { name: "Hellplague", code: "lsd" },
+            { name: "Culwen's Point", code: "wsd" },
+            { name: "Shadowfang", code: "2hs" },
+            { name: "Soulflay", code: "clm" },
+            { name: "Kinemil's Awl", code: "gis" },
+            { name: "Blacktongue", code: "bsw" },
+            { name: "Ripsaw", code: "flb" },
+            { name: "The Patriarch", code: "gsd" },
+            { name: "The Gnasher", code: "hax" },
+            { name: "Deathspade", code: "axe" },
+            { name: "Bladebone", code: "2ax" },
+            { name: "Skull Splitter", code: "mpi" },
+            { name: "Rakescar", code: "wax" },
+            { name: "Axe of Fechmar", code: "lax" },
+            { name: "Goreshovel", code: "bax" },
+            { name: "The Chieftain", code: "btx" },
+            { name: "Brainhew", code: "gax" },
+            { name: "Humongous", code: "gix" },
+            { name: "Felloak", code: "clb" },
+            { name: "Stoutnail", code: "spc" },
+            { name: "Crushflange", code: "mac" },
+            { name: "Bloodrise", code: "mst" },
+            { name: "The General's Tan Do Li Ga", code: "fla" },
+            { name: "Ironstone", code: "whm" },
+            { name: "Bonesnap", code: "mau" },
+            { name: "Steeldriver", code: "gma" },
+            { name: "Gull", code: "dgr" },
+            { name: "The Diggler", code: "dir" },
+            { name: "The Jade Tan Do", code: "kri" },
+            { name: "Spectral Shard", code: "bld" },
+            { name: "Bane Ash", code: "sst" },
+            { name: "Serpent Lord", code: "lst" },
+            { name: "Spire of Lazarus", code: "cst" },
+            { name: "The Salamander", code: "bst" },
+            { name: "The Iron Jang Bong", code: "wst" },
+            { name: "Torch of Iro", code: "wnd" },
+            { name: "Maelstrom", code: "ywn" },
+            { name: "Gravenspine", code: "bwn" },
+            { name: "Ume's Lament", code: "gwn" },
+            { name: "Knell Striker", code: "scp" },
+            { name: "Rusthandle", code: "gsc" },
+            { name: "Stormeye", code: "wsp" },
+            { name: "Dimoak's Hew", code: "bar" },
+            { name: "Steelgoad", code: "vou" },
+            { name: "Soul Harvest", code: "scy" },
+            { name: "The Battlebranch", code: "pax" },
+            { name: "Woestave", code: "hal" },
+            { name: "The Grim Reaper", code: "wsc" },
+            { name: "The Dragon Chang", code: "spr" },
+            { name: "Razortine", code: "tri" },
+            { name: "Bloodthief", code: "brn" },
+            { name: "Lance of Yaggai", code: "spt" },
+            { name: "The Tannr Gorerod", code: "pik" },
+            { name: "Pluckeye", code: "sbw" },
+            { name: "Witherstring", code: "hbw" },
+            { name: "Raven Claw", code: "lbw" },
+            { name: "Rogue's Bow", code: "cbw" },
+            { name: "Stormstrike", code: "sbb" },
+            { name: "Wizendraw", code: "lbb" },
+            { name: "Hellclap", code: "swb" },
+            { name: "Blastbark", code: "lwb" },
+            { name: "Skystrike", code: "bow" },
+            { name: "Riphook", code: "lxb" },
+            { name: "Kuko Shakaku", code: "mxb" },
+            { name: "Leadcrow", code: "lxb" },
+            { name: "Ichorsting", code: "mxb" },
+            { name: "Hellcast", code: "hxb" },
+            { name: "Doomslinger", code: "rxb" },
+        ];
+
+        const normalUniqueArmor = [
+            { name: "Biggin's Bonnet", code: "cap" },
+            { name: "Tarnhelm", code: "skp" },
+            { name: "Coif of Glory", code: "hlm" },
+            { name: "Duskdeep", code: "fhl" },
+            { name: "Howltusk", code: "ghm" },
+            { name: "Undead Crown", code: "crn" },
+            { name: "Wormskull", code: "msk" },
+            { name: "Greyform", code: "qui" },
+            { name: "Blinkbat's Form", code: "lea" },
+            { name: "The Centurion", code: "hla" },
+            { name: "Twitchthroe", code: "stu" },
+            { name: "Darkglow", code: "rng" },
+            { name: "Hawkmail", code: "scl" },
+            { name: "Sparking Mail", code: "chn" },
+            { name: "Venom Ward", code: "brs" },
+            { name: "Iceblink", code: "spl" },
+            { name: "Boneflesh", code: "plt" },
+            { name: "Rockfleece", code: "fld" },
+            { name: "Rattlecage", code: "gth" },
+            { name: "Goldskin", code: "ful" },
+            { name: "Victors Silk", code: "aar" },
+            { name: "Heavenly Garb", code: "ltp" },
+            { name: "Pelta Lunata", code: "buc" },
+            { name: "Umbral Disk", code: "sml" },
+            { name: "Stormguild", code: "lrg" },
+            { name: "Steelclash", code: "kit" },
+            { name: "Swordback Hold", code: "spk" },
+            { name: "Bverrit Keep", code: "tow" },
+            { name: "Wall of the Eyeless", code: "gts" },
+            { name: "The Ward", code: "lrg" },
+            { name: "Visceratuant", code: "buc" },
+            { name: "Moser's Blessed Circle", code: "xml" },
+            { name: "The Hand of Broc", code: "lgl" },
+            { name: "Bloodfist", code: "hgl" },
+            { name: "Chance Guards", code: "mgl" },
+            { name: "Magefist", code: "tgl" },
+            { name: "Frostburn", code: "hgl" },
+            { name: "Hotspur", code: "lbt" },
+            { name: "Gorefoot", code: "hbt" },
+            { name: "Treads of Cthon", code: "mbt" },
+            { name: "Goblin Toe", code: "tbt" },
+            { name: "Tearhaunch", code: "hbt" },
+            { name: "Lenymo", code: "lbl" },
+            { name: "Snakecord", code: "vbl" },
+            { name: "Nightsmoke", code: "hbl" },
+            { name: "Goldwrap", code: "hbl" },
+            { name: "Bladebuckle", code: "mbl" },
+        ];
+
+        // Set items data - organized by level/tier
+        const highLevelSets = [
+            // Immortal King's (Barbarian)
+            { name: "Immortal King's Will", code: "ba5", set: "IK" },
+            { name: "Immortal King's Soul Cage", code: "uar", set: "IK" },
+            { name: "Immortal King's Detail", code: "uhc", set: "IK" },
+            { name: "Immortal King's Forge", code: "ulg", set: "IK" },
+            { name: "Immortal King's Pillar", code: "uhb", set: "IK" },
+            { name: "Immortal King's Stone Crusher", code: "2ha", set: "IK" },
+            // Tal Rasha's (Sorceress)
+            { name: "Tal Rasha's Horadric Crest", code: "xh9", set: "TR" },
+            { name: "Tal Rasha's Guardianship", code: "utp", set: "TR" },
+            { name: "Tal Rasha's Fine-Spun Cloth", code: "ulc", set: "TR" },
+            { name: "Tal Rasha's Lidless Eye", code: "ob9", set: "TR" },
+            { name: "Tal Rasha's Adjudication", code: "amu", set: "TR" },
+            // Griswold's (Paladin)
+            { name: "Griswold's Valor", code: "bah", set: "Gris" },
+            { name: "Griswold's Heart", code: "uar", set: "Gris" },
+            { name: "Griswold's Redemption", code: "pa9", set: "Gris" },
+            { name: "Griswold's Honor", code: "pa9", set: "Gris" },
+            // Trang-Oul's (Necromancer)
+            { name: "Trang-Oul's Guise", code: "baf", set: "TO" },
+            { name: "Trang-Oul's Scales", code: "uui", set: "TO" },
+            { name: "Trang-Oul's Wing", code: "paf", set: "TO" },
+            { name: "Trang-Oul's Claws", code: "uvg", set: "TO" },
+            { name: "Trang-Oul's Girth", code: "uvc", set: "TO" },
+            // M'avina's (Amazon)
+            { name: "M'avina's True Sight", code: "ci3", set: "Mav" },
+            { name: "M'avina's Embrace", code: "uea", set: "Mav" },
+            { name: "M'avina's Icy Clutch", code: "ulg", set: "Mav" },
+            { name: "M'avina's Tenet", code: "umc", set: "Mav" },
+            { name: "M'avina's Caster", code: "6lw", set: "Mav" },
+            // Natalya's (Assassin)
+            { name: "Natalya's Totem", code: "ba7", set: "Nat" },
+            { name: "Natalya's Shadow", code: "utp", set: "Nat" },
+            { name: "Natalya's Mark", code: "7wc", set: "Nat" },
+            { name: "Natalya's Soul", code: "uhb", set: "Nat" },
+            // Aldur's (Druid)
+            { name: "Aldur's Stony Gaze", code: "dr5", set: "Ald" },
+            { name: "Aldur's Deception", code: "utp", set: "Ald" },
+            { name: "Aldur's Rhythm", code: "7sc", set: "Ald" },
+            { name: "Aldur's Advance", code: "utb", set: "Ald" },
+            // The Disciple
+            { name: "Laying of Hands", code: "xlg", set: "Disciple" },
+            { name: "Rite of Passage", code: "utb", set: "Disciple" },
+            { name: "Dark Adherent", code: "utp", set: "Disciple" },
+            { name: "Credendum", code: "umc", set: "Disciple" },
+            { name: "Telling of Beads", code: "amu", set: "Disciple" },
+            // Sazabi's
+            { name: "Sazabi's Mental Sheath", code: "xlm", set: "Sazabi" },
+            { name: "Sazabi's Ghost Liberator", code: "7cr", set: "Sazabi" },
+            { name: "Sazabi's Cobalt Redeemer", code: "paf", set: "Sazabi" },
+            // Bul-Kathos'
+            { name: "Bul-Kathos' Sacred Charge", code: "7fb", set: "BK" },
+            { name: "Bul-Kathos' Tribal Guardian", code: "7fb", set: "BK" },
+        ];
+
+        const midLevelSets = [
+            // Hwanin's Majesty
+            { name: "Hwanin's Splendor", code: "xhl", set: "Hwanin" },
+            { name: "Hwanin's Refuge", code: "xtp", set: "Hwanin" },
+            { name: "Hwanin's Blessing", code: "zhb", set: "Hwanin" },
+            { name: "Hwanin's Justice", code: "9bl", set: "Hwanin" },
+            // Naj's Ancient Vestige
+            { name: "Naj's Circlet", code: "ci1", set: "Naj" },
+            { name: "Naj's Light Plate", code: "xar", set: "Naj" },
+            { name: "Naj's Puzzler", code: "6ss", set: "Naj" },
+            // Orphan's Call
+            { name: "Guillaume's Face", code: "xlm", set: "Orphan" },
+            { name: "Whitstan's Guard", code: "paf", set: "Orphan" },
+            { name: "Magnus' Skin", code: "xng", set: "Orphan" },
+            { name: "Wilhelm's Pride", code: "zhb", set: "Orphan" },
+            // Sander's Folly
+            { name: "Sander's Paragon", code: "cap", set: "Sander" },
+            { name: "Sander's Riprap", code: "hbt", set: "Sander" },
+            { name: "Sander's Taboo", code: "hvg", set: "Sander" },
+            { name: "Sander's Superstition", code: "9wn", set: "Sander" },
+            // Cow King's Leathers
+            { name: "Cow King's Horns", code: "xap", set: "Cow" },
+            { name: "Cow King's Hide", code: "xtu", set: "Cow" },
+            { name: "Cow King's Hooves", code: "xhb", set: "Cow" },
+            // Heaven's Brethren
+            { name: "Dangoon's Teaching", code: "zvg", set: "Brethren" },
+            { name: "Taebaek's Glory", code: "xhb", set: "Brethren" },
+            { name: "Haemosu's Adamant", code: "xar", set: "Brethren" },
+            { name: "Ondal's Almighty", code: "9sp", set: "Brethren" },
+        ];
+
+        const lowLevelSets = [
+            // Angelic Raiment
+            { name: "Angelic Halo", code: "rin", set: "Angelic" },
+            { name: "Angelic Wings", code: "amu", set: "Angelic" },
+            { name: "Angelic Sickle", code: "sbr", set: "Angelic" },
+            { name: "Angelic Mantle", code: "rng", set: "Angelic" },
+            // Arcanna's Tricks
+            { name: "Arcanna's Head", code: "skp", set: "Arcanna" },
+            { name: "Arcanna's Flesh", code: "ltp", set: "Arcanna" },
+            { name: "Arcanna's Deathwand", code: "wnd", set: "Arcanna" },
+            { name: "Arcanna's Sign", code: "amu", set: "Arcanna" },
+            // Arctic Gear
+            { name: "Arctic Horn", code: "ci0", set: "Arctic" },
+            { name: "Arctic Furs", code: "qui", set: "Arctic" },
+            { name: "Arctic Binding", code: "lbl", set: "Arctic" },
+            { name: "Arctic Mitts", code: "lgl", set: "Arctic" },
+            // Berserker's Arsenal
+            { name: "Berserker's Headgear", code: "hlm", set: "Berserker" },
+            { name: "Berserker's Hauberk", code: "spl", set: "Berserker" },
+            { name: "Berserker's Hatchet", code: "2ax", set: "Berserker" },
+            // Cathan's Traps
+            { name: "Cathan's Visage", code: "msk", set: "Cathan" },
+            { name: "Cathan's Mesh", code: "ltr", set: "Cathan" },
+            { name: "Cathan's Rule", code: "sst", set: "Cathan" },
+            { name: "Cathan's Sigil", code: "amu", set: "Cathan" },
+            { name: "Cathan's Seal", code: "rin", set: "Cathan" },
+            // Civerb's Vestments
+            { name: "Civerb's Cudgel", code: "gsc", set: "Civerb" },
+            { name: "Civerb's Icon", code: "amu", set: "Civerb" },
+            { name: "Civerb's Ward", code: "lrg", set: "Civerb" },
+            // Cleglaw's Brace
+            { name: "Cleglaw's Tooth", code: "lsd", set: "Cleglaw" },
+            { name: "Cleglaw's Claw", code: "sml", set: "Cleglaw" },
+            { name: "Cleglaw's Pincers", code: "mgl", set: "Cleglaw" },
+            // Death's Disguise
+            { name: "Death's Touch", code: "lea", set: "Death" },
+            { name: "Death's Guard", code: "tgl", set: "Death" },
+            { name: "Death's Hand", code: "hgl", set: "Death" },
+            // Hsarus' Defense
+            { name: "Hsarus' Iron Heel", code: "chn", set: "Hsarus" },
+            { name: "Hsarus' Iron Fist", code: "vbt", set: "Hsarus" },
+            { name: "Hsarus' Iron Stay", code: "vbl", set: "Hsarus" },
+            // Infernal Tools
+            { name: "Infernal Cranium", code: "cap", set: "Infernal" },
+            { name: "Infernal Torch", code: "9wn", set: "Infernal" },
+            { name: "Infernal Sign", code: "7tw", set: "Infernal" },
+            // Iratha's Finery
+            { name: "Iratha's Coil", code: "crn", set: "Iratha" },
+            { name: "Iratha's Cuff", code: "lgl", set: "Iratha" },
+            { name: "Iratha's Cord", code: "lbl", set: "Iratha" },
+            { name: "Iratha's Collar", code: "amu", set: "Iratha" },
+            // Isenhart's Armory
+            { name: "Isenhart's Horns", code: "fhl", set: "Isenhart" },
+            { name: "Isenhart's Case", code: "brs", set: "Isenhart" },
+            { name: "Isenhart's Parry", code: "spk", set: "Isenhart" },
+            { name: "Isenhart's Lightbrand", code: "bsw", set: "Isenhart" },
+            // Milabrega's Regalia
+            { name: "Milabrega's Diadem", code: "crn", set: "Milabrega" },
+            { name: "Milabrega's Robe", code: "aar", set: "Milabrega" },
+            { name: "Milabrega's Orb", code: "pa8", set: "Milabrega" },
+            { name: "Milabrega's Rod", code: "wsp", set: "Milabrega" },
+            // Sigon's Complete Steel
+            { name: "Sigon's Visor", code: "ghm", set: "Sigon" },
+            { name: "Sigon's Shelter", code: "gth", set: "Sigon" },
+            { name: "Sigon's Guard", code: "tow", set: "Sigon" },
+            { name: "Sigon's Gage", code: "hgl", set: "Sigon" },
+            { name: "Sigon's Sabot", code: "hbt", set: "Sigon" },
+            { name: "Sigon's Wrap", code: "hbl", set: "Sigon" },
+            // Tancred's Battlegear
+            { name: "Tancred's Skull", code: "bwn", set: "Tancred" },
+            { name: "Tancred's Spine", code: "ful", set: "Tancred" },
+            { name: "Tancred's Hobnails", code: "tbt", set: "Tancred" },
+            { name: "Tancred's Weird", code: "amu", set: "Tancred" },
+            { name: "Tancred's Crowbill", code: "mpi", set: "Tancred" },
+            // Vidala's Rig
+            { name: "Vidala's Barb", code: "amu", set: "Vidala" },
+            { name: "Vidala's Fetlock", code: "lbt", set: "Vidala" },
+            { name: "Vidala's Ambush", code: "lea", set: "Vidala" },
+            { name: "Vidala's Snare", code: "lbw", set: "Vidala" },
+        ];
+
+        // Magic items data
+        const magicJewelry = [
+            { name: "Magic Amulets (ILVL 82+)", code: "amu", minIlvl: 82, desc: "High-level crafting/gambling" },
+            { name: "Magic Amulets (ILVL 60-81)", code: "amu", minIlvl: 60, maxIlvl: 81, desc: "Mid-level amulets" },
+            { name: "Magic Amulets (ILVL <60)", code: "amu", maxIlvl: 59, desc: "Low-level amulets" },
+            { name: "Magic Rings (ILVL 71+)", code: "rin", minIlvl: 71, desc: "High-level crafting" },
+            { name: "Magic Rings (ILVL 42-70)", code: "rin", minIlvl: 42, maxIlvl: 70, desc: "Mid-level rings" },
+            { name: "Magic Rings (ILVL <42)", code: "rin", maxIlvl: 41, desc: "Low-level rings" },
+            { name: "Magic Jewels", code: "jew", desc: "All magic jewels" },
+        ];
+
+        const magicCharms = [
+            { name: "Grand Charms (ILVL 78+)", code: "cm3", minIlvl: 78, desc: "High-level skillers" },
+            { name: "Grand Charms (ILVL 50-77)", code: "cm3", minIlvl: 50, maxIlvl: 77, desc: "Skiller range" },
+            { name: "Grand Charms (ILVL <50)", code: "cm3", maxIlvl: 49, desc: "Low-level grands" },
+            { name: "Large Charms (ILVL 80+)", code: "cm2", minIlvl: 80, desc: "High-level" },
+            { name: "Large Charms (ILVL <80)", code: "cm2", maxIlvl: 79, desc: "Lower-level" },
+            { name: "Small Charms (ILVL 90+)", code: "cm1", minIlvl: 90, desc: "Perfect stat range" },
+            { name: "Small Charms (ILVL 48-89)", code: "cm1", minIlvl: 48, maxIlvl: 89, desc: "Good stat range" },
+            { name: "Small Charms (ILVL <48)", code: "cm1", maxIlvl: 47, desc: "Low-level" },
+        ];
+
+        const magicCraftingBases = [
+            { name: "Vampirebone Gloves (ILVL 85+)", code: "vgl", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Sharkskin Gloves (ILVL 85+)", code: "xvg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Bramble Mitts (ILVL 85+)", code: "uvg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Chain Gloves (ILVL 85+)", code: "mgl", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Heavy Bracers (ILVL 85+)", code: "xmg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Vambraces (ILVL 85+)", code: "umg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Demonhide Gloves (ILVL 85+)", code: "xlg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Wyrmhide Boots (ILVL 85+)", code: "ulb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Demonhide Boots (ILVL 85+)", code: "xlb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Battle Boots (ILVL 85+)", code: "tbt", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Scarabshell Boots (ILVL 85+)", code: "xtb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Boneweave Boots (ILVL 85+)", code: "utb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Vampirefang Belt (ILVL 85+)", code: "uvc", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Mithril Coil (ILVL 85+)", code: "zmb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Mesh Belt (ILVL 85+)", code: "umc", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Berserker Axe (ILVL 85+)", code: "72a", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Phase Blade (ILVL 85+)", code: "7sb", minIlvl: 85, desc: "Crafting Base" },
+        ];
+
+        // Rare items data
+        const rareJewelry = [
+            { name: "Rare Amulets", code: "amu", desc: "All rare amulets" },
+            { name: "Rare Rings", code: "rin", desc: "All rare rings" },
+            { name: "Rare Jewels", code: "jew", desc: "All rare jewels" },
+        ];
+
+        const rareClassItems = [
+            { name: "Circlets (All)", code: "EQ7", desc: "All circlets/coronets/tiaras" },
+            { name: "Claws (ILVL 50+)", code: "CL5", minIlvl: 50, desc: "Assassin claws" },
+            { name: "Orbs (ILVL 50+)", code: "WP11", minIlvl: 50, desc: "Sorceress orbs" },
+            { name: "Javelins (ILVL 56+)", code: "7ja", minIlvl: 56, desc: "Elite javelins" },
+            { name: "Matriarchal Javelin (ILVL 56+)", code: "jav", minIlvl: 56, desc: "Elite javelin" },
+            { name: "Bows (ILVL 56+)", code: "7wa", minIlvl: 56, desc: "Elite bows" },
+            { name: "Matriarchal Bow (ILVL 56+)", code: "wax", minIlvl: 56, desc: "Elite bow" },
+            { name: "Paladin Shields (Elite)", code: "CL3", tier: "elite", desc: "Elite paladin shields" },
+        ];
+
+        const rareEliteBases = [
+            { name: "Elite Gloves (ILVL 50+)", code: "EQ4", tier: "elite", minIlvl: 50, desc: "Elite gloves" },
+            { name: "Elite Boots (ILVL 50+)", code: "EQ5", tier: "elite", minIlvl: 50, desc: "Elite boots" },
+            { name: "Elite Belts (ILVL 50+)", code: "EQ6", tier: "elite", minIlvl: 50, desc: "Elite belts" },
+            { name: "Elite Helms (ILVL 50+)", code: "EQ1", tier: "elite", minIlvl: 50, desc: "Elite helms" },
+            { name: "Elite Armors (ILVL 50+)", code: "EQ2", tier: "elite", minIlvl: 50, desc: "Elite body armor" },
+            { name: "Elite Shields (ILVL 50+)", code: "EQ3", tier: "elite", minIlvl: 50, desc: "Elite shields" },
         ];
 
         // Global settings state
         const globalSettings = {
             enableFilterLevels: false,
             levelNames: [
-                'Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5',
-                'Level 6', 'Level 7', 'Level 8', 'Level 9', 'Level 10'
+                '', '', '', '', '',
+                '', '', '', '', ''
             ]
         };
 
@@ -723,7 +1723,24 @@
             utility: {},
             runes: {},
             gems: {},
-            misc: {}
+            misc: {},
+            jewelryCharms: {},
+            classUniques: {},
+            eliteWeapons: {},
+            eliteArmor: {},
+            excWeapons: {},
+            excArmor: {},
+            normWeapons: {},
+            normArmor: {},
+            highSets: {},
+            midSets: {},
+            lowSets: {},
+            magicJewelry: {},
+            magicCharms: {},
+            magicCrafting: {},
+            rareJewelry: {},
+            rareClassItems: {},
+            rareEliteBases: {}
         };
 
         // Initialize utility items state
@@ -778,6 +1795,285 @@
             };
         });
 
+        // Initialize unique items state
+        jewelryAndCharms.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.jewelryCharms[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        classSpecificUniques.forEach(item => {
+            // Use name as key since same code may be used by multiple items
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.classUniques[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        eliteUniqueWeapons.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.eliteWeapons[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        eliteUniqueArmor.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.eliteArmor[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        exceptionalUniqueWeapons.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.excWeapons[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        exceptionalUniqueArmor.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.excArmor[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        normalUniqueWeapons.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.normWeapons[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        normalUniqueArmor.forEach(item => {
+            const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+            filterState.normArmor[key] = {
+                name: item.name,
+                code: item.code,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        // Initialize state for set items
+        highLevelSets.forEach(item => {
+            const key = item.code + '_' + item.set;
+            filterState.highSets[key] = {
+                name: item.name,
+                code: item.code,
+                set: item.set,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        midLevelSets.forEach(item => {
+            const key = item.code + '_' + item.set;
+            filterState.midSets[key] = {
+                name: item.name,
+                code: item.code,
+                set: item.set,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        lowLevelSets.forEach(item => {
+            const key = item.code + '_' + item.set;
+            filterState.lowSets[key] = {
+                name: item.name,
+                code: item.code,
+                set: item.set,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'DARK_GREEN',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        // Initialize state for magic items
+        magicJewelry.forEach((item, idx) => {
+            const key = item.code + '_' + idx;
+            filterState.magicJewelry[key] = {
+                name: item.name,
+                code: item.code,
+                minIlvl: item.minIlvl,
+                maxIlvl: item.maxIlvl,
+                desc: item.desc,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'BLUE',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        magicCharms.forEach((item, idx) => {
+            const key = item.code + '_' + idx;
+            filterState.magicCharms[key] = {
+                name: item.name,
+                code: item.code,
+                minIlvl: item.minIlvl,
+                maxIlvl: item.maxIlvl,
+                desc: item.desc,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'BLUE',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        magicCraftingBases.forEach((item, idx) => {
+            const key = item.code + '_' + idx;
+            filterState.magicCrafting[key] = {
+                name: item.name,
+                code: item.code,
+                minIlvl: item.minIlvl,
+                maxIlvl: item.maxIlvl,
+                desc: item.desc,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'BLUE',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        // Initialize state for rare items
+        rareJewelry.forEach((item, idx) => {
+            const key = item.code + '_' + idx;
+            filterState.rareJewelry[key] = {
+                name: item.name,
+                code: item.code,
+                desc: item.desc,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'YELLOW',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        rareClassItems.forEach((item, idx) => {
+            const key = item.code + '_' + idx;
+            filterState.rareClassItems[key] = {
+                name: item.name,
+                code: item.code,
+                minIlvl: item.minIlvl,
+                tier: item.tier,
+                desc: item.desc,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'YELLOW',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
+        rareEliteBases.forEach((item, idx) => {
+            const key = item.code + '_' + idx;
+            filterState.rareEliteBases[key] = {
+                name: item.name,
+                code: item.code,
+                minIlvl: item.minIlvl,
+                tier: item.tier,
+                desc: item.desc,
+                show: true,
+                useCustomColors: false,
+                chatNotification: false,
+                fontColor: 'YELLOW',
+                borderColor: null,
+                backgroundColor: null,
+                filterLevels: [true, true, true, true, true, true, true, true, true, true]
+            };
+        });
+
         // Render items
         function renderUtilityItems() {
             const container = document.getElementById('utility-items');
@@ -793,33 +2089,27 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
-                // Build filter levels checkboxes
-                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
-                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
-                        <input type="checkbox" class="level-checkbox" 
-                            ${checked ? 'checked' : ''}
-                            onchange="updateItemLevel('utility', '${item.code}', ${idx}, this.checked)">
-                        <span class="level-checkbox-label">${idx + 1}</span>
-                    </div>
-                `).join('');
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('utility', '${item.code}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
                 
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('utility', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('utility', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('utility', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
                     <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
                         <span class="levels-label">Levels:</span>
                         <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
@@ -827,6 +2117,12 @@
                         <div class="level-checkboxes">
                             ${levelCheckboxes}
                         </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateItemState('utility', '${item.code}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
                     </div>
                     <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
                         <div class="color-picker-wrapper">
@@ -858,6 +2154,12 @@
                                 title="Clear background color">×</button>
                         </div>
                     </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('utility', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
                 `;
                 container.appendChild(row);
             });
@@ -879,33 +2181,27 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
-                // Build filter levels checkboxes
-                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
-                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
-                        <input type="checkbox" class="level-checkbox" 
-                            ${checked ? 'checked' : ''}
-                            onchange="updateItemLevel('runes', '${item.code}', ${idx}, this.checked)">
-                        <span class="level-checkbox-label">${idx + 1}</span>
-                    </div>
-                `).join('');
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('runes', '${item.code}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
                 
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('runes', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('runes', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('runes', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
                     <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
                         <span class="levels-label">Levels:</span>
                         <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
@@ -913,6 +2209,12 @@
                         <div class="level-checkboxes">
                             ${levelCheckboxes}
                         </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateItemState('runes', '${item.code}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
                     </div>
                     <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
                         <div class="color-picker-wrapper">
@@ -943,6 +2245,13 @@
                                 onclick="clearColor('runes', '${item.code}', 'backgroundColor')"
                                 title="Clear background color">×</button>
                         </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('runes', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
                 `;
                 container.appendChild(row);
             });
@@ -964,33 +2273,27 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
-                // Build filter levels checkboxes
-                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
-                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
-                        <input type="checkbox" class="level-checkbox" 
-                            ${checked ? 'checked' : ''}
-                            onchange="updateItemLevel('gems', '${item.code}', ${idx}, this.checked)">
-                        <span class="level-checkbox-label">${idx + 1}</span>
-                    </div>
-                `).join('');
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('gems', '${item.code}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
                 
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('gems', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('gems', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('gems', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
                     <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
                         <span class="levels-label">Levels:</span>
                         <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
@@ -998,6 +2301,12 @@
                         <div class="level-checkboxes">
                             ${levelCheckboxes}
                         </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateItemState('gems', '${item.code}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
                     </div>
                     <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
                         <div class="color-picker-wrapper">
@@ -1029,6 +2338,12 @@
                                 title="Clear background color">×</button>
                         </div>
                     </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('gems', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
                 `;
                 container.appendChild(row);
             });
@@ -1050,33 +2365,27 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
-                // Build filter levels checkboxes
-                const levelCheckboxes = state.filterLevels.map((checked, idx) => `
-                    <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
-                        <input type="checkbox" class="level-checkbox" 
-                            ${checked ? 'checked' : ''}
-                            onchange="updateItemLevel('misc', '${item.code}', ${idx}, this.checked)">
-                        <span class="level-checkbox-label">${idx + 1}</span>
-                    </div>
-                `).join('');
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('misc', '${item.code}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
                 
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('misc', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('misc', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('misc', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
                     <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
                         <span class="levels-label">Levels:</span>
                         <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
@@ -1084,6 +2393,12 @@
                         <div class="level-checkboxes">
                             ${levelCheckboxes}
                         </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateItemState('misc', '${item.code}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
                     </div>
                     <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
                         <div class="color-picker-wrapper">
@@ -1114,6 +2429,12 @@
                                 onclick="clearColor('misc', '${item.code}', 'backgroundColor')"
                                 title="Clear background color">×</button>
                         </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateItemState('misc', '${item.code}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
                     </div>
                 `;
                 container.appendChild(row);
@@ -1322,18 +2643,813 @@
             generateFilter();
         }
 
+        // ====== UNIQUE ITEMS FUNCTIONS ======
+
+        // Generic render function for all unique item categories
+        function renderUniqueItems(items, stateCategory, containerId, countId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+                const state = filterState[stateCategory][key];
+                const row = document.createElement('div');
+                row.className = 'item-row';
+                
+                // Build font color options
+                const fontOptions = FONT_COLORS.map(color => 
+                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
+                ).join('');
+                
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('${stateCategory}', '${key}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
+                
+                row.innerHTML = `
+                    <input type="checkbox" class="item-checkbox" 
+                        ${state.show ? 'checked' : ''} 
+                        onchange="updateUniqueItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                    <span class="item-name">${item.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateUniqueItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Font</span>
+                            <select class="color-select" 
+                                onchange="updateUniqueItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
+                                ${fontOptions}
+                            </select>
+                            <button class="color-clear-btn" 
+                                onclick="clearUniqueFontColor('${stateCategory}', '${key}')"
+                                title="Reset to default">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Border</span>
+                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
+                                onchange="updateUniqueItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
+                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearUniqueColor('${stateCategory}', '${key}', 'borderColor')"
+                                title="Clear border color">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">BG</span>
+                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
+                                onchange="updateUniqueItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
+                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearUniqueColor('${stateCategory}', '${key}', 'backgroundColor')"
+                                title="Clear background color">×</button>
+                        </div>
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <input type="checkbox" class="custom-color-checkbox" 
+                            ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateUniqueItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
+                        <span class="custom-label">Notify</span>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            updateUniqueCount(stateCategory, countId);
+        }
+
+        function renderJewelryCharmsItems() {
+            renderUniqueItems(jewelryAndCharms, 'jewelryCharms', 'jewelry-charms-items', 'jewelry-charms');
+        }
+
+        function renderClassUniquesItems() {
+            renderUniqueItems(classSpecificUniques, 'classUniques', 'class-uniques-items', 'class-uniques');
+        }
+
+        function renderEliteWeaponsItems() {
+            renderUniqueItems(eliteUniqueWeapons, 'eliteWeapons', 'elite-weapons-items', 'elite-weapons');
+        }
+
+        function renderEliteArmorItems() {
+            renderUniqueItems(eliteUniqueArmor, 'eliteArmor', 'elite-armor-items', 'elite-armor');
+        }
+
+        function renderExcWeaponsItems() {
+            renderUniqueItems(exceptionalUniqueWeapons, 'excWeapons', 'exc-weapons-items', 'exc-weapons');
+        }
+
+        function renderExcArmorItems() {
+            renderUniqueItems(exceptionalUniqueArmor, 'excArmor', 'exc-armor-items', 'exc-armor');
+        }
+
+        function renderNormWeaponsItems() {
+            renderUniqueItems(normalUniqueWeapons, 'normWeapons', 'norm-weapons-items', 'norm-weapons');
+        }
+
+        function renderNormArmorItems() {
+            renderUniqueItems(normalUniqueArmor, 'normArmor', 'norm-armor-items', 'norm-armor');
+        }
+
+        // Generic set items rendering function (uses SET keyword instead of UNI)
+        function renderSetItems(items, stateCategory, containerId, countId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = '';
+            let shownCount = 0;
+
+            items.forEach(item => {
+                const key = item.code + '_' + item.set;
+                const state = filterState[stateCategory][key];
+                if (state.show) shownCount++;
+
+                const row = document.createElement('div');
+                row.className = 'item-row';
+
+                // Build font color options
+                const fontOptions = FONT_COLORS.map(color => 
+                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
+                ).join('');
+
+                const levels = Array.from({length: 10}, (_, i) => {
+                    const levelNum = i + 1;
+                    const levelName = globalSettings.levelNames[i];
+                    if (!levelName) return '';
+                    return `
+                        <label class="level-checkbox">
+                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
+                                onchange="updateSetItemState('${stateCategory}', '${key}', 'filterLevels', this.checked, ${i})">
+                            <span>${levelNum}</span>
+                        </label>
+                    `;
+                }).join('');
+
+                row.innerHTML = `
+                    <div class="item-main">
+                        <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
+                            onchange="updateSetItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                        <span class="item-name">${state.name}</span>
+                    </div>
+                    ${globalSettings.enableFilterLevels ? `
+                    <div class="levels-container">
+                        <span class="levels-label">Levels</span>
+                        <button class="level-all-btn" 
+                            onclick="setAllSetLevels('${stateCategory}', '${key}', true)">All</button>
+                        <button class="level-none-btn" 
+                            onclick="setAllSetLevels('${stateCategory}', '${key}', false)">None</button>
+                        <div class="level-checkboxes">${levels}</div>
+                    </div>
+                    ` : ''}
+                    <div class="custom-container">
+                        <input type="checkbox" class="custom-checkbox" ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateSetItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Font</span>
+                            <select class="color-select" 
+                                onchange="updateSetItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
+                                ${fontOptions}
+                            </select>
+                            <button class="color-clear-btn" 
+                                onclick="clearSetFontColor('${stateCategory}', '${key}')"
+                                title="Reset to default">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Border</span>
+                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
+                                onchange="updateSetItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
+                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearSetColor('${stateCategory}', '${key}', 'borderColor')"
+                                title="Clear border color">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">BG</span>
+                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
+                                onchange="updateSetItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
+                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearSetColor('${stateCategory}', '${key}', 'backgroundColor')"
+                                title="Clear background color">×</button>
+                        </div>
+                    </div>
+                    <div class="notify-container">
+                        <input type="checkbox" class="notify-checkbox" ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateSetItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
+                        <span class="notify-label">Notify</span>
+                    </div>
+                `;
+
+                container.appendChild(row);
+            });
+
+            document.getElementById(countId).textContent = `(${shownCount}/${items.length} shown)`;
+        }
+
+        // Specific set rendering functions
+        function renderHighSetsItems() {
+            renderSetItems(highLevelSets, 'highSets', 'high-sets-items', 'high-sets-count');
+        }
+
+        function renderMidSetsItems() {
+            renderSetItems(midLevelSets, 'midSets', 'mid-sets-items', 'mid-sets-count');
+        }
+
+        function renderLowSetsItems() {
+            renderSetItems(lowLevelSets, 'lowSets', 'low-sets-items', 'low-sets-count');
+        }
+
+        // Generic magic/rare items rendering function
+        function renderMagicRareItems(items, stateCategory, containerId, countId, defaultColor) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = '';
+            let shownCount = 0;
+
+            items.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                const state = filterState[stateCategory][key];
+                if (state.show) shownCount++;
+
+                const row = document.createElement('div');
+                row.className = 'item-row';
+
+                const fontOptions = FONT_COLORS.map(color => 
+                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
+                ).join('');
+
+                const levels = Array.from({length: 10}, (_, i) => {
+                    const levelNum = i + 1;
+                    const levelName = globalSettings.levelNames[i];
+                    if (!levelName) return '';
+                    return `
+                        <label class="level-checkbox">
+                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
+                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'filterLevels', this.checked, ${i})">
+                            <span>${levelNum}</span>
+                        </label>
+                    `;
+                }).join('');
+
+                row.innerHTML = `
+                    <div class="item-main">
+                        <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
+                            onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                        <span class="item-name">${state.name}</span>
+                    </div>
+                    ${globalSettings.enableFilterLevels ? `
+                    <div class="levels-container">
+                        <span class="levels-label">Levels</span>
+                        <button class="level-all-btn" 
+                            onclick="setAllMagicRareLevels('${stateCategory}', '${key}', true)">All</button>
+                        <button class="level-none-btn" 
+                            onclick="setAllMagicRareLevels('${stateCategory}', '${key}', false)">None</button>
+                        <div class="level-checkboxes">${levels}</div>
+                    </div>
+                    ` : ''}
+                    <div class="custom-container">
+                        <input type="checkbox" class="custom-checkbox" ${state.useCustomColors ? 'checked' : ''}
+                            onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
+                        <span class="custom-label">Custom</span>
+                    </div>
+                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Font</span>
+                            <select class="color-select" 
+                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
+                                ${fontOptions}
+                            </select>
+                            <button class="color-clear-btn" 
+                                onclick="clearMagicRareFontColor('${stateCategory}', '${key}', '${defaultColor}')"
+                                title="Reset to default">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">Border</span>
+                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
+                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
+                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearMagicRareColor('${stateCategory}', '${key}', 'borderColor')"
+                                title="Clear border color">×</button>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <span class="color-label">BG</span>
+                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
+                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
+                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
+                            <button class="color-clear-btn" 
+                                onclick="clearMagicRareColor('${stateCategory}', '${key}', 'backgroundColor')"
+                                title="Clear background color">×</button>
+                        </div>
+                    </div>
+                    <div class="notify-container">
+                        <input type="checkbox" class="notify-checkbox" ${state.chatNotification ? 'checked' : ''}
+                            onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
+                        <span class="notify-label">Notify</span>
+                    </div>
+                `;
+
+                container.appendChild(row);
+            });
+
+            document.getElementById(countId).textContent = `(${shownCount}/${items.length} shown)`;
+        }
+
+        // Specific render functions for magic/rare items
+        function renderMagicJewelryItems() {
+            renderMagicRareItems(magicJewelry, 'magicJewelry', 'magic-jewelry-items', 'magic-jewelry-count', 'BLUE');
+        }
+
+        function renderMagicCharmsItems() {
+            renderMagicRareItems(magicCharms, 'magicCharms', 'magic-charms-items', 'magic-charms-count', 'BLUE');
+        }
+
+        function renderMagicCraftingItems() {
+            renderMagicRareItems(magicCraftingBases, 'magicCrafting', 'magic-crafting-items', 'magic-crafting-count', 'BLUE');
+        }
+
+        function renderRareJewelryItems() {
+            renderMagicRareItems(rareJewelry, 'rareJewelry', 'rare-jewelry-items', 'rare-jewelry-count', 'YELLOW');
+        }
+
+        function renderRareClassItemsItems() {
+            renderMagicRareItems(rareClassItems, 'rareClassItems', 'rare-class-items-items', 'rare-class-items-count', 'YELLOW');
+        }
+
+        function renderRareEliteBasesItems() {
+            renderMagicRareItems(rareEliteBases, 'rareEliteBases', 'rare-elite-bases-items', 'rare-elite-bases-count', 'YELLOW');
+        }
+
+        // Helper functions for unique items
+        function updateUniqueItemState(category, key, field, value) {
+            filterState[category][key][field] = value;
+            
+            if (category === 'jewelryCharms') {
+                renderJewelryCharmsItems();
+            } else if (category === 'classUniques') {
+                renderClassUniquesItems();
+            } else if (category === 'eliteWeapons') {
+                renderEliteWeaponsItems();
+            } else if (category === 'eliteArmor') {
+                renderEliteArmorItems();
+            } else if (category === 'excWeapons') {
+                renderExcWeaponsItems();
+            } else if (category === 'excArmor') {
+                renderExcArmorItems();
+            } else if (category === 'normWeapons') {
+                renderNormWeaponsItems();
+            } else if (category === 'normArmor') {
+                renderNormArmorItems();
+            }
+            
+            generateFilter();
+        }
+
+        function clearUniqueFontColor(category, key) {
+            filterState[category][key].fontColor = 'DARK_GREEN';
+            
+            if (category === 'jewelryCharms') {
+                renderJewelryCharmsItems();
+            } else if (category === 'classUniques') {
+                renderClassUniquesItems();
+            } else if (category === 'eliteWeapons') {
+                renderEliteWeaponsItems();
+            } else if (category === 'eliteArmor') {
+                renderEliteArmorItems();
+            } else if (category === 'excWeapons') {
+                renderExcWeaponsItems();
+            } else if (category === 'excArmor') {
+                renderExcArmorItems();
+            } else if (category === 'normWeapons') {
+                renderNormWeaponsItems();
+            } else if (category === 'normArmor') {
+                renderNormArmorItems();
+            }
+            
+            generateFilter();
+        }
+
+        function clearUniqueColor(category, key, colorType) {
+            filterState[category][key][colorType] = null;
+            
+            if (category === 'jewelryCharms') {
+                renderJewelryCharmsItems();
+            } else if (category === 'classUniques') {
+                renderClassUniquesItems();
+            } else if (category === 'eliteWeapons') {
+                renderEliteWeaponsItems();
+            } else if (category === 'eliteArmor') {
+                renderEliteArmorItems();
+            } else if (category === 'excWeapons') {
+                renderExcWeaponsItems();
+            } else if (category === 'excArmor') {
+                renderExcArmorItems();
+            } else if (category === 'normWeapons') {
+                renderNormWeaponsItems();
+            } else if (category === 'normArmor') {
+                renderNormArmorItems();
+            }
+            
+            generateFilter();
+        }
+
+        function updateUniqueCount(category, countId) {
+            const state = filterState[category];
+            const total = Object.keys(state).length;
+            const shown = Object.values(state).filter(item => item.show).length;
+            document.getElementById(`${countId}-count`).textContent = `(${shown}/${total} shown)`;
+        }
+
+        // Update set item state and re-render
+        function updateSetItemState(category, key, field, value, index = null) {
+            if (index !== null) {
+                filterState[category][key][field][index] = value;
+            } else {
+                filterState[category][key][field] = value;
+            }
+
+            // Re-render the appropriate section
+            if (category === 'highSets') {
+                renderHighSetsItems();
+            } else if (category === 'midSets') {
+                renderMidSetsItems();
+            } else if (category === 'lowSets') {
+                renderLowSetsItems();
+            }
+            
+            generateFilter();
+        }
+
+        // Clear set item font color (reset to DARK_GREEN)
+        function clearSetFontColor(category, key) {
+            filterState[category][key].fontColor = 'DARK_GREEN';
+            if (category === 'highSets') {
+                renderHighSetsItems();
+            } else if (category === 'midSets') {
+                renderMidSetsItems();
+            } else if (category === 'lowSets') {
+                renderLowSetsItems();
+            }
+            generateFilter();
+        }
+
+        // Clear set item border or background color
+        function clearSetColor(category, key, colorType) {
+            filterState[category][key][colorType] = null;
+            if (category === 'highSets') {
+                renderHighSetsItems();
+            } else if (category === 'midSets') {
+                renderMidSetsItems();
+            } else if (category === 'lowSets') {
+                renderLowSetsItems();
+            }
+            generateFilter();
+        }
+
+        // Set all filter levels for a set item
+        function setAllSetLevels(category, key, enabled) {
+            for (let i = 0; i < 10; i++) {
+                filterState[category][key].filterLevels[i] = enabled;
+            }
+            if (category === 'highSets') {
+                renderHighSetsItems();
+            } else if (category === 'midSets') {
+                renderMidSetsItems();
+            } else if (category === 'lowSets') {
+                renderLowSetsItems();
+            }
+            generateFilter();
+        }
+
+        // Preset functions for unique items
+        function applyUniquePreset(category, items, preset) {
+            items.forEach(item => {
+                const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+                if (preset === 'show-all') {
+                    filterState[category][key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState[category][key].show = false;
+                }
+            });
+            
+            // Re-render the appropriate section
+            if (category === 'jewelryCharms') {
+                renderJewelryCharmsItems();
+            } else if (category === 'classUniques') {
+                renderClassUniquesItems();
+            } else if (category === 'eliteWeapons') {
+                renderEliteWeaponsItems();
+            } else if (category === 'eliteArmor') {
+                renderEliteArmorItems();
+            } else if (category === 'excWeapons') {
+                renderExcWeaponsItems();
+            } else if (category === 'excArmor') {
+                renderExcArmorItems();
+            } else if (category === 'normWeapons') {
+                renderNormWeaponsItems();
+            } else if (category === 'normArmor') {
+                renderNormArmorItems();
+            }
+            
+            generateFilter();
+        }
+
+        function applyJewelryCharmsPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('jewelryCharms', jewelryAndCharms, preset);
+        }
+
+        function applyClassUniquesPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('classUniques', classSpecificUniques, preset);
+        }
+
+        function applyEliteWeaponsPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('eliteWeapons', eliteUniqueWeapons, preset);
+        }
+
+        function applyEliteArmorPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('eliteArmor', eliteUniqueArmor, preset);
+        }
+
+        function applyExcWeaponsPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('excWeapons', exceptionalUniqueWeapons, preset);
+        }
+
+        function applyExcArmorPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('excArmor', exceptionalUniqueArmor, preset);
+        }
+
+        function applyNormWeaponsPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('normWeapons', normalUniqueWeapons, preset);
+        }
+
+        function applyNormArmorPreset(preset) {
+            if (!preset) return;
+            applyUniquePreset('normArmor', normalUniqueArmor, preset);
+        }
+
+        // Preset functions for set items
+        function applyHighSetsPreset(preset) {
+            if (!preset) return;
+            highLevelSets.forEach(item => {
+                const key = item.code + '_' + item.set;
+                if (preset === 'show-all') {
+                    filterState.highSets[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.highSets[key].show = false;
+                }
+            });
+            renderHighSetsItems();
+            generateFilter();
+        }
+
+        function applyMidSetsPreset(preset) {
+            if (!preset) return;
+            midLevelSets.forEach(item => {
+                const key = item.code + '_' + item.set;
+                if (preset === 'show-all') {
+                    filterState.midSets[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.midSets[key].show = false;
+                }
+            });
+            renderMidSetsItems();
+            generateFilter();
+        }
+
+        function applyLowSetsPreset(preset) {
+            if (!preset) return;
+            lowLevelSets.forEach(item => {
+                const key = item.code + '_' + item.set;
+                if (preset === 'show-all') {
+                    filterState.lowSets[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.lowSets[key].show = false;
+                }
+            });
+            renderLowSetsItems();
+            generateFilter();
+        }
+
+        // State update functions for magic/rare items
+        function updateMagicRareItemState(category, key, field, value, index = null) {
+            if (index !== null) {
+                filterState[category][key][field][index] = value;
+            } else {
+                filterState[category][key][field] = value;
+            }
+
+            // Re-render the appropriate section
+            if (category === 'magicJewelry') {
+                renderMagicJewelryItems();
+            } else if (category === 'magicCharms') {
+                renderMagicCharmsItems();
+            } else if (category === 'magicCrafting') {
+                renderMagicCraftingItems();
+            } else if (category === 'rareJewelry') {
+                renderRareJewelryItems();
+            } else if (category === 'rareClassItems') {
+                renderRareClassItemsItems();
+            } else if (category === 'rareEliteBases') {
+                renderRareEliteBasesItems();
+            }
+            
+            generateFilter();
+        }
+
+        function clearMagicRareFontColor(category, key, defaultColor) {
+            filterState[category][key].fontColor = defaultColor;
+            if (category === 'magicJewelry') {
+                renderMagicJewelryItems();
+            } else if (category === 'magicCharms') {
+                renderMagicCharmsItems();
+            } else if (category === 'magicCrafting') {
+                renderMagicCraftingItems();
+            } else if (category === 'rareJewelry') {
+                renderRareJewelryItems();
+            } else if (category === 'rareClassItems') {
+                renderRareClassItemsItems();
+            } else if (category === 'rareEliteBases') {
+                renderRareEliteBasesItems();
+            }
+            generateFilter();
+        }
+
+        function clearMagicRareColor(category, key, colorType) {
+            filterState[category][key][colorType] = null;
+            if (category === 'magicJewelry') {
+                renderMagicJewelryItems();
+            } else if (category === 'magicCharms') {
+                renderMagicCharmsItems();
+            } else if (category === 'magicCrafting') {
+                renderMagicCraftingItems();
+            } else if (category === 'rareJewelry') {
+                renderRareJewelryItems();
+            } else if (category === 'rareClassItems') {
+                renderRareClassItemsItems();
+            } else if (category === 'rareEliteBases') {
+                renderRareEliteBasesItems();
+            }
+            generateFilter();
+        }
+
+        function setAllMagicRareLevels(category, key, enabled) {
+            for (let i = 0; i < 10; i++) {
+                filterState[category][key].filterLevels[i] = enabled;
+            }
+            if (category === 'magicJewelry') {
+                renderMagicJewelryItems();
+            } else if (category === 'magicCharms') {
+                renderMagicCharmsItems();
+            } else if (category === 'magicCrafting') {
+                renderMagicCraftingItems();
+            } else if (category === 'rareJewelry') {
+                renderRareJewelryItems();
+            } else if (category === 'rareClassItems') {
+                renderRareClassItemsItems();
+            } else if (category === 'rareEliteBases') {
+                renderRareEliteBasesItems();
+            }
+            generateFilter();
+        }
+
+        // Preset functions for magic/rare items
+        function applyMagicJewelryPreset(preset) {
+            if (!preset) return;
+            magicJewelry.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.magicJewelry[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.magicJewelry[key].show = false;
+                } else if (preset === 'high-ilvl') {
+                    filterState.magicJewelry[key].show = !item.maxIlvl || item.minIlvl >= 71;
+                }
+            });
+            renderMagicJewelryItems();
+            generateFilter();
+        }
+
+        function applyMagicCharmsPreset(preset) {
+            if (!preset) return;
+            magicCharms.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.magicCharms[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.magicCharms[key].show = false;
+                } else if (preset === 'high-ilvl') {
+                    filterState.magicCharms[key].show = !item.maxIlvl || item.minIlvl >= 50;
+                }
+            });
+            renderMagicCharmsItems();
+            generateFilter();
+        }
+
+        function applyMagicCraftingPreset(preset) {
+            if (!preset) return;
+            magicCraftingBases.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.magicCrafting[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.magicCrafting[key].show = false;
+                }
+            });
+            renderMagicCraftingItems();
+            generateFilter();
+        }
+
+        function applyRareJewelryPreset(preset) {
+            if (!preset) return;
+            rareJewelry.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.rareJewelry[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.rareJewelry[key].show = false;
+                }
+            });
+            renderRareJewelryItems();
+            generateFilter();
+        }
+
+        function applyRareClassItemsPreset(preset) {
+            if (!preset) return;
+            rareClassItems.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.rareClassItems[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.rareClassItems[key].show = false;
+                }
+            });
+            renderRareClassItemsItems();
+            generateFilter();
+        }
+
+        function applyRareEliteBasesPreset(preset) {
+            if (!preset) return;
+            rareEliteBases.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.rareEliteBases[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.rareEliteBases[key].show = false;
+                }
+            });
+            renderRareEliteBasesItems();
+            generateFilter();
+        }
+
         // Generate filter output
         function generateFilter() {
             let filter = '// FilterPhoenix Visual Filter Builder\n';
             filter += '// Generated: ' + new Date().toLocaleString() + '\n\n';
 
-            // Add FilterLevel declarations if enabled
+            // Add FilterLevel declarations if enabled (only for named levels)
             if (globalSettings.enableFilterLevels) {
-                filter += '// === FILTER LEVELS ===\n\n';
-                for (let i = 0; i < 10; i++) {
-                    filter += `FilterLevel[${i + 1}]: "${globalSettings.levelNames[i]}"\n`;
+                const namedLevels = globalSettings.levelNames
+                    .map((name, idx) => ({ name, level: idx + 1 }))
+                    .filter(item => item.name);
+                
+                if (namedLevels.length > 0) {
+                    filter += '// === FILTER LEVELS ===\n\n';
+                    namedLevels.forEach(item => {
+                        filter += `FilterLevel[${item.level}]: "${item.name}"\n`;
+                    });
+                    filter += '\n';
                 }
-                filter += '\n';
             }
 
             // Check if any items need custom styles (for border/background colors)
@@ -1573,6 +3689,226 @@
                 }
             });
 
+            // === UNIQUE ITEMS ===
+            filter += '\n// === UNIQUE ITEMS ===\n\n';
+            
+            // Helper function to generate unique item filter lines
+            function generateUniqueItemLines(items, stateCategory, sectionTitle) {
+                let lines = `// ${sectionTitle}\n`;
+                let hasItems = false;
+                
+                items.forEach(item => {
+                    const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+                    const state = filterState[stateCategory][key];
+                    if (state.show) {
+                        hasItems = true;
+                        // Generate filter level condition if enabled
+                        const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                        let line = `ItemDisplay[UNI ${item.code}${filtLvlCondition}]:`;
+                        
+                        // Only add colors if custom colors are enabled
+                        if (state.useCustomColors && state.fontColor !== 'DARK_GREEN') {
+                            line += ` %${state.fontColor}%`;
+                        }
+                        
+                        line += ` %NAME%`;
+                        
+                        // Add style reference for border/background/notification if needed
+                        if (state.useCustomColors || state.chatNotification) {
+                            const needsBorder = state.useCustomColors && state.borderColor !== null;
+                            const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                            const needsNotification = state.chatNotification;
+                            
+                            if (needsBorder || needsBackground || needsNotification) {
+                                const rgbParts = [];
+                                if (needsNotification) {
+                                    rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                }
+                                if (needsBorder) {
+                                    const rgb = hexToRGBSlash(state.borderColor);
+                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                }
+                                if (needsBackground) {
+                                    const rgb = hexToRGBSlash(state.backgroundColor);
+                                    rgbParts.push(`BackgroundColor = RGB(${rgb})`);
+                                }
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            }
+                        }
+                        
+                        lines += line + '\n';
+                    } else {
+                        lines += `ItemDisplay[UNI ${item.code}]:\n`;
+                    }
+                });
+                
+                return hasItems ? lines + '\n' : '';
+            }
+
+            // Helper function to generate set item filter lines (uses SET keyword)
+            function generateSetItemLines(items, stateCategory, sectionTitle) {
+                let lines = `// ${sectionTitle}\n`;
+                let hasItems = false;
+                
+                items.forEach(item => {
+                    const key = item.code + '_' + item.set;
+                    const state = filterState[stateCategory][key];
+                    if (state.show) {
+                        hasItems = true;
+                        // Generate filter level condition if enabled
+                        const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                        let line = `ItemDisplay[SET ${item.code}${filtLvlCondition}]:`;
+                        
+                        // Only add colors if custom colors are enabled
+                        if (state.useCustomColors && state.fontColor !== 'DARK_GREEN') {
+                            line += ` %${state.fontColor}%`;
+                        }
+                        
+                        line += ` %NAME%`;
+                        
+                        // Add style reference for border/background/notification if needed
+                        if (state.useCustomColors || state.chatNotification) {
+                            const needsBorder = state.useCustomColors && state.borderColor !== null;
+                            const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                            const needsNotification = state.chatNotification;
+                            
+                            if (needsBorder || needsBackground || needsNotification) {
+                                const rgbParts = [];
+                                if (needsNotification) {
+                                    rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                }
+                                if (needsBorder) {
+                                    const rgb = hexToRGBSlash(state.borderColor);
+                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                }
+                                if (needsBackground) {
+                                    const rgb = hexToRGBSlash(state.backgroundColor);
+                                    rgbParts.push(`BackgroundColor = RGB(${rgb})`);
+                                }
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            }
+                        }
+                        
+                        lines += line + '\n';
+                    } else {
+                        lines += `ItemDisplay[SET ${item.code}]:\n`;
+                    }
+                });
+                
+                return hasItems ? lines + '\n' : '';
+            }
+            
+            function generateMagicRareItemLines(items, stateCategory, sectionTitle, rarity) {
+                let lines = `// ${sectionTitle}\n`;
+                let hasItems = false;
+                
+                items.forEach((item, idx) => {
+                    const key = item.code + '_' + idx;
+                    const state = filterState[stateCategory][key];
+                    if (state.show) {
+                        hasItems = true;
+                        // Generate filter level condition if enabled
+                        const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                        
+                        // Build ILVL condition
+                        let ilvlCondition = '';
+                        if (item.minIlvl !== undefined && item.maxIlvl !== undefined) {
+                            ilvlCondition = ` ILVL>${item.minIlvl} ILVL<${item.maxIlvl}`;
+                        } else if (item.minIlvl !== undefined) {
+                            ilvlCondition = ` ILVL>${item.minIlvl}`;
+                        } else if (item.maxIlvl !== undefined) {
+                            ilvlCondition = ` ILVL<${item.maxIlvl}`;
+                        }
+                        
+                        let line = `ItemDisplay[${rarity} ${item.code} !ID${ilvlCondition}${filtLvlCondition}]:`;
+                        
+                        // Add font color
+                        if (state.useCustomColors && state.fontColor) {
+                            line += ` %${state.fontColor}%`;
+                        } else if (rarity === 'MAG') {
+                            line += ` %BLUE%`;
+                        } else {
+                            line += ` %YELLOW%`;
+                        }
+                        
+                        line += ` %NAME%`;
+                        
+                        // Add ILVL display for magic jewelry and charms, description for others
+                        if (stateCategory === 'magicJewelry' || stateCategory === 'magicCharms') {
+                            line += ` %WHITE%[%ILVL%]`;
+                        } else if (item.desc) {
+                            line += ` {${item.desc}}`;
+                        }
+                        
+                        // Add style reference for border/background/notification if needed
+                        if (state.useCustomColors || state.chatNotification) {
+                            const needsBorder = state.useCustomColors && state.borderColor !== null;
+                            const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                            const needsNotification = state.chatNotification;
+                            
+                            if (needsBorder || needsBackground || needsNotification) {
+                                const rgbParts = [];
+                                if (needsNotification) {
+                                    const notifyColor = state.fontColor || (rarity === 'MAG' ? 'BLUE' : 'YELLOW');
+                                    rgbParts.push(`NotificationColor = ${notifyColor}`);
+                                }
+                                if (needsBorder) {
+                                    const rgb = hexToRGBSlash(state.borderColor);
+                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                }
+                                if (needsBackground) {
+                                    const rgb = hexToRGBSlash(state.backgroundColor);
+                                    rgbParts.push(`BackgroundColor = RGB(${rgb})`);
+                                }
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            }
+                        }
+                        
+                        lines += line + '\n';
+                    } else {
+                        // Build hide condition
+                        let ilvlCondition = '';
+                        if (item.minIlvl !== undefined && item.maxIlvl !== undefined) {
+                            ilvlCondition = ` ILVL>${item.minIlvl} ILVL<${item.maxIlvl}`;
+                        } else if (item.minIlvl !== undefined) {
+                            ilvlCondition = ` ILVL>${item.minIlvl}`;
+                        } else if (item.maxIlvl !== undefined) {
+                            ilvlCondition = ` ILVL<${item.maxIlvl}`;
+                        }
+                        lines += `ItemDisplay[${rarity} ${item.code} !ID${ilvlCondition}]:\n`;
+                    }
+                });
+                
+                return hasItems ? lines + '\n' : '';
+            }
+            
+            filter += generateUniqueItemLines(jewelryAndCharms, 'jewelryCharms', 'Unique Jewelry & Charms');
+            filter += generateUniqueItemLines(classSpecificUniques, 'classUniques', 'Class-Specific Uniques');
+            filter += generateUniqueItemLines(eliteUniqueWeapons, 'eliteWeapons', 'Elite Unique Weapons');
+            filter += generateUniqueItemLines(eliteUniqueArmor, 'eliteArmor', 'Elite Unique Armor');
+            filter += generateUniqueItemLines(exceptionalUniqueWeapons, 'excWeapons', 'Exceptional Unique Weapons');
+            filter += generateUniqueItemLines(exceptionalUniqueArmor, 'excArmor', 'Exceptional Unique Armor');
+            filter += generateUniqueItemLines(normalUniqueWeapons, 'normWeapons', 'Normal Unique Weapons');
+            filter += generateUniqueItemLines(normalUniqueArmor, 'normArmor', 'Normal Unique Armor');
+
+            // === SET ITEMS ===
+            filter += '\n// === SET ITEMS ===\n\n';
+            filter += generateSetItemLines(highLevelSets, 'highSets', 'High-Level Set Items');
+            filter += generateSetItemLines(midLevelSets, 'midSets', 'Mid-Level Set Items');
+            filter += generateSetItemLines(lowLevelSets, 'lowSets', 'Low-Level Set Items');
+
+            // === MAGIC ITEMS ===
+            filter += '\n// === MAGIC ITEMS ===\n\n';
+            filter += generateMagicRareItemLines(magicJewelry, 'magicJewelry', 'Magic Jewelry & Jewels', 'MAG');
+            filter += generateMagicRareItemLines(magicCharms, 'magicCharms', 'Magic Charms', 'MAG');
+            filter += generateMagicRareItemLines(magicCraftingBases, 'magicCrafting', 'Magic Crafting Bases', 'MAG');
+
+            // === RARE ITEMS ===
+            filter += '\n// === RARE ITEMS ===\n\n';
+            filter += generateMagicRareItemLines(rareJewelry, 'rareJewelry', 'Rare Jewelry & Jewels', 'RARE');
+            filter += generateMagicRareItemLines(rareClassItems, 'rareClassItems', 'Rare Class-Specific Items', 'RARE');
+            filter += generateMagicRareItemLines(rareEliteBases, 'rareEliteBases', 'Rare Elite Bases', 'RARE');
+
             document.getElementById('filter-output').value = filter;
             updateOutputStats();
         }
@@ -1702,6 +4038,23 @@
             renderRuneItems();
             renderGemsItems();
             renderMiscItems();
+            renderJewelryCharmsItems();
+            renderClassUniquesItems();
+            renderEliteWeaponsItems();
+            renderEliteArmorItems();
+            renderExcWeaponsItems();
+            renderExcArmorItems();
+            renderNormWeaponsItems();
+            renderNormArmorItems();
+            renderHighSetsItems();
+            renderMidSetsItems();
+            renderLowSetsItems();
+            renderMagicJewelryItems();
+            renderMagicCharmsItems();
+            renderMagicCraftingItems();
+            renderRareJewelryItems();
+            renderRareClassItemsItems();
+            renderRareEliteBasesItems();
             generateFilter();
         }
 
@@ -1726,12 +4079,30 @@
 
         // Update level name
         function updateLevelName(level, name) {
-            globalSettings.levelNames[level] = name || `Level ${level + 1}`;
-            // Re-render all sections to update tooltips
+            globalSettings.levelNames[level] = name.trim();
+            // Re-render all sections to update checkboxes visibility
             renderUtilityItems();
             renderRuneItems();
             renderGemsItems();
             renderMiscItems();
+            renderJewelryCharmsItems();
+            renderClassUniquesItems();
+            renderEliteWeaponsItems();
+            renderEliteArmorItems();
+            renderExcWeaponsItems();
+            renderExcArmorItems();
+            renderNormWeaponsItems();
+            renderNormArmorItems();
+            renderHighSetsItems();
+            renderMidSetsItems();
+            renderLowSetsItems();
+            renderMagicJewelryItems();
+            renderMagicCharmsItems();
+            renderMagicCraftingItems();
+            renderRareJewelryItems();
+            renderRareClassItemsItems();
+            renderRareEliteBasesItems();
+            generateFilter();
         }
 
         // Update item filter level
@@ -1746,7 +4117,9 @@
                 filterState[category][code].filterLevels[i] = checked;
             }
             // Re-render the appropriate section to update checkboxes
-            if (category === 'utility') {
+            if (category === 'jewelryCharms') {
+                renderJewelryCharmsItems();
+            } else if (category === 'utility') {
                 renderUtilityItems();
             } else if (category === 'runes') {
                 renderRuneItems();
@@ -1754,6 +4127,20 @@
                 renderGemsItems();
             } else if (category === 'misc') {
                 renderMiscItems();
+            } else if (category === 'classUniques') {
+                renderClassUniquesItems();
+            } else if (category === 'eliteWeapons') {
+                renderEliteWeaponsItems();
+            } else if (category === 'eliteArmor') {
+                renderEliteArmorItems();
+            } else if (category === 'excWeapons') {
+                renderExcWeaponsItems();
+            } else if (category === 'excArmor') {
+                renderExcArmorItems();
+            } else if (category === 'normWeapons') {
+                renderNormWeaponsItems();
+            } else if (category === 'normArmor') {
+                renderNormArmorItems();
             }
             generateFilter();
         }
@@ -1763,6 +4150,23 @@
         renderRuneItems();
         renderGemsItems();
         renderMiscItems();
+        renderJewelryCharmsItems();
+        renderClassUniquesItems();
+        renderEliteWeaponsItems();
+        renderEliteArmorItems();
+        renderExcWeaponsItems();
+        renderExcArmorItems();
+        renderNormWeaponsItems();
+        renderNormArmorItems();
+        renderHighSetsItems();
+        renderMidSetsItems();
+        renderLowSetsItems();
+        renderMagicJewelryItems();
+        renderMagicCharmsItems();
+        renderMagicCraftingItems();
+        renderRareJewelryItems();
+        renderRareClassItemsItems();
+        renderRareEliteBasesItems();
         generateFilter();
     </script>
 </body>
