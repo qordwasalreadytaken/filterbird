@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilterPhoenix - Visual Filter Builder</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #2a2a2a;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            color: #fff;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+        }
+
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section {
+            background: #2a2a2a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .section-header {
+            padding: 15px 20px;
+            background: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            border-bottom: 1px solid #444;
+        }
+
+        .section-header:hover {
+            background: #3a3a3a;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .section-toggle {
+            font-size: 20px;
+            color: #999;
+            transition: transform 0.2s;
+        }
+
+        .section.expanded .section-toggle {
+            transform: rotate(90deg);
+        }
+
+        .section-content {
+            display: none;
+            padding: 15px 20px;
+        }
+
+        .section.expanded .section-content {
+            display: block;
+        }
+
+        .preset-controls {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #252525;
+            border-radius: 4px;
+        }
+
+        .preset-controls label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .preset-select {
+            width: 100%;
+            padding: 8px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .item-row {
+            padding: 10px;
+            background: #252525;
+            border-radius: 4px;
+            display: grid;
+            grid-template-columns: auto 1fr auto auto auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .item-row:hover {
+            background: #2a2a2a;
+        }
+
+        .item-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .color-label {
+            font-size: 11px;
+            color: #999;
+            min-width: 50px;
+        }
+
+        .color-input {
+            width: 50px;
+            height: 28px;
+            border: 1px solid #444;
+            border-radius: 3px;
+            cursor: pointer;
+            background: #333;
+        }
+
+        .output-panel {
+            position: sticky;
+            top: 20px;
+            height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output-section {
+            background: #2a2a2a;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .output-header {
+            padding: 15px 20px;
+            background: #333;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .output-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .output-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background: #4a4a4a;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #555;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            border-color: #0066cc;
+        }
+
+        .btn-primary:hover {
+            background: #0052a3;
+        }
+
+        .output-textarea {
+            flex: 1;
+            padding: 15px;
+            background: #1a1a1a;
+            border: none;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            resize: none;
+            line-height: 1.5;
+        }
+
+        .output-textarea:focus {
+            outline: none;
+        }
+
+        .item-count {
+            font-size: 12px;
+            color: #777;
+            margin-left: 5px;
+        }
+
+        /* Hide default file input */
+        input[type="file"] {
+            display: none;
+        }
+
+        .filter-info {
+            padding: 10px 20px;
+            background: #252525;
+            border-top: 1px solid #444;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FilterPhoenix - Visual Filter Builder</h1>
+            <div class="subtitle">Point-and-click interface for creating Diablo II item filters</div>
+        </header>
+
+        <div class="layout">
+            <div class="editor-panel">
+                <!-- Utility Items Section -->
+                <div class="section" id="utility-section">
+                    <div class="section-header" onclick="toggleSection('utility-section')">
+                        <div>
+                            <span class="section-title">Utility Items</span>
+                            <span class="item-count" id="utility-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyUtilityPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="essential-only">Essential Only (Potions + Scrolls)</option>
+                                <option value="endgame">Endgame (Hide low potions)</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="utility-items"></div>
+                    </div>
+                </div>
+
+                <!-- Runes Section -->
+                <div class="section" id="runes-section">
+                    <div class="section-header" onclick="toggleSection('runes-section')">
+                        <div>
+                            <span class="section-title">Runes</span>
+                            <span class="item-count" id="runes-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyRunePreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="hide-low">Hide Low Runes (El-Ort)</option>
+                                <option value="mid-plus">Mid+ Runes Only (Thul+)</option>
+                                <option value="high-only">High Runes Only (Pul+)</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="runes-items"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="output-panel">
+                <div class="output-section">
+                    <div class="output-header">
+                        <span class="output-title">Filter Output</span>
+                        <div class="output-actions">
+                            <label for="import-file" class="btn">Import Filter</label>
+                            <input type="file" id="import-file" accept=".filter" onchange="importFilter(event)">
+                            <button class="btn btn-primary" onclick="exportFilter()">Export</button>
+                            <button class="btn" onclick="copyToClipboard()">Copy</button>
+                        </div>
+                    </div>
+                    <textarea class="output-textarea" id="filter-output" 
+                        placeholder="Your filter will appear here... You can edit it manually."></textarea>
+                    <div class="filter-info">
+                        Lines: <span id="line-count">0</span> | 
+                        Characters: <span id="char-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Item data
+        const utilityItems = [
+            { name: "Full Rejuvenation Potion", code: "rvl", category: "potion" },
+            { name: "Rejuvenation Potion", code: "rvs", category: "potion" },
+            { name: "Super Healing Potion", code: "hp5", category: "potion" },
+            { name: "Greater Healing Potion", code: "hp4", category: "potion" },
+            { name: "Healing Potion", code: "hp3", category: "potion" },
+            { name: "Lesser Healing Potion", code: "hp2", category: "potion" },
+            { name: "Minor Healing Potion", code: "hp1", category: "potion" },
+            { name: "Super Mana Potion", code: "mp5", category: "potion" },
+            { name: "Greater Mana Potion", code: "mp4", category: "potion" },
+            { name: "Mana Potion", code: "mp3", category: "potion" },
+            { name: "Lesser Mana Potion", code: "mp2", category: "potion" },
+            { name: "Minor Mana Potion", code: "mp1", category: "potion" },
+            { name: "Antidote Potion", code: "yps", category: "potion" },
+            { name: "Thawing Potion", code: "wms", category: "potion" },
+            { name: "Stamina Potion", code: "vps", category: "potion" },
+            { name: "Tome of Town Portal", code: "tbk", category: "scroll" },
+            { name: "Tome of Identify", code: "ibk", category: "scroll" },
+            { name: "Scroll of Town Portal", code: "tsc", category: "scroll" },
+            { name: "Scroll of Identify", code: "isc", category: "scroll" },
+            { name: "Key", code: "key", category: "key" },
+        ];
+
+        const runeItems = [
+            { name: "El Rune", code: "r01", level: 11, tier: 1 },
+            { name: "Eld Rune", code: "r02", level: 11, tier: 1 },
+            { name: "Tir Rune", code: "r03", level: 13, tier: 1 },
+            { name: "Nef Rune", code: "r04", level: 13, tier: 1 },
+            { name: "Eth Rune", code: "r05", level: 15, tier: 1 },
+            { name: "Ith Rune", code: "r06", level: 15, tier: 1 },
+            { name: "Tal Rune", code: "r07", level: 17, tier: 1 },
+            { name: "Ral Rune", code: "r08", level: 19, tier: 1 },
+            { name: "Ort Rune", code: "r09", level: 21, tier: 1 },
+            { name: "Thul Rune", code: "r10", level: 23, tier: 2 },
+            { name: "Amn Rune", code: "r11", level: 25, tier: 2 },
+            { name: "Sol Rune", code: "r12", level: 27, tier: 2 },
+            { name: "Shael Rune", code: "r13", level: 29, tier: 2 },
+            { name: "Dol Rune", code: "r14", level: 31, tier: 2 },
+            { name: "Hel Rune", code: "r15", level: 0, tier: 2 },
+            { name: "Io Rune", code: "r16", level: 35, tier: 2 },
+            { name: "Lum Rune", code: "r17", level: 37, tier: 2 },
+            { name: "Ko Rune", code: "r18", level: 39, tier: 2 },
+            { name: "Fal Rune", code: "r19", level: 41, tier: 2 },
+            { name: "Lem Rune", code: "r20", level: 43, tier: 3 },
+            { name: "Pul Rune", code: "r21", level: 45, tier: 3 },
+            { name: "Um Rune", code: "r22", level: 47, tier: 3 },
+            { name: "Mal Rune", code: "r23", level: 49, tier: 3 },
+            { name: "Ist Rune", code: "r24", level: 51, tier: 3 },
+            { name: "Gul Rune", code: "r25", level: 53, tier: 3 },
+            { name: "Vex Rune", code: "r26", level: 55, tier: 3 },
+            { name: "Ohm Rune", code: "r27", level: 57, tier: 3 },
+            { name: "Lo Rune", code: "r28", level: 59, tier: 3 },
+            { name: "Sur Rune", code: "r29", level: 61, tier: 3 },
+            { name: "Ber Rune", code: "r30", level: 63, tier: 3 },
+            { name: "Jah Rune", code: "r31", level: 65, tier: 3 },
+            { name: "Cham Rune", code: "r32", level: 67, tier: 3 },
+            { name: "Zod Rune", code: "r33", level: 69, tier: 3 },
+        ];
+
+        // State management
+        const filterState = {
+            utility: {},
+            runes: {}
+        };
+
+        // Initialize utility items state
+        utilityItems.forEach(item => {
+            filterState.utility[item.code] = {
+                show: true,
+                fontColor: '#ffffff',
+                borderColor: '#808080',
+                backgroundColor: '#000000'
+            };
+        });
+
+        // Initialize rune items state
+        runeItems.forEach(item => {
+            filterState.runes[item.code] = {
+                show: true,
+                fontColor: '#ff8000',
+                borderColor: '#ff8000',
+                backgroundColor: '#000000'
+            };
+        });
+
+        // Render items
+        function renderUtilityItems() {
+            const container = document.getElementById('utility-items');
+            container.innerHTML = '';
+            
+            utilityItems.forEach(item => {
+                const state = filterState.utility[item.code];
+                const row = document.createElement('div');
+                row.className = 'item-row';
+                row.innerHTML = `
+                    <input type="checkbox" class="item-checkbox" 
+                        ${state.show ? 'checked' : ''} 
+                        onchange="updateItemState('utility', '${item.code}', 'show', this.checked)">
+                    <span class="item-name">${item.name}</span>
+                    <div class="color-picker-wrapper">
+                        <span class="color-label">Font</span>
+                        <input type="color" class="color-input" value="${state.fontColor}"
+                            onchange="updateItemState('utility', '${item.code}', 'fontColor', this.value)">
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <span class="color-label">Border</span>
+                        <input type="color" class="color-input" value="${state.borderColor}"
+                            onchange="updateItemState('utility', '${item.code}', 'borderColor', this.value)">
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <span class="color-label">BG</span>
+                        <input type="color" class="color-input" value="${state.backgroundColor}"
+                            onchange="updateItemState('utility', '${item.code}', 'backgroundColor', this.value)">
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            updateItemCount('utility');
+        }
+
+        function renderRuneItems() {
+            const container = document.getElementById('runes-items');
+            container.innerHTML = '';
+            
+            runeItems.forEach(item => {
+                const state = filterState.runes[item.code];
+                const row = document.createElement('div');
+                row.className = 'item-row';
+                row.innerHTML = `
+                    <input type="checkbox" class="item-checkbox" 
+                        ${state.show ? 'checked' : ''} 
+                        onchange="updateItemState('runes', '${item.code}', 'show', this.checked)">
+                    <span class="item-name">${item.name}</span>
+                    <div class="color-picker-wrapper">
+                        <span class="color-label">Font</span>
+                        <input type="color" class="color-input" value="${state.fontColor}"
+                            onchange="updateItemState('runes', '${item.code}', 'fontColor', this.value)">
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <span class="color-label">Border</span>
+                        <input type="color" class="color-input" value="${state.borderColor}"
+                            onchange="updateItemState('runes', '${item.code}', 'borderColor', this.value)">
+                    </div>
+                    <div class="color-picker-wrapper">
+                        <span class="color-label">BG</span>
+                        <input type="color" class="color-input" value="${state.backgroundColor}"
+                            onchange="updateItemState('runes', '${item.code}', 'backgroundColor', this.value)">
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            updateItemCount('runes');
+        }
+
+        // Update state and regenerate filter
+        function updateItemState(category, code, property, value) {
+            filterState[category][code][property] = value;
+            updateItemCount(category);
+            generateFilter();
+        }
+
+        // Update item counts
+        function updateItemCount(category) {
+            const state = filterState[category];
+            const total = Object.keys(state).length;
+            const shown = Object.values(state).filter(item => item.show).length;
+            document.getElementById(`${category}-count`).textContent = `(${shown}/${total} shown)`;
+        }
+
+        // Section toggling
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('expanded');
+        }
+
+        // Presets
+        function applyUtilityPreset(preset) {
+            if (!preset) return;
+
+            const essentialCodes = ['rvl', 'rvs', 'hp5', 'mp5', 'tbk', 'ibk', 'tsc', 'isc'];
+            const lowPotions = ['hp1', 'hp2', 'hp3', 'mp1', 'mp2', 'mp3'];
+
+            switch(preset) {
+                case 'show-all':
+                    Object.keys(filterState.utility).forEach(code => {
+                        filterState.utility[code].show = true;
+                    });
+                    break;
+                case 'hide-all':
+                    Object.keys(filterState.utility).forEach(code => {
+                        filterState.utility[code].show = false;
+                    });
+                    break;
+                case 'essential-only':
+                    Object.keys(filterState.utility).forEach(code => {
+                        filterState.utility[code].show = essentialCodes.includes(code);
+                    });
+                    break;
+                case 'endgame':
+                    Object.keys(filterState.utility).forEach(code => {
+                        filterState.utility[code].show = !lowPotions.includes(code);
+                    });
+                    break;
+            }
+
+            renderUtilityItems();
+            generateFilter();
+        }
+
+        function applyRunePreset(preset) {
+            if (!preset) return;
+
+            switch(preset) {
+                case 'show-all':
+                    Object.keys(filterState.runes).forEach(code => {
+                        filterState.runes[code].show = true;
+                    });
+                    break;
+                case 'hide-all':
+                    Object.keys(filterState.runes).forEach(code => {
+                        filterState.runes[code].show = false;
+                    });
+                    break;
+                case 'hide-low':
+                    runeItems.forEach(item => {
+                        filterState.runes[item.code].show = item.code > 'r09'; // After Ort
+                    });
+                    break;
+                case 'mid-plus':
+                    runeItems.forEach(item => {
+                        filterState.runes[item.code].show = item.code >= 'r10'; // Thul+
+                    });
+                    break;
+                case 'high-only':
+                    runeItems.forEach(item => {
+                        filterState.runes[item.code].show = item.code >= 'r21'; // Pul+
+                    });
+                    break;
+            }
+
+            renderRuneItems();
+            generateFilter();
+        }
+
+        // Generate filter output
+        function generateFilter() {
+            let filter = '// FilterPhoenix Visual Filter Builder\n';
+            filter += '// Generated: ' + new Date().toLocaleString() + '\n\n';
+
+            // Utility items
+            filter += '// === UTILITY ITEMS ===\n\n';
+            utilityItems.forEach(item => {
+                const state = filterState.utility[item.code];
+                if (state.show) {
+                    filter += `ItemDisplay[${item.code}]: %NAME%`;
+                    if (state.fontColor !== '#ffffff') {
+                        filter += ` %${rgbToFilterColor(state.fontColor)}%`;
+                    }
+                    // Add border/background if different from defaults
+                    filter += '\n';
+                } else {
+                    filter += `ItemDisplay[${item.code}]:\n`;
+                }
+            });
+
+            // Runes
+            filter += '\n// === RUNES ===\n\n';
+            runeItems.forEach(item => {
+                const state = filterState.runes[item.code];
+                if (state.show) {
+                    filter += `ItemDisplay[${item.code}]: %NAME%`;
+                    if (state.fontColor !== '#ff8000') {
+                        filter += ` %${rgbToFilterColor(state.fontColor)}%`;
+                    }
+                    filter += '\n';
+                } else {
+                    filter += `ItemDisplay[${item.code}]:\n`;
+                }
+            });
+
+            document.getElementById('filter-output').value = filter;
+            updateOutputStats();
+        }
+
+        // Convert RGB hex to filter color code
+        function rgbToFilterColor(hex) {
+            // Simple mapping - in real implementation would need proper color mapping
+            const colorMap = {
+                '#ffffff': 'WHITE',
+                '#ff0000': 'RED',
+                '#00ff00': 'GREEN',
+                '#0000ff': 'BLUE',
+                '#ffff00': 'YELLOW',
+                '#ff8000': 'ORANGE',
+                '#800080': 'PURPLE',
+                '#808080': 'GRAY'
+            };
+            return colorMap[hex.toLowerCase()] || 'WHITE';
+        }
+
+        // Update output statistics
+        function updateOutputStats() {
+            const output = document.getElementById('filter-output').value;
+            const lines = output.split('\n').length;
+            const chars = output.length;
+            document.getElementById('line-count').textContent = lines;
+            document.getElementById('char-count').textContent = chars;
+        }
+
+        // Export filter
+        function exportFilter() {
+            const output = document.getElementById('filter-output').value;
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'FilterPhoenix_' + Date.now() + '.filter';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Copy to clipboard
+        function copyToClipboard() {
+            const output = document.getElementById('filter-output');
+            output.select();
+            document.execCommand('copy');
+            alert('Filter copied to clipboard!');
+        }
+
+        // Import filter
+        function importFilter(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                document.getElementById('filter-output').value = content;
+                // TODO: Parse filter and update UI state
+                updateOutputStats();
+                alert('Filter imported! Manual parsing not yet implemented - you can edit the text directly.');
+            };
+            reader.readAsText(file);
+        }
+
+        // Allow manual edits to update stats
+        document.getElementById('filter-output').addEventListener('input', updateOutputStats);
+
+        // Initialize
+        renderUtilityItems();
+        renderRuneItems();
+        generateFilter();
+    </script>
+</body>
+</html>

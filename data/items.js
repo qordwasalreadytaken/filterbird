@@ -1339,7 +1339,7 @@ var equipment = {
 {qlvl:71, name:"Hellslayer", req_level:66, ctc:[[10,20,"Fire Ball","on attack"]], e_damage:100, e_max_damage_per_level:3, fDamage_min:150, fDamage_max:250, strength_per_level:0.5, dexterity_per_level:0.5, life:25, twoHanded:1, type:"axe", base:"Decapitator", img:"Hellslayer"},
 {qlvl:75, name:"Messerschmidt's Reaver", req_level:70, e_damage:200, e_max_damage_per_level:2.5, fDamage_min:20, fDamage_max:240, ar_bonus:100, all_attributes:15, durability_extra:25, twoHanded:1, type:"axe", base:"Champion Axe", img:"Messerschmidt's_Reaver"},
 {qlvl:83, name:"Executioner's Justice", req_level:75, ctc:[[50,6,"Decrepify","when you kill an enemy"]], e_damage:290, cblow:25, ias:30, target_defense:-33, twoHanded:1, type:"axe", base:"Glorious Axe", img:"Humongous"},
-// Swords
+// Swords 
 {qlvl:3, name:"Rixot's Keen", req_level:2, e_damage:100, damage_min:5, cblow:25, ar_bonus:20, defense:25, light_radius:2, type:"sword", base:"Short Sword", img:"Rixot's_Keen"},
 {qlvl:10, name:"Blood Crescent", req_level:7, e_damage:80, owounds:33, ias:15, life_leech:15, all_res:15, life:15, light_radius:4, type:"sword", base:"Scimitar", img:"Blood_Crescent"},
 {qlvl:14, name:"Skewer of Krintiz", req_level:10, e_damage:50, damage_min:3, damage_max:7, itd:1, mana_leech:7, dexterity:10, strength:10, type:"sword", base:"Saber", img:"Skewer_of_Krintiz"},

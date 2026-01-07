@@ -200,6 +200,7 @@ ItemDisplay[dhn]: %GRAY% Diablo's Horn <<notify>>
 ItemDisplay[bey]: %GRAY% Baal's Eye <<notify>>
 ItemDisplay[mbr]: %GRAY% Mephisto's Brain <<notify>>
 
+//// Quest items
 //Wirt Leg
 ItemDisplay[leg SOCK>0]: %NAME% %!stripedsocks!%  <<qspecials>>
 ItemDisplay[leg]: %NAME%  <<qspecials>>
@@ -210,13 +211,12 @@ ItemDisplay[box]: %TAN%%NAME% { %!cubesox!% } <:notify: NotificationColor = GOLD
 // Other quest
 ItemDisplay[QUEST]: %TAN%%NAME% <:notify: NotificationColor = GOLD> //%NOTIFY(GOLD)%
 
-//PoD Items
+////PoD Items, OOC OOA Maps soulstone
 //ItemDisplay[SPECIAL]: %GOLD%%NAME% <<qspecials>>
 ItemDisplay[SYNTH]: %GOLD%%NAME% <<qspecials>> //failsafe forsynthesized items, the above *should* catch them though
 ItemDisplay[std]: %NAME%
 ItemDisplay[cx5]: %NL%%GRAY% »     %PURPLE% %NAME% %GRAY%       «%NL%%NL% {  - Charms and Jewels%NL%  - Ethereal Items%NL%  - Socketed Items%NL%  - Non-magical Items%NL%%WHITE%Any item can be corrupted except:%NL%with another item and press the Transmute button twice.%NL%Place the Orb of Corruption%WHITE% into the Horadric Cube%WHITE%%NL%} <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(128/0/128), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
 ItemDisplay[cx9]: %NL%%GRAY% »     %WHITE% %NAME% %GRAY%       «%NL%%NL%  <:notify: BorderColor = RGB(138/43/226), BorderSize = 4, BackgroundColor = RGB(255/255/255), MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
-//ItemDisplay[cx5]: %NL%%GRAY% »     %PURPLE% %NAME% %GRAY%       «%NL%%NL% {  - Charms and Jewels%NL%  - Ethereal Items%NL%  - Socketed Items%NL%  - Non-magical Items%NL%%WHITE%Any item can be corrupted except:%NL%with another item and press the Transmute button twice.%NL%Place the Orb of Corruption%WHITE% into the Horadric Cube%WHITE%%NL%} <:notify: BorderColor = 155, BorderSize = 4, BackgroundColor = 75, MapIcon = 70, MapIconColor = 75, NotificationSound = corb2, NotificationColor = PURPLE>
 ItemDisplay[cx6]: %PURPLE%Diablo's Soulstone
 ItemDisplay[cx7]: %RED%»»»» %NAME%%RED% ««««
 ItemDisplay[ma1 OR ma2 OR ma3 OR ma5 OR ma6 OR ma7 OR ma9 OR ma10 OR maz OR ma11]: %NAME% %!mapmacro!% <<highprionotify>>
@@ -243,15 +243,14 @@ ItemDisplay[(ARMOR OR WEAPON) (( ID MAG OR RARE OR SET OR UNI) AND ETH) SOCK>0]:
 ItemDisplay[(ARMOR OR WEAPON) (MAG OR RARE OR SET OR UNI) SOCK>0]: %NAME% %!tansocks!% %CONTINUE%
 
 //Gems
-//ItemDisplay[GEMLEVEL=3 AND FILERTLVL=1 AND (DIFFICULTY=0 or CLVL<40)]: %NAME%
-//ItemDisplay[GEM AND FILERTLVL=1 AND (DIFFICULTY=0 or CLVL<40)]: %NAME%
+//// Flawless Gems, currently set to always show ruby and skull, uncommment others to always show all flawless
 //ItemDisplay[gzv]: %NAME% //Flawless Amethyst
 //ItemDisplay[glw]: %NAME% //Flawless Diamond
 //ItemDisplay[glg]: %NAME% //Flawless Emerald 
 ItemDisplay[glr]: %NAME% <:notify: MapIcon = 49>//Flawless Ruby
 //ItemDisplay[glb]: %NAME% //Flawless Sapphire
 //ItemDisplay[gly]: %NAME% //Flawless Topaz
-ItemDisplay[skl]: %NAME%  <:notify: MapIcon = 49>
+ItemDisplay[skl]: %NAME%  <:notify: MapIcon = 49> //Flawless Skull
 ItemDisplay[FILTERLVL<4 AND GEMTIER=4]: %NAME%
 ////Perfect Gems
 ItemDisplay[gpv]: %PURPLE%Ø P %WHITE%Amethyst %PURPLE%Ø<<notify>>
@@ -261,8 +260,10 @@ ItemDisplay[gpr]: %RED%Ø P %WHITE%Ruby %RED%Ø<:notify: MapIcon = 49>
 ItemDisplay[gpb]: %BLUE%Ø P %WHITE%Sapphire %BLUE%Ø<<notify>>
 ItemDisplay[gpy]: %YELLOW%Ø P %WHITE%Topaz %YELLOW%Ø<<notify>>
 ItemDisplay[skz]: %WHITE%Ø P %WHITE%Skull %WHITE%Ø<:notify: MapIcon = 49> //<<stack>>
-// filterbird
+// filterbird labels this line as bad, need to fix
+// Show ALL gems at filterlevel 1 AND in normal difficulty or character level below 40
 //ItemDisplay[GEM FILTERLVL=1 AND (DIFFICULTY=0 or CLVL<40)]: %NAME%
+//ItemDisplay[GEMLEVEL=3 AND FILERTLVL=1 AND (DIFFICULTY=0 or CLVL<40)]: %NAME%
 
 //Magic and rare Rings and amulets
 ItemDisplay[(rin OR amu) RARE !ID]: %TAN%»» %YELLOW%%NAME%%TAN% «« <<lowprionotify>>
@@ -273,7 +274,7 @@ ItemDisplay[jew MAG !ID]: %BLUE%%NAME% <:lowprionotify: BorderColor = RGB(128/0/
 ItemDisplay[jew RARE !ID]: %TAN%»» %YELLOW%%NAME%%TAN% «« <<rare>> // <<lowprionotify>>
 ItemDisplay[jew (RARE OR MAG) ID]: %NAME%
 
-//Craftables
+////Craftables - Needs review now that base items don't matter
 ItemDisplay[(7wa) MAG]: %NL% %NAME% %RED%[ort] %GRAY% [%ILVL%]%NL% <:notify: MapIcon = 66, NotificationColor = RED> {%GRAY% Ort Rune + Perfect Ruby + This Magical Item + Jewel = Crafted Blood Zerker Axe%NL%%GRAY% Horadric Cube Craft Recipe}
 //ItemDisplay[(mpi) MAG]: %NL% %NAME% %RED%[ort] %GRAY% [%ILVL%]%NL% <:notify: MapIcon = 66, NotificationColor = RED> {%GRAY% Ort Rune + Perfect Ruby + This Magical Item + Jewel = Crafted Blood Pickaxe%NL%%GRAY% Horadric Cube Craft Recipe}
 ItemDisplay[(mpi) MAG FILTERLVL<3]: %NL% %NAME% %RED%[ort] %GRAY% [%ILVL%] {%GRAY% Ort Rune + Perfect Ruby + This Magical Item + Jewel = Crafted Blood Pickaxe%NL%%GRAY% Horadric Cube Craft Recipe}
