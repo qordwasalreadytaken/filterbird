@@ -437,13 +437,91 @@
         .btn-link:hover {
             color: #0052a3;
         }
+
+        /* Newer level filter styles */
+        .item-main {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .levels-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .level-all-btn, .level-none-btn {
+            padding: 2px 8px;
+            background: #3a3a3a;
+            border: 1px solid #555;
+            border-radius: 3px;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.2s;
+        }
+
+        .level-all-btn:hover, .level-none-btn:hover {
+            background: #4a4a4a;
+            color: #fff;
+        }
+
+        label.level-checkbox {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 3px;
+            transition: background 0.2s;
+        }
+
+        label.level-checkbox:hover {
+            background: #3a3a3a;
+        }
+
+        label.level-checkbox input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        label.level-checkbox span {
+            font-size: 11px;
+            color: #aaa;
+            user-select: none;
+        }
+
+        label.level-checkbox input[type="checkbox"]:checked + span {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .custom-container, .notify-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .custom-checkbox, .notify-checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .notify-label {
+            font-size: 11px;
+            color: #999;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>FilterPhoenix - Visual Filter Builder</h1>
-            <div class="subtitle">Point-and-click interface for creating Diablo II item filters</div>
+            <div class="subtitle">Point-and-click interface for creating simple Path of Diablo item filters</div>
         </header>
 
         <div class="layout">
@@ -458,10 +536,22 @@
                         </label>
                     </div>
                     <div class="filter-levels-config" id="filter-levels-config">
-                        <p style="font-size: 12px; color: #999; margin: 0 0 10px 0;">Name your filter levels (used for strictness control):</p>
+                        <p style="font-size: 12px; color: #999; margin: 0 0 10px 0;">Name your filter levels (used for strictness control, only named filterlevels will be used):</p>
                         <div class="level-names-grid" id="level-names-grid">
                             <!-- Level name inputs will be generated here -->
                         </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <label title="Hides inferior (INF) items">
+                            <input type="checkbox" id="hide-junk" onchange="toggleHideJunk(this.checked)" checked>
+                            Hide Junk
+                        </label>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <label title="Shows anything not explicitly hidden by another line">
+                            <input type="checkbox" id="show-all" onchange="toggleShowAll(this.checked)" checked>
+                            End the filter with show anything not explicitly hidden
+                        </label>
                     </div>
                 </div>
 
@@ -937,6 +1027,271 @@
                         <div class="item-list" id="rare-elite-bases-items"></div>
                     </div>
                 </div>
+
+                <!-- NMAG RUNEWORD BASES -->
+                <div class="section-divider" style="margin: 30px 0; text-align: center; color: #666; font-weight: bold; font-size: 16px;">
+                    === NMAG RUNEWORD BASES ===
+                </div>
+
+                <!-- Weapons -->
+                <div class="section" id="nmag-polearms-section">
+                    <div class="section-header" onclick="toggleSection('nmag-polearms-section')">
+                        <div>
+                            <span class="section-title">NMAG: Polearms (Insight, Infinity, Obedience)</span>
+                            <span class="item-count" id="nmag-polearms-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagPolearmsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="eth-only">ETH Only</option>
+                                <option value="4sock">4-Socket Only</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-polearms-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-swords-section">
+                    <div class="section-header" onclick="toggleSection('nmag-swords-section')">
+                        <div>
+                            <span class="section-title">NMAG: Swords (Spirit, Grief)</span>
+                            <span class="item-count" id="nmag-swords-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSwordsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="elite-only">Elite Only</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-swords-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-axes-section">
+                    <div class="section-header" onclick="toggleSection('nmag-axes-section')">
+                        <div>
+                            <span class="section-title">NMAG: Axes (Grief, Beast, Death)</span>
+                            <span class="item-count" id="nmag-axes-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagAxesPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-axes-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-maces-section">
+                    <div class="section-header" onclick="toggleSection('nmag-maces-section')">
+                        <div>
+                            <span class="section-title">NMAG: Maces (BoTD, Heart of the Oak)</span>
+                            <span class="item-count" id="nmag-maces-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagMacesPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-maces-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-staves-section">
+                    <div class="section-header" onclick="toggleSection('nmag-staves-section')">
+                        <div>
+                            <span class="section-title">NMAG: Staves (CTA, Memory)</span>
+                            <span class="item-count" id="nmag-staves-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagStavesPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-staves-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-bows-section">
+                    <div class="section-header" onclick="toggleSection('nmag-bows-section')">
+                        <div>
+                            <span class="section-title">NMAG: Bows (Faith, Ice, Brand, Insight)</span>
+                            <span class="item-count" id="nmag-bows-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagBowsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-bows-items"></div>
+                    </div>
+                </div>
+
+                <!-- Armor -->
+                <div class="section" id="nmag-light-armor-section">
+                    <div class="section-header" onclick="toggleSection('nmag-light-armor-section')">
+                        <div>
+                            <span class="section-title">NMAG: Light Armor (Enigma, Fortitude, CoH)</span>
+                            <span class="item-count" id="nmag-light-armor-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagLightArmorPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="elite-only">Elite Only</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-light-armor-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-heavy-armor-section">
+                    <div class="section-header" onclick="toggleSection('nmag-heavy-armor-section')">
+                        <div>
+                            <span class="section-title">NMAG: Heavy Armor (Fortitude, CoH, Bramble)</span>
+                            <span class="item-count" id="nmag-heavy-armor-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagHeavyArmorPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-heavy-armor-items"></div>
+                    </div>
+                </div>
+
+                <!-- Shields -->
+                <div class="section" id="nmag-shields-generic-section">
+                    <div class="section-header" onclick="toggleSection('nmag-shields-generic-section')">
+                        <div>
+                            <span class="section-title">NMAG: Shields - Generic (Spirit, Splendor, Rhyme)</span>
+                            <span class="item-count" id="nmag-shields-generic-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagShieldsGenericPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-shields-generic-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-shields-paladin-section">
+                    <div class="section-header" onclick="toggleSection('nmag-shields-paladin-section')">
+                        <div>
+                            <span class="section-title">NMAG: Shields - Paladin (Spirit, Exile)</span>
+                            <span class="item-count" id="nmag-shields-paladin-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagShieldsPaladinPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-shields-paladin-items"></div>
+                    </div>
+                </div>
+
+                <!-- Helms & Class-Specific -->
+                <div class="section" id="nmag-helms-section">
+                    <div class="section-header" onclick="toggleSection('nmag-helms-section')">
+                        <div>
+                            <span class="section-title">NMAG: Helms (Delirium, Dream)</span>
+                            <span class="item-count" id="nmag-helms-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagHelmsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-helms-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-class-specific-section">
+                    <div class="section-header" onclick="toggleSection('nmag-class-specific-section')">
+                        <div>
+                            <span class="section-title">NMAG: Class-Specific</span>
+                            <span class="item-count" id="nmag-class-specific-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagClassSpecificPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                        </div>
+                        <div class="item-list" id="nmag-class-specific-items"></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Output Panel -->
@@ -962,6 +1317,7 @@
         </div>
     </div>
 
+    <script src="data/item_metadata.js"></script>
     <script>
         // Available font colors for filter
         const FONT_COLORS = [
@@ -1709,13 +2065,97 @@
             { name: "Elite Shields (ILVL 50+)", code: "EQ3", tier: "elite", minIlvl: 50, desc: "Elite shields" },
         ];
 
+        // NMAG Runeword Bases
+        const nmagPolearms = [
+            { name: "Thresher", code: "7s8", quality: "elite", rw: "Insight, Infinity, Obedience" },
+            { name: "Giant Thresher", code: "7wc", quality: "elite", rw: "Insight, Infinity" },
+            { name: "Cryptic Axe", code: "7pa", quality: "elite", rw: "Insight, Infinity, Obedience" },
+            { name: "Mancatcher", code: "7vo", quality: "elite", rw: "Insight, Infinity" },
+            { name: "Colossus Voulge", code: "7h7", quality: "elite", rw: "Insight, Infinity" },
+            { name: "Great Poleaxe", code: "7o7", quality: "elite", rw: "Insight, Infinity" },
+        ];
+
+        const nmagSwords = [
+            { name: "Phase Blade", code: "7cr", quality: "elite", rw: "Spirit, Grief, Last Wish" },
+            { name: "Colossus Blade", code: "7gd", quality: "elite", rw: "Grief, Breath of the Dying" },
+            { name: "Colossus Sword", code: "7fb", quality: "elite", rw: "Grief" },
+            { name: "Crystal Sword", code: "crs", quality: "normal", rw: "Spirit" },
+            { name: "Broad Sword", code: "bsd", quality: "normal", rw: "Spirit" },
+            { name: "Long Sword", code: "lsd", quality: "normal", rw: "Spirit" },
+        ];
+
+        const nmagAxes = [
+            { name: "Berserker Axe", code: "7wa", quality: "elite", rw: "Grief, Beast, Death" },
+            { name: "Ettin Axe", code: "72a", quality: "elite", rw: "Honor, Crescent Moon" },
+        ];
+
+        const nmagMaces = [
+            { name: "Thunder Maul", code: "7gm", quality: "elite", rw: "BOTD" },
+            { name: "Scourge", code: "7m7", quality: "elite", rw: "Grief, Crescent Moon" },
+            { name: "Flail", code: "fla", quality: "normal", rw: "CTA, Heart of the Oak" },
+        ];
+
+        const nmagStaves = [
+            { name: "Archon Staff", code: "6ws", quality: "elite", rw: "CTA, Memory" },
+            { name: "War Staff", code: "wst", quality: "exceptional", rw: "CTA, Memory" },
+        ];
+
+        const nmagBows = [
+            { name: "Matriarchal Bow", code: "amc", quality: "elite", rw: "Faith, Ice, Brand" },
+            { name: "Grand Matron Bow", code: "amb", quality: "elite", rw: "Faith, Ice, Brand" },
+            { name: "Hydra Bow", code: "6hb", quality: "elite", rw: "Faith, Ice" },
+            { name: "Crusader Bow", code: "6cb", quality: "elite", rw: "Faith, Ice" },
+        ];
+
+        const nmagLightArmor = [
+            { name: "Archon Plate", code: "utp", quality: "elite", rw: "Enigma, Fortitude, CoH" },
+            { name: "Dusk Shroud", code: "uui", quality: "elite", rw: "Enigma, Fortitude" },
+            { name: "Wyrmhide", code: "utu", quality: "elite", rw: "Enigma, Fortitude" },
+            { name: "Mage Plate", code: "xtp", quality: "exceptional", rw: "Stealth, Smoke" },
+            { name: "Light Plate", code: "ltp", quality: "normal", rw: "Stealth, Enigma" },
+        ];
+
+        const nmagHeavyArmor = [
+            { name: "Sacred Armor", code: "uar", quality: "elite", rw: "Fortitude, CoH, Bramble" },
+            { name: "Lacquered Plate", code: "ula", quality: "elite", rw: "Fortitude" },
+            { name: "Great Hauberk", code: "urs", quality: "elite", rw: "Fortitude" },
+        ];
+
+        const nmagShieldsGeneric = [
+            { name: "Monarch", code: "uit", quality: "elite", rw: "Spirit, Dream" },
+            { name: "Bone Shield", code: "bsh", quality: "elite", rw: "Splendor, Rhyme" },
+            { name: "Grim Shield", code: "xsh", quality: "elite", rw: "Splendor, Rhyme" },
+        ];
+
+        const nmagShieldsPaladin = [
+            { name: "Sacred Targe", code: "pa9", quality: "elite", rw: "Spirit, Exile" },
+            { name: "Sacred Rondache", code: "paa", quality: "elite", rw: "Spirit, Exile" },
+            { name: "Kurast Shield", code: "pab", quality: "elite", rw: "Spirit, Exile" },
+            { name: "Zakarum Shield", code: "paf", quality: "elite", rw: "Spirit, Exile" },
+            { name: "Vortex Shield", code: "pac", quality: "elite", rw: "Spirit, Exile" },
+        ];
+
+        const nmagHelms = [
+            { name: "Demonhead", code: "uh9", quality: "elite", rw: "Delirium, Dream" },
+            { name: "Bone Visage", code: "usk", quality: "elite", rw: "Delirium, Dream" },
+        ];
+
+        const nmagClassSpecific = [
+            { name: "Druid Pelts", code: "CL1", quality: "elite", rw: "Delirium, Metamorphosis" },
+            { name: "Necro Shrunken Heads", code: "CL2", quality: "elite", rw: "Splendor, Rhyme" },
+            { name: "Assassin Claws", code: "CL5", quality: "elite", rw: "Chaos, Fury, Plague" },
+            { name: "Sorceress Orbs", code: "WP11", quality: "elite", rw: "Plague" },
+        ];
+
         // Global settings state
         const globalSettings = {
             enableFilterLevels: false,
             levelNames: [
                 '', '', '', '', '',
                 '', '', '', '', ''
-            ]
+            ],
+            hideJunk: true,
+            showAll: true
         };
 
         // State management
@@ -1740,7 +2180,19 @@
             magicCrafting: {},
             rareJewelry: {},
             rareClassItems: {},
-            rareEliteBases: {}
+            rareEliteBases: {},
+            nmagPolearms: {},
+            nmagSwords: {},
+            nmagAxes: {},
+            nmagMaces: {},
+            nmagStaves: {},
+            nmagBows: {},
+            nmagLightArmor: {},
+            nmagHeavyArmor: {},
+            nmagShieldsGeneric: {},
+            nmagShieldsPaladin: {},
+            nmagHelms: {},
+            nmagClassSpecific: {}
         };
 
         // Initialize utility items state
@@ -2073,6 +2525,42 @@
                 filterLevels: [true, true, true, true, true, true, true, true, true, true]
             };
         });
+
+        // Initialize NMAG runeword bases state
+        const initializeNmagState = (items, stateCategory) => {
+            items.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                filterState[stateCategory][key] = {
+                    name: item.name,
+                    code: item.code,
+                    quality: item.quality,
+                    rw: item.rw,
+                    show: true,
+                    ethFilter: 'both',  // 'both', 'eth-only', 'non-eth'
+                    sockFilter: [],     // Array of selected socket counts: ['0', '3', '4', etc]
+                    edFilter: 'any',    // 'any', '10+', '12+', '13+', '14+', '15'
+                    useCustomColors: false,
+                    chatNotification: false,
+                    fontColor: 'WHITE',
+                    borderColor: null,
+                    backgroundColor: null,
+                    filterLevels: [true, true, true, true, true, true, true, true, true, true]
+                };
+            });
+        };
+
+        initializeNmagState(nmagPolearms, 'nmagPolearms');
+        initializeNmagState(nmagSwords, 'nmagSwords');
+        initializeNmagState(nmagAxes, 'nmagAxes');
+        initializeNmagState(nmagMaces, 'nmagMaces');
+        initializeNmagState(nmagStaves, 'nmagStaves');
+        initializeNmagState(nmagBows, 'nmagBows');
+        initializeNmagState(nmagLightArmor, 'nmagLightArmor');
+        initializeNmagState(nmagHeavyArmor, 'nmagHeavyArmor');
+        initializeNmagState(nmagShieldsGeneric, 'nmagShieldsGeneric');
+        initializeNmagState(nmagShieldsPaladin, 'nmagShieldsPaladin');
+        initializeNmagState(nmagHelms, 'nmagHelms');
+        initializeNmagState(nmagClassSpecific, 'nmagClassSpecific');
 
         // Render items
         function renderUtilityItems() {
@@ -2661,37 +3149,38 @@
                     `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
                 ).join('');
                 
-                // Build filter levels checkboxes (only for named levels)
-                const levelCheckboxes = state.filterLevels
-                    .map((checked, idx) => {
-                        if (!globalSettings.levelNames[idx]) return null;
-                        return `
-                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
-                                <input type="checkbox" class="level-checkbox" 
-                                    ${checked ? 'checked' : ''}
-                                    onchange="updateItemLevel('${stateCategory}', '${key}', ${idx}, this.checked)">
-                                <span class="level-checkbox-label">${idx + 1}</span>
-                            </div>
-                        `;
-                    })
-                    .filter(cb => cb !== null)
-                    .join('');
+                const levels = Array.from({length: 10}, (_, i) => {
+                    const levelNum = i + 1;
+                    const levelName = globalSettings.levelNames[i];
+                    if (!levelName) return '';
+                    return `
+                        <label class="level-checkbox">
+                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
+                                onchange="updateItemLevel('${stateCategory}', '${key}', ${i}, this.checked)">
+                            <span>${levelNum}</span>
+                        </label>
+                    `;
+                }).join('');
                 
                 row.innerHTML = `
-                    <input type="checkbox" class="item-checkbox" 
-                        ${state.show ? 'checked' : ''} 
-                        onchange="updateUniqueItemState('${stateCategory}', '${key}', 'show', this.checked)">
-                    <span class="item-name">${item.name}</span>
-                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
-                        <span class="levels-label">Levels:</span>
-                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', true); event.preventDefault();" title="Select all levels">All</button>
-                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', false); event.preventDefault();" title="Deselect all levels">None</button>
-                        <div class="level-checkboxes">
-                            ${levelCheckboxes}
-                        </div>
+                    <div class="item-main">
+                        <input type="checkbox" class="item-checkbox" 
+                            ${state.show ? 'checked' : ''} 
+                            onchange="updateUniqueItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                        <span class="item-name">${item.name}</span>
                     </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
+                    ${globalSettings.enableFilterLevels ? `
+                    <div class="levels-container">
+                        <span class="levels-label">Levels</span>
+                        <button class="level-all-btn" 
+                            onclick="setAllLevels('${stateCategory}', '${key}', true)">All</button>
+                        <button class="level-none-btn" 
+                            onclick="setAllLevels('${stateCategory}', '${key}', false)">None</button>
+                        <div class="level-checkboxes">${levels}</div>
+                    </div>
+                    ` : ''}
+                    <div class="custom-container">
+                        <input type="checkbox" class="custom-checkbox" 
                             ${state.useCustomColors ? 'checked' : ''}
                             onchange="updateUniqueItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
                         <span class="custom-label">Custom</span>
@@ -2726,11 +3215,11 @@
                                 title="Clear background color">×</button>
                         </div>
                     </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
+                    <div class="notify-container">
+                        <input type="checkbox" class="notify-checkbox" 
                             ${state.chatNotification ? 'checked' : ''}
                             onchange="updateUniqueItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
+                        <span class="notify-label">Notify</span>
                     </div>
                 `;
                 container.appendChild(row);
@@ -3002,6 +3491,213 @@
 
         function renderRareEliteBasesItems() {
             renderMagicRareItems(rareEliteBases, 'rareEliteBases', 'rare-elite-bases-items', 'rare-elite-bases-count', 'YELLOW');
+        }
+
+        // Generate socket checkboxes based on max_sockets from bases object
+        function generateSocketCheckboxes(itemCode, selectedSockets, stateCategory, key) {
+            // Look up max sockets from bases object in item_metadata.js
+            // The state contains the item name, we need to convert it to the bases key format
+            const state = filterState[stateCategory][key];
+            const basesKey = state.name.replace(/ /g, '_'); // "Colossus Blade" -> "Colossus_Blade"
+            const baseItem = bases[basesKey];
+            let maxSockets = baseItem?.max_sockets || 6;
+            
+            // Override max sockets for class-specific items
+            if (stateCategory === 'nmagClassSpecific') {
+                if (state.name.includes('Necro') || state.name.includes('Shrunken Head')) {
+                    maxSockets = 2;
+                } else {
+                    maxSockets = 3;
+                }
+            }
+            
+            // Available socket options: 0, 2, 3, 4, 5, 6 but limited by max_sockets
+            const socketOptions = ['0', '2', '3', '4', '5', '6'].filter(sock => {
+                const sockNum = parseInt(sock);
+                return sock === '0' || sockNum <= maxSockets;
+            });
+            
+            let html = '<div style="display: flex; align-items: center; gap: 4px; font-size: 11px;">';
+            html += '<span style="margin-right: 2px;">Sockets:</span>';
+            
+            socketOptions.forEach(sock => {
+                const isChecked = selectedSockets.includes(sock);
+                html += `
+                    <label style="display: flex; align-items: center; gap: 2px; cursor: pointer;">
+                        <input type="checkbox" 
+                            ${isChecked ? 'checked' : ''}
+                            onchange="toggleNmagSocket('${stateCategory}', '${key}', '${sock}', this.checked)"
+                            style="margin: 0; cursor: pointer;">
+                        <span>${sock}</span>
+                    </label>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        // Generic NMAG runeword bases rendering function
+        function renderNmagItems(items, stateCategory, containerId, countId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = '';
+            let shownCount = 0;
+
+            items.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                const state = filterState[stateCategory][key];
+                if (state.show) shownCount++;
+
+                const row = document.createElement('div');
+                row.className = 'item-row';
+
+                const fontOptions = FONT_COLORS.map(color => 
+                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
+                ).join('');
+
+                const levels = Array.from({length: 10}, (_, i) => {
+                    const levelNum = i + 1;
+                    const levelName = globalSettings.levelNames[i];
+                    if (!levelName) return '';
+                    return `
+                        <label class="level-checkbox">
+                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
+                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'filterLevels', this.checked, ${i})">
+                            <span>${levelNum}</span>
+                        </label>
+                    `;
+                }).join('');
+
+                row.innerHTML = `
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
+                            onchange="updateNmagItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                        <span class="item-name">${state.name}</span>
+                        <span style="color: #888; font-size: 11px; margin-left: 8px;">[${state.quality}]</span>
+                        <div style="display: inline-flex; gap: 8px; align-items: center; margin-left: 15px;">
+                            <select style="font-size: 11px; padding: 2px 4px;" 
+                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'ethFilter', this.value)">
+                                <option value="both" ${state.ethFilter === 'both' ? 'selected' : ''}>Both</option>
+                                <option value="eth-only" ${state.ethFilter === 'eth-only' ? 'selected' : ''}>ETH Only</option>
+                                <option value="non-eth" ${state.ethFilter === 'non-eth' ? 'selected' : ''}>Non-ETH</option>
+                            </select>
+                            ${generateSocketCheckboxes(state.code, state.sockFilter, stateCategory, key)}
+                            <select style="font-size: 11px; padding: 2px 4px;" 
+                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'edFilter', this.value)">
+                                <option value="any" ${state.edFilter === 'any' ? 'selected' : ''}>ED: Any</option>
+                                <option value="10+" ${state.edFilter === '10+' ? 'selected' : ''}>10+</option>
+                                <option value="12+" ${state.edFilter === '12+' ? 'selected' : ''}>12+</option>
+                                <option value="13+" ${state.edFilter === '13+' ? 'selected' : ''}>13+</option>
+                                <option value="14+" ${state.edFilter === '14+' ? 'selected' : ''}>14+</option>
+                                <option value="15" ${state.edFilter === '15' ? 'selected' : ''}>15</option>
+                            </select>
+                        </div>
+                        ${globalSettings.enableFilterLevels && levels ? `
+                            <div class="levels-container">
+                                <span class="levels-label">Levels</span>
+                                <button class="level-all-btn" 
+                                    onclick="setAllNmagLevels('${stateCategory}', '${key}', true)">All</button>
+                                <button class="level-none-btn" 
+                                    onclick="setAllNmagLevels('${stateCategory}', '${key}', false)">None</button>
+                                <div class="level-checkboxes">${levels}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 30px; margin-top: 5px;">
+                        <div class="color-picker-wrapper">
+                            <input type="checkbox" class="custom-color-checkbox" 
+                                ${state.useCustomColors ? 'checked' : ''}
+                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
+                            <span class="custom-label">Custom</span>
+                        </div>
+                        <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
+                            <div class="color-picker-wrapper">
+                                <span class="color-label">Font</span>
+                                <select class="color-select" 
+                                    onchange="updateNmagItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
+                                    ${fontOptions}
+                                </select>
+                                <button class="color-clear-btn" onclick="clearNmagFontColor('${stateCategory}', '${key}')" title="Reset to default">×</button>
+                            </div>
+                            <div class="color-picker-wrapper">
+                                <span class="color-label">Border</span>
+                                <input type="color" class="color-input" value="${state.borderColor || '#ffffff'}"
+                                    onchange="updateNmagItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
+                                    ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
+                                <button class="color-clear-btn" onclick="clearNmagColor('${stateCategory}', '${key}', 'borderColor')" title="Clear border color">×</button>
+                            </div>
+                            <div class="color-picker-wrapper">
+                                <span class="color-label">BG</span>
+                                <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
+                                    onchange="updateNmagItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
+                                    ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
+                                <button class="color-clear-btn" onclick="clearNmagColor('${stateCategory}', '${key}', 'backgroundColor')" title="Clear background color">×</button>
+                            </div>
+                        </div>
+                        <div class="color-picker-wrapper">
+                            <input type="checkbox" class="custom-color-checkbox" 
+                                ${state.chatNotification ? 'checked' : ''}
+                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
+                            <span class="custom-label">Notify</span>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(row);
+            });
+
+            const total = items.length;
+            document.getElementById(countId).textContent = `(${shownCount}/${total} shown)`;
+        }
+
+        function renderNmagPolearmsItems() {
+            renderNmagItems(nmagPolearms, 'nmagPolearms', 'nmag-polearms-items', 'nmag-polearms-count');
+        }
+
+        function renderNmagSwordsItems() {
+            renderNmagItems(nmagSwords, 'nmagSwords', 'nmag-swords-items', 'nmag-swords-count');
+        }
+
+        function renderNmagAxesItems() {
+            renderNmagItems(nmagAxes, 'nmagAxes', 'nmag-axes-items', 'nmag-axes-count');
+        }
+
+        function renderNmagMacesItems() {
+            renderNmagItems(nmagMaces, 'nmagMaces', 'nmag-maces-items', 'nmag-maces-count');
+        }
+
+        function renderNmagStavesItems() {
+            renderNmagItems(nmagStaves, 'nmagStaves', 'nmag-staves-items', 'nmag-staves-count');
+        }
+
+        function renderNmagBowsItems() {
+            renderNmagItems(nmagBows, 'nmagBows', 'nmag-bows-items', 'nmag-bows-count');
+        }
+
+        function renderNmagLightArmorItems() {
+            renderNmagItems(nmagLightArmor, 'nmagLightArmor', 'nmag-light-armor-items', 'nmag-light-armor-count');
+        }
+
+        function renderNmagHeavyArmorItems() {
+            renderNmagItems(nmagHeavyArmor, 'nmagHeavyArmor', 'nmag-heavy-armor-items', 'nmag-heavy-armor-count');
+        }
+
+        function renderNmagShieldsGenericItems() {
+            renderNmagItems(nmagShieldsGeneric, 'nmagShieldsGeneric', 'nmag-shields-generic-items', 'nmag-shields-generic-count');
+        }
+
+        function renderNmagShieldsPaladinItems() {
+            renderNmagItems(nmagShieldsPaladin, 'nmagShieldsPaladin', 'nmag-shields-paladin-items', 'nmag-shields-paladin-count');
+        }
+
+        function renderNmagHelmsItems() {
+            renderNmagItems(nmagHelms, 'nmagHelms', 'nmag-helms-items', 'nmag-helms-count');
+        }
+
+        function renderNmagClassSpecificItems() {
+            renderNmagItems(nmagClassSpecific, 'nmagClassSpecific', 'nmag-class-specific-items', 'nmag-class-specific-count');
         }
 
         // Helper functions for unique items
@@ -3432,10 +4128,297 @@
             generateFilter();
         }
 
+        // State update functions for NMAG items
+        function updateNmagItemState(category, key, field, value, index = null) {
+            if (index !== null) {
+                filterState[category][key][field][index] = value;
+            } else {
+                filterState[category][key][field] = value;
+            }
+
+            // Re-render the appropriate section
+            const renderMap = {
+                'nmagPolearms': renderNmagPolearmsItems,
+                'nmagSwords': renderNmagSwordsItems,
+                'nmagAxes': renderNmagAxesItems,
+                'nmagMaces': renderNmagMacesItems,
+                'nmagStaves': renderNmagStavesItems,
+                'nmagBows': renderNmagBowsItems,
+                'nmagLightArmor': renderNmagLightArmorItems,
+                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagShieldsGeneric': renderNmagShieldsGenericItems,
+                'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
+                'nmagHelms': renderNmagHelmsItems,
+                'nmagClassSpecific': renderNmagClassSpecificItems
+            };
+            if (renderMap[category]) renderMap[category]();
+            generateFilter();
+        }
+
+        // Toggle socket selection for NMAG items
+        function toggleNmagSocket(category, key, socketValue, checked) {
+            const state = filterState[category][key];
+            if (checked) {
+                if (!state.sockFilter.includes(socketValue)) {
+                    state.sockFilter.push(socketValue);
+                }
+            } else {
+                state.sockFilter = state.sockFilter.filter(s => s !== socketValue);
+            }
+            generateFilter();
+        }
+
+        function clearNmagFontColor(category, key) {
+            filterState[category][key].fontColor = 'WHITE';
+            const renderMap = {
+                'nmagPolearms': renderNmagPolearmsItems,
+                'nmagSwords': renderNmagSwordsItems,
+                'nmagAxes': renderNmagAxesItems,
+                'nmagMaces': renderNmagMacesItems,
+                'nmagStaves': renderNmagStavesItems,
+                'nmagLightArmor': renderNmagLightArmorItems,
+                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagShieldsGeneric': renderNmagShieldsGenericItems,
+                'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
+                'nmagHelms': renderNmagHelmsItems,
+                'nmagClassSpecific': renderNmagClassSpecificItems
+            };
+            if (renderMap[category]) renderMap[category]();
+            generateFilter();
+        }
+
+        function clearNmagColor(category, key, colorType) {
+            filterState[category][key][colorType] = null;
+            const renderMap = {
+                'nmagPolearms': renderNmagPolearmsItems,
+                'nmagSwords': renderNmagSwordsItems,
+                'nmagAxes': renderNmagAxesItems,
+                'nmagMaces': renderNmagMacesItems,
+                'nmagStaves': renderNmagStavesItems,
+                'nmagLightArmor': renderNmagLightArmorItems,
+                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagShieldsGeneric': renderNmagShieldsGenericItems,
+                'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
+                'nmagHelms': renderNmagHelmsItems,
+                'nmagClassSpecific': renderNmagClassSpecificItems
+            };
+            if (renderMap[category]) renderMap[category]();
+            generateFilter();
+        }
+
+        function setAllNmagLevels(category, key, enabled) {
+            for (let i = 0; i < 10; i++) {
+                filterState[category][key].filterLevels[i] = enabled;
+            }
+            const renderMap = {
+                'nmagPolearms': renderNmagPolearmsItems,
+                'nmagSwords': renderNmagSwordsItems,
+                'nmagAxes': renderNmagAxesItems,
+                'nmagMaces': renderNmagMacesItems,
+                'nmagStaves': renderNmagStavesItems,
+                'nmagLightArmor': renderNmagLightArmorItems,
+                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagShieldsGeneric': renderNmagShieldsGenericItems,
+                'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
+                'nmagHelms': renderNmagHelmsItems,
+                'nmagClassSpecific': renderNmagClassSpecificItems
+            };
+            if (renderMap[category]) renderMap[category]();
+            generateFilter();
+        }
+
+        // Preset functions for NMAG items
+        function applyNmagPolearmsPreset(preset) {
+            if (!preset) return;
+            nmagPolearms.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagPolearms[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagPolearms[key].show = false;
+                } else if (preset === 'eth-only') {
+                    filterState.nmagPolearms[key].show = true;
+                    filterState.nmagPolearms[key].ethFilter = 'eth-only';
+                } else if (preset === '4sock') {
+                    filterState.nmagPolearms[key].show = true;
+                    filterState.nmagPolearms[key].sockFilter = '4';
+                }
+            });
+            renderNmagPolearmsItems();
+            generateFilter();
+        }
+
+        function applyNmagSwordsPreset(preset) {
+            if (!preset) return;
+            nmagSwords.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagSwords[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagSwords[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagSwords[key].show = item.quality === 'elite';
+                }
+            });
+            renderNmagSwordsItems();
+            generateFilter();
+        }
+
+        function applyNmagAxesPreset(preset) {
+            if (!preset) return;
+            nmagAxes.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagAxes[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagAxes[key].show = false;
+                }
+            });
+            renderNmagAxesItems();
+            generateFilter();
+        }
+
+        function applyNmagMacesPreset(preset) {
+            if (!preset) return;
+            nmagMaces.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagMaces[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagMaces[key].show = false;
+                }
+            });
+            renderNmagMacesItems();
+            generateFilter();
+        }
+
+        function applyNmagStavesPreset(preset) {
+            if (!preset) return;
+            nmagStaves.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagStaves[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagStaves[key].show = false;
+                }
+            });
+            renderNmagStavesItems();
+            generateFilter();
+        }
+
+        function applyNmagBowsPreset(preset) {
+            if (!preset) return;
+            nmagBows.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagBows[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagBows[key].show = false;
+                }
+            });
+            renderNmagBowsItems();
+            generateFilter();
+        }
+
+        function applyNmagLightArmorPreset(preset) {
+            if (!preset) return;
+            nmagLightArmor.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagLightArmor[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagLightArmor[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagLightArmor[key].show = item.quality === 'elite';
+                }
+            });
+            renderNmagLightArmorItems();
+            generateFilter();
+        }
+
+        function applyNmagHeavyArmorPreset(preset) {
+            if (!preset) return;
+            nmagHeavyArmor.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagHeavyArmor[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagHeavyArmor[key].show = false;
+                }
+            });
+            renderNmagHeavyArmorItems();
+            generateFilter();
+        }
+
+        function applyNmagShieldsGenericPreset(preset) {
+            if (!preset) return;
+            nmagShieldsGeneric.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagShieldsGeneric[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagShieldsGeneric[key].show = false;
+                }
+            });
+            renderNmagShieldsGenericItems();
+            generateFilter();
+        }
+
+        function applyNmagShieldsPaladinPreset(preset) {
+            if (!preset) return;
+            nmagShieldsPaladin.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagShieldsPaladin[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagShieldsPaladin[key].show = false;
+                }
+            });
+            renderNmagShieldsPaladinItems();
+            generateFilter();
+        }
+
+        function applyNmagHelmsPreset(preset) {
+            if (!preset) return;
+            nmagHelms.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagHelms[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagHelms[key].show = false;
+                }
+            });
+            renderNmagHelmsItems();
+            generateFilter();
+        }
+
+        function applyNmagClassSpecificPreset(preset) {
+            if (!preset) return;
+            nmagClassSpecific.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagClassSpecific[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagClassSpecific[key].show = false;
+                }
+            });
+            renderNmagClassSpecificItems();
+            generateFilter();
+        }
+
         // Generate filter output
         function generateFilter() {
+            // Get current date formatted as "DD MMM"
+            const now = new Date();
+            const day = now.getDate();
+            const month = now.toLocaleString('en-US', { month: 'short' });
+            const dateStr = `${day} ${month}`;
+            
             let filter = '// FilterPhoenix Visual Filter Builder\n';
             filter += '// Generated: ' + new Date().toLocaleString() + '\n\n';
+            filter += 'Attribute[Author]: Filter Builder\n';
+            filter += 'Attribute[Name]: You\n';
+            filter += `Attribute[Date]: ${dateStr}\n\n`;
 
             // Add FilterLevel declarations if enabled (only for named levels)
             if (globalSettings.enableFilterLevels) {
@@ -3882,6 +4865,134 @@
                 return hasItems ? lines + '\n' : '';
             }
             
+            function generateNmagItemLines(items, stateCategory, sectionTitle) {
+                let lines = `// ${sectionTitle}\n`;
+                let hasItems = false;
+                
+                items.forEach((item, idx) => {
+                    const key = item.code + '_' + idx;
+                    const state = filterState[stateCategory][key];
+                    if (state.show) {
+                        hasItems = true;
+                        // Generate filter level condition if enabled
+                        const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
+                        
+                        // Build socket condition
+                        let sockCondition = '';
+                        if (state.sockFilter.length > 0) {
+                            if (state.sockFilter.length === 1) {
+                                sockCondition = ` SOCK=${state.sockFilter[0]}`;
+                            } else {
+                                // Multiple socket values: (SOCK=3 OR SOCK=4)
+                                const sockParts = state.sockFilter.map(s => `SOCK=${s}`).join(' OR ');
+                                sockCondition = ` (${sockParts})`;
+                            }
+                        }
+                        
+                        // Build ED condition
+                        let edCondition = '';
+                        if (state.edFilter === '15') {
+                            edCondition = ' ED=15';
+                        } else if (state.edFilter === '14+') {
+                            edCondition = ' ED>13';
+                        } else if (state.edFilter === '13+') {
+                            edCondition = ' ED>12';
+                        } else if (state.edFilter === '12+') {
+                            edCondition = ' ED>11';
+                        } else if (state.edFilter === '10+') {
+                            edCondition = ' ED>9';
+                        }
+                        
+                        // Build style reference for border/background/notification if needed
+                        let styleRef = '';
+                        if (state.useCustomColors || state.chatNotification) {
+                            const needsBorder = state.useCustomColors && state.borderColor !== null;
+                            const needsBackground = state.useCustomColors && state.backgroundColor !== null;
+                            const needsNotification = state.chatNotification;
+                            
+                            if (needsBorder || needsBackground || needsNotification) {
+                                const rgbParts = [];
+                                if (needsNotification) {
+                                    const notifyColor = state.fontColor || 'WHITE';
+                                    rgbParts.push(`NotificationColor = ${notifyColor}`);
+                                }
+                                if (needsBorder) {
+                                    const rgb = hexToRGBSlash(state.borderColor);
+                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                }
+                                if (needsBackground) {
+                                    const rgb = hexToRGBSlash(state.backgroundColor);
+                                    rgbParts.push(`BackgroundColor = RGB(${rgb})`);
+                                }
+                                styleRef = ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            }
+                        }
+                        
+                        // Handle ETH filter - generate two lines when 'any'
+                        if (state.ethFilter === 'eth-only') {
+                            // ETH only - gray font for everything
+                            let line = `ItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
+                            lines += line + '\n';
+                        } else if (state.ethFilter === 'non-eth') {
+                            // Non-ETH only - white name, gray sockets
+                            let line = `ItemDisplay[NMAG ${item.code} !ETH${sockCondition}${edCondition}${filtLvlCondition}]:`;
+                            if (state.useCustomColors && state.fontColor) {
+                                line += ` %${state.fontColor}%`;
+                            } else {
+                                line += ` %WHITE%`;
+                            }
+                            line += ` %NAME% %GRAY%[%SOCKETS%]${styleRef}`;
+                            lines += line + '\n';
+                        } else {
+                            // 'any' - generate two lines: ETH first (gray), then non-ETH (white+gray)
+                            // Line 1: ETH - all gray
+                            let ethLine = `ItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
+                            lines += ethLine + '\n';
+                            
+                            // Line 2: Non-ETH - white name, gray sockets
+                            let nonEthLine = `ItemDisplay[NMAG ${item.code}${sockCondition}${edCondition}${filtLvlCondition}]:`;
+                            if (state.useCustomColors && state.fontColor) {
+                                nonEthLine += ` %${state.fontColor}%`;
+                            } else {
+                                nonEthLine += ` %WHITE%`;
+                            }
+                            nonEthLine += ` %NAME% %GRAY%[%SOCKETS%]${styleRef}`;
+                            lines += nonEthLine + '\n';
+                        }
+                    } else {
+                        // Build hide condition - match the show conditions
+                        let ethCondition = '';
+                        if (state.ethFilter === 'eth-only') {
+                            ethCondition = ' ETH';
+                        } else if (state.ethFilter === 'non-eth') {
+                            ethCondition = ' !ETH';
+                        }
+                        
+                        let sockCondition = '';
+                        if (state.sockFilter !== 'any') {
+                            sockCondition = ` SOCK=${state.sockFilter}`;
+                        }
+                        
+                        let edCondition = '';
+                        if (state.edFilter === '15') {
+                            edCondition = ' ED=15';
+                        } else if (state.edFilter === '14+') {
+                            edCondition = ' ED>13';
+                        } else if (state.edFilter === '13+') {
+                            edCondition = ' ED>12';
+                        } else if (state.edFilter === '12+') {
+                            edCondition = ' ED>11';
+                        } else if (state.edFilter === '10+') {
+                            edCondition = ' ED>9';
+                        }
+                        
+                        lines += `ItemDisplay[NMAG ${item.code}${ethCondition}${sockCondition}${edCondition}]:\n`;
+                    }
+                });
+                
+                return hasItems ? lines + '\n' : '';
+            }
+            
             filter += generateUniqueItemLines(jewelryAndCharms, 'jewelryCharms', 'Unique Jewelry & Charms');
             filter += generateUniqueItemLines(classSpecificUniques, 'classUniques', 'Class-Specific Uniques');
             filter += generateUniqueItemLines(eliteUniqueWeapons, 'eliteWeapons', 'Elite Unique Weapons');
@@ -3908,6 +5019,31 @@
             filter += generateMagicRareItemLines(rareJewelry, 'rareJewelry', 'Rare Jewelry & Jewels', 'RARE');
             filter += generateMagicRareItemLines(rareClassItems, 'rareClassItems', 'Rare Class-Specific Items', 'RARE');
             filter += generateMagicRareItemLines(rareEliteBases, 'rareEliteBases', 'Rare Elite Bases', 'RARE');
+
+            // === NMAG RUNEWORD BASES ===
+            filter += '\n// === NMAG RUNEWORD BASES ===\n\n';
+            filter += generateNmagItemLines(nmagPolearms, 'nmagPolearms', 'NMAG: Polearms (Insight, Infinity, Obedience)');
+            filter += generateNmagItemLines(nmagSwords, 'nmagSwords', 'NMAG: Swords (Spirit, Grief)');
+            filter += generateNmagItemLines(nmagAxes, 'nmagAxes', 'NMAG: Axes (Grief, Beast, Death)');
+            filter += generateNmagItemLines(nmagMaces, 'nmagMaces', 'NMAG: Maces (BoTD, Heart of the Oak)');
+            filter += generateNmagItemLines(nmagStaves, 'nmagStaves', 'NMAG: Staves (CTA, Memory');
+            filter += generateNmagItemLines(nmagBows, 'nmagBows', 'NMAG: Bows (Faith, Ice, Brand, Insight)');
+            filter += generateNmagItemLines(nmagLightArmor, 'nmagLightArmor', 'NMAG: Light Armor (Enigma, Fortitude, CoH)');
+            filter += generateNmagItemLines(nmagHeavyArmor, 'nmagHeavyArmor', 'NMAG: Heavy Armor (Fortitude, CoH, Bramble)');
+            filter += generateNmagItemLines(nmagShieldsGeneric, 'nmagShieldsGeneric', 'NMAG: Shields - Generic (Spirit, Dream, Splendor)');
+            filter += generateNmagItemLines(nmagShieldsPaladin, 'nmagShieldsPaladin', 'NMAG: Shields - Paladin (Spirit, Exile)');
+            filter += generateNmagItemLines(nmagHelms, 'nmagHelms', 'NMAG: Helms (Delirium, Dream)');
+            filter += generateNmagItemLines(nmagClassSpecific, 'nmagClassSpecific', 'NMAG: Class-Specific');
+
+            // === FILTER CLOSING ===
+            if (globalSettings.hideJunk) {
+                filter += '\n// Hide junk items\n';
+                filter += 'ItemDisplay[(ARMOR OR WEAPON) INF]:\n';
+            }
+            if (globalSettings.showAll) {
+                filter += '\n// Show all remaining items\n';
+                filter += 'ItemDisplay[]: %NAME%\n';
+            }
 
             document.getElementById('filter-output').value = filter;
             updateOutputStats();
@@ -4055,6 +5191,30 @@
             renderRareJewelryItems();
             renderRareClassItemsItems();
             renderRareEliteBasesItems();
+            renderNmagPolearmsItems();
+            renderNmagSwordsItems();
+            renderNmagAxesItems();
+            renderNmagMacesItems();
+            renderNmagStavesItems();
+            renderNmagBowsItems();
+            renderNmagLightArmorItems();
+            renderNmagHeavyArmorItems();
+            renderNmagShieldsGenericItems();
+            renderNmagShieldsPaladinItems();
+            renderNmagHelmsItems();
+            renderNmagClassSpecificItems();
+            generateFilter();
+        }
+
+        // Toggle Hide Junk setting
+        function toggleHideJunk(enabled) {
+            globalSettings.hideJunk = enabled;
+            generateFilter();
+        }
+
+        // Toggle Show All setting
+        function toggleShowAll(enabled) {
+            globalSettings.showAll = enabled;
             generateFilter();
         }
 
@@ -4102,6 +5262,18 @@
             renderRareJewelryItems();
             renderRareClassItemsItems();
             renderRareEliteBasesItems();
+            renderNmagPolearmsItems();
+            renderNmagSwordsItems();
+            renderNmagAxesItems();
+            renderNmagMacesItems();
+            renderNmagStavesItems();
+            renderNmagBowsItems();
+            renderNmagLightArmorItems();
+            renderNmagHeavyArmorItems();
+            renderNmagShieldsGenericItems();
+            renderNmagShieldsPaladinItems();
+            renderNmagHelmsItems();
+            renderNmagClassSpecificItems();
             generateFilter();
         }
 
@@ -4167,6 +5339,18 @@
         renderRareJewelryItems();
         renderRareClassItemsItems();
         renderRareEliteBasesItems();
+        renderNmagPolearmsItems();
+        renderNmagSwordsItems();
+        renderNmagAxesItems();
+        renderNmagMacesItems();
+        renderNmagStavesItems();
+        renderNmagBowsItems();
+        renderNmagLightArmorItems();
+        renderNmagHeavyArmorItems();
+        renderNmagShieldsGenericItems();
+        renderNmagShieldsPaladinItems();
+        renderNmagHelmsItems();
+        renderNmagClassSpecificItems();
         generateFilter();
     </script>
 </body>
