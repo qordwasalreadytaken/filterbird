@@ -788,6 +788,9 @@
             <h1>FilterPhoenix - Visual Filter Builder - Beta Version</h1>
             <div class="subtitle">Point-and-click interface for creating simple Path of Diablo item filters</div>
             <div class="subtitle" style="color: #ff4444;">Limited testing done, use at your own risk. Testing and feedback is welcome!</div>
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="filter-builder-about.html" style="color: #4fc3f7; text-decoration: none; font-size: 14px;" target="_blank">ℹ️ About & Help</a>
+            </div>
         </header>
 
         <div class="layout">
@@ -5662,7 +5665,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'FilterPhoenix_' + Date.now() + '.filter';
+            a.download = 'FPCustom.filter';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
