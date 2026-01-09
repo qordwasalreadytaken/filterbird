@@ -134,8 +134,7 @@
             padding: 10px;
             background: #252525;
             border-radius: 4px;
-            display: grid;
-            grid-template-columns: auto 1fr auto auto auto auto;
+            display: flex;
             gap: 10px;
             align-items: center;
         }
@@ -303,6 +302,272 @@
 
         .output-textarea:focus {
             outline: none;
+        }
+
+        .output-textarea.highlight-active {
+            background: linear-gradient(to right, #2a4a2a 0%, #1a1a1a 100%);
+            transition: background 0.3s ease;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-container {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            animation: modalFadeIn 0.2s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            background: #333;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: #999;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-section {
+            margin-bottom: 25px;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #444;
+        }
+
+        .modal-control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .modal-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            background: #252525;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal-checkbox-label:hover {
+            background: #2d2d2d;
+        }
+
+        .modal-checkbox-label input[type="checkbox"] {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .modal-checkbox-label input[type="checkbox"]:checked + span {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .modal-button-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .modal-btn {
+            padding: 6px 12px;
+            background: #444;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #ddd;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal-btn:hover {
+            background: #555;
+        }
+
+        .modal-color-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #252525;
+            border-radius: 4px;
+        }
+
+        .modal-color-label {
+            font-size: 12px;
+            color: #999;
+            min-width: 80px;
+        }
+
+        .modal-color-input {
+            width: 60px;
+            height: 30px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #333;
+        }
+
+        .modal-select {
+            flex: 1;
+            padding: 6px 8px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #e0e0e0;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .modal-clear-btn {
+            padding: 6px 12px;
+            background: #444;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #aaa;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal-clear-btn:hover {
+            background: #555;
+            color: #fff;
+        }
+
+        .settings-btn {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            background: #444;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .settings-btn:hover {
+            background: #555;
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        .socket-checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .socket-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            background: #252525;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .socket-checkbox-label:hover {
+            background: #2d2d2d;
+        }
+
+        .socket-checkbox-label input[type="checkbox"] {
+            margin: 0;
+            cursor: pointer;
         }
 
         .item-count {
@@ -630,11 +895,11 @@
                     </div>
                 </div>
 
-                <!-- PoD/Misc Section -->
+                <!-- PoD/Keys/Maps/Quest & Misc Section -->
                 <div class="section" id="misc-section">
                     <div class="section-header" onclick="toggleSection('misc-section')">
                         <div>
-                            <span class="section-title">PoD/Misc Items</span>
+                            <span class="section-title">PoD/Keys/Maps/Quest & Misc Items</span>
                             <span class="item-count" id="misc-count">(0/0 shown)</span>
                         </div>
                         <span class="section-toggle">▶</span>
@@ -1031,7 +1296,7 @@
 
                 <!-- NMAG RUNEWORD BASES -->
                 <div class="section-divider" style="margin: 30px 0; text-align: center; color: #666; font-weight: bold; font-size: 16px;">
-                    === NMAG RUNEWORD BASES ===
+                    === Popular RUNEWORD BASES NMAG ===
                 </div>
 
                 <!-- Weapons -->
@@ -2202,6 +2467,7 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                biggerClickbox: false,
                 fontColor: 'WHITE',
                 borderColor: null,
                 backgroundColor: null,
@@ -2215,6 +2481,7 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                biggerClickbox: false,
                 fontColor: 'ORANGE',
                 borderColor: null,
                 backgroundColor: null,
@@ -2228,6 +2495,7 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                biggerClickbox: false,
                 fontColor: 'WHITE',
                 borderColor: null,
                 backgroundColor: null,
@@ -2241,6 +2509,7 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                biggerClickbox: false,
                 fontColor: 'PURPLE',
                 borderColor: null,
                 backgroundColor: null,
@@ -2599,56 +2868,9 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('utility', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
-                        <span class="levels-label">FilterLevels:</span>
-                        <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
-                        <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
-                        <div class="level-checkboxes">
-                            ${levelCheckboxes}
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('utility', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateItemState('utility', '${item.code}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearFontColor('utility', '${item.code}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#808080'}"
-                                onchange="updateItemState('utility', '${item.code}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('utility', '${item.code}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateItemState('utility', '${item.code}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('utility', '${item.code}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('utility', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('utility', '${item.code}', \`${item.name}\`, 'simple')" 
+                        title="Configure item settings">⚙</button>
                 `;
                 container.appendChild(row);
             });
@@ -2691,56 +2913,9 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('runes', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
-                        <span class="levels-label">FilterLevels:</span>
-                        <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
-                        <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
-                        <div class="level-checkboxes">
-                            ${levelCheckboxes}
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('runes', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateItemState('runes', '${item.code}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearFontColor('runes', '${item.code}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
-                                onchange="updateItemState('runes', '${item.code}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('runes', '${item.code}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateItemState('runes', '${item.code}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('runes', '${item.code}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('runes', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('runes', '${item.code}', \`${item.name}\`, 'simple')" 
+                        title="Configure item settings">⚙</button>
                 `;
                 container.appendChild(row);
             });
@@ -2783,56 +2958,9 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('gems', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
-                        <span class="levels-label">FilterLevels:</span>
-                        <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
-                        <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
-                        <div class="level-checkboxes">
-                            ${levelCheckboxes}
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('gems', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateItemState('gems', '${item.code}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearFontColor('gems', '${item.code}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#808080'}"
-                                onchange="updateItemState('gems', '${item.code}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('gems', '${item.code}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateItemState('gems', '${item.code}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('gems', '${item.code}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('gems', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('gems', '${item.code}', \`${item.name}\`, 'simple')" 
+                        title="Configure item settings">⚙</button>
                 `;
                 container.appendChild(row);
             });
@@ -2875,61 +3003,25 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('misc', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
-                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
-                        <span class="levels-label">FilterLevels:</span>
-                        <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
-                        <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
-                        <div class="level-checkboxes">
-                            ${levelCheckboxes}
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateItemState('misc', '${item.code}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateItemState('misc', '${item.code}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearFontColor('misc', '${item.code}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#808080'}"
-                                onchange="updateItemState('misc', '${item.code}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('misc', '${item.code}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateItemState('misc', '${item.code}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearColor('misc', '${item.code}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="color-picker-wrapper">
-                        <input type="checkbox" class="custom-color-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateItemState('misc', '${item.code}', 'chatNotification', this.checked)">
-                        <span class="custom-label">Notify</span>
-                    </div>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('misc', '${item.code}', \`${item.name}\`, 'simple')" 
+                        title="Configure item settings">⚙</button>
                 `;
                 container.appendChild(row);
             });
 
             updateItemCount('misc');
+        }
+
+        // Helper to find item code from key for different categories
+        function findItemCodeByKey(category, key, items) {
+            const item = items.find(i => {
+                const itemKey = (category === 'highSets' || category === 'midSets' || category === 'lowSets') 
+                    ? i.code + '_' + i.set
+                    : i.name.replace(/[^a-zA-Z0-9]/g, '_');
+                return itemKey === key;
+            });
+            return item ? item.code : null;
         }
 
         // Update state and regenerate filter
@@ -2951,6 +3043,8 @@
             
             updateItemCount(category);
             generateFilter();
+            // Delay highlighting to ensure DOM updates complete
+            setTimeout(() => highlightItemInOutput(code), 100);
         }
 
         // Clear a color value
@@ -2966,6 +3060,7 @@
                 renderMiscItems();
             }
             generateFilter();
+            setTimeout(() => highlightItemInOutput(code), 100);
         }
 
         // Clear font color to default
@@ -2985,6 +3080,7 @@
                 renderMiscItems();
             }
             generateFilter();
+            setTimeout(() => highlightItemInOutput(code), 100);
         }
 
         // Update item counts
@@ -3145,83 +3241,14 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
                 
-                // Build font color options
-                const fontOptions = FONT_COLORS.map(color => 
-                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
-                ).join('');
-                
-                const levels = Array.from({length: 10}, (_, i) => {
-                    const levelNum = i + 1;
-                    const levelName = globalSettings.levelNames[i];
-                    if (!levelName) return '';
-                    return `
-                        <label class="level-checkbox">
-                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
-                                onchange="updateItemLevel('${stateCategory}', '${key}', ${i}, this.checked)">
-                            <span>${levelNum}</span>
-                        </label>
-                    `;
-                }).join('');
-                
                 row.innerHTML = `
-                    <div class="item-main">
-                        <input type="checkbox" class="item-checkbox" 
-                            ${state.show ? 'checked' : ''} 
-                            onchange="updateUniqueItemState('${stateCategory}', '${key}', 'show', this.checked)">
-                        <span class="item-name">${item.name}</span>
-                    </div>
-                    ${globalSettings.enableFilterLevels ? `
-                    <div class="levels-container">
-                        <span class="levels-label">Levels</span>
-                        <button class="level-all-btn" 
-                            onclick="setAllLevels('${stateCategory}', '${key}', true)">All</button>
-                        <button class="level-none-btn" 
-                            onclick="setAllLevels('${stateCategory}', '${key}', false)">None</button>
-                        <div class="level-checkboxes">${levels}</div>
-                    </div>
-                    ` : ''}
-                    <div class="custom-container">
-                        <input type="checkbox" class="custom-checkbox" 
-                            ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateUniqueItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateUniqueItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearUniqueFontColor('${stateCategory}', '${key}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
-                                onchange="updateUniqueItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearUniqueColor('${stateCategory}', '${key}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateUniqueItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearUniqueColor('${stateCategory}', '${key}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="notify-container">
-                        <input type="checkbox" class="notify-checkbox" 
-                            ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateUniqueItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
-                        <span class="notify-label">Notify</span>
-                    </div>
+                    <input type="checkbox" class="item-checkbox" 
+                        ${state.show ? 'checked' : ''} 
+                        onchange="updateUniqueItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                    <span class="item-name">${item.name}</span>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('${stateCategory}', '${key}', '${item.name.replace(/'/g, "\\'")}', 'unique')" 
+                        title="Configure item settings">⚙</button>
                 `;
                 container.appendChild(row);
             });
@@ -3277,80 +3304,13 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
 
-                // Build font color options
-                const fontOptions = FONT_COLORS.map(color => 
-                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
-                ).join('');
-
-                const levels = Array.from({length: 10}, (_, i) => {
-                    const levelNum = i + 1;
-                    const levelName = globalSettings.levelNames[i];
-                    if (!levelName) return '';
-                    return `
-                        <label class="level-checkbox">
-                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
-                                onchange="updateSetItemState('${stateCategory}', '${key}', 'filterLevels', this.checked, ${i})">
-                            <span>${levelNum}</span>
-                        </label>
-                    `;
-                }).join('');
-
                 row.innerHTML = `
-                    <div class="item-main">
-                        <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
-                            onchange="updateSetItemState('${stateCategory}', '${key}', 'show', this.checked)">
-                        <span class="item-name">${state.name}</span>
-                    </div>
-                    ${globalSettings.enableFilterLevels ? `
-                    <div class="levels-container">
-                        <span class="levels-label">Levels</span>
-                        <button class="level-all-btn" 
-                            onclick="setAllSetLevels('${stateCategory}', '${key}', true)">All</button>
-                        <button class="level-none-btn" 
-                            onclick="setAllSetLevels('${stateCategory}', '${key}', false)">None</button>
-                        <div class="level-checkboxes">${levels}</div>
-                    </div>
-                    ` : ''}
-                    <div class="custom-container">
-                        <input type="checkbox" class="custom-checkbox" ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateSetItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateSetItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearSetFontColor('${stateCategory}', '${key}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
-                                onchange="updateSetItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearSetColor('${stateCategory}', '${key}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateSetItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearSetColor('${stateCategory}', '${key}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="notify-container">
-                        <input type="checkbox" class="notify-checkbox" ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateSetItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
-                        <span class="notify-label">Notify</span>
-                    </div>
+                    <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
+                        onchange="updateSetItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                    <span class="item-name">${state.name}</span>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', 'set')" 
+                        title="Configure item settings">⚙</button>
                 `;
 
                 container.appendChild(row);
@@ -3380,6 +3340,9 @@
             container.innerHTML = '';
             let shownCount = 0;
 
+            // Determine if this is magic or rare based on defaultColor
+            const itemType = defaultColor === 'BLUE' ? 'magic' : 'rare';
+
             items.forEach((item, idx) => {
                 const key = item.code + '_' + idx;
                 const state = filterState[stateCategory][key];
@@ -3388,79 +3351,13 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
 
-                const fontOptions = FONT_COLORS.map(color => 
-                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
-                ).join('');
-
-                const levels = Array.from({length: 10}, (_, i) => {
-                    const levelNum = i + 1;
-                    const levelName = globalSettings.levelNames[i];
-                    if (!levelName) return '';
-                    return `
-                        <label class="level-checkbox">
-                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
-                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'filterLevels', this.checked, ${i})">
-                            <span>${levelNum}</span>
-                        </label>
-                    `;
-                }).join('');
-
                 row.innerHTML = `
-                    <div class="item-main">
-                        <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
-                            onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'show', this.checked)">
-                        <span class="item-name">${state.name}</span>
-                    </div>
-                    ${globalSettings.enableFilterLevels ? `
-                    <div class="levels-container">
-                        <span class="levels-label">Levels</span>
-                        <button class="level-all-btn" 
-                            onclick="setAllMagicRareLevels('${stateCategory}', '${key}', true)">All</button>
-                        <button class="level-none-btn" 
-                            onclick="setAllMagicRareLevels('${stateCategory}', '${key}', false)">None</button>
-                        <div class="level-checkboxes">${levels}</div>
-                    </div>
-                    ` : ''}
-                    <div class="custom-container">
-                        <input type="checkbox" class="custom-checkbox" ${state.useCustomColors ? 'checked' : ''}
-                            onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
-                        <span class="custom-label">Custom</span>
-                    </div>
-                    <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Font</span>
-                            <select class="color-select" 
-                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
-                                ${fontOptions}
-                            </select>
-                            <button class="color-clear-btn" 
-                                onclick="clearMagicRareFontColor('${stateCategory}', '${key}', '${defaultColor}')"
-                                title="Reset to default">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">Border</span>
-                            <input type="color" class="color-input" value="${state.borderColor || '#ff8000'}"
-                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
-                                ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearMagicRareColor('${stateCategory}', '${key}', 'borderColor')"
-                                title="Clear border color">×</button>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <span class="color-label">BG</span>
-                            <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
-                                ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                            <button class="color-clear-btn" 
-                                onclick="clearMagicRareColor('${stateCategory}', '${key}', 'backgroundColor')"
-                                title="Clear background color">×</button>
-                        </div>
-                    </div>
-                    <div class="notify-container">
-                        <input type="checkbox" class="notify-checkbox" ${state.chatNotification ? 'checked' : ''}
-                            onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
-                        <span class="notify-label">Notify</span>
-                    </div>
+                    <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
+                        onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                    <span class="item-name">${state.name}</span>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', '${itemType}')" 
+                        title="Configure item settings">⚙</button>
                 `;
 
                 container.appendChild(row);
@@ -3554,96 +3451,14 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
 
-                const fontOptions = FONT_COLORS.map(color => 
-                    `<option value="${color}" ${state.fontColor === color ? 'selected' : ''}>${color}</option>`
-                ).join('');
-
-                const levels = Array.from({length: 10}, (_, i) => {
-                    const levelNum = i + 1;
-                    const levelName = globalSettings.levelNames[i];
-                    if (!levelName) return '';
-                    return `
-                        <label class="level-checkbox">
-                            <input type="checkbox" ${state.filterLevels[i] ? 'checked' : ''}
-                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'filterLevels', this.checked, ${i})">
-                            <span>${levelNum}</span>
-                        </label>
-                    `;
-                }).join('');
-
                 row.innerHTML = `
-                    <div style="display: flex; align-items: center;">
-                        <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
-                            onchange="updateNmagItemState('${stateCategory}', '${key}', 'show', this.checked)">
-                        <span class="item-name">${state.name}</span>
-                        <span style="color: #888; font-size: 11px; margin-left: 8px;">[${state.quality}]</span>
-                        <div style="display: inline-flex; gap: 8px; align-items: center; margin-left: 15px;">
-                            <select style="font-size: 11px; padding: 2px 4px;" 
-                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'ethFilter', this.value)">
-                                <option value="both" ${state.ethFilter === 'both' ? 'selected' : ''}>Both</option>
-                                <option value="eth-only" ${state.ethFilter === 'eth-only' ? 'selected' : ''}>ETH Only</option>
-                                <option value="non-eth" ${state.ethFilter === 'non-eth' ? 'selected' : ''}>Non-ETH</option>
-                            </select>
-                            ${generateSocketCheckboxes(state.code, state.sockFilter, stateCategory, key)}
-                            <select style="font-size: 11px; padding: 2px 4px;" 
-                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'edFilter', this.value)">
-                                <option value="any" ${state.edFilter === 'any' ? 'selected' : ''}>ED: Any</option>
-                                <option value="10+" ${state.edFilter === '10+' ? 'selected' : ''}>10+</option>
-                                <option value="12+" ${state.edFilter === '12+' ? 'selected' : ''}>12+</option>
-                                <option value="13+" ${state.edFilter === '13+' ? 'selected' : ''}>13+</option>
-                                <option value="14+" ${state.edFilter === '14+' ? 'selected' : ''}>14+</option>
-                                <option value="15" ${state.edFilter === '15' ? 'selected' : ''}>15</option>
-                            </select>
-                        </div>
-                        ${globalSettings.enableFilterLevels && levels ? `
-                            <div class="levels-container">
-                                <span class="levels-label">Levels</span>
-                                <button class="level-all-btn" 
-                                    onclick="setAllNmagLevels('${stateCategory}', '${key}', true)">All</button>
-                                <button class="level-none-btn" 
-                                    onclick="setAllNmagLevels('${stateCategory}', '${key}', false)">None</button>
-                                <div class="level-checkboxes">${levels}</div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div style="display: flex; align-items: center; padding-left: 30px; margin-top: 5px;">
-                        <div class="color-picker-wrapper">
-                            <input type="checkbox" class="custom-color-checkbox" 
-                                ${state.useCustomColors ? 'checked' : ''}
-                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'useCustomColors', this.checked)">
-                            <span class="custom-label">Custom</span>
-                        </div>
-                        <div class="colors-container" style="${!state.useCustomColors ? 'opacity: 0.3; pointer-events: none;' : ''}">
-                            <div class="color-picker-wrapper">
-                                <span class="color-label">Font</span>
-                                <select class="color-select" 
-                                    onchange="updateNmagItemState('${stateCategory}', '${key}', 'fontColor', this.value)">
-                                    ${fontOptions}
-                                </select>
-                                <button class="color-clear-btn" onclick="clearNmagFontColor('${stateCategory}', '${key}')" title="Reset to default">×</button>
-                            </div>
-                            <div class="color-picker-wrapper">
-                                <span class="color-label">Border</span>
-                                <input type="color" class="color-input" value="${state.borderColor || '#ffffff'}"
-                                    onchange="updateNmagItemState('${stateCategory}', '${key}', 'borderColor', this.value)"
-                                    ${!state.borderColor ? 'style="opacity: 0.5;"' : ''}>
-                                <button class="color-clear-btn" onclick="clearNmagColor('${stateCategory}', '${key}', 'borderColor')" title="Clear border color">×</button>
-                            </div>
-                            <div class="color-picker-wrapper">
-                                <span class="color-label">BG</span>
-                                <input type="color" class="color-input" value="${state.backgroundColor || '#000000'}"
-                                    onchange="updateNmagItemState('${stateCategory}', '${key}', 'backgroundColor', this.value)"
-                                    ${!state.backgroundColor ? 'style="opacity: 0.5;"' : ''}>
-                                <button class="color-clear-btn" onclick="clearNmagColor('${stateCategory}', '${key}', 'backgroundColor')" title="Clear background color">×</button>
-                            </div>
-                        </div>
-                        <div class="color-picker-wrapper">
-                            <input type="checkbox" class="custom-color-checkbox" 
-                                ${state.chatNotification ? 'checked' : ''}
-                                onchange="updateNmagItemState('${stateCategory}', '${key}', 'chatNotification', this.checked)">
-                            <span class="custom-label">Notify</span>
-                        </div>
-                    </div>
+                    <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
+                        onchange="updateNmagItemState('${stateCategory}', '${key}', 'show', this.checked)">
+                    <span class="item-name">${state.name}</span>
+                    <span style="color: #888; font-size: 11px; margin-left: 8px;">[${state.quality}]</span>
+                    <button class="settings-btn" 
+                        onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', 'nmag')" 
+                        title="Configure item settings">⚙</button>
                 `;
 
                 container.appendChild(row);
@@ -3724,6 +3539,20 @@
             }
             
             generateFilter();
+            
+            // Find item code and highlight
+            const itemArrays = {
+                'jewelryCharms': jewelryAndCharms,
+                'classUniques': classSpecificUniques,
+                'eliteWeapons': eliteUniqueWeapons,
+                'eliteArmor': eliteUniqueArmor,
+                'excWeapons': exceptionalUniqueWeapons,
+                'excArmor': exceptionalUniqueArmor,
+                'normWeapons': normalUniqueWeapons,
+                'normArmor': normalUniqueArmor
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'UNI'), 100);
         }
 
         function clearUniqueFontColor(category, key) {
@@ -3748,6 +3577,19 @@
             }
             
             generateFilter();
+            
+            const itemArrays = {
+                'jewelryCharms': jewelryAndCharms,
+                'classUniques': classSpecificUniques,
+                'eliteWeapons': eliteUniqueWeapons,
+                'eliteArmor': eliteUniqueArmor,
+                'excWeapons': exceptionalUniqueWeapons,
+                'excArmor': exceptionalUniqueArmor,
+                'normWeapons': normalUniqueWeapons,
+                'normArmor': normalUniqueArmor
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'UNI'), 100);
         }
 
         function clearUniqueColor(category, key, colorType) {
@@ -3772,6 +3614,19 @@
             }
             
             generateFilter();
+            
+            const itemArrays = {
+                'jewelryCharms': jewelryAndCharms,
+                'classUniques': classSpecificUniques,
+                'eliteWeapons': eliteUniqueWeapons,
+                'eliteArmor': eliteUniqueArmor,
+                'excWeapons': exceptionalUniqueWeapons,
+                'excArmor': exceptionalUniqueArmor,
+                'normWeapons': normalUniqueWeapons,
+                'normArmor': normalUniqueArmor
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'UNI'), 100);
         }
 
         function updateUniqueCount(category, countId) {
@@ -3799,6 +3654,14 @@
             }
             
             generateFilter();
+            
+            const itemArrays = {
+                'highSets': highLevelSets,
+                'midSets': midLevelSets,
+                'lowSets': lowLevelSets
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'SET'), 100);
         }
 
         // Clear set item font color (reset to DARK_GREEN)
@@ -3812,6 +3675,14 @@
                 renderLowSetsItems();
             }
             generateFilter();
+            
+            const itemArrays = {
+                'highSets': highLevelSets,
+                'midSets': midLevelSets,
+                'lowSets': lowLevelSets
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'SET'), 100);
         }
 
         // Clear set item border or background color
@@ -3825,6 +3696,14 @@
                 renderLowSetsItems();
             }
             generateFilter();
+            
+            const itemArrays = {
+                'highSets': highLevelSets,
+                'midSets': midLevelSets,
+                'lowSets': lowLevelSets
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'SET'), 100);
         }
 
         // Set all filter levels for a set item
@@ -3840,6 +3719,14 @@
                 renderLowSetsItems();
             }
             generateFilter();
+            
+            const itemArrays = {
+                'highSets': highLevelSets,
+                'midSets': midLevelSets,
+                'lowSets': lowLevelSets
+            };
+            const code = findItemCodeByKey(category, key, itemArrays[category]);
+            if (code) setTimeout(() => highlightItemInOutput(code, 'SET'), 100);
         }
 
         // Preset functions for unique items
@@ -3982,6 +3869,11 @@
             }
             
             generateFilter();
+            
+            // Extract code from key format "code_index"
+            const code = key.split('_')[0];
+            const prefix = category.startsWith('magic') ? 'MAG' : 'RARE';
+            if (code) setTimeout(() => highlightItemInOutput(code, prefix), 100);
         }
 
         function clearMagicRareFontColor(category, key, defaultColor) {
@@ -4000,6 +3892,10 @@
                 renderRareEliteBasesItems();
             }
             generateFilter();
+            
+            const code = key.split('_')[0];
+            const prefix = category.startsWith('magic') ? 'MAG' : 'RARE';
+            if (code) setTimeout(() => highlightItemInOutput(code, prefix), 100);
         }
 
         function clearMagicRareColor(category, key, colorType) {
@@ -4018,6 +3914,10 @@
                 renderRareEliteBasesItems();
             }
             generateFilter();
+            
+            const code = key.split('_')[0];
+            const prefix = category.startsWith('magic') ? 'MAG' : 'RARE';
+            if (code) setTimeout(() => highlightItemInOutput(code, prefix), 100);
         }
 
         function setAllMagicRareLevels(category, key, enabled) {
@@ -4038,6 +3938,10 @@
                 renderRareEliteBasesItems();
             }
             generateFilter();
+            
+            const code = key.split('_')[0];
+            const prefix = category.startsWith('magic') ? 'MAG' : 'RARE';
+            if (code) setTimeout(() => highlightItemInOutput(code, prefix), 100);
         }
 
         // Preset functions for magic/rare items
@@ -4154,6 +4058,9 @@
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
+            
+            const code = key.split('_')[0];
+            if (code) setTimeout(() => highlightItemInOutput(code, 'NMAG'), 100);
         }
 
         // Toggle socket selection for NMAG items
@@ -4167,6 +4074,9 @@
                 state.sockFilter = state.sockFilter.filter(s => s !== socketValue);
             }
             generateFilter();
+            
+            const code = key.split('_')[0];
+            if (code) setTimeout(() => highlightItemInOutput(code, 'NMAG'), 100);
         }
 
         function clearNmagFontColor(category, key) {
@@ -4186,6 +4096,9 @@
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
+            
+            const code = key.split('_')[0];
+            if (code) setTimeout(() => highlightItemInOutput(code, 'NMAG'), 100);
         }
 
         function clearNmagColor(category, key, colorType) {
@@ -4205,6 +4118,9 @@
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
+            
+            const code = key.split('_')[0];
+            if (code) setTimeout(() => highlightItemInOutput(code, 'NMAG'), 100);
         }
 
         function setAllNmagLevels(category, key, enabled) {
@@ -4226,6 +4142,9 @@
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
+            
+            const code = key.split('_')[0];
+            if (code) setTimeout(() => highlightItemInOutput(code, 'NMAG'), 100);
         }
 
         // Preset functions for NMAG items
@@ -4507,7 +4426,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
-                    line += ` %NAME%`;
+                    if (state.biggerClickbox) {
+                        line += ` %NL%       %NAME%       %NL%`;
+                    } else {
+                        line += ` %NAME%`;
+                    }
                     
                     // Add style reference for border/background/notification if needed
                     if (state.useCustomColors || state.chatNotification) {
@@ -4552,7 +4475,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
-                    line += ` %NAME%`;
+                    if (state.biggerClickbox) {
+                        line += ` %NL%       %NAME%       %NL%`;
+                    } else {
+                        line += ` %NAME%`;
+                    }
                     
                     // Add style reference for border/background/notification if needed
                     if (state.useCustomColors || state.chatNotification) {
@@ -4597,7 +4524,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
-                    line += ` %NAME%`;
+                    if (state.biggerClickbox) {
+                        line += ` %NL%       %NAME%       %NL%`;
+                    } else {
+                        line += ` %NAME%`;
+                    }
                     
                     // Add style reference for border/background/notification if needed
                     if (state.useCustomColors || state.chatNotification) {
@@ -4629,7 +4560,7 @@
             });
 
             // PoD/Misc Items
-            filter += '\n// === POD/MISC ITEMS ===\n\n';
+            filter += '\n// === POD/Keys/Maps/MISC ITEMS ===\n\n';
             miscItems.forEach(item => {
                 const state = filterState.misc[item.code];
                 if (state.show) {
@@ -4642,7 +4573,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
-                    line += ` %NAME%`;
+                    if (state.biggerClickbox) {
+                        line += ` %NL%       %NAME%       %NL%`;
+                    } else {
+                        line += ` %NAME%`;
+                    }
                     
                     // Add style reference for border/background/notification if needed
                     if (state.useCustomColors || state.chatNotification) {
@@ -5117,6 +5052,505 @@
             document.getElementById('char-count').textContent = chars;
         }
 
+        // Highlight and scroll to item in output
+        function highlightItemInOutput(itemCode, prefix = null) {
+            const textarea = document.getElementById('filter-output');
+            const text = textarea.value;
+            
+            // Build pattern based on whether we have a prefix
+            let pattern;
+            if (prefix) {
+                // Search for specific prefixed item: ItemDisplay[NMAG 7s8]:
+                pattern = new RegExp(`ItemDisplay\\[${prefix} ${itemCode}[^\\]]*\\]:`, 'i');
+            } else {
+                // Search for simple item: ItemDisplay[r01]:
+                pattern = new RegExp(`ItemDisplay\\[${itemCode}[^\\]]*\\]:`, 'i');
+            }
+            
+            const match = text.match(pattern);
+            
+            if (match) {
+                const startPos = match.index;
+                const endPos = startPos + match[0].length;
+                
+                // Use setSelectionRange to automatically scroll into view
+                textarea.focus();
+                textarea.setSelectionRange(startPos, endPos);
+                
+                // Add highlight effect
+                textarea.classList.add('highlight-active');
+                
+                // Remove selection and highlight after a moment
+                setTimeout(() => {
+                    textarea.setSelectionRange(endPos, endPos); // Move cursor to end, removing selection
+                    textarea.blur(); // Remove focus
+                }, 300);
+                
+                setTimeout(() => {
+                    textarea.classList.remove('highlight-active');
+                }, 1000);
+            }
+        }
+
+        // Modal Management Functions
+        let currentModalItem = null;
+
+        function openItemSettings(category, itemKey, itemName, itemType = 'unique') {
+            currentModalItem = { category, itemKey, itemType };
+            
+            const modal = document.getElementById('itemSettingsModal');
+            const modalTitle = document.getElementById('modalItemName');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = itemName;
+            
+            // Populate modal with appropriate controls
+            modalBody.innerHTML = generateModalContent(category, itemKey, itemType);
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeItemSettings(event) {
+            // Only close if clicking overlay or close button
+            if (event && event.target.closest('.modal-container') && !event.target.classList.contains('modal-close')) {
+                return;
+            }
+            
+            const modal = document.getElementById('itemSettingsModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling
+            currentModalItem = null;
+        }
+
+        function generateModalContent(category, itemKey, itemType) {
+            const state = filterState[category]?.[itemKey] || {};
+            let html = '';
+
+            // Filter Levels Section
+            if (globalSettings.enableFilterLevels) {
+                html += '<div class="modal-section">';
+                html += '<h4 class="modal-section-title">Filter Levels</h4>';
+                html += '<div class="modal-checkbox-grid">';
+                
+                for (let i = 0; i < 10; i++) {
+                    const levelNum = i + 1;
+                    const levelName = globalSettings.levelNames[i];
+                    if (!levelName) continue;
+                    
+                    const checked = state.filterLevels?.[i] ? 'checked' : '';
+                    const labelText = `${levelNum} (${levelName})`;
+                    html += `
+                        <label class="modal-checkbox-label">
+                            <input type="checkbox" ${checked} 
+                                onchange="updateModalFilterLevel('${category}', '${itemKey}', ${i}, this.checked, '${itemType}')">
+                            <span>${labelText}</span>
+                        </label>
+                    `;
+                }
+                
+                html += '</div>';
+                html += '<div class="modal-button-group">';
+                html += `<button class="modal-btn" onclick="setAllModalLevels('${category}', '${itemKey}', true, '${itemType}')">Select All</button>`;
+                html += `<button class="modal-btn" onclick="setAllModalLevels('${category}', '${itemKey}', false, '${itemType}')">Clear All</button>`;
+                html += '</div>';
+                html += '</div>';
+            }
+
+            // NMAG-specific controls
+            if (itemType === 'nmag') {
+                // Eth Filter
+                html += '<div class="modal-section">';
+                html += '<h4 class="modal-section-title">Ethereal Filter</h4>';
+                html += '<div class="modal-control-group">';
+                html += '<select class="modal-select" onchange="updateModalEthFilter(\'' + category + '\', \'' + itemKey + '\', this.value)">';
+                const ethFilter = state.ethFilter || 'both';
+                html += '<option value="both"' + (ethFilter === 'both' ? ' selected' : '') + '>Both Eth and Non-Eth</option>';
+                html += '<option value="eth-only"' + (ethFilter === 'eth-only' ? ' selected' : '') + '>Ethereal Only</option>';
+                html += '<option value="non-eth"' + (ethFilter === 'non-eth' ? ' selected' : '') + '>Non-Ethereal Only</option>';
+                html += '</select>';
+                html += '</div>';
+                html += '</div>';
+
+                // Socket Filter
+                html += '<div class="modal-section">';
+                html += '<h4 class="modal-section-title">Sockets</h4>';
+                html += '<div class="socket-checkbox-container">';
+                const sockFilter = state.sockFilter || [];
+                
+                // Determine max sockets from bases object in item_metadata.js
+                const basesKey = state.name.replace(/ /g, '_');
+                const baseItem = bases[basesKey];
+                let maxSockets = baseItem?.max_sockets || 6;
+                
+                // Override for class-specific items if bases lookup failed
+                if (category === 'nmagClassSpecific') {
+                    if (itemKey === 'CL2') {
+                        maxSockets = 2; // Necro Shrunken Heads
+                    } else if (itemKey === 'CL1' || itemKey === 'CL5' || itemKey === 'WP11') {
+                        maxSockets = 3; // Druid Pelts, Assassin Claws, Sorceress Orbs
+                    }
+                }
+                
+                ['0', '2', '3', '4', '5', '6'].filter(sock => parseInt(sock) <= maxSockets).forEach(sock => {
+                    const checked = sockFilter.includes(sock) ? 'checked' : '';
+                    const label = sock === '0' ? '0 Sockets' : `${sock} Socket${parseInt(sock) > 1 ? 's' : ''}`;
+                    html += `
+                        <label class="socket-checkbox-label">
+                            <input type="checkbox" ${checked} 
+                                onchange="updateModalSocket('${category}', '${itemKey}', '${sock}', this.checked)">
+                            <span>${label}</span>
+                        </label>
+                    `;
+                });
+                html += '</div>';
+                html += '</div>';
+
+                // ED Filter
+                html += '<div class="modal-section">';
+                html += '<h4 class="modal-section-title">Enhanced Damage</h4>';
+                html += '<div class="modal-control-group">';
+                html += '<select class="modal-select" onchange="updateModalEDFilter(\'' + category + '\', \'' + itemKey + '\', this.value)">';
+                const edFilter = state.edFilter || 'any';
+                html += '<option value="any"' + (edFilter === 'any' ? ' selected' : '') + '>Any ED</option>';
+                html += '<option value="10+"' + (edFilter === '10+' ? ' selected' : '') + '>10% ED or higher</option>';
+                html += '<option value="12+"' + (edFilter === '12+' ? ' selected' : '') + '>12% ED or higher</option>';
+                html += '<option value="13+"' + (edFilter === '13+' ? ' selected' : '') + '>13% ED or higher</option>';
+                html += '<option value="14+"' + (edFilter === '14+' ? ' selected' : '') + '>14% ED or higher</option>';
+                html += '<option value="15"' + (edFilter === '15' ? ' selected' : '') + '>15% ED only</option>';
+                html += '</select>';
+                html += '</div>';
+                html += '</div>';
+            }
+
+            // Custom Colors Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Custom Colors</h4>';
+            html += '<div class="modal-control-group">';
+            
+            // Custom colors toggle
+            const customEnabled = state.useCustomColors ? 'checked' : '';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" ${customEnabled} 
+                        onchange="toggleModalCustomColor('${category}', '${itemKey}', this.checked, '${itemType}')">
+                    <span>Enable Custom Colors</span>
+                </label>
+            `;
+
+            if (state.useCustomColors) {
+                // Font Color
+                html += '<div class="modal-color-row">';
+                html += '<span class="modal-color-label">Font Color:</span>';
+                html += '<select class="modal-select" onchange="updateModalFontColor(\'' + category + '\', \'' + itemKey + '\', this.value, \'' + itemType + '\')">';
+                html += '<option value="">Default</option>';
+                FONT_COLORS.forEach(fc => {
+                    const selected = state.fontColor === fc ? 'selected' : '';
+                    html += `<option value="${fc}" ${selected}>${fc}</option>`;
+                });
+                html += '</select>';
+                html += '<button class="modal-clear-btn" onclick="clearModalFontColor(\'' + category + '\', \'' + itemKey + '\', \'' + itemType + '\')">Clear</button>';
+                html += '</div>';
+
+                // Border Color
+                html += '<div class="modal-color-row">';
+                html += '<span class="modal-color-label">Border Color:</span>';
+                const borderColor = state.borderColor || '#ffffff';
+                html += '<input type="color" class="modal-color-input" value="' + borderColor + '" ';
+                html += 'onchange="updateModalBorderColor(\'' + category + '\', \'' + itemKey + '\', this.value, \'' + itemType + '\')">';
+                html += '<button class="modal-clear-btn" onclick="clearModalBorderColor(\'' + category + '\', \'' + itemKey + '\', \'' + itemType + '\')">Clear</button>';
+                html += '</div>';
+
+                // Background Color
+                html += '<div class="modal-color-row">';
+                html += '<span class="modal-color-label">Background Color:</span>';
+                const bgColor = state.backgroundColor || '#000000';
+                html += '<input type="color" class="modal-color-input" value="' + bgColor + '" ';
+                html += 'onchange="updateModalBackgroundColor(\'' + category + '\', \'' + itemKey + '\', this.value, \'' + itemType + '\')">';
+                html += '<button class="modal-clear-btn" onclick="clearModalBackgroundColor(\'' + category + '\', \'' + itemKey + '\', \'' + itemType + '\')">Clear</button>';
+                html += '</div>';
+            }
+            
+            html += '</div>';
+            html += '</div>';
+
+            // Notify Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Notifications</h4>';
+            html += '<div class="modal-control-group">';
+            const notifyChecked = state.chatNotification ? 'checked' : '';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" ${notifyChecked} 
+                        onchange="updateModalNotify('${category}', '${itemKey}', this.checked, '${itemType}')">
+                    <span>Enable chat notification when this item drops</span>
+                </label>
+            `;
+            html += '</div>';
+            html += '</div>';
+
+            // Display Options Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Display Options</h4>';
+            html += '<div class="modal-control-group">';
+            const clickboxChecked = state.biggerClickbox ? 'checked' : '';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" ${clickboxChecked} 
+                        onchange="updateModalBiggerClickbox('${category}', '${itemKey}', this.checked, '${itemType}')">
+                    <span>Bigger clickbox (adds spacing around item name)</span>
+                </label>
+            `;
+            html += '</div>';
+            html += '</div>';
+
+            return html;
+        }
+
+        // Modal update functions
+        function updateModalFilterLevel(category, itemKey, levelIndex, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true, filterLevels: [] };
+            if (!filterState[category][itemKey].filterLevels) filterState[category][itemKey].filterLevels = [];
+            
+            filterState[category][itemKey].filterLevels[levelIndex] = checked;
+            generateFilter();
+
+            // Get item code for highlighting
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function setAllModalLevels(category, itemKey, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true, filterLevels: [] };
+            if (!filterState[category][itemKey].filterLevels) filterState[category][itemKey].filterLevels = [];
+            
+            for (let i = 0; i < 10; i++) {
+                filterState[category][itemKey].filterLevels[i] = checked;
+            }
+            
+            // Refresh modal content
+            openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function toggleModalCustomColor(category, itemKey, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
+            
+            filterState[category][itemKey].useCustomColors = checked;
+            
+            // Refresh modal to show/hide color controls
+            openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function updateModalFontColor(category, itemKey, color, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { shown: true };
+            
+            filterState[category][itemKey].fontColor = color;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function clearModalFontColor(category, itemKey, itemType) {
+            updateModalFontColor(category, itemKey, '', itemType);
+            openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
+        }
+
+        function updateModalBorderColor(category, itemKey, color, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { shown: true };
+            
+            filterState[category][itemKey].borderColor = color;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function clearModalBorderColor(category, itemKey, itemType) {
+            if (filterState[category]?.[itemKey]) {
+                delete filterState[category][itemKey].borderColor;
+            }
+            openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function updateModalBackgroundColor(category, itemKey, color, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { shown: true };
+            
+            filterState[category][itemKey].backgroundColor = color;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function clearModalBackgroundColor(category, itemKey, itemType) {
+            if (filterState[category]?.[itemKey]) {
+                delete filterState[category][itemKey].backgroundColor;
+            }
+            openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function updateModalNotify(category, itemKey, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
+            
+            filterState[category][itemKey].chatNotification = checked;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function updateModalBiggerClickbox(category, itemKey, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
+            
+            filterState[category][itemKey].biggerClickbox = checked;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        // NMAG-specific modal functions
+        function updateModalEthFilter(category, itemKey, value) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { shown: true };
+            
+            filterState[category][itemKey].ethFilter = value;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                setTimeout(() => highlightItemInOutput(item.code, 'NMAG'), 100);
+            }
+        }
+
+        function updateModalSocket(category, itemKey, socketValue, checked) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true, sockFilter: [] };
+            if (!filterState[category][itemKey].sockFilter) filterState[category][itemKey].sockFilter = [];
+            
+            if (checked) {
+                // Add socket value if not already present
+                if (!filterState[category][itemKey].sockFilter.includes(socketValue)) {
+                    filterState[category][itemKey].sockFilter.push(socketValue);
+                }
+            } else {
+                // Remove socket value
+                const index = filterState[category][itemKey].sockFilter.indexOf(socketValue);
+                if (index > -1) {
+                    filterState[category][itemKey].sockFilter.splice(index, 1);
+                }
+            }
+            
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                setTimeout(() => highlightItemInOutput(item.code, 'NMAG'), 100);
+            }
+        }
+
+        function updateModalEDFilter(category, itemKey, value) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { shown: true };
+            
+            filterState[category][itemKey].edFilter = value;
+            generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                setTimeout(() => highlightItemInOutput(item.code, 'NMAG'), 100);
+            }
+        }
+
+        // Helper functions
+        function findItemByKey(category, itemKey) {
+            // For simple categories (utility, runes, gems, misc), itemKey is the code
+            const simpleCategoriesMap = {
+                'utility': utilityItems,
+                'runes': runeItems,
+                'gems': gemItems,
+                'misc': miscItems
+            };
+            
+            if (simpleCategoriesMap[category]) {
+                return simpleCategoriesMap[category].find(item => item.code === itemKey);
+            }
+            
+            // For complex categories, look up by sanitized name or code
+            const items = window[category];
+            if (!items) return null;
+            return items.find(item => {
+                const sanitized = item.name.replace(/[\s']/g, '_');
+                return sanitized === itemKey || item.code === itemKey;
+            });
+        }
+
+        function getItemPrefix(itemType) {
+            const prefixMap = {
+                'unique': 'UNI',
+                'set': 'SET',
+                'magic': 'MAG',
+                'rare': 'RARE',
+                'nmag': 'NMAG'
+            };
+            return prefixMap[itemType] || null;
+        }
+
         // Export filter
         function exportFilter() {
             const output = document.getElementById('filter-output').value;
@@ -5282,6 +5716,7 @@
         function updateItemLevel(category, code, level, checked) {
             filterState[category][code].filterLevels[level] = checked;
             generateFilter();
+            setTimeout(() => highlightItemInOutput(code), 100);
         }
 
         // Set all levels for an item
@@ -5354,5 +5789,18 @@
         renderNmagClassSpecificItems();
         generateFilter();
     </script>
+
+    <!-- Item Settings Modal -->
+    <div class="modal-overlay" id="itemSettingsModal" onclick="closeItemSettings(event)">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalItemName"></h3>
+                <button class="modal-close" onclick="closeItemSettings()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be populated dynamically -->
+            </div>
+        </div>
+    </div>
 </body>
 </html>
