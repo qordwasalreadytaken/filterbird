@@ -1816,7 +1816,7 @@
 
         const eliteUniqueArmor = [
             { name: "Andariel's Visage", code: "bac" },
-            { name: "Crown of Ages", code: "bah" },
+            { name: "Crown of Ages", code: "urn" },
             { name: "Giant Skull", code: "baf" },
             { name: "Griffon's Eye", code: "ci3" },
             { name: "Nightwing's Veil", code: "ba9" },
@@ -2040,7 +2040,7 @@
             { name: "Wizendraw", code: "lbb" },
             { name: "Hellclap", code: "swb" },
             { name: "Blastbark", code: "lwb" },
-            { name: "Skystrike", code: "bow" },
+            { name: "Skystrike", code: "8sb" },
             { name: "Riphook", code: "lxb" },
             { name: "Kuko Shakaku", code: "mxb" },
             { name: "Leadcrow", code: "lxb" },
@@ -2115,7 +2115,7 @@
             { name: "Tal Rasha's Lidless Eye", code: "ob9", set: "TR" },
             { name: "Tal Rasha's Adjudication", code: "amu", set: "TR" },
             // Griswold's (Paladin)
-            { name: "Griswold's Valor", code: "bah", set: "Gris" },
+            { name: "Griswold's Valor", code: "urn", set: "Gris" },
             { name: "Griswold's Heart", code: "uar", set: "Gris" },
             { name: "Griswold's Redemption", code: "pa9", set: "Gris" },
             { name: "Griswold's Honor", code: "pa9", set: "Gris" },
@@ -2174,14 +2174,14 @@
             // Sander's Folly
             { name: "Sander's Paragon", code: "cap", set: "Sander" },
             { name: "Sander's Riprap", code: "hbt", set: "Sander" },
-            { name: "Sander's Taboo", code: "hvg", set: "Sander" },
+            { name: "Sander's Taboo", code: "vgl", set: "Sander" },
             { name: "Sander's Superstition", code: "9wn", set: "Sander" },
             // Cow King's Leathers
             { name: "Cow King's Horns", code: "xap", set: "Cow" },
             { name: "Cow King's Hide", code: "xtu", set: "Cow" },
             { name: "Cow King's Hooves", code: "xhb", set: "Cow" },
             // Heaven's Brethren
-            { name: "Dangoon's Teaching", code: "zvg", set: "Brethren" },
+            { name: "Dangoon's Teaching", code: "7ma", set: "Brethren" },
             { name: "Taebaek's Glory", code: "xhb", set: "Brethren" },
             { name: "Haemosu's Adamant", code: "xar", set: "Brethren" },
             { name: "Ondal's Almighty", code: "9sp", set: "Brethren" },
@@ -2209,7 +2209,7 @@
             { name: "Berserker's Hatchet", code: "2ax", set: "Berserker" },
             // Cathan's Traps
             { name: "Cathan's Visage", code: "msk", set: "Cathan" },
-            { name: "Cathan's Mesh", code: "ltr", set: "Cathan" },
+            { name: "Cathan's Mesh", code: "chn", set: "Cathan" },
             { name: "Cathan's Rule", code: "sst", set: "Cathan" },
             { name: "Cathan's Sigil", code: "amu", set: "Cathan" },
             { name: "Cathan's Seal", code: "rin", set: "Cathan" },
@@ -2874,6 +2874,14 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('utility', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">FilterLevels:</span>
+                        <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('utility', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('utility', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
@@ -2919,6 +2927,14 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('runes', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">FilterLevels:</span>
+                        <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('runes', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
@@ -2964,6 +2980,14 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('gems', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">FilterLevels:</span>
+                        <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('gems', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('gems', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
@@ -3009,6 +3033,14 @@
                         ${state.show ? 'checked' : ''} 
                         onchange="updateItemState('misc', '${item.code}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">FilterLevels:</span>
+                        <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('misc', '${item.code}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('misc', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
@@ -3247,11 +3279,35 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
                 
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('${stateCategory}', '${key}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
                         onchange="updateUniqueItemState('${stateCategory}', '${key}', 'show', this.checked)">
                     <span class="item-name">${item.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${item.name.replace(/'/g, "\\'")}', 'unique')" 
                         title="Configure item settings">⚙</button>
@@ -3310,10 +3366,34 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
 
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('${stateCategory}', '${key}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
+
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
                         onchange="updateSetItemState('${stateCategory}', '${key}', 'show', this.checked)">
                     <span class="item-name">${state.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', 'set')" 
                         title="Configure item settings">⚙</button>
@@ -3357,10 +3437,34 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
 
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('${stateCategory}', '${key}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
+
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
                         onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'show', this.checked)">
                     <span class="item-name">${state.name}</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', '${itemType}')" 
                         title="Configure item settings">⚙</button>
@@ -3457,11 +3561,35 @@
                 const row = document.createElement('div');
                 row.className = 'item-row';
 
+                // Build filter levels checkboxes (only for named levels)
+                const levelCheckboxes = state.filterLevels
+                    .map((checked, idx) => {
+                        if (!globalSettings.levelNames[idx]) return null;
+                        return `
+                            <div class="level-checkbox-wrapper" title="${globalSettings.levelNames[idx]}">
+                                <input type="checkbox" class="level-checkbox" 
+                                    ${checked ? 'checked' : ''}
+                                    onchange="updateItemLevel('${stateCategory}', '${key}', ${idx}, this.checked)">
+                                <span class="level-checkbox-label">${idx + 1}</span>
+                            </div>
+                        `;
+                    })
+                    .filter(cb => cb !== null)
+                    .join('');
+
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
                         onchange="updateNmagItemState('${stateCategory}', '${key}', 'show', this.checked)">
                     <span class="item-name">${state.name}</span>
                     <span style="color: #888; font-size: 11px; margin-left: 8px;">[${state.quality}]</span>
+                    <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
+                        <span class="levels-label">Levels:</span>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', true); event.preventDefault();" title="Select all levels">All</button>
+                        <button class="btn-link" onclick="setAllLevels('${stateCategory}', '${key}', false); event.preventDefault();" title="Deselect all levels">None</button>
+                        <div class="level-checkboxes">
+                            ${levelCheckboxes}
+                        </div>
+                    </div>
                     <button class="settings-btn" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', 'nmag')" 
                         title="Configure item settings">⚙</button>
@@ -4355,7 +4483,7 @@
                 if (namedLevels.length > 0) {
                     filter += '// === FILTER LEVELS ===\n\n';
                     namedLevels.forEach(item => {
-                        filter += `FilterLevel[${item.level}]: "${item.name}"\n`;
+                        filter += `FilterLevel[${item.level}]: ${item.name}\n`;
                     });
                     filter += '\n';
                 }
@@ -4415,7 +4543,7 @@
             // Generate single ItemStyle declaration if needed
             if (needsCustomStyle) {
                 filter += '// === CUSTOM STYLE ===\n\n';
-                filter += 'ItemStyle[CustomDisplay]: NotificationColor = %ITEM%\n\n';
+                filter += 'ItemStyle[CustomDisplay]: NotificationColor = WHITE\n\n';
             }
 
             // Utility items
@@ -4433,7 +4561,7 @@
                     }
                     
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%`;
+                        line += ` %NL%       %NAME%       %NL%%NL%`;
                     } else {
                         line += ` %NAME%`;
                     }
@@ -4451,13 +4579,13 @@
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
-                                rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                             }
                             if (needsBackground) {
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                         }
                     }
                     
@@ -4482,7 +4610,7 @@
                     }
                     
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%`;
+                        line += ` %NL%       %NAME%       %NL%%NL%`;
                     } else {
                         line += ` %NAME%`;
                     }
@@ -4500,13 +4628,13 @@
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
-                                rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                             }
                             if (needsBackground) {
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                         }
                     }
                     
@@ -4531,7 +4659,7 @@
                     }
                     
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%`;
+                        line += ` %NL%       %NAME%       %NL%%NL%`;
                     } else {
                         line += ` %NAME%`;
                     }
@@ -4549,13 +4677,13 @@
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
-                                rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                             }
                             if (needsBackground) {
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                         }
                     }
                     
@@ -4580,7 +4708,7 @@
                     }
                     
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%`;
+                        line += ` %NL%       %NAME%       %NL%%NL%`;
                     } else {
                         line += ` %NAME%`;
                     }
@@ -4598,13 +4726,13 @@
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
-                                rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                             }
                             if (needsBackground) {
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                         }
                     }
                     
@@ -4651,13 +4779,13 @@
                                 }
                                 if (needsBorder) {
                                     const rgb = hexToRGBSlash(state.borderColor);
-                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                    rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                                 }
                                 if (needsBackground) {
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                             }
                         }
                         
@@ -4704,13 +4832,13 @@
                                 }
                                 if (needsBorder) {
                                     const rgb = hexToRGBSlash(state.borderColor);
-                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                    rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                                 }
                                 if (needsBackground) {
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                             }
                         }
                         
@@ -4779,13 +4907,13 @@
                                 }
                                 if (needsBorder) {
                                     const rgb = hexToRGBSlash(state.borderColor);
-                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                    rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                                 }
                                 if (needsBackground) {
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                             }
                         }
                         
@@ -4860,13 +4988,13 @@
                                 }
                                 if (needsBorder) {
                                     const rgb = hexToRGBSlash(state.borderColor);
-                                    rgbParts.push(`BorderColor = RGB(${rgb})`);
+                                    rgbParts.push(`BorderColor = RGB(${rgb}), BorderSize = 3`);
                                 }
                                 if (needsBackground) {
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                styleRef = ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
+                                styleRef = ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
                             }
                         }
                         
@@ -5013,12 +5141,12 @@
                 } else {
                     // End of range, save it
                     if (rangeStart === rangeEnd) {
-                        ranges.push(`FILTLVL=${rangeStart}`);
+                        ranges.push(`FILTERLVL=${rangeStart}`);
                     } else if (rangeEnd === rangeStart + 1) {
-                        ranges.push(`FILTLVL=${rangeStart}`);
-                        ranges.push(`FILTLVL=${rangeEnd}`);
+                        ranges.push(`FILTERLVL=${rangeStart}`);
+                        ranges.push(`FILTERLVL=${rangeEnd}`);
                     } else {
-                        ranges.push(`FILTLVL>=${rangeStart} FILTLVL<=${rangeEnd}`);
+                        ranges.push(`FILTERLVL>=${rangeStart} FILTERLVL<=${rangeEnd}`);
                     }
                     
                     if (i < enabledLevels.length) {
@@ -5132,36 +5260,6 @@
         function generateModalContent(category, itemKey, itemType) {
             const state = filterState[category]?.[itemKey] || {};
             let html = '';
-
-            // Filter Levels Section
-            if (globalSettings.enableFilterLevels) {
-                html += '<div class="modal-section">';
-                html += '<h4 class="modal-section-title">Filter Levels</h4>';
-                html += '<div class="modal-checkbox-grid">';
-                
-                for (let i = 0; i < 10; i++) {
-                    const levelNum = i + 1;
-                    const levelName = globalSettings.levelNames[i];
-                    if (!levelName) continue;
-                    
-                    const checked = state.filterLevels?.[i] ? 'checked' : '';
-                    const labelText = `${levelNum} (${levelName})`;
-                    html += `
-                        <label class="modal-checkbox-label">
-                            <input type="checkbox" ${checked} 
-                                onchange="updateModalFilterLevel('${category}', '${itemKey}', ${i}, this.checked, '${itemType}')">
-                            <span>${labelText}</span>
-                        </label>
-                    `;
-                }
-                
-                html += '</div>';
-                html += '<div class="modal-button-group">';
-                html += `<button class="modal-btn" onclick="setAllModalLevels('${category}', '${itemKey}', true, '${itemType}')">Select All</button>`;
-                html += `<button class="modal-btn" onclick="setAllModalLevels('${category}', '${itemKey}', false, '${itemType}')">Clear All</button>`;
-                html += '</div>';
-                html += '</div>';
-            }
 
             // NMAG-specific controls
             if (itemType === 'nmag') {
