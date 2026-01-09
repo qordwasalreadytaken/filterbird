@@ -105,23 +105,45 @@
             padding: 10px;
             background: #252525;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .preset-controls label {
-            display: block;
-            margin-bottom: 8px;
             font-size: 13px;
             color: #aaa;
+            margin: 0;
         }
 
         .preset-select {
-            width: 100%;
             padding: 8px;
             background: #333;
             border: 1px solid #444;
             border-radius: 4px;
             color: #e0e0e0;
             font-size: 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .group-settings-btn {
+            padding: 8px 16px;
+            background: #4a4a4a;
+            border: 1px solid #666;
+            border-radius: 4px;
+            color: #4fc3f7;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .group-settings-btn:hover {
+            background: #555;
+            border-color: #4fc3f7;
+            box-shadow: 0 0 8px rgba(79, 195, 247, 0.3);
         }
 
         .item-list {
@@ -544,6 +566,19 @@
             transform: rotate(30deg);
         }
 
+        .settings-btn.modified {
+            background: #1a4d7a;
+            border-color: #4fc3f7;
+            color: #4fc3f7;
+        }
+
+        .settings-btn.modified:hover {
+            background: #2563a3;
+            border-color: #81d4fa;
+            color: #81d4fa;
+            transform: rotate(30deg);
+        }
+
         .socket-checkbox-container {
             display: flex;
             flex-wrap: wrap;
@@ -843,6 +878,7 @@
                                 <option value="essential-only">Essential Only (Potions + Scrolls)</option>
                                 <option value="endgame">Endgame (Hide low potions)</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('utility', 'Utility Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="utility-items"></div>
                     </div>
@@ -868,6 +904,7 @@
                                 <option value="mid-plus">Mid+ Runes Only (Thul+)</option>
                                 <option value="high-only">High Runes Only (Pul+)</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('runes', 'Runes')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="runes-items"></div>
                     </div>
@@ -893,6 +930,7 @@
                                 <option value="flawless-plus">Flawless+</option>
                                 <option value="regular-plus">Regular+</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('gems', 'Gems')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="gems-items"></div>
                     </div>
@@ -916,6 +954,7 @@
                                 <option value="hide-all">Hide All</option>
                                 <option value="essentials">Essentials (Keys/Organs/Essences/Orbs)</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('misc', 'PoD/Keys/Maps/Quest & Misc Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="misc-items"></div>
                     </div>
@@ -938,6 +977,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('jewelry-charms', 'Unique Jewelry & Charms')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="jewelry-charms-items"></div>
                     </div>
@@ -960,6 +1000,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('class-uniques', 'Class-Specific Unique Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="class-uniques-items"></div>
                     </div>
@@ -982,6 +1023,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('elite-weapons', 'Elite Unique Weapons')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="elite-weapons-items"></div>
                     </div>
@@ -1004,6 +1046,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('elite-armor', 'Elite Unique Armor')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="elite-armor-items"></div>
                     </div>
@@ -1026,6 +1069,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('exc-weapons', 'Exceptional Unique Weapons')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="exc-weapons-items"></div>
                     </div>
@@ -1048,6 +1092,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('exc-armor', 'Exceptional Unique Armor')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="exc-armor-items"></div>
                     </div>
@@ -1070,6 +1115,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('norm-weapons', 'Normal Unique Weapons')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="norm-weapons-items"></div>
                     </div>
@@ -1092,6 +1138,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('norm-armor', 'Normal Unique Armor')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="norm-armor-items"></div>
                     </div>
@@ -1114,6 +1161,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('high-sets', 'High-Level Set Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="high-sets-items"></div>
                     </div>
@@ -1136,6 +1184,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('mid-sets', 'Mid-Level Set Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="mid-sets-items"></div>
                     </div>
@@ -1158,6 +1207,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('low-sets', 'Low-Level Set Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="low-sets-items"></div>
                     </div>
@@ -1181,6 +1231,7 @@
                                 <option value="hide-all">Hide All</option>
                                 <option value="high-ilvl">High ILVL Only</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('magic-jewelry', 'Magic Jewelry & Jewels')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="magic-jewelry-items"></div>
                     </div>
@@ -1204,6 +1255,7 @@
                                 <option value="hide-all">Hide All</option>
                                 <option value="high-ilvl">High ILVL Only</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('magic-charms', 'Magic Charms')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="magic-charms-items"></div>
                     </div>
@@ -1226,6 +1278,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('magic-crafting', 'Magic Crafting Bases')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="magic-crafting-items"></div>
                     </div>
@@ -1248,6 +1301,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('rare-jewelry', 'Rare Jewelry & Jewels')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="rare-jewelry-items"></div>
                     </div>
@@ -1270,6 +1324,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('rare-class-items', 'Rare Class-Specific Items')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="rare-class-items-items"></div>
                     </div>
@@ -1292,6 +1347,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('rare-elite-bases', 'Rare Elite Bases')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="rare-elite-bases-items"></div>
                     </div>
@@ -1321,6 +1377,7 @@
                                 <option value="eth-only">ETH Only</option>
                                 <option value="4sock">4-Socket Only</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-polearms', 'NMAG: Polearms')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-polearms-items"></div>
                     </div>
@@ -1343,6 +1400,7 @@
                                 <option value="hide-all">Hide All</option>
                                 <option value="elite-only">Elite Only</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-swords', 'NMAG: Swords')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-swords-items"></div>
                     </div>
@@ -1364,6 +1422,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-axes', 'NMAG: Axes')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-axes-items"></div>
                     </div>
@@ -1385,6 +1444,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-maces', 'NMAG: Maces')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-maces-items"></div>
                     </div>
@@ -1406,6 +1466,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-staves', 'NMAG: Staves')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-staves-items"></div>
                     </div>
@@ -1427,6 +1488,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-bows', 'NMAG: Bows')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-bows-items"></div>
                     </div>
@@ -1450,6 +1512,7 @@
                                 <option value="hide-all">Hide All</option>
                                 <option value="elite-only">Elite Only</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-light-armor', 'NMAG: Light Armor')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-light-armor-items"></div>
                     </div>
@@ -1471,6 +1534,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-heavy-armor', 'NMAG: Heavy Armor')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-heavy-armor-items"></div>
                     </div>
@@ -1493,6 +1557,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-shields-generic', 'NMAG: Shields - Generic')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-shields-generic-items"></div>
                     </div>
@@ -1514,6 +1579,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-shields-paladin', 'NMAG: Shields - Paladin')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-shields-paladin-items"></div>
                     </div>
@@ -1536,6 +1602,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-helms', 'NMAG: Helms')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-helms-items"></div>
                     </div>
@@ -1557,6 +1624,7 @@
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-class-specific', 'NMAG: Class-Specific')">⚙ Group Settings</button>
                         </div>
                         <div class="item-list" id="nmag-class-specific-items"></div>
                     </div>
@@ -2872,6 +2940,8 @@
                     .filter(cb => cb !== null)
                     .join('');
                 
+                const isModified = isItemModified(state, 'simple');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -2885,7 +2955,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('utility', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -2925,6 +2995,8 @@
                     .filter(cb => cb !== null)
                     .join('');
                 
+                const isModified = isItemModified(state, 'simple');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -2938,7 +3010,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('runes', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -2978,6 +3050,8 @@
                     .filter(cb => cb !== null)
                     .join('');
                 
+                const isModified = isItemModified(state, 'simple');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -2991,7 +3065,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('gems', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -3031,6 +3105,8 @@
                     .filter(cb => cb !== null)
                     .join('');
                 
+                const isModified = isItemModified(state, 'simple');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -3044,7 +3120,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('misc', '${item.code}', \`${item.name}\`, 'simple')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -3122,6 +3198,51 @@
             }
             generateFilter();
             setTimeout(() => highlightItemInOutput(code), 100);
+        }
+
+        // Check if an item has been modified from defaults
+        function isItemModified(state, itemType = 'simple') {
+            // Check common modifications
+            if (state.useCustomColors) return true;
+            if (state.chatNotification) return true;
+            if (state.biggerClickbox) return true;
+            
+            // Check NMAG-specific modifications
+            if (itemType === 'nmag') {
+                if (state.ethFilter && state.ethFilter !== 'both') return true;
+                if (state.sockFilter && state.sockFilter.length > 0) return true;
+                if (state.edFilter && state.edFilter !== 'any') return true;
+            }
+            
+            return false;
+        }
+
+        // Update settings button visual state after modifications
+        function updateSettingsButtonState(category, itemKey, itemType = 'simple') {
+            const state = filterState[category]?.[itemKey];
+            if (!state) return;
+            
+            const isModified = isItemModified(state, itemType);
+            
+            // Find all settings buttons and update the one for this item
+            const itemRows = document.querySelectorAll('.item-row');
+            itemRows.forEach(row => {
+                const settingsBtn = row.querySelector('.settings-btn');
+                if (settingsBtn) {
+                    const onclickAttr = settingsBtn.getAttribute('onclick');
+                    // Check if this button belongs to our item
+                    // Need to handle both single quotes in onclick and escaped single quotes in item key
+                    if (onclickAttr && 
+                        onclickAttr.includes(`'${category}'`) && 
+                        (onclickAttr.includes(`'${itemKey}'`) || onclickAttr.includes(`'${itemKey.replace(/'/g, "\\'")}'`))) {
+                        if (isModified) {
+                            settingsBtn.classList.add('modified');
+                        } else {
+                            settingsBtn.classList.remove('modified');
+                        }
+                    }
+                }
+            });
         }
 
         // Update item counts
@@ -3298,6 +3419,8 @@
                     .filter(cb => cb !== null)
                     .join('');
                 
+                const isModified = isItemModified(state, 'unique');
+                
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
@@ -3311,7 +3434,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${item.name.replace(/'/g, "\\'")}', 'unique')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -3385,6 +3508,8 @@
                     .filter(cb => cb !== null)
                     .join('');
 
+                const isModified = isItemModified(state, 'set');
+
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
                         onchange="updateSetItemState('${stateCategory}', '${key}', 'show', this.checked)">
@@ -3397,7 +3522,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', 'set')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -3456,6 +3581,8 @@
                     .filter(cb => cb !== null)
                     .join('');
 
+                const isModified = isItemModified(state, itemType);
+
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
                         onchange="updateMagicRareItemState('${stateCategory}', '${key}', 'show', this.checked)">
@@ -3468,7 +3595,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', '${itemType}')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -3580,6 +3707,8 @@
                     .filter(cb => cb !== null)
                     .join('');
 
+                const isModified = isItemModified(state, 'nmag');
+
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${state.show ? 'checked' : ''}
                         onchange="updateNmagItemState('${stateCategory}', '${key}', 'show', this.checked)">
@@ -3593,7 +3722,7 @@
                             ${levelCheckboxes}
                         </div>
                     </div>
-                    <button class="settings-btn" 
+                    <button class="settings-btn ${isModified ? 'modified' : ''}" 
                         onclick="openItemSettings('${stateCategory}', '${key}', '${state.name.replace(/'/g, "\\'")}', 'nmag')" 
                         title="Configure item settings">⚙</button>
                 `;
@@ -4549,6 +4678,12 @@
                 filter += 'ItemStyle[CustomDisplay]: NotificationColor = WHITE\n\n';
             }
 
+            // Filter Start
+            filter += '// === Default of never hiding runewords or identified items ===\n\n';
+            filter += 'ItemDisplay[RW]: %NAME%\n';
+            filter += 'ItemDisplay[ID]: %NAME%\n\n';
+
+
             // Utility items
             filter += '// === UTILITY ITEMS ===\n\n';
             utilityItems.forEach(item => {
@@ -5260,6 +5395,355 @@
             currentModalItem = null;
         }
 
+        // Group Settings Functions
+        function openGroupSettings(category, categoryDisplayName) {
+            const modal = document.getElementById('itemSettingsModal');
+            const modalTitle = document.getElementById('modalItemName');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = `Group Settings: ${categoryDisplayName}`;
+            
+            // Generate group settings modal content
+            modalBody.innerHTML = generateGroupSettingsContent(category);
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            // Store current group for apply function
+            currentModalItem = { isGroup: true, category };
+        }
+
+        function generateGroupSettingsContent(category) {
+            let html = '';
+            
+            // Filter Levels Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Filter Levels (Apply to All Items)</h4>';
+            html += '<p style="color: #888; font-size: 12px; margin-bottom: 10px;">Select which filter levels to enable for all items in this group:</p>';
+            html += '<div class="modal-control-group">';
+            html += '<div class="level-checkbox-container">';
+            for (let i = 1; i <= 10; i++) {
+                html += `
+                    <label class="level-checkbox-label">
+                        <input type="checkbox" id="group-level-${i}">
+                        <span>${i}</span>
+                    </label>
+                `;
+            }
+            html += '</div>';
+            html += '<div style="margin-top: 10px;">';
+            html += '<button class="modal-btn" onclick="setAllGroupLevels(true)">Select All</button>';
+            html += '<button class="modal-btn" onclick="setAllGroupLevels(false)">Clear All</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // Custom Colors Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Custom Colors</h4>';
+            html += '<div class="modal-control-group">';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" id="group-custom-colors" onchange="toggleGroupCustomColors(this.checked)">
+                    <span>Enable Custom Colors for All Items</span>
+                </label>
+            `;
+            html += '<div id="group-color-controls" style="display: none; margin-top: 10px;">';
+            
+            // Font Color
+            html += '<div class="modal-color-row">';
+            html += '<span class="modal-color-label">Font Color:</span>';
+            html += '<select class="modal-select" id="group-font-color">';
+            html += '<option value="">Default</option>';
+            FONT_COLORS.forEach(fc => {
+                html += `<option value="${fc}">${fc}</option>`;
+            });
+            html += '</select>';
+            html += '</div>';
+
+            // Border Color
+            html += '<div class="modal-color-row">';
+            html += '<span class="modal-color-label">Border Color:</span>';
+            html += '<input type="color" class="modal-color-input" id="group-border-color" value="#ffffff">';
+            html += '</div>';
+
+            // Background Color
+            html += '<div class="modal-color-row">';
+            html += '<span class="modal-color-label">Background Color:</span>';
+            html += '<input type="color" class="modal-color-input" id="group-bg-color" value="#000000">';
+            html += '</div>';
+            
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // Notifications Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Notifications</h4>';
+            html += '<div class="modal-control-group">';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" id="group-notifications">
+                    <span>Enable chat notifications for all items in this group</span>
+                </label>
+            `;
+            html += '</div>';
+            html += '</div>';
+
+            // Display Options Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Display Options</h4>';
+            html += '<div class="modal-control-group">';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" id="group-bigger-clickbox">
+                    <span>Bigger clickbox for all items in this group</span>
+                </label>
+            `;
+            html += '</div>';
+            html += '</div>';
+
+            // Apply Button
+            html += '<div class="modal-section">';
+            html += '<button class="modal-btn modal-btn-primary" onclick="applyGroupSettings()" style="width: 100%; padding: 12px; font-size: 14px; font-weight: bold;">Apply to All Items in Group</button>';
+            html += '</div>';
+
+            return html;
+        }
+
+        function setAllGroupLevels(checked) {
+            for (let i = 1; i <= 10; i++) {
+                const checkbox = document.getElementById(`group-level-${i}`);
+                if (checkbox) checkbox.checked = checked;
+            }
+        }
+
+        function toggleGroupCustomColors(enabled) {
+            const controls = document.getElementById('group-color-controls');
+            if (controls) {
+                controls.style.display = enabled ? 'block' : 'none';
+            }
+        }
+
+        function applyGroupSettings() {
+            if (!currentModalItem || !currentModalItem.isGroup) return;
+            
+            const category = currentModalItem.category;
+            
+            // Map kebab-case category names to camelCase filterState keys
+            const categoryMap = {
+                'utility': 'utility',
+                'runes': 'runes',
+                'gems': 'gems',
+                'misc': 'misc',
+                'jewelry-charms': 'jewelryCharms',
+                'class-uniques': 'classUniques',
+                'elite-weapons': 'eliteWeapons',
+                'elite-armor': 'eliteArmor',
+                'exc-weapons': 'excWeapons',
+                'exc-armor': 'excArmor',
+                'norm-weapons': 'normWeapons',
+                'norm-armor': 'normArmor',
+                'high-sets': 'highSets',
+                'mid-sets': 'midSets',
+                'low-sets': 'lowSets',
+                'magic-jewelry': 'magicJewelry',
+                'magic-charms': 'magicCharms',
+                'magic-crafting': 'magicCrafting',
+                'rare-jewelry': 'rareJewelry',
+                'rare-class-items': 'rareClassItems',
+                'rare-elite-bases': 'rareEliteBases',
+                'nmag-polearms': 'nmagPolearms',
+                'nmag-swords': 'nmagSwords',
+                'nmag-axes': 'nmagAxes',
+                'nmag-maces': 'nmagMaces',
+                'nmag-staves': 'nmagStaves',
+                'nmag-bows': 'nmagBows',
+                'nmag-light-armor': 'nmagLightArmor',
+                'nmag-heavy-armor': 'nmagHeavyArmor',
+                'nmag-shields-generic': 'nmagShieldsGeneric',
+                'nmag-shields-paladin': 'nmagShieldsPaladin',
+                'nmag-helms': 'nmagHelms',
+                'nmag-class-specific': 'nmagClassSpecific'
+            };
+            
+            const stateCategory = categoryMap[category] || category;
+            
+            // Get selected filter levels
+            const selectedLevels = [];
+            let anyLevelSelected = false;
+            for (let i = 0; i < 10; i++) {
+                const checkbox = document.getElementById(`group-level-${i + 1}`);
+                if (checkbox && checkbox.checked) {
+                    selectedLevels[i] = true;
+                    anyLevelSelected = true;
+                } else {
+                    selectedLevels[i] = false;
+                }
+            }
+            
+            // Get color settings
+            const useCustomColors = document.getElementById('group-custom-colors')?.checked || false;
+            const fontColor = document.getElementById('group-font-color')?.value || '';
+            const borderColor = document.getElementById('group-border-color')?.value || '#ffffff';
+            const bgColor = document.getElementById('group-bg-color')?.value || '#000000';
+            
+            // Get notification and clickbox settings
+            const chatNotification = document.getElementById('group-notifications')?.checked || false;
+            const biggerClickbox = document.getElementById('group-bigger-clickbox')?.checked || false;
+            
+            // Apply to all items in the category
+            if (!filterState[stateCategory]) filterState[stateCategory] = {};
+            
+            // Get all items in this category
+            let itemsToUpdate = [];
+            
+            // Determine item list based on category
+            if (category === 'utility') itemsToUpdate = utilityItems;
+            else if (category === 'runes') itemsToUpdate = runeItems;
+            else if (category === 'gems') itemsToUpdate = gemItems;
+            else if (category === 'misc') itemsToUpdate = miscItems;
+            else if (category === 'jewelry-charms') itemsToUpdate = jewelryAndCharms;
+            else if (category === 'class-uniques') itemsToUpdate = classSpecificUniques;
+            else if (category === 'elite-weapons') itemsToUpdate = eliteUniqueWeapons;
+            else if (category === 'elite-armor') itemsToUpdate = eliteUniqueArmor;
+            else if (category === 'exc-weapons') itemsToUpdate = exceptionalUniqueWeapons;
+            else if (category === 'exc-armor') itemsToUpdate = exceptionalUniqueArmor;
+            else if (category === 'norm-weapons') itemsToUpdate = normalUniqueWeapons;
+            else if (category === 'norm-armor') itemsToUpdate = normalUniqueArmor;
+            else if (category === 'high-sets') itemsToUpdate = highLevelSets;
+            else if (category === 'mid-sets') itemsToUpdate = midLevelSets;
+            else if (category === 'low-sets') itemsToUpdate = lowLevelSets;
+            else if (category === 'magic-jewelry') itemsToUpdate = magicJewelry;
+            else if (category === 'magic-charms') itemsToUpdate = magicCharms;
+            else if (category === 'magic-crafting') itemsToUpdate = magicCraftingBases;
+            else if (category === 'rare-jewelry') itemsToUpdate = rareJewelry;
+            else if (category === 'rare-class-items') itemsToUpdate = rareClassItems;
+            else if (category === 'rare-elite-bases') itemsToUpdate = rareEliteBases;
+            else if (category.startsWith('nmag-')) {
+                // Handle NMAG categories
+                const nmagCategories = {
+                    'nmag-polearms': nmagPolearms,
+                    'nmag-swords': nmagSwords,
+                    'nmag-axes': nmagAxes,
+                    'nmag-maces': nmagMaces,
+                    'nmag-staves': nmagStaves,
+                    'nmag-bows': nmagBows,
+                    'nmag-light-armor': nmagLightArmor,
+                    'nmag-heavy-armor': nmagHeavyArmor,
+                    'nmag-shields-generic': nmagShieldsGeneric,
+                    'nmag-shields-paladin': nmagShieldsPaladin,
+                    'nmag-helms': nmagHelms,
+                    'nmag-class-specific': nmagClassSpecific
+                };
+                itemsToUpdate = nmagCategories[category] || [];
+            }
+            
+            // Apply settings to each item
+            let successCount = 0;
+            itemsToUpdate.forEach((item, idx) => {
+                // Determine item key based on category type
+                let itemKey;
+                
+                // Simple items (utility, runes, gems, misc) use code directly
+                if (category === 'utility' || category === 'runes' || category === 'gems' || category === 'misc') {
+                    itemKey = item.code;
+                }
+                // Set items use code_set format
+                else if (category.includes('-sets')) {
+                    itemKey = item.code + '_' + item.set;
+                }
+                // Magic, rare, and nmag items use code_index format
+                else if (category.startsWith('magic-') || category.startsWith('rare-') || category.startsWith('nmag-')) {
+                    itemKey = item.code + '_' + idx;
+                }
+                // Unique items use transformed name
+                else if (item.name) {
+                    itemKey = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+                }
+                // Fallback
+                else {
+                    itemKey = item.code || item.key;
+                }
+                
+                if (!filterState[stateCategory][itemKey]) {
+                    filterState[stateCategory][itemKey] = { show: true };
+                }
+                
+                // Apply filter levels if any selected
+                if (anyLevelSelected) {
+                    filterState[stateCategory][itemKey].filterLevels = [...selectedLevels];
+                }
+                
+                // Apply custom colors
+                if (useCustomColors) {
+                    filterState[stateCategory][itemKey].useCustomColors = true;
+                    if (fontColor) filterState[stateCategory][itemKey].fontColor = fontColor;
+                    filterState[stateCategory][itemKey].borderColor = borderColor;
+                    filterState[stateCategory][itemKey].backgroundColor = bgColor;
+                }
+                
+                // Apply notification
+                if (chatNotification) {
+                    filterState[stateCategory][itemKey].chatNotification = true;
+                }
+                
+                // Apply bigger clickbox
+                if (biggerClickbox) {
+                    filterState[stateCategory][itemKey].biggerClickbox = true;
+                }
+            });
+            
+            // Regenerate filter and close modal
+            generateFilter();
+            closeItemSettings();
+            
+            // Re-render the category to update button states
+            const renderFunctions = {
+                'utility': renderUtilityItems,
+                'runes': renderRuneItems,
+                'gems': renderGemsItems,
+                'misc': renderMiscItems,
+                'jewelryCharms': renderJewelryCharmsItems,
+                'classUniques': renderClassUniquesItems,
+                'eliteWeapons': renderEliteWeaponsItems,
+                'eliteArmor': renderEliteArmorItems,
+                'excWeapons': renderExcWeaponsItems,
+                'excArmor': renderExcArmorItems,
+                'normWeapons': renderNormWeaponsItems,
+                'normArmor': renderNormArmorItems,
+                'highSets': renderHighSetsItems,
+                'midSets': renderMidSetsItems,
+                'lowSets': renderLowSetsItems,
+                'magicJewelry': renderMagicJewelryItems,
+                'magicCharms': renderMagicCharmsItems,
+                'magicCrafting': renderMagicCraftingItems,
+                'rareJewelry': renderRareJewelryItems,
+                'rareClassItems': renderRareClassItemsItems,
+                'rareEliteBases': renderRareEliteBasesItems,
+                'nmagPolearms': renderNmagPolearmsItems,
+                'nmagSwords': renderNmagSwordsItems,
+                'nmagAxes': renderNmagAxesItems,
+                'nmagMaces': renderNmagMacesItems,
+                'nmagStaves': renderNmagStavesItems,
+                'nmagBows': renderNmagBowsItems,
+                'nmagLightArmor': renderNmagLightArmorItems,
+                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagShieldsGeneric': renderNmagShieldsGenericItems,
+                'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
+                'nmagHelms': renderNmagHelmsItems,
+                'nmagClassSpecific': renderNmagClassSpecificItems
+            };
+            
+            const renderFunc = renderFunctions[stateCategory];
+            if (renderFunc) {
+                renderFunc();
+            }
+            
+            // Show success message
+            alert(`Group settings applied to ${itemsToUpdate.length} items!`);
+        }
+
         function generateModalContent(category, itemKey, itemType) {
             const state = filterState[category]?.[itemKey] || {};
             let html = '';
@@ -5460,6 +5944,7 @@
             // Refresh modal to show/hide color controls
             openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
             generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5474,6 +5959,7 @@
             
             filterState[category][itemKey].fontColor = color;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5493,6 +5979,7 @@
             
             filterState[category][itemKey].borderColor = color;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5521,6 +6008,7 @@
             
             filterState[category][itemKey].backgroundColor = color;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5549,6 +6037,7 @@
             
             filterState[category][itemKey].chatNotification = checked;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5563,6 +6052,7 @@
             
             filterState[category][itemKey].biggerClickbox = checked;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5578,6 +6068,7 @@
             
             filterState[category][itemKey].ethFilter = value;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, 'nmag');
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5604,6 +6095,7 @@
             }
             
             generateFilter();
+            updateSettingsButtonState(category, itemKey, 'nmag');
 
             const item = findItemByKey(category, itemKey);
             if (item) {
@@ -5617,6 +6109,7 @@
             
             filterState[category][itemKey].edFilter = value;
             generateFilter();
+            updateSettingsButtonState(category, itemKey, 'nmag');
 
             const item = findItemByKey(category, itemKey);
             if (item) {
