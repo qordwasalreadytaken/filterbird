@@ -8296,11 +8296,478 @@
             reader.onload = function(e) {
                 const content = e.target.result;
                 document.getElementById('filter-output').value = content;
-                // TODO: Parse filter and update UI state
+                
+                // Parse and update state
+                try {
+                    parseFilterAndUpdateState(content);
+                    alert('Filter imported successfully! All settings have been loaded.');
+                } catch (error) {
+                    console.error('Import error:', error);
+                    alert('Filter imported but could not fully parse: ' + error.message);
+                }
+                
                 updateOutputStats();
-                alert('Filter imported! Manual parsing not yet implemented - you can edit the text directly.');
             };
             reader.readAsText(file);
+        }
+
+        function parseFilterAndUpdateState(filterContent) {
+            const lines = filterContent.split('\n');
+            
+            // Parse FilterLevel declarations
+            const filterLevelRegex = /FilterLevel\[(\d+)\]:\s*(.+)/;
+            lines.forEach(line => {
+                const match = line.match(filterLevelRegex);
+                if (match) {
+                    const level = parseInt(match[1]) - 1;
+                    const name = match[2].trim();
+                    if (level >= 0 && level < 10) {
+                        globalSettings.levelNames[level] = name;
+                        globalSettings.enableFilterLevels = true;
+                    }
+                }
+            });
+            
+            // Parse ItemDisplay lines
+            const itemDisplayRegex = /ItemDisplay\[([^\]]+)\]:\s*(.*)$/;
+            
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line.startsWith('ItemDisplay[')) return;
+                
+                const match = line.match(itemDisplayRegex);
+                if (!match) return;
+                
+                const condition = match[1];
+                const display = match[2];
+                
+                // Parse the condition and display parts
+                parseItemDisplayLine(condition, display);
+            });
+            
+            // Update UI
+            if (globalSettings.enableFilterLevels) {
+                document.getElementById('enable-filter-levels').checked = true;
+                document.getElementById('filter-levels-config').classList.add('active');
+                renderLevelNamesConfig();
+            }
+            
+            document.getElementById('hide-junk').checked = globalSettings.hideJunk;
+            document.getElementById('show-all').checked = globalSettings.showAll;
+            
+            // Re-render all sections
+            renderAllSections();
+        }
+
+        function parseItemDisplayLine(condition, display) {
+            const hidden = !display || display.trim() === '';
+            
+            // Extract codes and conditions
+            const parts = condition.split(/\s+/);
+            let code = null;
+            let rarity = null;
+            let isSet = false;
+            let isUnique = false;
+            let isNmag = false;
+            let ethFilter = 'both';
+            let sockFilter = [];
+            let edFilter = 'any';
+            let filterLevels = null;
+            
+            // Parse condition parts
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
+                
+                if (part === 'UNI') {
+                    isUnique = true;
+                } else if (part === 'SET') {
+                    isSet = true;
+                } else if (part === 'NMAG') {
+                    isNmag = true;
+                } else if (part === 'MAG' || part === 'RARE') {
+                    rarity = part;
+                } else if (part === 'ETH') {
+                    ethFilter = 'eth-only';
+                } else if (part === '!ETH') {
+                    ethFilter = 'non-eth';
+                } else if (part.match(/^SOCK=/)) {
+                    // Single socket: SOCK=3
+                    const val = part.split('=')[1];
+                    if (val) sockFilter.push(val);
+                } else if (part === '(SOCK=') {
+                    // Multiple sockets: (SOCK=3 OR SOCK=4)
+                    // Continue parsing until we hit )
+                    for (let j = i + 1; j < parts.length; j++) {
+                        if (parts[j].includes('SOCK=')) {
+                            const val = parts[j].replace(/[()]/g, '').split('=')[1];
+                            if (val) sockFilter.push(val);
+                        }
+                        if (parts[j].includes(')')) {
+                            i = j;
+                            break;
+                        }
+                    }
+                } else if (part === 'ED=15') {
+                    edFilter = '15';
+                } else if (part === 'ED>13') {
+                    edFilter = '14+';
+                } else if (part === 'ED>12') {
+                    edFilter = '13+';
+                } else if (part === 'ED>11') {
+                    edFilter = '12+';
+                } else if (part === 'ED>9') {
+                    edFilter = '10+';
+                } else if (part.startsWith('FILTLVL')) {
+                    // Parse filter level condition
+                    filterLevels = parseFilterLevelCondition(part);
+                } else if (!part.startsWith('!') && !part.includes('>') && !part.includes('<') && !part.includes('=') && !part.includes('(') && !part.includes(')') && part !== 'OR') {
+                    // This is likely the item code
+                    code = part;
+                }
+            }
+            
+            if (!code) return;
+            
+            // Parse display formatting
+            let fontColor = 'WHITE';
+            let useCustomColors = false;
+            let borderColor = null;
+            let backgroundColor = null;
+            let chatNotification = false;
+            let biggerClickbox = false;
+            
+            if (display) {
+                // Parse color codes
+                const colorMatch = display.match(/%([A-Z]+)%/);
+                if (colorMatch) {
+                    fontColor = colorMatch[1];
+                    useCustomColors = true;
+                }
+                
+                // Check for bigger clickbox
+                if (display.includes('%NL%')) {
+                    biggerClickbox = true;
+                }
+                
+                // Parse CustomDisplay
+                const customMatch = display.match(/<:CustomDisplay:\s*([^:]+):>/);
+                if (customMatch) {
+                    useCustomColors = true;
+                    const customParts = customMatch[1].split(',');
+                    customParts.forEach(part => {
+                        part = part.trim();
+                        if (part.startsWith('NotificationColor')) {
+                            chatNotification = true;
+                        } else if (part.startsWith('BorderColor')) {
+                            const rgbMatch = part.match(/RGB\(([^)]+)\)/);
+                            if (rgbMatch) {
+                                borderColor = rgbSlashToHex(rgbMatch[1]);
+                            }
+                        } else if (part.startsWith('BackgroundColor')) {
+                            const rgbMatch = part.match(/RGB\(([^)]+)\)/);
+                            if (rgbMatch) {
+                                backgroundColor = rgbSlashToHex(rgbMatch[1]);
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Prepare state object - only include filterLevels if parsed
+            const baseState = {
+                show: !hidden,
+                useCustomColors,
+                fontColor,
+                borderColor,
+                backgroundColor,
+                chatNotification,
+                biggerClickbox
+            };
+            
+            if (filterLevels) {
+                baseState.filterLevels = filterLevels;
+            }
+            
+            // Update filterState based on item type
+            if (isNmag) {
+                updateNmagItemState(code, {
+                    ...baseState,
+                    ethFilter,
+                    sockFilter,
+                    edFilter
+                });
+            } else if (isUnique) {
+                updateUniqueItemState(code, baseState);
+            } else if (isSet) {
+                updateSetItemState(code, baseState);
+            } else if (rarity) {
+                updateRareMagicItemState(code, rarity, baseState);
+            } else {
+                // Simple items (utility, runes, gems, misc)
+                updateSimpleItemState(code, baseState);
+            }
+        }
+
+        function parseFilterLevelCondition(filtlvlPart) {
+            // Parse FILTLVL>=1<=5 type conditions
+            const levels = [false, false, false, false, false, false, false, false, false, false];
+            
+            // Simple case: FILTLVL=1
+            const simpleMatch = filtlvlPart.match(/FILTLVL=(\d+)/);
+            if (simpleMatch) {
+                const level = parseInt(simpleMatch[1]) - 1;
+                if (level >= 0 && level < 10) levels[level] = true;
+                return levels;
+            }
+            
+            // Range case: FILTLVL>=1<=5
+            const rangeMatch = filtlvlPart.match(/FILTLVL>=(\d+)<=(\d+)/);
+            if (rangeMatch) {
+                const start = parseInt(rangeMatch[1]) - 1;
+                const end = parseInt(rangeMatch[2]) - 1;
+                for (let i = start; i <= end && i < 10; i++) {
+                    if (i >= 0) levels[i] = true;
+                }
+                return levels;
+            }
+            
+            return levels;
+        }
+
+        function updateSimpleItemState(code, state) {
+            // Check utility items
+            const utilItem = utilityItems.find(i => i.code === code);
+            if (utilItem && filterState.utility[code]) {
+                Object.assign(filterState.utility[code], state);
+                return;
+            }
+            
+            // Check runes
+            const runeItem = runeItems.find(i => i.code === code);
+            if (runeItem && filterState.runes[code]) {
+                Object.assign(filterState.runes[code], state);
+                return;
+            }
+            
+            // Check gems
+            const gemItem = gemItems.find(i => i.code === code);
+            if (gemItem && filterState.gems[code]) {
+                Object.assign(filterState.gems[code], state);
+                return;
+            }
+            
+            // Check misc
+            const miscItem = miscItems.find(i => i.code === code);
+            if (miscItem && filterState.misc[code]) {
+                Object.assign(filterState.misc[code], state);
+                return;
+            }
+        }
+
+        function updateNmagItemState(code, state) {
+            // Search through all nmag arrays
+            const nmagArrays = [
+                { arr: nmagPolearms, cat: 'nmagPolearms' },
+                { arr: nmagSwords, cat: 'nmagSwords' },
+                { arr: nmagAxes, cat: 'nmagAxes' },
+                { arr: nmagMaces, cat: 'nmagMaces' },
+                { arr: nmagStaves, cat: 'nmagStaves' },
+                { arr: nmagSpears, cat: 'nmagSpears' },
+                { arr: nmagBows, cat: 'nmagBows' },
+                { arr: nmagArmor, cat: 'nmagArmor' },
+                { arr: nmagShieldsGeneric, cat: 'nmagShieldsGeneric' },
+                { arr: nmagShieldsPaladin, cat: 'nmagShieldsPaladin' },
+                { arr: nmagHelms, cat: 'nmagHelms' },
+                { arr: nmagDruidPelts, cat: 'nmagDruidPelts' },
+                { arr: nmagNecroHeads, cat: 'nmagNecroHeads' },
+                { arr: nmagAssassinClaws, cat: 'nmagAssassinClaws' },
+                { arr: nmagSorcOrbs, cat: 'nmagSorcOrbs' },
+                { arr: nmagDaggers, cat: 'nmagDaggers' },
+                { arr: nmagWands, cat: 'nmagWands' },
+                { arr: nmagScepters, cat: 'nmagScepters' },
+                { arr: nmagBarbarianHelms, cat: 'nmagBarbarianHelms' },
+                { arr: nmagPolearmsExtended, cat: 'nmagPolearmsExtended' },
+                { arr: nmagSwordsExtended, cat: 'nmagSwordsExtended' },
+                { arr: nmagAxesExtended, cat: 'nmagAxesExtended' },
+                { arr: nmagMacesExtended, cat: 'nmagMacesExtended' },
+                { arr: nmagStavesExtended, cat: 'nmagStavesExtended' },
+                { arr: nmagSpearsExtended, cat: 'nmagSpearsExtended' },
+                { arr: nmagBowsExtended, cat: 'nmagBowsExtended' },
+                { arr: nmagCrossbows, cat: 'nmagCrossbows' },
+                { arr: nmagJavelins, cat: 'nmagJavelins' },
+                { arr: nmagArmorExtended, cat: 'nmagArmorExtended' },
+                { arr: nmagShieldsExtended, cat: 'nmagShieldsExtended' },
+                { arr: nmagPaladinShieldsExtended, cat: 'nmagPaladinShieldsExtended' },
+                { arr: nmagNecromancerShieldsExtended, cat: 'nmagNecromancerShieldsExtended' },
+                { arr: nmagHelmsExtended, cat: 'nmagHelmsExtended' },
+                { arr: nmagDruidPeltsExtended, cat: 'nmagDruidPeltsExtended' },
+                { arr: nmagNecroHeadsExtended, cat: 'nmagNecroHeadsExtended' },
+                { arr: nmagAssassinClawsExtended, cat: 'nmagAssassinClawsExtended' },
+                { arr: nmagSorcOrbsExtended, cat: 'nmagSorcOrbsExtended' },
+                { arr: nmagDaggersExtended, cat: 'nmagDaggersExtended' },
+                { arr: nmagWandsExtended, cat: 'nmagWandsExtended' },
+                { arr: nmagSceptersExtended, cat: 'nmagSceptersExtended' },
+                { arr: nmagBarbarianHelmsExtended, cat: 'nmagBarbarianHelmsExtended' },
+                { arr: nmagAmazonWeapons, cat: 'nmagAmazonWeapons' },
+                { arr: nmagCirclets, cat: 'nmagCirclets' }
+            ];
+            
+            for (const { arr, cat } of nmagArrays) {
+                const idx = arr.findIndex(i => i.code === code);
+                if (idx !== -1) {
+                    const key = code + '_' + idx;
+                    if (filterState[cat] && filterState[cat][key]) {
+                        Object.assign(filterState[cat][key], state);
+                        return;
+                    }
+                }
+            }
+        }
+
+        function updateUniqueItemState(code, state) {
+            // Search unique arrays
+            const uniqueArrays = [
+                { arr: jewelryAndCharms, cat: 'jewelryCharms' },
+                { arr: classSpecificUniques, cat: 'classUniques' },
+                { arr: eliteUniqueWeapons, cat: 'eliteWeapons' },
+                { arr: eliteUniqueArmor, cat: 'eliteArmor' },
+                { arr: exceptionalUniqueWeapons, cat: 'excWeapons' },
+                { arr: exceptionalUniqueArmor, cat: 'excArmor' },
+                { arr: normalUniqueWeapons, cat: 'normWeapons' },
+                { arr: normalUniqueArmor, cat: 'normArmor' }
+            ];
+            
+            for (const { arr, cat } of uniqueArrays) {
+                const item = arr.find(i => i.code === code);
+                if (item && item.name) {
+                    const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
+                    if (filterState[cat] && filterState[cat][key]) {
+                        Object.assign(filterState[cat][key], state);
+                        return;
+                    }
+                }
+            }
+        }
+
+        function updateSetItemState(code, state) {
+            // Search set arrays
+            const setArrays = [
+                { arr: highLevelSets, cat: 'highSets' },
+                { arr: midLevelSets, cat: 'midSets' },
+                { arr: lowLevelSets, cat: 'lowSets' }
+            ];
+            
+            for (const { arr, cat } of setArrays) {
+                const items = arr.filter(i => i.code === code);
+                items.forEach(item => {
+                    const key = item.code + '_' + item.set;
+                    if (filterState[cat] && filterState[cat][key]) {
+                        Object.assign(filterState[cat][key], state);
+                    }
+                });
+            }
+        }
+
+        function updateRareMagicItemState(code, rarity, state) {
+            // Search magic/rare arrays
+            const arrays = [
+                { arr: magicJewelry, cat: 'magicJewelry' },
+                { arr: magicCharms, cat: 'magicCharms' },
+                { arr: magicCraftingBases, cat: 'magicCrafting' },
+                { arr: rareJewelry, cat: 'rareJewelry' },
+                { arr: rareClassItems, cat: 'rareClassItems' },
+                { arr: rareEliteBases, cat: 'rareEliteBases' }
+            ];
+            
+            for (const { arr, cat } of arrays) {
+                arr.forEach((item, idx) => {
+                    if (item.code === code) {
+                        const key = code + '_' + idx;
+                        if (filterState[cat] && filterState[cat][key]) {
+                            Object.assign(filterState[cat][key], state);
+                        }
+                    }
+                });
+            }
+        }
+
+        function rgbSlashToHex(rgbStr) {
+            // Convert "255/128/0" to "#ff8000"
+            const parts = rgbStr.split('/').map(p => parseInt(p.trim()));
+            if (parts.length !== 3) return '#ffffff';
+            const hex = parts.map(p => {
+                const h = Math.max(0, Math.min(255, p)).toString(16);
+                return h.length === 1 ? '0' + h : h;
+            }).join('');
+            return '#' + hex;
+        }
+
+        function renderAllSections() {
+            renderUtilityItems();
+            renderRuneItems();
+            renderGemsItems();
+            renderMiscItems();
+            renderJewelryCharmsItems();
+            renderClassUniquesItems();
+            renderEliteWeaponsItems();
+            renderEliteArmorItems();
+            renderExcWeaponsItems();
+            renderExcArmorItems();
+            renderNormWeaponsItems();
+            renderNormArmorItems();
+            renderHighSetsItems();
+            renderMidSetsItems();
+            renderLowSetsItems();
+            renderMagicJewelryItems();
+            renderMagicCharmsItems();
+            renderMagicCraftingItems();
+            renderRareJewelryItems();
+            renderRareClassItemsItems();
+            renderRareEliteBasesItems();
+            renderNmagPolearmsItems();
+            renderNmagSwordsItems();
+            renderNmagAxesItems();
+            renderNmagMacesItems();
+            renderNmagStavesItems();
+            renderNmagSpearsItems();
+            renderNmagBowsItems();
+            renderNmagArmorItems();
+            renderNmagShieldsGenericItems();
+            renderNmagShieldsPaladinItems();
+            renderNmagHelmsItems();
+            renderNmagDruidPeltsItems();
+            renderNmagNecroHeadsItems();
+            renderNmagAssassinClawsItems();
+            renderNmagSorcOrbsItems();
+            renderNmagDaggersItems();
+            renderNmagWandsItems();
+            renderNmagSceptersItems();
+            renderNmagBarbarianHelmsItems();
+            renderNmagPolearmsExtendedItems();
+            renderNmagSwordsExtendedItems();
+            renderNmagAxesExtendedItems();
+            renderNmagMacesExtendedItems();
+            renderNmagStavesExtendedItems();
+            renderNmagSpearsExtendedItems();
+            renderNmagBowsExtendedItems();
+            renderNmagCrossbowsItems();
+            renderNmagJavelinsItems();
+            renderNmagArmorExtendedItems();
+            renderNmagShieldsExtendedItems();
+            renderNmagPaladinShieldsExtendedItems();
+            renderNmagNecromancerShieldsExtendedItems();
+            renderNmagHelmsExtendedItems();
+            renderNmagDruidPeltsExtendedItems();
+            renderNmagNecroHeadsExtendedItems();
+            renderNmagAssassinClawsExtendedItems();
+            renderNmagSorcOrbsExtendedItems();
+            renderNmagDaggersExtendedItems();
+            renderNmagWandsExtendedItems();
+            renderNmagSceptersExtendedItems();
+            renderNmagBarbarianHelmsExtendedItems();
+            renderNmagAmazonWeaponsItems();
+            renderNmagCircletsItems();
+            generateFilter();
         }
 
         // Allow manual edits to update stats

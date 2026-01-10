@@ -1,0 +1,825 @@
+// FilterPhoenix Visual Filter Builder
+// Generated: 1/9/2026, 7:57:44 AM
+
+Attribute[Author]: Filter Builder
+Attribute[Name]: You
+Attribute[Date]: 9 Jan
+
+// === UTILITY ITEMS ===
+
+ItemDisplay[rvl]: %NAME%
+ItemDisplay[rvs]: %NAME%
+ItemDisplay[hp5]: %NAME%
+ItemDisplay[hp4]: %NAME%
+ItemDisplay[hp3]: %NAME%
+ItemDisplay[hp2]: %NAME%
+ItemDisplay[hp1]: %NAME%
+ItemDisplay[mp5]: %NAME%
+ItemDisplay[mp4]: %NAME%
+ItemDisplay[mp3]: %NAME%
+ItemDisplay[mp2]: %NAME%
+ItemDisplay[mp1]: %NAME%
+ItemDisplay[yps]: %NAME%
+ItemDisplay[wms]: %NAME%
+ItemDisplay[vps]: %NAME%
+ItemDisplay[tbk]: %NAME%
+ItemDisplay[ibk]: %NAME%
+ItemDisplay[tsc]: %NAME%
+ItemDisplay[isc]: %NAME%
+ItemDisplay[key]: %NAME%
+
+// === RUNES ===
+
+ItemDisplay[r01]: %NAME%
+ItemDisplay[r02]: %NAME%
+ItemDisplay[r03]: %NAME%
+ItemDisplay[r04]: %NAME%
+ItemDisplay[r05]: %NAME%
+ItemDisplay[r06]: %NAME%
+ItemDisplay[r07]: %NAME%
+ItemDisplay[r08]: %NAME%
+ItemDisplay[r09]: %NAME%
+ItemDisplay[r10]: %NAME%
+ItemDisplay[r11]: %NAME%
+ItemDisplay[r12]: %NAME%
+ItemDisplay[r13]: %NAME%
+ItemDisplay[r14]: %NAME%
+ItemDisplay[r15]: %NAME%
+ItemDisplay[r16]: %NAME%
+ItemDisplay[r17]: %NAME%
+ItemDisplay[r18]: %NAME%
+ItemDisplay[r19]: %NAME%
+ItemDisplay[r20]: %NAME%
+ItemDisplay[r21]: %NAME%
+ItemDisplay[r22]: %NAME%
+ItemDisplay[r23]: %NAME%
+ItemDisplay[r24]: %NAME%
+ItemDisplay[r25]: %NAME%
+ItemDisplay[r26]: %NAME%
+ItemDisplay[r27]: %NAME%
+ItemDisplay[r28]: %NAME%
+ItemDisplay[r29]: %NAME%
+ItemDisplay[r30]: %NAME%
+ItemDisplay[r31]: %NAME%
+ItemDisplay[r32]: %NAME%
+ItemDisplay[r33]: %NAME%
+
+// === GEMS ===
+
+ItemDisplay[gpb]: %NAME%
+ItemDisplay[gpg]: %NAME%
+ItemDisplay[gpy]: %NAME%
+ItemDisplay[gpr]: %NAME%
+ItemDisplay[gpv]: %NAME%
+ItemDisplay[gpw]: %NAME%
+ItemDisplay[skz]: %NAME%
+ItemDisplay[glb]: %NAME%
+ItemDisplay[glg]: %NAME%
+ItemDisplay[gly]: %NAME%
+ItemDisplay[glr]: %NAME%
+ItemDisplay[gzv]: %NAME%
+ItemDisplay[glw]: %NAME%
+ItemDisplay[skl]: %NAME%
+ItemDisplay[gsb]: %NAME%
+ItemDisplay[gsg]: %NAME%
+ItemDisplay[gsy]: %NAME%
+ItemDisplay[gsr]: %NAME%
+ItemDisplay[gsv]: %NAME%
+ItemDisplay[gsw]: %NAME%
+ItemDisplay[sku]: %NAME%
+ItemDisplay[gfb]: %NAME%
+ItemDisplay[gfg]: %NAME%
+ItemDisplay[gfy]: %NAME%
+ItemDisplay[gfr]: %NAME%
+ItemDisplay[gfv]: %NAME%
+ItemDisplay[gfw]: %NAME%
+ItemDisplay[skf]: %NAME%
+ItemDisplay[gcb]: %NAME%
+ItemDisplay[gcg]: %NAME%
+ItemDisplay[gcy]: %NAME%
+ItemDisplay[gcr]: %NAME%
+ItemDisplay[gcv]: %NAME%
+ItemDisplay[gcw]: %NAME%
+ItemDisplay[skc]: %NAME%
+
+// === POD/Keys/Maps/MISC ITEMS ===
+
+ItemDisplay[SYNTH]: %NAME%
+ItemDisplay[cx5]: %NAME%
+ItemDisplay[cx9]: %NAME%
+ItemDisplay[pk1]: %NAME%
+ItemDisplay[pk2]: %NAME%
+ItemDisplay[pk3]: %NAME%
+ItemDisplay[dhn]: %NAME%
+ItemDisplay[bey]: %NAME%
+ItemDisplay[mbr]: %NAME%
+ItemDisplay[tes]: %NAME%
+ItemDisplay[ceh]: %NAME%
+ItemDisplay[bet]: %NAME%
+ItemDisplay[fed]: %NAME%
+ItemDisplay[toa]: %NAME%
+ItemDisplay[MAP]: %NAME%
+ItemDisplay[QUEST]: %NAME%
+ItemDisplay[CRAFT]: %NAME%
+
+// === UNIQUE ITEMS ===
+
+// Unique Jewelry & Charms
+ItemDisplay[UNI rin]: %NAME%
+ItemDisplay[UNI amu]: %NAME%
+ItemDisplay[UNI jew]: %NAME%
+ItemDisplay[UNI cm1]: %NAME%
+ItemDisplay[UNI cm2]: %NAME%
+ItemDisplay[UNI cm3]: %NAME%
+
+// Class-Specific Uniques
+ItemDisplay[UNI 7ja]: %NAME%
+ItemDisplay[UNI 7ja]: %NAME%
+ItemDisplay[UNI 7ja]: %NAME%
+ItemDisplay[UNI 9ja]: %NAME%
+ItemDisplay[UNI 9am]: %NAME%
+ItemDisplay[UNI 8lw]: %NAME%
+ItemDisplay[UNI 7bt]: %NAME%
+ItemDisplay[UNI 7wc]: %NAME%
+ItemDisplay[UNI 9ar]: %NAME%
+ItemDisplay[UNI 9wc]: %NAME%
+ItemDisplay[UNI 6cs]: %NAME%
+ItemDisplay[UNI ob9]: %NAME%
+ItemDisplay[UNI obd]: %NAME%
+ItemDisplay[UNI ne9]: %NAME%
+ItemDisplay[UNI ned]: %NAME%
+ItemDisplay[UNI nee]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI pae]: %NAME%
+ItemDisplay[UNI ba5]: %NAME%
+ItemDisplay[UNI ba4]: %NAME%
+ItemDisplay[UNI baa]: %NAME%
+ItemDisplay[UNI bac]: %NAME%
+ItemDisplay[UNI dr5]: %NAME%
+ItemDisplay[UNI dr9]: %NAME%
+ItemDisplay[UNI dra]: %NAME%
+ItemDisplay[UNI drb]: %NAME%
+
+// Elite Unique Weapons
+ItemDisplay[UNI 7cr]: %NAME%
+ItemDisplay[UNI 7fb]: %NAME%
+ItemDisplay[UNI 7gd]: %NAME%
+ItemDisplay[UNI 7gd]: %NAME%
+ItemDisplay[UNI 7cs]: %NAME%
+ItemDisplay[UNI 7b7]: %NAME%
+ItemDisplay[UNI 72h]: %NAME%
+ItemDisplay[UNI 7dj]: %NAME%
+ItemDisplay[UNI 7ta]: %NAME%
+ItemDisplay[UNI 7et]: %NAME%
+ItemDisplay[UNI 7ws]: %NAME%
+ItemDisplay[UNI 7wa]: %NAME%
+ItemDisplay[UNI 7ha]: %NAME%
+ItemDisplay[UNI 7ga]: %NAME%
+ItemDisplay[UNI 7la]: %NAME%
+ItemDisplay[UNI 7gi]: %NAME%
+ItemDisplay[UNI 7tr]: %NAME%
+ItemDisplay[UNI 7wh]: %NAME%
+ItemDisplay[UNI 7fl]: %NAME%
+ItemDisplay[UNI 7sc]: %NAME%
+ItemDisplay[UNI 7sc]: %NAME%
+ItemDisplay[UNI 7m7]: %NAME%
+ItemDisplay[UNI 7m7]: %NAME%
+ItemDisplay[UNI 7o7]: %NAME%
+ItemDisplay[UNI 7gm]: %NAME%
+ItemDisplay[UNI 7gm]: %NAME%
+ItemDisplay[UNI 7dg]: %NAME%
+ItemDisplay[UNI 7kr]: %NAME%
+ItemDisplay[UNI 7di]: %NAME%
+ItemDisplay[UNI 6ss]: %NAME%
+ItemDisplay[UNI 6cs]: %NAME%
+ItemDisplay[UNI 7wn]: %NAME%
+ItemDisplay[UNI 7yw]: %NAME%
+ItemDisplay[UNI 7sc]: %NAME%
+ItemDisplay[UNI 7sc]: %NAME%
+ItemDisplay[UNI 7qs]: %NAME%
+ItemDisplay[UNI 7o7]: %NAME%
+ItemDisplay[UNI 7gt]: %NAME%
+ItemDisplay[UNI 7s8]: %NAME%
+ItemDisplay[UNI 7pa]: %NAME%
+ItemDisplay[UNI 7h7]: %NAME%
+ItemDisplay[UNI 7p7]: %NAME%
+ItemDisplay[UNI 7vo]: %NAME%
+ItemDisplay[UNI 7bk]: %NAME%
+ItemDisplay[UNI 7gl]: %NAME%
+ItemDisplay[UNI 7ts]: %NAME%
+ItemDisplay[UNI 7ta]: %NAME%
+ItemDisplay[UNI 7tw]: %NAME%
+ItemDisplay[UNI 7bk]: %NAME%
+ItemDisplay[UNI 6l7]: %NAME%
+ItemDisplay[UNI 6hb]: %NAME%
+ItemDisplay[UNI 6lw]: %NAME%
+ItemDisplay[UNI 6hx]: %NAME%
+ItemDisplay[UNI 6rx]: %NAME%
+
+// Elite Unique Armor
+ItemDisplay[UNI bac]: %NAME%
+ItemDisplay[UNI urn]: %NAME%
+ItemDisplay[UNI baf]: %NAME%
+ItemDisplay[UNI ci3]: %NAME%
+ItemDisplay[UNI ba9]: %NAME%
+ItemDisplay[UNI ba7]: %NAME%
+ItemDisplay[UNI ba8]: %NAME%
+ItemDisplay[UNI ba6]: %NAME%
+ItemDisplay[UNI uar]: %NAME%
+ItemDisplay[UNI uar]: %NAME%
+ItemDisplay[UNI uui]: %NAME%
+ItemDisplay[UNI uul]: %NAME%
+ItemDisplay[UNI uui]: %NAME%
+ItemDisplay[UNI utp]: %NAME%
+ItemDisplay[UNI uea]: %NAME%
+ItemDisplay[UNI ung]: %NAME%
+ItemDisplay[UNI utp]: %NAME%
+ItemDisplay[UNI urs]: %NAME%
+ItemDisplay[UNI uit]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI pae]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI uhg]: %NAME%
+ItemDisplay[UNI ulg]: %NAME%
+ItemDisplay[UNI uvg]: %NAME%
+ItemDisplay[UNI umg]: %NAME%
+ItemDisplay[UNI umb]: %NAME%
+ItemDisplay[UNI uhb]: %NAME%
+ItemDisplay[UNI uvb]: %NAME%
+ItemDisplay[UNI utb]: %NAME%
+ItemDisplay[UNI ulb]: %NAME%
+ItemDisplay[UNI ulc]: %NAME%
+ItemDisplay[UNI uvc]: %NAME%
+ItemDisplay[UNI umc]: %NAME%
+ItemDisplay[UNI ulc]: %NAME%
+ItemDisplay[UNI uhc]: %NAME%
+
+// Exceptional Unique Weapons
+ItemDisplay[UNI 9ss]: %NAME%
+ItemDisplay[UNI 9sm]: %NAME%
+ItemDisplay[UNI 9sb]: %NAME%
+ItemDisplay[UNI 9fc]: %NAME%
+ItemDisplay[UNI 9cr]: %NAME%
+ItemDisplay[UNI 9bs]: %NAME%
+ItemDisplay[UNI 9ls]: %NAME%
+ItemDisplay[UNI 9wd]: %NAME%
+ItemDisplay[UNI 92h]: %NAME%
+ItemDisplay[UNI 9cm]: %NAME%
+ItemDisplay[UNI 9gs]: %NAME%
+ItemDisplay[UNI 9b9]: %NAME%
+ItemDisplay[UNI 9fb]: %NAME%
+ItemDisplay[UNI 9gd]: %NAME%
+ItemDisplay[UNI 9ha]: %NAME%
+ItemDisplay[UNI 9ax]: %NAME%
+ItemDisplay[UNI 92a]: %NAME%
+ItemDisplay[UNI 9mp]: %NAME%
+ItemDisplay[UNI 9mt]: %NAME%
+ItemDisplay[UNI 9ma]: %NAME%
+ItemDisplay[UNI 9ba]: %NAME%
+ItemDisplay[UNI 9bt]: %NAME%
+ItemDisplay[UNI 9ga]: %NAME%
+ItemDisplay[UNI 9gi]: %NAME%
+ItemDisplay[UNI 9cl]: %NAME%
+ItemDisplay[UNI 9sp]: %NAME%
+ItemDisplay[UNI 9ma]: %NAME%
+ItemDisplay[UNI 9mt]: %NAME%
+ItemDisplay[UNI 9fl]: %NAME%
+ItemDisplay[UNI 9wh]: %NAME%
+ItemDisplay[UNI 9m9]: %NAME%
+ItemDisplay[UNI 9mt]: %NAME%
+ItemDisplay[UNI 9dg]: %NAME%
+ItemDisplay[UNI 9di]: %NAME%
+ItemDisplay[UNI 9kr]: %NAME%
+ItemDisplay[UNI 9bl]: %NAME%
+ItemDisplay[UNI 9s8]: %NAME%
+ItemDisplay[UNI 9st]: %NAME%
+ItemDisplay[UNI 9s9]: %NAME%
+ItemDisplay[UNI 9sb]: %NAME%
+ItemDisplay[UNI 9ss]: %NAME%
+ItemDisplay[UNI 9bw]: %NAME%
+ItemDisplay[UNI 9gw]: %NAME%
+ItemDisplay[UNI 9tw]: %NAME%
+ItemDisplay[UNI 9qr]: %NAME%
+ItemDisplay[UNI 9sc]: %NAME%
+ItemDisplay[UNI 9qs]: %NAME%
+ItemDisplay[UNI 9ws]: %NAME%
+ItemDisplay[UNI 9pa]: %NAME%
+ItemDisplay[UNI 9h9]: %NAME%
+ItemDisplay[UNI 9s7]: %NAME%
+ItemDisplay[UNI 9vo]: %NAME%
+ItemDisplay[UNI 9s8]: %NAME%
+ItemDisplay[UNI 9p9]: %NAME%
+ItemDisplay[UNI 9sr]: %NAME%
+ItemDisplay[UNI 9tr]: %NAME%
+ItemDisplay[UNI 9br]: %NAME%
+ItemDisplay[UNI 9st]: %NAME%
+ItemDisplay[UNI 9p9]: %NAME%
+ItemDisplay[UNI 9b8]: %NAME%
+ItemDisplay[UNI 9ta]: %NAME%
+ItemDisplay[UNI 8sb]: %NAME%
+ItemDisplay[UNI 8lb]: %NAME%
+ItemDisplay[UNI 8cb]: %NAME%
+ItemDisplay[UNI 8s8]: %NAME%
+ItemDisplay[UNI 8l8]: %NAME%
+ItemDisplay[UNI 8lx]: %NAME%
+ItemDisplay[UNI 8mx]: %NAME%
+ItemDisplay[UNI 8hx]: %NAME%
+ItemDisplay[UNI 8rx]: %NAME%
+
+// Exceptional Unique Armor
+ItemDisplay[UNI xh9]: %NAME%
+ItemDisplay[UNI xhm]: %NAME%
+ItemDisplay[UNI ci2]: %NAME%
+ItemDisplay[UNI xrn]: %NAME%
+ItemDisplay[UNI xsk]: %NAME%
+ItemDisplay[UNI xow]: %NAME%
+ItemDisplay[UNI xh9]: %NAME%
+ItemDisplay[UNI xlm]: %NAME%
+ItemDisplay[UNI xrs]: %NAME%
+ItemDisplay[UNI xpl]: %NAME%
+ItemDisplay[UNI xui]: %NAME%
+ItemDisplay[UNI xul]: %NAME%
+ItemDisplay[UNI xmb]: %NAME%
+ItemDisplay[UNI xlt]: %NAME%
+ItemDisplay[UNI xtu]: %NAME%
+ItemDisplay[UNI xng]: %NAME%
+ItemDisplay[UNI xea]: %NAME%
+ItemDisplay[UNI xla]: %NAME%
+ItemDisplay[UNI xhb]: %NAME%
+ItemDisplay[UNI xtp]: %NAME%
+ItemDisplay[UNI xth]: %NAME%
+ItemDisplay[UNI xuc]: %NAME%
+ItemDisplay[UNI pa9]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI paf]: %NAME%
+ItemDisplay[UNI xlg]: %NAME%
+ItemDisplay[UNI xmg]: %NAME%
+ItemDisplay[UNI xhg]: %NAME%
+ItemDisplay[UNI xtg]: %NAME%
+ItemDisplay[UNI ulg]: %NAME%
+ItemDisplay[UNI xlb]: %NAME%
+ItemDisplay[UNI xmb]: %NAME%
+ItemDisplay[UNI xhb]: %NAME%
+ItemDisplay[UNI xtb]: %NAME%
+ItemDisplay[UNI zlb]: %NAME%
+ItemDisplay[UNI ztb]: %NAME%
+ItemDisplay[UNI zmb]: %NAME%
+ItemDisplay[UNI zhb]: %NAME%
+ItemDisplay[UNI zlb]: %NAME%
+
+// Normal Unique Weapons
+ItemDisplay[UNI ssd]: %NAME%
+ItemDisplay[UNI scm]: %NAME%
+ItemDisplay[UNI sbr]: %NAME%
+ItemDisplay[UNI flc]: %NAME%
+ItemDisplay[UNI bsd]: %NAME%
+ItemDisplay[UNI lsd]: %NAME%
+ItemDisplay[UNI wsd]: %NAME%
+ItemDisplay[UNI 2hs]: %NAME%
+ItemDisplay[UNI clm]: %NAME%
+ItemDisplay[UNI gis]: %NAME%
+ItemDisplay[UNI bsw]: %NAME%
+ItemDisplay[UNI flb]: %NAME%
+ItemDisplay[UNI gsd]: %NAME%
+ItemDisplay[UNI hax]: %NAME%
+ItemDisplay[UNI axe]: %NAME%
+ItemDisplay[UNI 2ax]: %NAME%
+ItemDisplay[UNI mpi]: %NAME%
+ItemDisplay[UNI wax]: %NAME%
+ItemDisplay[UNI lax]: %NAME%
+ItemDisplay[UNI bax]: %NAME%
+ItemDisplay[UNI btx]: %NAME%
+ItemDisplay[UNI gax]: %NAME%
+ItemDisplay[UNI gix]: %NAME%
+ItemDisplay[UNI clb]: %NAME%
+ItemDisplay[UNI spc]: %NAME%
+ItemDisplay[UNI mac]: %NAME%
+ItemDisplay[UNI mst]: %NAME%
+ItemDisplay[UNI fla]: %NAME%
+ItemDisplay[UNI whm]: %NAME%
+ItemDisplay[UNI mau]: %NAME%
+ItemDisplay[UNI gma]: %NAME%
+ItemDisplay[UNI dgr]: %NAME%
+ItemDisplay[UNI dir]: %NAME%
+ItemDisplay[UNI kri]: %NAME%
+ItemDisplay[UNI bld]: %NAME%
+ItemDisplay[UNI sst]: %NAME%
+ItemDisplay[UNI lst]: %NAME%
+ItemDisplay[UNI cst]: %NAME%
+ItemDisplay[UNI bst]: %NAME%
+ItemDisplay[UNI wst]: %NAME%
+ItemDisplay[UNI wnd]: %NAME%
+ItemDisplay[UNI ywn]: %NAME%
+ItemDisplay[UNI bwn]: %NAME%
+ItemDisplay[UNI gwn]: %NAME%
+ItemDisplay[UNI scp]: %NAME%
+ItemDisplay[UNI gsc]: %NAME%
+ItemDisplay[UNI wsp]: %NAME%
+ItemDisplay[UNI bar]: %NAME%
+ItemDisplay[UNI vou]: %NAME%
+ItemDisplay[UNI scy]: %NAME%
+ItemDisplay[UNI pax]: %NAME%
+ItemDisplay[UNI hal]: %NAME%
+ItemDisplay[UNI wsc]: %NAME%
+ItemDisplay[UNI spr]: %NAME%
+ItemDisplay[UNI tri]: %NAME%
+ItemDisplay[UNI brn]: %NAME%
+ItemDisplay[UNI spt]: %NAME%
+ItemDisplay[UNI pik]: %NAME%
+ItemDisplay[UNI sbw]: %NAME%
+ItemDisplay[UNI hbw]: %NAME%
+ItemDisplay[UNI lbw]: %NAME%
+ItemDisplay[UNI cbw]: %NAME%
+ItemDisplay[UNI sbb]: %NAME%
+ItemDisplay[UNI lbb]: %NAME%
+ItemDisplay[UNI swb]: %NAME%
+ItemDisplay[UNI lwb]: %NAME%
+ItemDisplay[UNI 8sb]: %NAME%
+ItemDisplay[UNI lxb]: %NAME%
+ItemDisplay[UNI mxb]: %NAME%
+ItemDisplay[UNI lxb]: %NAME%
+ItemDisplay[UNI mxb]: %NAME%
+ItemDisplay[UNI hxb]: %NAME%
+ItemDisplay[UNI rxb]: %NAME%
+
+// Normal Unique Armor
+ItemDisplay[UNI cap]: %NAME%
+ItemDisplay[UNI skp]: %NAME%
+ItemDisplay[UNI hlm]: %NAME%
+ItemDisplay[UNI fhl]: %NAME%
+ItemDisplay[UNI ghm]: %NAME%
+ItemDisplay[UNI crn]: %NAME%
+ItemDisplay[UNI msk]: %NAME%
+ItemDisplay[UNI qui]: %NAME%
+ItemDisplay[UNI lea]: %NAME%
+ItemDisplay[UNI hla]: %NAME%
+ItemDisplay[UNI stu]: %NAME%
+ItemDisplay[UNI rng]: %NAME%
+ItemDisplay[UNI scl]: %NAME%
+ItemDisplay[UNI chn]: %NAME%
+ItemDisplay[UNI brs]: %NAME%
+ItemDisplay[UNI spl]: %NAME%
+ItemDisplay[UNI plt]: %NAME%
+ItemDisplay[UNI fld]: %NAME%
+ItemDisplay[UNI gth]: %NAME%
+ItemDisplay[UNI ful]: %NAME%
+ItemDisplay[UNI aar]: %NAME%
+ItemDisplay[UNI ltp]: %NAME%
+ItemDisplay[UNI buc]: %NAME%
+ItemDisplay[UNI sml]: %NAME%
+ItemDisplay[UNI lrg]: %NAME%
+ItemDisplay[UNI kit]: %NAME%
+ItemDisplay[UNI spk]: %NAME%
+ItemDisplay[UNI tow]: %NAME%
+ItemDisplay[UNI gts]: %NAME%
+ItemDisplay[UNI lrg]: %NAME%
+ItemDisplay[UNI buc]: %NAME%
+ItemDisplay[UNI xml]: %NAME%
+ItemDisplay[UNI lgl]: %NAME%
+ItemDisplay[UNI hgl]: %NAME%
+ItemDisplay[UNI mgl]: %NAME%
+ItemDisplay[UNI tgl]: %NAME%
+ItemDisplay[UNI hgl]: %NAME%
+ItemDisplay[UNI lbt]: %NAME%
+ItemDisplay[UNI hbt]: %NAME%
+ItemDisplay[UNI mbt]: %NAME%
+ItemDisplay[UNI tbt]: %NAME%
+ItemDisplay[UNI hbt]: %NAME%
+ItemDisplay[UNI lbl]: %NAME%
+ItemDisplay[UNI vbl]: %NAME%
+ItemDisplay[UNI hbl]: %NAME%
+ItemDisplay[UNI hbl]: %NAME%
+ItemDisplay[UNI mbl]: %NAME%
+
+
+// === SET ITEMS ===
+
+// High-Level Set Items
+ItemDisplay[SET ba5]: %NAME%
+ItemDisplay[SET uar]: %NAME%
+ItemDisplay[SET uhc]: %NAME%
+ItemDisplay[SET ulg]: %NAME%
+ItemDisplay[SET uhb]: %NAME%
+ItemDisplay[SET 2ha]: %NAME%
+ItemDisplay[SET xh9]: %NAME%
+ItemDisplay[SET utp]: %NAME%
+ItemDisplay[SET ulc]: %NAME%
+ItemDisplay[SET ob9]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET urn]: %NAME%
+ItemDisplay[SET uar]: %NAME%
+ItemDisplay[SET pa9]: %NAME%
+ItemDisplay[SET pa9]: %NAME%
+ItemDisplay[SET baf]: %NAME%
+ItemDisplay[SET uui]: %NAME%
+ItemDisplay[SET paf]: %NAME%
+ItemDisplay[SET uvg]: %NAME%
+ItemDisplay[SET uvc]: %NAME%
+ItemDisplay[SET ci3]: %NAME%
+ItemDisplay[SET uea]: %NAME%
+ItemDisplay[SET ulg]: %NAME%
+ItemDisplay[SET umc]: %NAME%
+ItemDisplay[SET 6lw]: %NAME%
+ItemDisplay[SET ba7]: %NAME%
+ItemDisplay[SET utp]: %NAME%
+ItemDisplay[SET 7wc]: %NAME%
+ItemDisplay[SET uhb]: %NAME%
+ItemDisplay[SET dr5]: %NAME%
+ItemDisplay[SET utp]: %NAME%
+ItemDisplay[SET 7sc]: %NAME%
+ItemDisplay[SET utb]: %NAME%
+ItemDisplay[SET xlg]: %NAME%
+ItemDisplay[SET utb]: %NAME%
+ItemDisplay[SET utp]: %NAME%
+ItemDisplay[SET umc]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET xlm]: %NAME%
+ItemDisplay[SET 7cr]: %NAME%
+ItemDisplay[SET paf]: %NAME%
+ItemDisplay[SET 7fb]: %NAME%
+ItemDisplay[SET 7fb]: %NAME%
+
+// Mid-Level Set Items
+ItemDisplay[SET xhl]: %NAME%
+ItemDisplay[SET xtp]: %NAME%
+ItemDisplay[SET zhb]: %NAME%
+ItemDisplay[SET 9bl]: %NAME%
+ItemDisplay[SET ci1]: %NAME%
+ItemDisplay[SET xar]: %NAME%
+ItemDisplay[SET 6ss]: %NAME%
+ItemDisplay[SET xlm]: %NAME%
+ItemDisplay[SET paf]: %NAME%
+ItemDisplay[SET xng]: %NAME%
+ItemDisplay[SET zhb]: %NAME%
+ItemDisplay[SET cap]: %NAME%
+ItemDisplay[SET hbt]: %NAME%
+ItemDisplay[SET vgl]: %NAME%
+ItemDisplay[SET 9wn]: %NAME%
+ItemDisplay[SET xap]: %NAME%
+ItemDisplay[SET xtu]: %NAME%
+ItemDisplay[SET xhb]: %NAME%
+ItemDisplay[SET 7ma]: %NAME%
+ItemDisplay[SET xhb]: %NAME%
+ItemDisplay[SET xar]: %NAME%
+ItemDisplay[SET 9sp]: %NAME%
+
+// Low-Level Set Items
+ItemDisplay[SET rin]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET sbr]: %NAME%
+ItemDisplay[SET rng]: %NAME%
+ItemDisplay[SET skp]: %NAME%
+ItemDisplay[SET ltp]: %NAME%
+ItemDisplay[SET wnd]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET ci0]: %NAME%
+ItemDisplay[SET qui]: %NAME%
+ItemDisplay[SET lbl]: %NAME%
+ItemDisplay[SET lgl]: %NAME%
+ItemDisplay[SET hlm]: %NAME%
+ItemDisplay[SET spl]: %NAME%
+ItemDisplay[SET 2ax]: %NAME%
+ItemDisplay[SET msk]: %NAME%
+ItemDisplay[SET chn]: %NAME%
+ItemDisplay[SET sst]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET rin]: %NAME%
+ItemDisplay[SET gsc]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET lrg]: %NAME%
+ItemDisplay[SET lsd]: %NAME%
+ItemDisplay[SET sml]: %NAME%
+ItemDisplay[SET mgl]: %NAME%
+ItemDisplay[SET lea]: %NAME%
+ItemDisplay[SET tgl]: %NAME%
+ItemDisplay[SET hgl]: %NAME%
+ItemDisplay[SET chn]: %NAME%
+ItemDisplay[SET vbt]: %NAME%
+ItemDisplay[SET vbl]: %NAME%
+ItemDisplay[SET cap]: %NAME%
+ItemDisplay[SET 9wn]: %NAME%
+ItemDisplay[SET 7tw]: %NAME%
+ItemDisplay[SET crn]: %NAME%
+ItemDisplay[SET lgl]: %NAME%
+ItemDisplay[SET lbl]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET fhl]: %NAME%
+ItemDisplay[SET brs]: %NAME%
+ItemDisplay[SET spk]: %NAME%
+ItemDisplay[SET bsw]: %NAME%
+ItemDisplay[SET crn]: %NAME%
+ItemDisplay[SET aar]: %NAME%
+ItemDisplay[SET pa8]: %NAME%
+ItemDisplay[SET wsp]: %NAME%
+ItemDisplay[SET ghm]: %NAME%
+ItemDisplay[SET gth]: %NAME%
+ItemDisplay[SET tow]: %NAME%
+ItemDisplay[SET hgl]: %NAME%
+ItemDisplay[SET hbt]: %NAME%
+ItemDisplay[SET hbl]: %NAME%
+ItemDisplay[SET bwn]: %NAME%
+ItemDisplay[SET ful]: %NAME%
+ItemDisplay[SET tbt]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET mpi]: %NAME%
+ItemDisplay[SET amu]: %NAME%
+ItemDisplay[SET lbt]: %NAME%
+ItemDisplay[SET lea]: %NAME%
+ItemDisplay[SET lbw]: %NAME%
+
+
+// === MAGIC ITEMS ===
+
+// Magic Jewelry & Jewels
+ItemDisplay[MAG amu !ID ILVL>82]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG amu !ID ILVL>60 ILVL<81]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG amu !ID ILVL<59]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG rin !ID ILVL>71]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG rin !ID ILVL>42 ILVL<70]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG rin !ID ILVL<41]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG jew !ID]: %BLUE% %NAME% %WHITE%[%ILVL%]
+
+// Magic Charms
+ItemDisplay[MAG cm3 !ID ILVL>78]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm3 !ID ILVL>50 ILVL<77]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm3 !ID ILVL<49]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm2 !ID ILVL>80]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm2 !ID ILVL<79]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm1 !ID ILVL>90]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm1 !ID ILVL>48 ILVL<89]: %BLUE% %NAME% %WHITE%[%ILVL%]
+ItemDisplay[MAG cm1 !ID ILVL<47]: %BLUE% %NAME% %WHITE%[%ILVL%]
+
+// Magic Crafting Bases
+ItemDisplay[MAG vgl !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG xvg !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG uvg !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG mgl !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG xmg !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG umg !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG xlg !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG ulb !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG xlb !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG tbt !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG xtb !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG utb !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG uvc !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG zmb !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG umc !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG 72a !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+ItemDisplay[MAG 7sb !ID ILVL>85]: %BLUE% %NAME% {Crafting Base}
+
+
+// === RARE ITEMS ===
+
+// Rare Jewelry & Jewels
+ItemDisplay[RARE amu !ID]: %YELLOW% %NAME% {All rare amulets}
+ItemDisplay[RARE rin !ID]: %YELLOW% %NAME% {All rare rings}
+ItemDisplay[RARE jew !ID]: %YELLOW% %NAME% {All rare jewels}
+
+// Rare Class-Specific Items
+ItemDisplay[RARE EQ7 !ID]: %YELLOW% %NAME% {All circlets/coronets/tiaras}
+ItemDisplay[RARE CL5 !ID ILVL>50]: %YELLOW% %NAME% {Assassin claws}
+ItemDisplay[RARE WP11 !ID ILVL>50]: %YELLOW% %NAME% {Sorceress orbs}
+ItemDisplay[RARE 7ja !ID ILVL>56]: %YELLOW% %NAME% {Elite javelins}
+ItemDisplay[RARE jav !ID ILVL>56]: %YELLOW% %NAME% {Elite javelin}
+ItemDisplay[RARE 7wa !ID ILVL>56]: %YELLOW% %NAME% {Elite bows}
+ItemDisplay[RARE wax !ID ILVL>56]: %YELLOW% %NAME% {Elite bow}
+ItemDisplay[RARE CL3 !ID]: %YELLOW% %NAME% {Elite paladin shields}
+
+// Rare Elite Bases
+ItemDisplay[RARE EQ4 !ID ILVL>50]: %YELLOW% %NAME% {Elite gloves}
+ItemDisplay[RARE EQ5 !ID ILVL>50]: %YELLOW% %NAME% {Elite boots}
+ItemDisplay[RARE EQ6 !ID ILVL>50]: %YELLOW% %NAME% {Elite belts}
+ItemDisplay[RARE EQ1 !ID ILVL>50]: %YELLOW% %NAME% {Elite helms}
+ItemDisplay[RARE EQ2 !ID ILVL>50]: %YELLOW% %NAME% {Elite body armor}
+ItemDisplay[RARE EQ3 !ID ILVL>50]: %YELLOW% %NAME% {Elite shields}
+
+
+// === NMAG RUNEWORD BASES ===
+
+// NMAG: Polearms (Insight, Infinity, Obedience)
+ItemDisplay[NMAG 7s8 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7s8]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7wc ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7wc]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7pa ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7pa]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7vo ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7vo]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7h7 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7h7]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7o7 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7o7]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Swords (Spirit, Grief)
+ItemDisplay[NMAG 7cr ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7cr]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7gd ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7gd]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7fb ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7fb]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG crs ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG crs]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG bsd ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG bsd]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG lsd ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG lsd]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Axes (Grief, Beast, Death)
+ItemDisplay[NMAG 7wa ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7wa]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 72a ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 72a]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Maces (BoTD, Heart of the Oak)
+ItemDisplay[NMAG 7gm ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7gm]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 7m7 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 7m7]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG fla ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG fla]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Staves (CTA, Memory
+ItemDisplay[NMAG 6ws ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 6ws]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG wst ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG wst]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Bows (Faith, Ice, Brand, Insight)
+ItemDisplay[NMAG amc ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG amc]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG amb ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG amb]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 6hb ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 6hb]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG 6cb ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG 6cb]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Light Armor (Enigma, Fortitude, CoH)
+ItemDisplay[NMAG utp ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG utp]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG uui ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG uui]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG utu ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG utu]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG xtp ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG xtp]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG ltp ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG ltp]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Heavy Armor (Fortitude, CoH, Bramble)
+ItemDisplay[NMAG uar ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG uar]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG ula ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG ula]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG urs ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG urs]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Shields - Generic (Spirit, Dream, Splendor)
+ItemDisplay[NMAG uit ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG uit]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG bsh ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG bsh]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG xsh ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG xsh]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Shields - Paladin (Spirit, Exile)
+ItemDisplay[NMAG pa9 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG pa9]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG paa ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG paa]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG pab ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG pab]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG paf ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG paf]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG pac ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG pac]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Helms (Delirium, Dream)
+ItemDisplay[NMAG uh9 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG uh9]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG usk ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG usk]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+// NMAG: Class-Specific
+ItemDisplay[NMAG CL1 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG CL1]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG CL2 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG CL2]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG CL5 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG CL5]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[NMAG WP11 ETH]: %GRAY% %NAME% [%SOCKETS%]
+ItemDisplay[NMAG WP11]: %WHITE% %NAME% %GRAY%[%SOCKETS%]
+
+
+// Hide junk items
+ItemDisplay[(ARMOR OR WEAPON) INF]:
+
+// Show all remaining items
+ItemDisplay[]: %NAME%
