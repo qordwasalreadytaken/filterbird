@@ -7445,14 +7445,17 @@
             html += '<h4 class="modal-section-title">Filter Levels (Apply to All Items)</h4>';
             html += '<p style="color: #888; font-size: 12px; margin-bottom: 10px;">Select which filter levels to enable for all items in this group:</p>';
             html += '<div class="modal-control-group">';
-            html += '<div class="level-checkbox-container">';
+            html += '<div class="modal-checkbox-grid">';
+            // Only show checkboxes for defined filter levels
             for (let i = 1; i <= 10; i++) {
-                html += `
-                    <label class="level-checkbox-label">
-                        <input type="checkbox" id="group-level-${i}">
-                        <span>${i}</span>
-                    </label>
-                `;
+                if (globalSettings.levelNames[i - 1]) {
+                    html += `
+                        <label class="modal-checkbox-label">
+                            <input type="checkbox" id="group-level-${i}">
+                            <span>${i}</span>
+                        </label>
+                    `;
+                }
             }
             html += '</div>';
             html += '<div style="margin-top: 10px;">';
