@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMAG Item Coverage Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        h1 {
+            color: #4ec9b0;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #252526;
+            border-radius: 5px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-box {
+            padding: 15px;
+            background: #2d2d30;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4ec9b0;
+        }
+        .stat-label {
+            color: #858585;
+            margin-top: 5px;
+        }
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .item {
+            padding: 8px;
+            background: #3c3c3c;
+            border-radius: 3px;
+            border-left: 3px solid #4ec9b0;
+        }
+        .missing {
+            border-left-color: #f48771;
+        }
+        h3 {
+            color: #569cd6;
+            border-bottom: 2px solid #569cd6;
+            padding-bottom: 5px;
+        }
+        .coverage-bar {
+            height: 30px;
+            background: #3c3c3c;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .coverage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ec9b0, #569cd6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.3s ease;
+        }
+        button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1177bb;
+        }
+        .export-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>NMAG Item Coverage Checker</h1>
+    
+    <div class="section">
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number" id="total-wanted">0</div>
+                <div class="stat-label">Total Items in Your List</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="total-included">0</div>
+                <div class="stat-label">Items Already Included</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="total-missing">0</div>
+                <div class="stat-label">Items Missing</div>
+            </div>
+        </div>
+        
+        <div class="coverage-bar">
+            <div class="coverage-fill" id="coverage-fill" style="width: 0%">0%</div>
+        </div>
+    </div>
+
+    <div class="section export-section">
+        <h3>Export Options</h3>
+        <button onclick="exportMissingAsJSON()">Export Missing Items as JSON</button>
+        <button onclick="exportMissingAsText()">Export Missing Items as Text</button>
+        <button onclick="copyMissingToClipboard()">Copy Missing Items to Clipboard</button>
+    </div>
+
+    <div class="section">
+        <h3>✓ Items Already Included (<span id="included-count">0</span>)</h3>
+        <div class="item-list" id="included-list"></div>
+    </div>
+
+    <div class="section">
+        <h3>✗ Missing Items (<span id="missing-count">0</span>)</h3>
+        <div class="item-list" id="missing-list"></div>
+    </div>
+
+    <script>
+        // Current nmagitems from filter-builder.html
+        const currentNmagItems = [
+            // Polearms
+            "Thresher", "Giant Thresher", "Cryptic Axe", "Mancatcher", 
+            "Colossus Voulge", "Great Poleaxe",
+            
+            // Swords
+            "Phase Blade", "Colossus Blade", "Colossus Sword", 
+            "Crystal Sword", "Broad Sword", "Long Sword",
+            
+            // Axes
+            "Berserker Axe", "Ettin Axe",
+            
+            // Maces
+            "Thunder Maul", "Scourge", "Flail",
+            
+            // Staves
+            "Archon Staff", "War Staff",
+            
+            // Bows
+            "Matriarchal Bow", "Grand Matron Bow", "Hydra Bow", "Crusader Bow",
+            
+            // Light Armor
+            "Archon Plate", "Dusk Shroud", "Wyrmhide", "Mage Plate", "Light Plate",
+            
+            // Heavy Armor
+            "Sacred Armor", "Lacquered Plate", "Great Hauberk",
+            
+            // Shields Generic
+            "Monarch", "Bone Shield", "Grim Shield",
+            
+            // Shields Paladin
+            "Sacred Targe", "Sacred Rondache", "Kurast Shield", 
+            "Zakarum Shield", "Vortex Shield",
+            
+            // Helms
+            "Demonhead", "Bone Visage",
+            
+            // Class Specific (these are categories, not specific items)
+            // "Druid Pelts", "Necro Shrunken Heads", "Assassin Claws", "Sorceress Orbs"
+        ];
+
+        // Normalize function to handle spacing variations
+        function normalize(str) {
+            return str.replace(/\s+/g, ' ').trim().toLowerCase();
+        }
+
+        // Your list from nmag-list.txt
+        const wantedItems = `Monarch		
+Flail		
+Archon	Plate	
+Crystal	Sword	
+Mage	Plate	
+Mancatcher		
+Thresher		
+Dusk	Shroud	
+Phase	Blade	
+Wire	Fleece	
+Giant	Thresher	
+Berserker	Axe	
+Great	Hauberk	
+Sacred	Armor	
+Sacred	Targe	
+Legend	Sword	
+Grand	Matron	Bow
+War	Pike	
+Colossus	Blade	
+Kraken	Shell	
+War	Scepter	
+Colossus	Voulge	
+Cryptic	Axe	
+Great	Poleaxe	
+Boneweave		
+Matriarchal	Bow	
+Loricated	Mail	
+Wyrmhide		
+Short	Bow	
+Great	Bow	
+Sacred	Rondache	
+Balrog	Skin	
+Lacquered	Plate	
+Broad	Sword	
+Greater	Talons	
+Hellforge	Plate	
+Scarab	Husk	
+Blade	Bow	
+Suwayyah		
+Runic	Talons	
+Diamond	Mail	
+Hunter's	Bow	
+Feral	Claws	
+Cryptic	Sword	
+Heraldic	Shield	
+Bone	Visage	
+Greater	Claws	
+Breast	Plate	
+Gnarled	Staff	
+Antlers		
+Colossus	Sword	
+Akaran	Targe	
+Long	Sword	
+Thunder	Maul	
+Kurast	Shield	
+Scissors	Suwayyah	
+Gothic	Plate	
+Scissors	Quhab	
+Wrist	Sword	
+Stygian	Pike	
+Royal	Shield	
+Long	Bow	
+Demon	Crossbow	
+Aerin	Shield	
+Protector	Shield	
+Cedar	Staff	
+Battle	Staff	
+Composite	Bow	
+Diamond	Bow	
+Conquest	Sword	
+Shadow	Plate	
+Vortex	Shield	
+Kite	Shield	
+Hunter's	Guise	
+Jared's	Stone	
+Spirit	Mask	
+Double	Axe	
+Dimensional	Blade	
+Mask		
+Bone	Wand	
+Divine	Scepter	
+Ettin	Axe	
+Totemic	Mask	
+Demonhead		
+Poleaxe		
+Short	Battle	Bow
+Elder	Staff	
+Caduceus		
+Shadow	Bow	
+Mythical	Sword	
+Gothic	Staff	
+Hydra	Bow	
+Highland	Blade	
+Cuirass		
+Gilded	Shield	
+Balrog	Blade	
+Horned	Helm	
+Rondache		
+Long	Battle	Bow
+War	Axe	
+Small	Shield	
+Grim	Shield	
+Scythe		
+Ornate	Plate	
+Akaran	Rondache	
+Gargoyle	Head	
+Ghost	Spear	
+Bone	Shield	
+Ancient	Armor	
+Zakarum	Shield	
+Ring	Mail	
+Razor	Bow	
+Hyperion		
+Halberd		
+Shillelagh		
+Matriarchal	Spear	
+Rune	Staff	
+Sun	Spirit	
+Small	Crescent	
+Hawk	Helm	
+Reflex	Bow	
+Earth	Spirit	
+War	Scythe	
+Scourge		
+Pike		
+Large	Shield	
+Troll	Nest	
+Stag	Bow	
+Diadem		
+Grand	Crown	
+Edge	Bow	
+Tiara		
+Chu-Ko-Nu		
+War	Sword	
+Crown	Shield	
+Fuscina		
+Bec-de-Corbin		
+Archon	Staff	
+Bill		
+Blood	Spirit	
+Alpha	Helm	
+Sacred	Feathers	
+Glorious	Axe	
+Demon	Head	
+Short	Siege	Bow
+Dimensional	Shard	
+Falcon	Mask	
+Legendary	Mallet	
+Wolf	Head	
+Cedar	Bow	
+Corona		
+Chaos	Armor	
+Dragon	Shield	
+War	Fork	
+Blade	Talons	
+Battle	Scythe	
+Military	Pick	
+Fetish	Trophy	
+Crusader	Bow	
+Gothic	Bow	
+War	Staff	
+Crossbow		
+Zombie	Head	
+Colossus	Crossbow	
+Griffon	Headdress	
+Gothic	Shield	
+Partizan		
+Avenger	Guard	
+Grave	Wand	
+Rune	Bow	
+Knout		
+Fanged	Knife	
+Gorgon	Crossbow	
+Short	War	Bow
+Cap		
+Jawbone	Visor	
+Crown		
+Destroyer	Helm	
+Brandistock		
+Morning	Star	
+Rune	Sword	
+Claymore		
+Tigulated	Mail	
+War	Hammer	
+Great	Helm	
+Double	Bow	
+War	Spike	
+Trellised	Armor	
+Sky	Spirit	
+Death	Mask	
+Sharktooth	Armor	
+Heater		
+Champion	Sword	
+Hard	Leather	Armor
+Bone	Helm	
+Lance		
+Targe		
+Ward	Bow	
+Basinet		
+Helm		
+Jo	Staff	
+Mesh	Armor`.split('\n').map(s => normalize(s)).filter(s => s);
+
+        // Create normalized lookup
+        const currentNormalized = new Set(currentNmagItems.map(normalize));
+        
+        // Categorize items
+        const included = [];
+        const missing = [];
+        
+        wantedItems.forEach(item => {
+            if (currentNormalized.has(item)) {
+                included.push(item);
+            } else {
+                missing.push(item);
+            }
+        });
+
+        // Sort both lists
+        included.sort();
+        missing.sort();
+
+        // Update statistics
+        document.getElementById('total-wanted').textContent = wantedItems.length;
+        document.getElementById('total-included').textContent = included.length;
+        document.getElementById('total-missing').textContent = missing.length;
+        document.getElementById('included-count').textContent = included.length;
+        document.getElementById('missing-count').textContent = missing.length;
+
+        // Update coverage bar
+        const coveragePercent = Math.round((included.length / wantedItems.length) * 100);
+        document.getElementById('coverage-fill').style.width = coveragePercent + '%';
+        document.getElementById('coverage-fill').textContent = coveragePercent + '%';
+
+        // Display included items
+        const includedList = document.getElementById('included-list');
+        included.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.textContent = item;
+            includedList.appendChild(div);
+        });
+
+        // Display missing items
+        const missingList = document.getElementById('missing-list');
+        missing.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'item missing';
+            div.textContent = item;
+            missingList.appendChild(div);
+        });
+
+        // Export functions
+        function exportMissingAsJSON() {
+            const json = JSON.stringify(missing, null, 2);
+            downloadFile('missing-nmag-items.json', json, 'application/json');
+        }
+
+        function exportMissingAsText() {
+            const text = missing.join('\n');
+            downloadFile('missing-nmag-items.txt', text, 'text/plain');
+        }
+
+        function copyMissingToClipboard() {
+            const text = missing.join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`Copied ${missing.length} missing items to clipboard!`);
+            }).catch(err => {
+                alert('Failed to copy to clipboard: ' + err);
+            });
+        }
+
+        function downloadFile(filename, content, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Log summary to console
+        console.log(`Coverage Report:
+Total items in your list: ${wantedItems.length}
+Items already included: ${included.length} (${coveragePercent}%)
+Items missing: ${missing.length}
+
+Missing items:`, missing);
+    </script>
+</body>
+</html>

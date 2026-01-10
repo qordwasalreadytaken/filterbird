@@ -1494,49 +1494,49 @@
                     </div>
                 </div>
 
-                <!-- Armor -->
-                <div class="section" id="nmag-light-armor-section">
-                    <div class="section-header" onclick="toggleSection('nmag-light-armor-section')">
+                <div class="section" id="nmag-spears-section">
+                    <div class="section-header" onclick="toggleSection('nmag-spears-section')">
                         <div>
-                            <span class="section-title">NMAG: Light Armor (Enigma, Fortitude, CoH)</span>
-                            <span class="item-count" id="nmag-light-armor-count">(0/0 shown)</span>
+                            <span class="section-title">NMAG: Spears (Infinity, Insight, Pride, Obedience)</span>
+                            <span class="item-count" id="nmag-spears-count">(0/0 shown)</span>
                         </div>
                         <span class="section-toggle">▶</span>
                     </div>
                     <div class="section-content">
                         <div class="preset-controls">
                             <label>Quick Preset:</label>
-                            <select class="preset-select" onchange="applyNmagLightArmorPreset(this.value)">
+                            <select class="preset-select" onchange="applyNmagSpearsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-spears', 'NMAG: Spears')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-spears-items"></div>
+                    </div>
+                </div>
+
+                <!-- Armor -->
+                <div class="section" id="nmag-armor-section">
+                    <div class="section-header" onclick="toggleSection('nmag-armor-section')">
+                        <div>
+                            <span class="section-title">NMAG: Armor (Enigma, Fortitude, CoH, Bramble)</span>
+                            <span class="item-count" id="nmag-armor-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagArmorPreset(this.value)">
                                 <option value="">-- Select Preset --</option>
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                                 <option value="elite-only">Elite Only</option>
                             </select>
-                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-light-armor', 'NMAG: Light Armor')">⚙ Group Settings</button>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-armor', 'NMAG: Armor')">⚙ Group Settings</button>
                         </div>
-                        <div class="item-list" id="nmag-light-armor-items"></div>
-                    </div>
-                </div>
-
-                <div class="section" id="nmag-heavy-armor-section">
-                    <div class="section-header" onclick="toggleSection('nmag-heavy-armor-section')">
-                        <div>
-                            <span class="section-title">NMAG: Heavy Armor (Fortitude, CoH, Bramble)</span>
-                            <span class="item-count" id="nmag-heavy-armor-count">(0/0 shown)</span>
-                        </div>
-                        <span class="section-toggle">▶</span>
-                    </div>
-                    <div class="section-content">
-                        <div class="preset-controls">
-                            <label>Quick Preset:</label>
-                            <select class="preset-select" onchange="applyNmagHeavyArmorPreset(this.value)">
-                                <option value="">-- Select Preset --</option>
-                                <option value="show-all">Show All</option>
-                                <option value="hide-all">Hide All</option>
-                            </select>
-                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-heavy-armor', 'NMAG: Heavy Armor')">⚙ Group Settings</button>
-                        </div>
-                        <div class="item-list" id="nmag-heavy-armor-items"></div>
+                        <div class="item-list" id="nmag-armor-items"></div>
                     </div>
                 </div>
 
@@ -1608,31 +1608,720 @@
                     </div>
                 </div>
 
-                <div class="section" id="nmag-class-specific-section">
-                    <div class="section-header" onclick="toggleSection('nmag-class-specific-section')">
+                <div class="section" id="nmag-druid-pelts-section">
+                    <div class="section-header" onclick="toggleSection('nmag-druid-pelts-section')">
                         <div>
-                            <span class="section-title">NMAG: Class-Specific</span>
-                            <span class="item-count" id="nmag-class-specific-count">(0/0 shown)</span>
+                            <span class="section-title">NMAG: Druid Pelts</span>
+                            <span class="item-count" id="nmag-druid-pelts-count">(0/0 shown)</span>
                         </div>
                         <span class="section-toggle">▶</span>
                     </div>
                     <div class="section-content">
                         <div class="preset-controls">
                             <label>Quick Preset:</label>
-                            <select class="preset-select" onchange="applyNmagClassSpecificPreset(this.value)">
+                            <select class="preset-select" onchange="applyNmagDruidPeltsPreset(this.value)">
                                 <option value="">-- Select Preset --</option>
                                 <option value="show-all">Show All</option>
                                 <option value="hide-all">Hide All</option>
                             </select>
-                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-class-specific', 'NMAG: Class-Specific')">⚙ Group Settings</button>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-druid-pelts', 'NMAG: Druid Pelts')">⚙ Group Settings</button>
                         </div>
-                        <div class="item-list" id="nmag-class-specific-items"></div>
+                        <div class="item-list" id="nmag-druid-pelts-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-necro-heads-section">
+                    <div class="section-header" onclick="toggleSection('nmag-necro-heads-section')">
+                        <div>
+                            <span class="section-title">NMAG: Necro Shrunken Heads</span>
+                            <span class="item-count" id="nmag-necro-heads-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagNecroHeadsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-necro-heads', 'NMAG: Necro Shrunken Heads')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-necro-heads-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-assassin-claws-section">
+                    <div class="section-header" onclick="toggleSection('nmag-assassin-claws-section')">
+                        <div>
+                            <span class="section-title">NMAG: Assassin Claws</span>
+                            <span class="item-count" id="nmag-assassin-claws-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagAssassinClawsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-assassin-claws', 'NMAG: Assassin Claws')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-assassin-claws-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-sorc-orbs-section">
+                    <div class="section-header" onclick="toggleSection('nmag-sorc-orbs-section')">
+                        <div>
+                            <span class="section-title">NMAG: Sorc Orbs</span>
+                            <span class="item-count" id="nmag-sorc-orbs-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSorcOrbsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-sorc-orbs', 'NMAG: Sorc Orbs')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-sorc-orbs-items"></div>
                     </div>
                 </div>
 
                 <!-- NMAG Other base items -->
                 <div class="section-divider" style="margin: 30px 0; text-align: center; color: #666; font-weight: bold; font-size: 16px;">
                     === Other NMAG base items to follow ===
+                </div>
+
+                <!-- Extended NMAG categories -->
+                <div class="section" id="nmag-daggers-section">
+                    <div class="section-header" onclick="toggleSection('nmag-daggers-section')">
+                        <div>
+                            <span class="section-title">NMAG: Daggers</span>
+                            <span class="item-count" id="nmag-daggers-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagDaggersPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="elite-only">Elite Only</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-daggers', 'NMAG: Daggers')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-daggers-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-wands-section">
+                    <div class="section-header" onclick="toggleSection('nmag-wands-section')">
+                        <div>
+                            <span class="section-title">NMAG: Wands (White, Memory)</span>
+                            <span class="item-count" id="nmag-wands-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagWandsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="elite-only">Elite Only</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-wands', 'NMAG: Wands')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-wands-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-scepters-section">
+                    <div class="section-header" onclick="toggleSection('nmag-scepters-section')">
+                        <div>
+                            <span class="section-title">NMAG: Scepters (Spirit, Hoto, Sanctuary)</span>
+                            <span class="item-count" id="nmag-scepters-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSceptersPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="elite-only">Elite Only</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-scepters', 'NMAG: Scepters')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-scepters-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-barbarian-helms-section">
+                    <div class="section-header" onclick="toggleSection('nmag-barbarian-helms-section')">
+                        <div>
+                            <span class="section-title">NMAG: Barbarian Helms (Delirium, Dream)</span>
+                            <span class="item-count" id="nmag-barbarian-helms-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagBarbarianHelmsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                                <option value="elite-only">Elite Only</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-barbarian-helms', 'NMAG: Barbarian Helms')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-barbarian-helms-items"></div>
+                    </div>
+                </div>
+
+                <!-- ===== Other NMAG base items to follow ===== -->
+
+                <div class="section" id="nmag-polearms-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-polearms-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Polearms</span>
+                            <span class="item-count" id="nmag-polearms-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagPolearmsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-polearms-extended', 'NMAG Extended: Polearms')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-polearms-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-swords-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-swords-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Swords</span>
+                            <span class="item-count" id="nmag-swords-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSwordsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-swords-extended', 'NMAG Extended: Swords')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-swords-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-axes-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-axes-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Axes</span>
+                            <span class="item-count" id="nmag-axes-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagAxesExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-axes-extended', 'NMAG Extended: Axes')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-axes-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-maces-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-maces-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Maces</span>
+                            <span class="item-count" id="nmag-maces-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagMacesExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-maces-extended', 'NMAG Extended: Maces')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-maces-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-staves-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-staves-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Staves</span>
+                            <span class="item-count" id="nmag-staves-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagStavesExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-staves-extended', 'NMAG Extended: Staves')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-staves-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-spears-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-spears-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Spears</span>
+                            <span class="item-count" id="nmag-spears-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSpearsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-spears-extended', 'NMAG Extended: Spears')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-spears-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-bows-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-bows-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Bows</span>
+                            <span class="item-count" id="nmag-bows-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagBowsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-bows-extended', 'NMAG Extended: Bows')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-bows-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-crossbows-section">
+                    <div class="section-header" onclick="toggleSection('nmag-crossbows-section')">
+                        <div>
+                            <span class="section-title">NMAG: Crossbows</span>
+                            <span class="item-count" id="nmag-crossbows-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagCrossbowsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-crossbows', 'NMAG: Crossbows')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-crossbows-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-javelins-section">
+                    <div class="section-header" onclick="toggleSection('nmag-javelins-section')">
+                        <div>
+                            <span class="section-title">NMAG: Javelins</span>
+                            <span class="item-count" id="nmag-javelins-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagJavelinsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-javelins', 'NMAG: Javelins')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-javelins-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-armor-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-armor-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Armor</span>
+                            <span class="item-count" id="nmag-armor-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagArmorExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-armor-extended', 'NMAG Extended: Armor')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-armor-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-shields-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-shields-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Shields - Generic</span>
+                            <span class="item-count" id="nmag-shields-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagShieldsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-shields-extended', 'NMAG Extended: Shields - Generic')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-shields-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-paladin-shields-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-paladin-shields-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Shields - Paladin</span>
+                            <span class="item-count" id="nmag-paladin-shields-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagPaladinShieldsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-paladin-shields-extended', 'NMAG Extended: Shields - Paladin')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-paladin-shields-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-necromancer-shields-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-necromancer-shields-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Necro Shields</span>
+                            <span class="item-count" id="nmag-necromancer-shields-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagNecromancerShieldsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-necromancer-shields-extended', 'NMAG Extended: Necro Shields')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-necromancer-shields-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-helms-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-helms-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Helms</span>
+                            <span class="item-count" id="nmag-helms-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagHelmsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-helms-extended', 'NMAG Extended: Helms')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-helms-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-druid-pelts-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-druid-pelts-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Druid Pelts</span>
+                            <span class="item-count" id="nmag-druid-pelts-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagDruidPeltsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-druid-pelts-extended', 'NMAG Extended: Druid Pelts')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-druid-pelts-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-necro-heads-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-necro-heads-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Necro Heads</span>
+                            <span class="item-count" id="nmag-necro-heads-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagNecroHeadsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-necro-heads-extended', 'NMAG Extended: Necro Heads')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-necro-heads-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-assassin-claws-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-assassin-claws-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Assassin Claws</span>
+                            <span class="item-count" id="nmag-assassin-claws-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagAssassinClawsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-assassin-claws-extended', 'NMAG Extended: Assassin Claws')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-assassin-claws-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-sorc-orbs-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-sorc-orbs-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Sorc Orbs</span>
+                            <span class="item-count" id="nmag-sorc-orbs-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSorcOrbsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-sorc-orbs-extended', 'NMAG Extended: Sorc Orbs')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-sorc-orbs-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-daggers-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-daggers-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Daggers</span>
+                            <span class="item-count" id="nmag-daggers-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagDaggersExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-daggers-extended', 'NMAG Extended: Daggers')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-daggers-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-wands-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-wands-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Wands</span>
+                            <span class="item-count" id="nmag-wands-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagWandsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-wands-extended', 'NMAG Extended: Wands')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-wands-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-scepters-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-scepters-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Scepters</span>
+                            <span class="item-count" id="nmag-scepters-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagSceptersExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-scepters-extended', 'NMAG Extended: Scepters')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-scepters-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-barbarian-helms-extended-section">
+                    <div class="section-header" onclick="toggleSection('nmag-barbarian-helms-extended-section')">
+                        <div>
+                            <span class="section-title">NMAG Extended: Barbarian Helms</span>
+                            <span class="item-count" id="nmag-barbarian-helms-extended-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagBarbarianHelmsExtendedPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-barbarian-helms-extended', 'NMAG Extended: Barbarian Helms')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-barbarian-helms-extended-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-amazon-weapons-section">
+                    <div class="section-header" onclick="toggleSection('nmag-amazon-weapons-section')">
+                        <div>
+                            <span class="section-title">NMAG: Amazon Weapons</span>
+                            <span class="item-count" id="nmag-amazon-weapons-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagAmazonWeaponsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-amazon-weapons', 'NMAG: Amazon Weapons')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-amazon-weapons-items"></div>
+                    </div>
+                </div>
+
+                <div class="section" id="nmag-circlets-section">
+                    <div class="section-header" onclick="toggleSection('nmag-circlets-section')">
+                        <div>
+                            <span class="section-title">NMAG: Circlets</span>
+                            <span class="item-count" id="nmag-circlets-count">(0/0 shown)</span>
+                        </div>
+                        <span class="section-toggle">▶</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="preset-controls">
+                            <label>Quick Preset:</label>
+                            <select class="preset-select" onchange="applyNmagCircletsPreset(this.value)">
+                                <option value="">-- Select Preset --</option>
+                                <option value="show-all">Show All</option>
+                                <option value="hide-all">Hide All</option>
+                            </select>
+                            <button class="group-settings-btn" onclick="openGroupSettings('nmag-circlets', 'NMAG: Circlets')">⚙ Group Settings</button>
+                        </div>
+                        <div class="item-list" id="nmag-circlets-items"></div>
+                    </div>
                 </div>
 
             </div>
@@ -2410,84 +3099,655 @@
 
         // NMAG Runeword Bases
         const nmagPolearms = [
-            { name: "Thresher", code: "7s8", quality: "elite", rw: "Insight, Infinity, Obedience" },
-            { name: "Giant Thresher", code: "7wc", quality: "elite", rw: "Insight, Infinity" },
-            { name: "Cryptic Axe", code: "7pa", quality: "elite", rw: "Insight, Infinity, Obedience" },
-            { name: "Mancatcher", code: "7vo", quality: "elite", rw: "Insight, Infinity" },
-            { name: "Colossus Voulge", code: "7h7", quality: "elite", rw: "Insight, Infinity" },
-            { name: "Great Poleaxe", code: "7o7", quality: "elite", rw: "Insight, Infinity" },
+            { name: "Thresher", code: "7s8", quality: "elite" },
+            { name: "Giant Thresher", code: "7wc", quality: "elite" },
+            { name: "Cryptic Axe", code: "7pa", quality: "elite" },
+            { name: "Mancatcher", code: "7br", quality: "elite" },
+            { name: "Colossus Voulge", code: "7vo", quality: "elite" },
+            { name: "Great Poleaxe", code: "7o7", quality: "elite" },
+            { name: "Poleaxe", code: "pax", quality: "normal" },
+            { name: "Scythe", code: "scy", quality: "normal" },
+            { name: "Halberd", code: "hal", quality: "normal" },
+            { name: "War Scythe", code: "wsc", quality: "normal" },
+            { name: "Bill", code: "9vo", quality: "exceptional" },
+            { name: "Battle Scythe", code: "9s8", quality: "exceptional" },
+            { name: "Partizan", code: "9pa", quality: "exceptional" },
+            { name: "Bec-de-Corbin", code: "9h7", quality: "exceptional" },
+            { name: "War Pike", code: "7p7", quality: "elite" },
+            { name: "Ghost Spear", code: "7st", quality: "elite" },
+            { name: "Stygian Pike", code: "7tr", quality: "elite" },
+            { name: "Pike", code: "pik", quality: "normal" },
+            { name: "Lance", code: "9p9", quality: "exceptional" },
+            { name: "War Fork", code: "9br", quality: "exceptional" },
+            { name: "Fuscina", code: "9tr", quality: "exceptional" },
+            { name: "Brandistock", code: "brn", quality: "normal" },
+            { name: "Matriarchal Spear", code: "amd", quality: "elite" },
         ];
 
         const nmagSwords = [
-            { name: "Phase Blade", code: "7cr", quality: "elite", rw: "Spirit, Grief, Last Wish" },
-            { name: "Colossus Blade", code: "7gd", quality: "elite", rw: "Grief, Breath of the Dying" },
-            { name: "Colossus Sword", code: "7fb", quality: "elite", rw: "Grief" },
-            { name: "Crystal Sword", code: "crs", quality: "normal", rw: "Spirit" },
-            { name: "Broad Sword", code: "bsd", quality: "normal", rw: "Spirit" },
-            { name: "Long Sword", code: "lsd", quality: "normal", rw: "Spirit" },
+            { name: "Phase Blade", code: "7cr", quality: "elite" },
+            { name: "Colossus Blade", code: "7gd", quality: "elite" },
+            { name: "Colossus Sword", code: "7fb", quality: "elite" },
+            { name: "Crystal Sword", code: "crs", quality: "normal" },
+            { name: "Broad Sword", code: "bsd", quality: "normal" },
+            { name: "Long Sword", code: "lsd", quality: "normal" },
+            { name: "Legend Sword", code: "72h", quality: "elite" },
+            { name: "Cryptic Sword", code: "7ls", quality: "elite" },
+            { name: "Conquest Sword", code: "7bs", quality: "elite" },
+            { name: "Dimensional Blade", code: "9cr", quality: "exceptional" },
+            { name: "Mythical Sword", code: "7wd", quality: "elite" },
+            { name: "Highland Blade", code: "7cm", quality: "elite" },
+            { name: "Balrog Blade", code: "7gs", quality: "elite" },
+            { name: "War Sword", code: "wsd", quality: "normal" },
+            { name: "Rune Sword", code: "9ls", quality: "exceptional" },
+            { name: "Claymore", code: "clm", quality: "normal" },
+            { name: "Champion Sword", code: "7b7", quality: "elite" },
         ];
 
         const nmagAxes = [
-            { name: "Berserker Axe", code: "7wa", quality: "elite", rw: "Grief, Beast, Death" },
-            { name: "Ettin Axe", code: "72a", quality: "elite", rw: "Honor, Crescent Moon" },
+            { name: "Berserker Axe", code: "7wa", quality: "elite" },
+            { name: "Ettin Axe", code: "72a", quality: "elite" },
+            { name: "Double Axe", code: "2ax", quality: "normal" },
+            { name: "War Axe", code: "wax", quality: "normal" },
+            { name: "Small Crescent", code: "7ax", quality: "elite" },
+            { name: "Glorious Axe", code: "7gi", quality: "elite" },
+            { name: "Military Pick", code: "mpi", quality: "normal" },
+            { name: "War Spike", code: "7mp", quality: "elite" },
         ];
 
         const nmagMaces = [
-            { name: "Thunder Maul", code: "7gm", quality: "elite", rw: "BOTD" },
-            { name: "Scourge", code: "7m7", quality: "elite", rw: "Grief, Crescent Moon" },
-            { name: "Flail", code: "fla", quality: "normal", rw: "CTA, Heart of the Oak" },
+            { name: "Thunder Maul", code: "7gm", quality: "elite" },
+            { name: "Scourge", code: "7fl", quality: "elite" },
+            { name: "Flail", code: "fla", quality: "normal" },
+            { name: "Legendary Mallet", code: "7wh", quality: "elite" },
+            { name: "Knout", code: "9fl", quality: "exceptional" },
+            { name: "Morning Star", code: "mst", quality: "normal" },
+            { name: "War Hammer", code: "whm", quality: "normal" },
         ];
 
         const nmagStaves = [
-            { name: "Archon Staff", code: "6ws", quality: "elite", rw: "CTA, Memory" },
-            { name: "War Staff", code: "wst", quality: "exceptional", rw: "CTA, Memory" },
+            { name: "Archon Staff", code: "6ws", quality: "elite" },
+            { name: "War Staff", code: "wst", quality: "normal" },
+            { name: "Gnarled Staff", code: "cst", quality: "normal" },
+            { name: "Cedar Staff", code: "8cs", quality: "exceptional" },
+            { name: "Battle Staff", code: "bst", quality: "normal" },
+            { name: "Elder Staff", code: "6cs", quality: "elite" },
+            { name: "Gothic Staff", code: "8bs", quality: "exceptional" },
+            { name: "Shillelagh", code: "6bs", quality: "elite" },
+            { name: "Rune Staff", code: "8ws", quality: "exceptional" },
+            { name: "Jo Staff", code: "8ss", quality: "exceptional" },
+        ];
+
+        const nmagSpears = [
+            { name: "War Pike", code: "7p7", quality: "elite" },
+            { name: "Ghost Spear", code: "7st", quality: "elite" },
+            { name: "Stygian Pike", code: "7tr", quality: "elite" },
+            { name: "Lance", code: "9p9", quality: "exceptional" },
+            { name: "Pike", code: "pik", quality: "normal" },
+            { name: "Fuscina", code: "9tr", quality: "exceptional" },
+            { name: "War Fork", code: "9br", quality: "exceptional" },
+            { name: "Brandistock", code: "brn", quality: "normal" },
+            { name: "Matriarchal Spear", code: "amd", quality: "elite" },
         ];
 
         const nmagBows = [
-            { name: "Matriarchal Bow", code: "amc", quality: "elite", rw: "Faith, Ice, Brand" },
-            { name: "Grand Matron Bow", code: "amb", quality: "elite", rw: "Faith, Ice, Brand" },
-            { name: "Hydra Bow", code: "6hb", quality: "elite", rw: "Faith, Ice" },
-            { name: "Crusader Bow", code: "6cb", quality: "elite", rw: "Faith, Ice" },
+            { name: "Matriarchal Bow", code: "amb", quality: "elite" },
+            { name: "Grand Matron Bow", code: "amc", quality: "elite" },
+            { name: "Hydra Bow", code: "6lw", quality: "elite" },
+            { name: "Crusader Bow", code: "6l7", quality: "elite" },
+            { name: "Short Bow", code: "sbw", quality: "normal" },
+            { name: "Great Bow", code: "6cb", quality: "elite" },
+            { name: "Blade Bow", code: "6hb", quality: "elite" },
+            { name: "Hunters Bow", code: "hbw", quality: "normal" },
+            { name: "Long Bow", code: "lbw", quality: "normal" },
+            { name: "Demon Crossbow", code: "6rx", quality: "elite" },
+            { name: "Composite Bow", code: "cbw", quality: "normal" },
+            { name: "Diamond Bow", code: "6s7", quality: "elite" },
+            { name: "Short Battle Bow", code: "sbb", quality: "normal" },
+            { name: "Shadow Bow", code: "6lb", quality: "elite" },
+            { name: "Long Battle Bow", code: "lbb", quality: "normal" },
+            { name: "Razor Bow", code: "8hb", quality: "exceptional" },
+            { name: "Reflex Bow", code: "am2", quality: "normal" },
+            { name: "Stag Bow", code: "am1", quality: "normal" },
+            { name: "Edge Bow", code: "8sb", quality: "exceptional" },
+            { name: "Short Siege Bow", code: "8s8", quality: "exceptional" },
+            { name: "Cedar Bow", code: "8lb", quality: "exceptional" },
+            { name: "Gothic Bow", code: "8lw", quality: "exceptional" },
+            { name: "Crossbow", code: "mxb", quality: "normal" },
+            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional" },
+            { name: "Rune Bow", code: "8sw", quality: "exceptional" },
+            { name: "Short War Bow", code: "swb", quality: "normal" },
+            { name: "Double Bow", code: "8cb", quality: "exceptional" },
+            { name: "Ward Bow", code: "6sw", quality: "elite" },
+            { name: "Colossus Crossbow", code: "6lx", quality: "elite" },
+            { name: "Gorgon Crossbow", code: "6mx", quality: "elite" },
         ];
 
-        const nmagLightArmor = [
-            { name: "Archon Plate", code: "utp", quality: "elite", rw: "Enigma, Fortitude, CoH" },
-            { name: "Dusk Shroud", code: "uui", quality: "elite", rw: "Enigma, Fortitude" },
-            { name: "Wyrmhide", code: "utu", quality: "elite", rw: "Enigma, Fortitude" },
-            { name: "Mage Plate", code: "xtp", quality: "exceptional", rw: "Stealth, Smoke" },
-            { name: "Light Plate", code: "ltp", quality: "normal", rw: "Stealth, Enigma" },
-        ];
-
-        const nmagHeavyArmor = [
-            { name: "Sacred Armor", code: "uar", quality: "elite", rw: "Fortitude, CoH, Bramble" },
-            { name: "Lacquered Plate", code: "ula", quality: "elite", rw: "Fortitude" },
-            { name: "Great Hauberk", code: "urs", quality: "elite", rw: "Fortitude" },
+        // Armor (Light + Heavy combined) from nmag-list.txt
+        const nmagArmor = [
+            { name: "Archon Plate", code: "utp", quality: "elite" },
+            { name: "Mage Plate", code: "xtp", quality: "exceptional" },
+            { name: "Dusk Shroud", code: "uui", quality: "elite" },
+            { name: "Wire Fleece", code: "utu", quality: "elite" },
+            { name: "Great Hauberk", code: "urs", quality: "elite" },
+            { name: "Sacred Armor", code: "uar", quality: "elite" },
+            { name: "Boneweave", code: "uhn", quality: "elite" },
+            { name: "Wyrmhide", code: "uea", quality: "elite" },
+            { name: "Loricated Mail", code: "ucl", quality: "elite" },
+            { name: "Balrog Skin", code: "upl", quality: "elite" },
+            { name: "Lacquered Plate", code: "uth", quality: "elite" },
+            { name: "Scarab Husk", code: "ula", quality: "elite" },
+            { name: "Hellforge Plate", code: "ult", quality: "elite" },
+            { name: "Kraken Shell", code: "uld", quality: "elite" },
+            { name: "Diamond Mail", code: "ung", quality: "elite" },
+            { name: "Shadow Plate", code: "uul", quality: "elite" },
+            { name: "Tigulated Mail", code: "xcl", quality: "exceptional" },
+            { name: "Cuirass", code: "xrs", quality: "exceptional" },
+            { name: "Breast Plate", code: "brs", quality: "normal" },
+            { name: "Ancient Armor", code: "aar", quality: "normal" },
+            { name: "Sharktooth Armor", code: "xld", quality: "exceptional" },
+            { name: "Ornate Plate", code: "xar", quality: "exceptional" },
+            { name: "Ring Mail", code: "rng", quality: "normal" },
+            { name: "Trellised Armor", code: "xtu", quality: "exceptional" },
+            { name: "Hard Leather Armor", code: "hla", quality: "normal" },
+            { name: "Gothic Plate", code: "gth", quality: "normal" },
+            { name: "Chaos Armor", code: "xul", quality: "exceptional" },
         ];
 
         const nmagShieldsGeneric = [
-            { name: "Monarch", code: "uit", quality: "elite", rw: "Spirit, Dream" },
-            { name: "Bone Shield", code: "bsh", quality: "elite", rw: "Splendor, Rhyme" },
-            { name: "Grim Shield", code: "xsh", quality: "elite", rw: "Splendor, Rhyme" },
+            { name: "Monarch", code: "uit", quality: "elite" },
+            { name: "Bone Shield", code: "bsh", quality: "normal" },
+            { name: "Grim Shield", code: "xsh", quality: "exceptional" },
+            { name: "Heraldic Shield", code: "pa3", quality: "normal" },
+            { name: "Aerin Shield", code: "pa4", quality: "normal" },
+            { name: "Kite Shield", code: "kit", quality: "normal" },
+            { name: "Small Shield", code: "sml", quality: "normal" },
+            { name: "Hyperion", code: "urg", quality: "elite" },
+            { name: "Large Shield", code: "lrg", quality: "normal" },
+            { name: "Troll Nest", code: "ush", quality: "elite" },
+            { name: "Crown Shield", code: "pa5", quality: "normal" },
+            { name: "Dragon Shield", code: "xit", quality: "exceptional" },
+            { name: "Gothic Shield", code: "gts", quality: "normal" },
+            { name: "Heater", code: "uuc", quality: "elite" },
         ];
 
         const nmagShieldsPaladin = [
-            { name: "Sacred Targe", code: "pa9", quality: "elite", rw: "Spirit, Exile" },
-            { name: "Sacred Rondache", code: "paa", quality: "elite", rw: "Spirit, Exile" },
-            { name: "Kurast Shield", code: "pab", quality: "elite", rw: "Spirit, Exile" },
-            { name: "Zakarum Shield", code: "paf", quality: "elite", rw: "Spirit, Exile" },
-            { name: "Vortex Shield", code: "pac", quality: "elite", rw: "Spirit, Exile" },
+            { name: "Sacred Targe", code: "pab", quality: "elite" },
+            { name: "Sacred Rondache", code: "pac", quality: "elite" },
+            { name: "Kurast Shield", code: "pad", quality: "elite" },
+            { name: "Zakarum Shield", code: "pae", quality: "elite" },
+            { name: "Vortex Shield", code: "paf", quality: "elite" },
+            { name: "Akaran Targe", code: "pa6", quality: "exceptional" },
+            { name: "Royal Shield", code: "paa", quality: "exceptional" },
+            { name: "Protector Shield", code: "pa8", quality: "exceptional" },
+            { name: "Gilded Shield", code: "pa9", quality: "exceptional" },
+            { name: "Rondache", code: "pa2", quality: "normal" },
+            { name: "Akaran Rondache", code: "pa7", quality: "exceptional" },
+            { name: "Targe", code: "pa1", quality: "normal" },
         ];
 
         const nmagHelms = [
-            { name: "Demonhead", code: "uh9", quality: "elite", rw: "Delirium, Dream" },
-            { name: "Bone Visage", code: "usk", quality: "elite", rw: "Delirium, Dream" },
+            { name: "Demonhead", code: "usk", quality: "elite" },
+            { name: "Bone Visage", code: "uh9", quality: "elite" },
+            { name: "Mask", code: "msk", quality: "normal" },
+            { name: "Diadem", code: "ci3", quality: "elite" },
+            { name: "Grand Crown", code: "xrn", quality: "exceptional" },
+            { name: "Tiara", code: "ci2", quality: "exceptional" },
+            { name: "Corona", code: "urn", quality: "elite" },
+            { name: "Cap", code: "cap", quality: "normal" },
+            { name: "Crown", code: "crn", quality: "normal" },
+            { name: "Great Helm", code: "ghm", quality: "normal" },
+            { name: "Death Mask", code: "xsk", quality: "exceptional" },
+            { name: "Bone Helm", code: "bhm", quality: "normal" },
+            { name: "Basinet", code: "xhl", quality: "exceptional" },
+            { name: "Helm", code: "hlm", quality: "normal" },
         ];
 
-        const nmagClassSpecific = [
-            { name: "Druid Pelts", code: "CL1", quality: "elite", rw: "Delirium, Metamorphosis" },
-            { name: "Necro Shrunken Heads", code: "CL2", quality: "elite", rw: "Splendor, Rhyme" },
-            { name: "Assassin Claws", code: "CL5", quality: "elite", rw: "Chaos, Fury, Plague" },
-            { name: "Sorceress Orbs", code: "WP11", quality: "elite", rw: "Plague" },
+        const nmagDruidPelts = [
+            { name: "Wolf Head", code: "dr1", quality: "normal" },
+            { name: "Hawk Helm", code: "dr2", quality: "normal" },
+            { name: "Antlers", code: "dr3", quality: "normal" },
+            { name: "Falcon Mask", code: "dr4", quality: "normal" },
+            { name: "Spirit Mask", code: "dr5", quality: "normal" },
+            { name: "Alpha Helm", code: "dr6", quality: "exceptional" },
+            { name: "Griffon Headdress", code: "dr7", quality: "exceptional" },
+            { name: "Hunters Guise", code: "dr8", quality: "exceptional" },
+            { name: "Sacred Feathers", code: "dr9", quality: "exceptional" },
+            { name: "Totemic Mask", code: "dra", quality: "exceptional" },
+            { name: "Blood Spirit", code: "drb", quality: "elite" },
+            { name: "Sun Spirit", code: "drc", quality: "elite" },
+            { name: "Earth Spirit", code: "drd", quality: "elite" },
+            { name: "Sky Spirit", code: "dre", quality: "elite" },
+        ];
+
+        const nmagNecroHeads = [
+            { name: "Preserved Head", code: "ne1", quality: "normal" },
+            { name: "Zombie Head", code: "ne2", quality: "normal" },
+            { name: "Unraveller Head", code: "ne3", quality: "normal" },
+            { name: "Gargoyle Head", code: "ne4", quality: "normal" },
+            { name: "Demon Head", code: "ne5", quality: "normal" },
+            { name: "Mummified Trophy", code: "ne6", quality: "exceptional" },
+            { name: "Fetish Trophy", code: "ne7", quality: "exceptional" },
+            { name: "Sexton Trophy", code: "ne8", quality: "exceptional" },
+            { name: "Cantor Trophy", code: "ne9", quality: "exceptional" },
+            { name: "Hierophant Trophy", code: "nea", quality: "exceptional" },
+            { name: "Minion Skull", code: "neb", quality: "elite" },
+            { name: "Overseer Skull", code: "ned", quality: "elite" },
+            { name: "Succubae Skull", code: "nee", quality: "elite" },
+            { name: "Bloodlord Skull", code: "nef", quality: "elite" },
+            { name: "Hellspawn Skull", code: "neg", quality: "elite" },
+        ];
+
+        const nmagAssassinClaws = [
+            { name: "Katar", code: "ktr", quality: "normal" },
+            { name: "Wrist Blade", code: "wrb", quality: "normal" },
+            { name: "Hatchet Hands", code: "axf", quality: "normal" },
+            { name: "Cestus", code: "ces", quality: "normal" },
+            { name: "Claws", code: "clw", quality: "normal" },
+            { name: "Blade Talons", code: "btl", quality: "normal" },
+            { name: "Scissors Katar", code: "skr", quality: "normal" },
+            { name: "Quhab", code: "9ar", quality: "exceptional" },
+            { name: "Wrist Spike", code: "9wb", quality: "exceptional" },
+            { name: "Fascia", code: "9xf", quality: "exceptional" },
+            { name: "Hand Scythe", code: "9cs", quality: "exceptional" },
+            { name: "Greater Claws", code: "9lw", quality: "exceptional" },
+            { name: "Greater Talons", code: "9tw", quality: "exceptional" },
+            { name: "Scissors Quhab", code: "9qr", quality: "exceptional" },
+            { name: "Suwayyah", code: "7ar", quality: "elite" },
+            { name: "Wrist Sword", code: "7wb", quality: "elite" },
+            { name: "War Fist", code: "7xf", quality: "elite" },
+            { name: "Battle Cestus", code: "7cs", quality: "elite" },
+            { name: "Feral Claws", code: "7lw", quality: "elite" },
+            { name: "Runic Talons", code: "7tw", quality: "elite" },
+            { name: "Scissors Suwayyah", code: "7qr", quality: "elite" },
+        ];
+
+        const nmagSorcOrbs = [
+            { name: "Eagle Orb", code: "ob1", quality: "normal" },
+            { name: "Sacred Globe", code: "ob2", quality: "normal" },
+            { name: "Smoked Sphere", code: "ob3", quality: "normal" },
+            { name: "Clasped Orb", code: "ob4", quality: "normal" },
+            { name: "Jareds Stone", code: "ob5", quality: "normal" },
+            { name: "Glowing Orb", code: "ob6", quality: "exceptional" },
+            { name: "Crystalline Globe", code: "ob7", quality: "exceptional" },
+            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional" },
+            { name: "Sparkling Ball", code: "ob9", quality: "exceptional" },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional" },
+            { name: "Heavenly Stone", code: "obb", quality: "elite" },
+            { name: "Eldritch Orb", code: "obc", quality: "elite" },
+            { name: "Demon Heart", code: "obd", quality: "elite" },
+            { name: "Vortex Orb", code: "obe", quality: "elite" },
+            { name: "Dimensional Shard", code: "obf", quality: "elite" },
+        ];
+
+        // Extended NMAG categories - additional sockatable bases
+        const nmagDaggers = [
+            { name: "Dagger", code: "dgr", quality: "normal" },
+            { name: "Dirk", code: "dir", quality: "normal" },
+            { name: "Kris", code: "kri", quality: "normal" },
+            { name: "Blade", code: "bld", quality: "normal" },
+            { name: "Poignard", code: "9dg", quality: "exceptional" },
+            { name: "Rondel", code: "9di", quality: "exceptional" },
+            { name: "Cinquedeas", code: "9kr", quality: "exceptional" },
+            { name: "Stiletto", code: "9bl", quality: "exceptional" },
+            { name: "Bone Knife", code: "7dg", quality: "elite" },
+            { name: "Mithril Point", code: "7di", quality: "elite" },
+            { name: "Fanged Knife", code: "7kr", quality: "elite" },
+            { name: "Legend Spike", code: "7bl", quality: "elite" },
+        ];
+
+        const nmagWands = [
+            { name: "Wand", code: "wnd", quality: "normal" },
+            { name: "Yew Wand", code: "ywn", quality: "normal" },
+            { name: "Bone Wand", code: "bwn", quality: "normal" },
+            { name: "Grim Wand", code: "gwn", quality: "normal" },
+            { name: "Burnt Wand", code: "9wn", quality: "exceptional" },
+            { name: "Petrified Wand", code: "9yw", quality: "exceptional" },
+            { name: "Tomb Wand", code: "9bw", quality: "exceptional" },
+            { name: "Grave Wand", code: "9gw", quality: "exceptional" },
+            { name: "Polished Wand", code: "7wn", quality: "elite" },
+            { name: "Ghost Wand", code: "7yw", quality: "elite" },
+            { name: "Lich Wand", code: "7bw", quality: "elite" },
+            { name: "Unearthed Wand", code: "7gw", quality: "elite" },
+        ];
+
+        const nmagScepters = [
+            { name: "Scepter", code: "scp", quality: "normal" },
+            { name: "Grand Scepter", code: "gsc", quality: "normal" },
+            { name: "War Scepter", code: "wsp", quality: "normal" },
+            { name: "Rune Scepter", code: "9sc", quality: "exceptional" },
+            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional" },
+            { name: "Divine Scepter", code: "9ws", quality: "exceptional" },
+            { name: "Mighty Scepter", code: "7sc", quality: "elite" },
+            { name: "Seraph Rod", code: "7qs", quality: "elite" },
+            { name: "Caduceus", code: "7ws", quality: "elite" },
+        ];
+
+        const nmagBarbarianHelms = [
+            { name: "Jawbone Cap", code: "ba1", quality: "normal" },
+            { name: "Fanged Helm", code: "ba2", quality: "normal" },
+            { name: "Horned Helm", code: "ba3", quality: "normal" },
+            { name: "Assault Helmet", code: "ba4", quality: "normal" },
+            { name: "Avenger Guard", code: "ba5", quality: "normal" },
+            { name: "Jawbone Visor", code: "ba6", quality: "exceptional" },
+            { name: "Lion Helm", code: "ba7", quality: "exceptional" },
+            { name: "Rage Mask", code: "ba8", quality: "exceptional" },
+            { name: "Savage Helmet", code: "ba9", quality: "exceptional" },
+            { name: "Slayer Guard", code: "baa", quality: "exceptional" },
+            { name: "Carnage Helm", code: "bab", quality: "elite" },
+            { name: "Fury Visor", code: "bac", quality: "elite" },
+            { name: "Destroyer Helm", code: "bad", quality: "elite" },
+            { name: "Conqueror Crown", code: "bae", quality: "elite" },
+            { name: "Guardian Crown", code: "baf", quality: "elite" },
+        ];
+
+        // ===== Other NMAG base items to follow =====
+        // Extended arrays contain all sockatable items NOT in nmag-list.txt
+
+        const nmagPolearmsExtended = [
+            { name: "Bardiche", code: "bar", quality: "normal" },
+            { name: "Voulge", code: "vou", quality: "normal" },
+            { name: "War Scythe", code: "wsc", quality: "normal" },
+            { name: "Lochaber Axe", code: "9b7", quality: "exceptional" },
+            { name: "Bill", code: "9vo", quality: "exceptional" },
+            { name: "Partizan", code: "9pa", quality: "exceptional" },
+            { name: "Grim Scythe", code: "9wc", quality: "exceptional" },
+            { name: "Ogre Axe", code: "7o7", quality: "elite" },
+        ];
+
+        const nmagSwordsExtended = [
+            { name: "Short Sword", code: "ssd", quality: "normal" },
+            { name: "Scimitar", code: "scm", quality: "normal" },
+            { name: "Saber", code: "sbr", quality: "normal" },
+            { name: "Falchion", code: "flc", quality: "normal" },
+            { name: "Two-handed Sword", code: "2hs", quality: "normal" },
+            { name: "Giant Sword", code: "gis", quality: "normal" },
+            { name: "Bastard Sword", code: "bsw", quality: "normal" },
+            { name: "Flamberge", code: "flb", quality: "normal" },
+            { name: "Great Sword", code: "gsd", quality: "normal" },
+            { name: "Gladius", code: "9ss", quality: "exceptional" },
+            { name: "Cutlass", code: "9sm", quality: "exceptional" },
+            { name: "Shamshir", code: "9sb", quality: "exceptional" },
+            { name: "Tulwar", code: "9fc", quality: "exceptional" },
+            { name: "Battle Sword", code: "9bs", quality: "exceptional" },
+            { name: "Ancient Sword", code: "9wd", quality: "exceptional" },
+            { name: "Espandon", code: "92h", quality: "exceptional" },
+            { name: "Dacian Falx", code: "9cm", quality: "exceptional" },
+            { name: "Tusk Sword", code: "9gs", quality: "exceptional" },
+            { name: "Gothic Sword", code: "9b9", quality: "exceptional" },
+            { name: "Zweihander", code: "9fb", quality: "exceptional" },
+            { name: "Executioner Sword", code: "9gd", quality: "exceptional" },
+            { name: "Falcata", code: "7ss", quality: "elite" },
+            { name: "Ataghan", code: "7sm", quality: "elite" },
+            { name: "Elegant Blade", code: "7sb", quality: "elite" },
+            { name: "Hydra Edge", code: "7fc", quality: "elite" },
+        ];
+
+        const nmagAxesExtended = [
+            { name: "Hand Axe", code: "hax", quality: "normal" },
+            { name: "Axe", code: "axe", quality: "normal" },
+            { name: "Military Pick", code: "mpi", quality: "normal" },
+            { name: "Large Axe", code: "lax", quality: "normal" },
+            { name: "Broad Axe", code: "bax", quality: "normal" },
+            { name: "Battle Axe", code: "btx", quality: "normal" },
+            { name: "Great Axe", code: "gax", quality: "normal" },
+            { name: "Giant Axe", code: "gix", quality: "normal" },
+            { name: "Hatchet", code: "9ha", quality: "exceptional" },
+            { name: "Cleaver", code: "9ax", quality: "exceptional" },
+            { name: "Twin Axe", code: "92a", quality: "exceptional" },
+            { name: "Crowbill", code: "9mp", quality: "exceptional" },
+            { name: "Naga", code: "9wa", quality: "exceptional" },
+            { name: "Military Axe", code: "9la", quality: "exceptional" },
+            { name: "Bearded Axe", code: "9ba", quality: "exceptional" },
+            { name: "Tabar", code: "9bt", quality: "exceptional" },
+            { name: "Gothic Axe", code: "9ga", quality: "exceptional" },
+            { name: "Ancient Axe", code: "9gi", quality: "exceptional" },
+            { name: "Tomahawk", code: "7ha", quality: "elite" },
+            { name: "Small Crescent", code: "7ax", quality: "elite" },
+            { name: "War Spike", code: "7mp", quality: "elite" },
+            { name: "Feral Axe", code: "7la", quality: "elite" },
+            { name: "Silver Edged Axe", code: "7ba", quality: "elite" },
+            { name: "Decapitator", code: "7bt", quality: "elite" },
+            { name: "Champion Axe", code: "7ga", quality: "elite" },
+        ];
+
+        const nmagMacesExtended = [
+            { name: "Club", code: "clb", quality: "normal" },
+            { name: "Spiked Club", code: "spc", quality: "normal" },
+            { name: "Mace", code: "mac", quality: "normal" },
+            { name: "Maul", code: "mau", quality: "normal" },
+            { name: "Great Maul", code: "gma", quality: "normal" },
+            { name: "Cudgel", code: "9cl", quality: "exceptional" },
+            { name: "Barbed Club", code: "9sp", quality: "exceptional" },
+            { name: "Flanged Mace", code: "9ma", quality: "exceptional" },
+            { name: "Jagged Star", code: "9mt", quality: "exceptional" },
+            { name: "Battle Hammer", code: "9wh", quality: "exceptional" },
+            { name: "War Club", code: "9m9", quality: "exceptional" },
+            { name: "Martel de Fer", code: "9gm", quality: "exceptional" },
+            { name: "Truncheon", code: "7cl", quality: "elite" },
+            { name: "Tyrant Club", code: "7sp", quality: "elite" },
+            { name: "Reinforced Mace", code: "7ma", quality: "elite" },
+            { name: "Devil Star", code: "7mt", quality: "elite" },
+            { name: "Ogre Maul", code: "7m7", quality: "elite" },
+        ];
+
+        const nmagStavesExtended = [
+            { name: "Short Staff", code: "sst", quality: "normal" },
+            { name: "Long Staff", code: "lst", quality: "normal" },
+            { name: "Jo Staff", code: "8ss", quality: "exceptional" },
+            { name: "Quarterstaff", code: "8ls", quality: "exceptional" },
+            { name: "Walking Stick", code: "6ss", quality: "elite" },
+            { name: "Stalagmite", code: "6ls", quality: "elite" },
+        ];
+
+        const nmagSpearsExtended = [
+            { name: "Spear", code: "spr", quality: "normal" },
+            { name: "Trident", code: "tri", quality: "normal" },
+            { name: "Spetum", code: "spt", quality: "normal" },
+            { name: "War Spear", code: "9sr", quality: "exceptional" },
+            { name: "Yari", code: "9st", quality: "exceptional" },
+            { name: "Hyperion Spear", code: "7sr", quality: "elite" },
+            { name: "Mancatcher", code: "7br", quality: "elite" },
+        ];
+
+        const nmagBowsExtended = [
+            { name: "Long War Bow", code: "lwb", quality: "normal" },
+            { name: "Long Siege Bow", code: "8l8", quality: "exceptional" },
+            { name: "Spider Bow", code: "6sb", quality: "elite" },
+        ];
+
+        const nmagCrossbows = [
+            { name: "Light Crossbow", code: "lxb", quality: "normal" },
+            { name: "Crossbow", code: "mxb", quality: "normal" },
+            { name: "Heavy Crossbow", code: "hxb", quality: "normal" },
+            { name: "Repeating Crossbow", code: "rxb", quality: "normal" },
+            { name: "Arbalest", code: "8lx", quality: "exceptional" },
+            { name: "Siege Crossbow", code: "8mx", quality: "exceptional" },
+            { name: "Ballista", code: "8hx", quality: "exceptional" },
+            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional" },
+            { name: "Pellet Bow", code: "6lx", quality: "elite" },
+            { name: "Gorgon Crossbow", code: "6mx", quality: "elite" },
+            { name: "Colossus Crossbow", code: "6hx", quality: "elite" },
+            { name: "Demon Crossbow", code: "6rx", quality: "elite" },
+        ];
+
+        const nmagJavelins = [
+            { name: "Javelin", code: "jav", quality: "normal" },
+            { name: "Pilum", code: "pil", quality: "normal" },
+            { name: "Short Spear", code: "ssp", quality: "normal" },
+            { name: "Glaive", code: "glv", quality: "normal" },
+            { name: "Throwing Spear", code: "tsp", quality: "normal" },
+            { name: "War Javelin", code: "9ja", quality: "exceptional" },
+            { name: "Great Pilum", code: "9pi", quality: "exceptional" },
+            { name: "Simbilan", code: "9s9", quality: "exceptional" },
+            { name: "Spiculum", code: "9gl", quality: "exceptional" },
+            { name: "Harpoon", code: "9ts", quality: "exceptional" },
+            { name: "Hyperion Javelin", code: "7ja", quality: "elite" },
+            { name: "Stygian Pilum", code: "7pi", quality: "elite" },
+            { name: "Balrog Spear", code: "7s7", quality: "elite" },
+            { name: "Ghost Glaive", code: "7gl", quality: "elite" },
+            { name: "Winged Harpoon", code: "7ts", quality: "elite" },
+        ];
+
+        const nmagArmorExtended = [
+            { name: "Quilted Armor", code: "qui", quality: "normal" },
+            { name: "Leather Armor", code: "lea", quality: "normal" },
+            { name: "Studded Leather", code: "stu", quality: "normal" },
+            { name: "Scale Mail", code: "scl", quality: "normal" },
+            { name: "Chain Mail", code: "chn", quality: "normal" },
+            { name: "Splint Mail", code: "spl", quality: "normal" },
+            { name: "Plate Mail", code: "plt", quality: "normal" },
+            { name: "Field Plate", code: "fld", quality: "normal" },
+            { name: "Light Plate", code: "ltp", quality: "normal" },
+            { name: "Full Plate Mail", code: "ful", quality: "normal" },
+            { name: "Ghost Armor", code: "xui", quality: "exceptional" },
+            { name: "Serpentskin Armor", code: "xea", quality: "exceptional" },
+            { name: "Demonhide Armor", code: "xla", quality: "exceptional" },
+            { name: "Linked Mail", code: "xng", quality: "exceptional" },
+            { name: "Mesh Armor", code: "xhn", quality: "exceptional" },
+            { name: "Russet Armor", code: "xpl", quality: "exceptional" },
+            { name: "Templar Coat", code: "xlt", quality: "exceptional" },
+            { name: "Embossed Plate", code: "xth", quality: "exceptional" },
+        ];
+
+        const nmagShieldsExtended = [
+            { name: "Buckler", code: "buc", quality: "normal" },
+            { name: "Spiked Shield", code: "spk", quality: "normal" },
+            { name: "Tower Shield", code: "tow", quality: "normal" },
+            { name: "Gothic Shield", code: "gts", quality: "normal" },
+            { name: "Defender", code: "xuc", quality: "exceptional" },
+            { name: "Round Shield", code: "xml", quality: "exceptional" },
+            { name: "Scutum", code: "xrg", quality: "exceptional" },
+            { name: "Barbed Shield", code: "xpk", quality: "exceptional" },
+            { name: "Pavise", code: "xow", quality: "exceptional" },
+            { name: "Ancient Shield", code: "xts", quality: "exceptional" },
+            { name: "Luna", code: "uml", quality: "elite" },
+            { name: "Blade Barrier", code: "upk", quality: "elite" },
+            { name: "Aegis", code: "uow", quality: "elite" },
+            { name: "Ward", code: "uts", quality: "elite" },
+        ];
+
+        const nmagPaladinShieldsExtended = [
+            { name: "Targe", code: "pa1", quality: "normal" },
+        ];
+
+        const nmagNecromancerShieldsExtended = [
+            { name: "Preserved Head", code: "ne1", quality: "normal" },
+            { name: "Unraveller Head", code: "ne3", quality: "normal" },
+            { name: "Mummified Trophy", code: "ne6", quality: "exceptional" },
+            { name: "Sexton Trophy", code: "ne8", quality: "exceptional" },
+            { name: "Cantor Trophy", code: "ne9", quality: "exceptional" },
+            { name: "Hierophant Trophy", code: "nea", quality: "exceptional" },
+            { name: "Minion Skull", code: "neb", quality: "elite" },
+            { name: "Hellspawn Skull", code: "neg", quality: "elite" },
+            { name: "Overseer Skull", code: "ned", quality: "elite" },
+            { name: "Succubae Skull", code: "nee", quality: "elite" },
+            { name: "Bloodlord Skull", code: "nef", quality: "elite" },
+        ];
+
+        const nmagHelmsExtended = [
+            { name: "Skull Cap", code: "skp", quality: "normal" },
+            { name: "Full Helm", code: "fhl", quality: "normal" },
+            { name: "War Hat", code: "xap", quality: "exceptional" },
+            { name: "Sallet", code: "xkp", quality: "exceptional" },
+            { name: "Casque", code: "xlm", quality: "exceptional" },
+            { name: "Death Mask", code: "xsk", quality: "exceptional" },
+            { name: "Grim Helm", code: "xh9", quality: "exceptional" },
+            { name: "Winged Helm", code: "xhm", quality: "exceptional" },
+            { name: "Shako", code: "uap", quality: "elite" },
+            { name: "Hydraskull", code: "ukp", quality: "elite" },
+            { name: "Armet", code: "ulm", quality: "elite" },
+            { name: "Giant Conch", code: "uhl", quality: "elite" },
+            { name: "Spired Helm", code: "uhm", quality: "elite" },
+        ];
+
+        const nmagDruidPeltsExtended = [];
+
+        const nmagNecroHeadsExtended = [];
+
+        const nmagAssassinClawsExtended = [
+            { name: "Katar", code: "ktr", quality: "normal" },
+            { name: "Wrist Blade", code: "wrb", quality: "normal" },
+            { name: "Hatchet Hands", code: "axf", quality: "normal" },
+            { name: "Cestus", code: "ces", quality: "normal" },
+            { name: "Claws", code: "clw", quality: "normal" },
+            { name: "Scissors Katar", code: "skr", quality: "normal" },
+            { name: "Quhab", code: "9ar", quality: "exceptional" },
+            { name: "Wrist Spike", code: "9wb", quality: "exceptional" },
+            { name: "Fascia", code: "9xf", quality: "exceptional" },
+            { name: "Hand Scythe", code: "9cs", quality: "exceptional" },
+            { name: "War Fist", code: "7xf", quality: "elite" },
+            { name: "Battle Cestus", code: "7cs", quality: "elite" },
+        ];
+
+        const nmagSorcOrbsExtended = [
+            { name: "Eagle Orb", code: "ob1", quality: "normal" },
+            { name: "Sacred Globe", code: "ob2", quality: "normal" },
+            { name: "Smoked Sphere", code: "ob3", quality: "normal" },
+            { name: "Clasped Orb", code: "ob4", quality: "normal" },
+            { name: "Glowing Orb", code: "ob6", quality: "exceptional" },
+            { name: "Crystalline Globe", code: "ob7", quality: "exceptional" },
+            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional" },
+            { name: "Sparkling Ball", code: "ob9", quality: "exceptional" },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional" },
+            { name: "Heavenly Stone", code: "obb", quality: "elite" },
+            { name: "Eldritch Orb", code: "obc", quality: "elite" },
+            { name: "Demon Heart", code: "obd", quality: "elite" },
+            { name: "Vortex Orb", code: "obe", quality: "elite" },
+        ];
+
+        const nmagDaggersExtended = [];
+
+        const nmagWandsExtended = [
+            { name: "Wand", code: "wnd", quality: "normal" },
+            { name: "Yew Wand", code: "ywn", quality: "normal" },
+            { name: "Grim Wand", code: "gwn", quality: "normal" },
+            { name: "Burnt Wand", code: "9wn", quality: "exceptional" },
+            { name: "Petrified Wand", code: "9yw", quality: "exceptional" },
+            { name: "Tomb Wand", code: "9bw", quality: "exceptional" },
+            { name: "Polished Wand", code: "7wn", quality: "elite" },
+            { name: "Ghost Wand", code: "7yw", quality: "elite" },
+            { name: "Lich Wand", code: "7bw", quality: "elite" },
+            { name: "Unearthed Wand", code: "7gw", quality: "elite" },
+        ];
+
+        const nmagSceptersExtended = [
+            { name: "Scepter", code: "scp", quality: "normal" },
+            { name: "Grand Scepter", code: "gsc", quality: "normal" },
+            { name: "Rune Scepter", code: "9sc", quality: "exceptional" },
+            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional" },
+            { name: "Mighty Scepter", code: "7sc", quality: "elite" },
+            { name: "Seraph Rod", code: "7qs", quality: "elite" },
+        ];
+
+        const nmagBarbarianHelmsExtended = [
+            { name: "Jawbone Cap", code: "ba1", quality: "normal" },
+            { name: "Fanged Helm", code: "ba2", quality: "normal" },
+            { name: "Assault Helmet", code: "ba4", quality: "normal" },
+            { name: "Lion Helm", code: "ba7", quality: "exceptional" },
+            { name: "Rage Mask", code: "ba8", quality: "exceptional" },
+            { name: "Savage Helmet", code: "ba9", quality: "exceptional" },
+            { name: "Slayer Guard", code: "baa", quality: "exceptional" },
+            { name: "Carnage Helm", code: "bab", quality: "elite" },
+            { name: "Fury Visor", code: "bac", quality: "elite" },
+            { name: "Conqueror Crown", code: "bae", quality: "elite" },
+            { name: "Guardian Crown", code: "baf", quality: "elite" },
+        ];
+
+        const nmagAmazonWeapons = [
+            { name: "Maiden Spear", code: "am3", quality: "normal" },
+            { name: "Maiden Pike", code: "am4", quality: "normal" },
+            { name: "Ceremonial Spear", code: "am8", quality: "exceptional" },
+            { name: "Ceremonial Pike", code: "am9", quality: "exceptional" },
+            { name: "Maiden Javelin", code: "am5", quality: "normal" },
+            { name: "Ceremonial Javelin", code: "ama", quality: "exceptional" },
+            { name: "Matriarchal Javelin", code: "amf", quality: "elite" },
+            { name: "Matriarchal Pike", code: "ame", quality: "elite" },
+        ];
+
+        const nmagCirclets = [
+            { name: "Circlet", code: "ci0", quality: "normal" },
+            { name: "Coronet", code: "ci1", quality: "normal" },
         ];
 
         // Global settings state
@@ -2529,13 +3789,44 @@
             nmagAxes: {},
             nmagMaces: {},
             nmagStaves: {},
+            nmagSpears: {},
             nmagBows: {},
-            nmagLightArmor: {},
-            nmagHeavyArmor: {},
+            nmagArmor: {},
             nmagShieldsGeneric: {},
             nmagShieldsPaladin: {},
             nmagHelms: {},
-            nmagClassSpecific: {}
+            nmagDruidPelts: {},
+            nmagNecroHeads: {},
+            nmagAssassinClaws: {},
+            nmagSorcOrbs: {},
+            nmagDaggers: {},
+            nmagWands: {},
+            nmagScepters: {},
+            nmagBarbarianHelms: {},
+            nmagPolearmsExtended: {},
+            nmagSwordsExtended: {},
+            nmagAxesExtended: {},
+            nmagMacesExtended: {},
+            nmagStavesExtended: {},
+            nmagSpearsExtended: {},
+            nmagBowsExtended: {},
+            nmagCrossbows: {},
+            nmagJavelins: {},
+            nmagArmorExtended: {},
+            nmagShieldsExtended: {},
+            nmagPaladinShieldsExtended: {},
+            nmagNecromancerShieldsExtended: {},
+            nmagHelmsExtended: {},
+            nmagDruidPeltsExtended: {},
+            nmagNecroHeadsExtended: {},
+            nmagAssassinClawsExtended: {},
+            nmagSorcOrbsExtended: {},
+            nmagDaggersExtended: {},
+            nmagWandsExtended: {},
+            nmagSceptersExtended: {},
+            nmagBarbarianHelmsExtended: {},
+            nmagAmazonWeapons: {},
+            nmagCirclets: {}
         };
 
         // Initialize utility items state
@@ -2901,13 +4192,44 @@
         initializeNmagState(nmagAxes, 'nmagAxes');
         initializeNmagState(nmagMaces, 'nmagMaces');
         initializeNmagState(nmagStaves, 'nmagStaves');
+        initializeNmagState(nmagSpears, 'nmagSpears');
         initializeNmagState(nmagBows, 'nmagBows');
-        initializeNmagState(nmagLightArmor, 'nmagLightArmor');
-        initializeNmagState(nmagHeavyArmor, 'nmagHeavyArmor');
+        initializeNmagState(nmagArmor, 'nmagArmor');
         initializeNmagState(nmagShieldsGeneric, 'nmagShieldsGeneric');
         initializeNmagState(nmagShieldsPaladin, 'nmagShieldsPaladin');
         initializeNmagState(nmagHelms, 'nmagHelms');
-        initializeNmagState(nmagClassSpecific, 'nmagClassSpecific');
+        initializeNmagState(nmagDruidPelts, 'nmagDruidPelts');
+        initializeNmagState(nmagNecroHeads, 'nmagNecroHeads');
+        initializeNmagState(nmagAssassinClaws, 'nmagAssassinClaws');
+        initializeNmagState(nmagSorcOrbs, 'nmagSorcOrbs');
+        initializeNmagState(nmagDaggers, 'nmagDaggers');
+        initializeNmagState(nmagWands, 'nmagWands');
+        initializeNmagState(nmagScepters, 'nmagScepters');
+        initializeNmagState(nmagBarbarianHelms, 'nmagBarbarianHelms');
+        initializeNmagState(nmagPolearmsExtended, 'nmagPolearmsExtended');
+        initializeNmagState(nmagSwordsExtended, 'nmagSwordsExtended');
+        initializeNmagState(nmagAxesExtended, 'nmagAxesExtended');
+        initializeNmagState(nmagMacesExtended, 'nmagMacesExtended');
+        initializeNmagState(nmagStavesExtended, 'nmagStavesExtended');
+        initializeNmagState(nmagSpearsExtended, 'nmagSpearsExtended');
+        initializeNmagState(nmagBowsExtended, 'nmagBowsExtended');
+        initializeNmagState(nmagCrossbows, 'nmagCrossbows');
+        initializeNmagState(nmagJavelins, 'nmagJavelins');
+        initializeNmagState(nmagArmorExtended, 'nmagArmorExtended');
+        initializeNmagState(nmagShieldsExtended, 'nmagShieldsExtended');
+        initializeNmagState(nmagPaladinShieldsExtended, 'nmagPaladinShieldsExtended');
+        initializeNmagState(nmagNecromancerShieldsExtended, 'nmagNecromancerShieldsExtended');
+        initializeNmagState(nmagHelmsExtended, 'nmagHelmsExtended');
+        initializeNmagState(nmagDruidPeltsExtended, 'nmagDruidPeltsExtended');
+        initializeNmagState(nmagNecroHeadsExtended, 'nmagNecroHeadsExtended');
+        initializeNmagState(nmagAssassinClawsExtended, 'nmagAssassinClawsExtended');
+        initializeNmagState(nmagSorcOrbsExtended, 'nmagSorcOrbsExtended');
+        initializeNmagState(nmagDaggersExtended, 'nmagDaggersExtended');
+        initializeNmagState(nmagWandsExtended, 'nmagWandsExtended');
+        initializeNmagState(nmagSceptersExtended, 'nmagSceptersExtended');
+        initializeNmagState(nmagBarbarianHelmsExtended, 'nmagBarbarianHelmsExtended');
+        initializeNmagState(nmagAmazonWeapons, 'nmagAmazonWeapons');
+        initializeNmagState(nmagCirclets, 'nmagCirclets');
 
         // Render items
         function renderUtilityItems() {
@@ -3641,12 +4963,10 @@
             let maxSockets = baseItem?.max_sockets || 6;
             
             // Override max sockets for class-specific items
-            if (stateCategory === 'nmagClassSpecific') {
-                if (state.name.includes('Necro') || state.name.includes('Shrunken Head')) {
-                    maxSockets = 2;
-                } else {
-                    maxSockets = 3;
-                }
+            if (stateCategory === 'nmagNecroHeads') {
+                maxSockets = 2;
+            } else if (stateCategory === 'nmagDruidPelts' || stateCategory === 'nmagAssassinClaws' || stateCategory === 'nmagSorcOrbs') {
+                maxSockets = 3;
             }
             
             // Available socket options: 0, 2, 3, 4, 5, 6 but limited by max_sockets
@@ -3758,12 +5078,12 @@
             renderNmagItems(nmagBows, 'nmagBows', 'nmag-bows-items', 'nmag-bows-count');
         }
 
-        function renderNmagLightArmorItems() {
-            renderNmagItems(nmagLightArmor, 'nmagLightArmor', 'nmag-light-armor-items', 'nmag-light-armor-count');
+        function renderNmagSpearsItems() {
+            renderNmagItems(nmagSpears, 'nmagSpears', 'nmag-spears-items', 'nmag-spears-count');
         }
 
-        function renderNmagHeavyArmorItems() {
-            renderNmagItems(nmagHeavyArmor, 'nmagHeavyArmor', 'nmag-heavy-armor-items', 'nmag-heavy-armor-count');
+        function renderNmagArmorItems() {
+            renderNmagItems(nmagArmor, 'nmagArmor', 'nmag-armor-items', 'nmag-armor-count');
         }
 
         function renderNmagShieldsGenericItems() {
@@ -3778,8 +5098,133 @@
             renderNmagItems(nmagHelms, 'nmagHelms', 'nmag-helms-items', 'nmag-helms-count');
         }
 
-        function renderNmagClassSpecificItems() {
-            renderNmagItems(nmagClassSpecific, 'nmagClassSpecific', 'nmag-class-specific-items', 'nmag-class-specific-count');
+        function renderNmagDruidPeltsItems() {
+            renderNmagItems(nmagDruidPelts, 'nmagDruidPelts', 'nmag-druid-pelts-items', 'nmag-druid-pelts-count');
+        }
+
+        function renderNmagNecroHeadsItems() {
+            renderNmagItems(nmagNecroHeads, 'nmagNecroHeads', 'nmag-necro-heads-items', 'nmag-necro-heads-count');
+        }
+
+        function renderNmagAssassinClawsItems() {
+            renderNmagItems(nmagAssassinClaws, 'nmagAssassinClaws', 'nmag-assassin-claws-items', 'nmag-assassin-claws-count');
+        }
+
+        function renderNmagSorcOrbsItems() {
+            renderNmagItems(nmagSorcOrbs, 'nmagSorcOrbs', 'nmag-sorc-orbs-items', 'nmag-sorc-orbs-count');
+        }
+
+        function renderNmagDaggersItems() {
+            renderNmagItems(nmagDaggers, 'nmagDaggers', 'nmag-daggers-items', 'nmag-daggers-count');
+        }
+
+        function renderNmagWandsItems() {
+            renderNmagItems(nmagWands, 'nmagWands', 'nmag-wands-items', 'nmag-wands-count');
+        }
+
+        function renderNmagSceptersItems() {
+            renderNmagItems(nmagScepters, 'nmagScepters', 'nmag-scepters-items', 'nmag-scepters-count');
+        }
+
+        function renderNmagBarbarianHelmsItems() {
+            renderNmagItems(nmagBarbarianHelms, 'nmagBarbarianHelms', 'nmag-barbarian-helms-items', 'nmag-barbarian-helms-count');
+        }
+
+        // Extended NMAG render functions
+        function renderNmagPolearmsExtendedItems() {
+            renderNmagItems(nmagPolearmsExtended, 'nmagPolearmsExtended', 'nmag-polearms-extended-items', 'nmag-polearms-extended-count');
+        }
+
+        function renderNmagSwordsExtendedItems() {
+            renderNmagItems(nmagSwordsExtended, 'nmagSwordsExtended', 'nmag-swords-extended-items', 'nmag-swords-extended-count');
+        }
+
+        function renderNmagAxesExtendedItems() {
+            renderNmagItems(nmagAxesExtended, 'nmagAxesExtended', 'nmag-axes-extended-items', 'nmag-axes-extended-count');
+        }
+
+        function renderNmagMacesExtendedItems() {
+            renderNmagItems(nmagMacesExtended, 'nmagMacesExtended', 'nmag-maces-extended-items', 'nmag-maces-extended-count');
+        }
+
+        function renderNmagStavesExtendedItems() {
+            renderNmagItems(nmagStavesExtended, 'nmagStavesExtended', 'nmag-staves-extended-items', 'nmag-staves-extended-count');
+        }
+
+        function renderNmagSpearsExtendedItems() {
+            renderNmagItems(nmagSpearsExtended, 'nmagSpearsExtended', 'nmag-spears-extended-items', 'nmag-spears-extended-count');
+        }
+
+        function renderNmagBowsExtendedItems() {
+            renderNmagItems(nmagBowsExtended, 'nmagBowsExtended', 'nmag-bows-extended-items', 'nmag-bows-extended-count');
+        }
+
+        function renderNmagCrossbowsItems() {
+            renderNmagItems(nmagCrossbows, 'nmagCrossbows', 'nmag-crossbows-items', 'nmag-crossbows-count');
+        }
+
+        function renderNmagJavelinsItems() {
+            renderNmagItems(nmagJavelins, 'nmagJavelins', 'nmag-javelins-items', 'nmag-javelins-count');
+        }
+
+        function renderNmagArmorExtendedItems() {
+            renderNmagItems(nmagArmorExtended, 'nmagArmorExtended', 'nmag-armor-extended-items', 'nmag-armor-extended-count');
+        }
+
+        function renderNmagShieldsExtendedItems() {
+            renderNmagItems(nmagShieldsExtended, 'nmagShieldsExtended', 'nmag-shields-extended-items', 'nmag-shields-extended-count');
+        }
+
+        function renderNmagPaladinShieldsExtendedItems() {
+            renderNmagItems(nmagPaladinShieldsExtended, 'nmagPaladinShieldsExtended', 'nmag-paladin-shields-extended-items', 'nmag-paladin-shields-extended-count');
+        }
+
+        function renderNmagNecromancerShieldsExtendedItems() {
+            renderNmagItems(nmagNecromancerShieldsExtended, 'nmagNecromancerShieldsExtended', 'nmag-necromancer-shields-extended-items', 'nmag-necromancer-shields-extended-count');
+        }
+
+        function renderNmagHelmsExtendedItems() {
+            renderNmagItems(nmagHelmsExtended, 'nmagHelmsExtended', 'nmag-helms-extended-items', 'nmag-helms-extended-count');
+        }
+
+        function renderNmagDruidPeltsExtendedItems() {
+            renderNmagItems(nmagDruidPeltsExtended, 'nmagDruidPeltsExtended', 'nmag-druid-pelts-extended-items', 'nmag-druid-pelts-extended-count');
+        }
+
+        function renderNmagNecroHeadsExtendedItems() {
+            renderNmagItems(nmagNecroHeadsExtended, 'nmagNecroHeadsExtended', 'nmag-necro-heads-extended-items', 'nmag-necro-heads-extended-count');
+        }
+
+        function renderNmagAssassinClawsExtendedItems() {
+            renderNmagItems(nmagAssassinClawsExtended, 'nmagAssassinClawsExtended', 'nmag-assassin-claws-extended-items', 'nmag-assassin-claws-extended-count');
+        }
+
+        function renderNmagSorcOrbsExtendedItems() {
+            renderNmagItems(nmagSorcOrbsExtended, 'nmagSorcOrbsExtended', 'nmag-sorc-orbs-extended-items', 'nmag-sorc-orbs-extended-count');
+        }
+
+        function renderNmagDaggersExtendedItems() {
+            renderNmagItems(nmagDaggersExtended, 'nmagDaggersExtended', 'nmag-daggers-extended-items', 'nmag-daggers-extended-count');
+        }
+
+        function renderNmagWandsExtendedItems() {
+            renderNmagItems(nmagWandsExtended, 'nmagWandsExtended', 'nmag-wands-extended-items', 'nmag-wands-extended-count');
+        }
+
+        function renderNmagSceptersExtendedItems() {
+            renderNmagItems(nmagSceptersExtended, 'nmagSceptersExtended', 'nmag-scepters-extended-items', 'nmag-scepters-extended-count');
+        }
+
+        function renderNmagBarbarianHelmsExtendedItems() {
+            renderNmagItems(nmagBarbarianHelmsExtended, 'nmagBarbarianHelmsExtended', 'nmag-barbarian-helms-extended-items', 'nmag-barbarian-helms-extended-count');
+        }
+
+        function renderNmagAmazonWeaponsItems() {
+            renderNmagItems(nmagAmazonWeapons, 'nmagAmazonWeapons', 'nmag-amazon-weapons-items', 'nmag-amazon-weapons-count');
+        }
+
+        function renderNmagCircletsItems() {
+            renderNmagItems(nmagCirclets, 'nmagCirclets', 'nmag-circlets-items', 'nmag-circlets-count');
         }
 
         // Helper functions for unique items
@@ -4314,13 +5759,20 @@
                 'nmagAxes': renderNmagAxesItems,
                 'nmagMaces': renderNmagMacesItems,
                 'nmagStaves': renderNmagStavesItems,
+                'nmagSpears': renderNmagSpearsItems,
                 'nmagBows': renderNmagBowsItems,
-                'nmagLightArmor': renderNmagLightArmorItems,
-                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagArmor': renderNmagArmorItems,
                 'nmagShieldsGeneric': renderNmagShieldsGenericItems,
                 'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
                 'nmagHelms': renderNmagHelmsItems,
-                'nmagClassSpecific': renderNmagClassSpecificItems
+                'nmagDruidPelts': renderNmagDruidPeltsItems,
+                'nmagNecroHeads': renderNmagNecroHeadsItems,
+                'nmagAssassinClaws': renderNmagAssassinClawsItems,
+                'nmagSorcOrbs': renderNmagSorcOrbsItems,
+                'nmagDaggers': renderNmagDaggersItems,
+                'nmagWands': renderNmagWandsItems,
+                'nmagScepters': renderNmagSceptersItems,
+                'nmagBarbarianHelms': renderNmagBarbarianHelmsItems
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
@@ -4353,12 +5805,44 @@
                 'nmagAxes': renderNmagAxesItems,
                 'nmagMaces': renderNmagMacesItems,
                 'nmagStaves': renderNmagStavesItems,
-                'nmagLightArmor': renderNmagLightArmorItems,
-                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagSpears': renderNmagSpearsItems,
+                'nmagBows': renderNmagBowsItems,
+                'nmagArmor': renderNmagArmorItems,
                 'nmagShieldsGeneric': renderNmagShieldsGenericItems,
                 'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
                 'nmagHelms': renderNmagHelmsItems,
-                'nmagClassSpecific': renderNmagClassSpecificItems
+                'nmagDruidPelts': renderNmagDruidPeltsItems,
+                'nmagNecroHeads': renderNmagNecroHeadsItems,
+                'nmagAssassinClaws': renderNmagAssassinClawsItems,
+                'nmagSorcOrbs': renderNmagSorcOrbsItems,
+                'nmagDaggers': renderNmagDaggersItems,
+                'nmagWands': renderNmagWandsItems,
+                'nmagScepters': renderNmagSceptersItems,
+                'nmagBarbarianHelms': renderNmagBarbarianHelmsItems,
+                'nmagPolearmsExtended': renderNmagPolearmsExtendedItems,
+                'nmagSwordsExtended': renderNmagSwordsExtendedItems,
+                'nmagAxesExtended': renderNmagAxesExtendedItems,
+                'nmagMacesExtended': renderNmagMacesExtendedItems,
+                'nmagStavesExtended': renderNmagStavesExtendedItems,
+                'nmagSpearsExtended': renderNmagSpearsExtendedItems,
+                'nmagBowsExtended': renderNmagBowsExtendedItems,
+                'nmagCrossbows': renderNmagCrossbowsItems,
+                'nmagJavelins': renderNmagJavelinsItems,
+                'nmagArmorExtended': renderNmagArmorExtendedItems,
+                'nmagShieldsExtended': renderNmagShieldsExtendedItems,
+                'nmagPaladinShieldsExtended': renderNmagPaladinShieldsExtendedItems,
+                'nmagNecromancerShieldsExtended': renderNmagNecromancerShieldsExtendedItems,
+                'nmagHelmsExtended': renderNmagHelmsExtendedItems,
+                'nmagDruidPeltsExtended': renderNmagDruidPeltsExtendedItems,
+                'nmagNecroHeadsExtended': renderNmagNecroHeadsExtendedItems,
+                'nmagAssassinClawsExtended': renderNmagAssassinClawsExtendedItems,
+                'nmagSorcOrbsExtended': renderNmagSorcOrbsExtendedItems,
+                'nmagDaggersExtended': renderNmagDaggersExtendedItems,
+                'nmagWandsExtended': renderNmagWandsExtendedItems,
+                'nmagSceptersExtended': renderNmagSceptersExtendedItems,
+                'nmagBarbarianHelmsExtended': renderNmagBarbarianHelmsExtendedItems,
+                'nmagAmazonWeapons': renderNmagAmazonWeaponsItems,
+                'nmagCirclets': renderNmagCircletsItems
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
@@ -4375,12 +5859,44 @@
                 'nmagAxes': renderNmagAxesItems,
                 'nmagMaces': renderNmagMacesItems,
                 'nmagStaves': renderNmagStavesItems,
-                'nmagLightArmor': renderNmagLightArmorItems,
-                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagSpears': renderNmagSpearsItems,
+                'nmagBows': renderNmagBowsItems,
+                'nmagArmor': renderNmagArmorItems,
                 'nmagShieldsGeneric': renderNmagShieldsGenericItems,
                 'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
                 'nmagHelms': renderNmagHelmsItems,
-                'nmagClassSpecific': renderNmagClassSpecificItems
+                'nmagDruidPelts': renderNmagDruidPeltsItems,
+                'nmagNecroHeads': renderNmagNecroHeadsItems,
+                'nmagAssassinClaws': renderNmagAssassinClawsItems,
+                'nmagSorcOrbs': renderNmagSorcOrbsItems,
+                'nmagDaggers': renderNmagDaggersItems,
+                'nmagWands': renderNmagWandsItems,
+                'nmagScepters': renderNmagSceptersItems,
+                'nmagBarbarianHelms': renderNmagBarbarianHelmsItems,
+                'nmagPolearmsExtended': renderNmagPolearmsExtendedItems,
+                'nmagSwordsExtended': renderNmagSwordsExtendedItems,
+                'nmagAxesExtended': renderNmagAxesExtendedItems,
+                'nmagMacesExtended': renderNmagMacesExtendedItems,
+                'nmagStavesExtended': renderNmagStavesExtendedItems,
+                'nmagSpearsExtended': renderNmagSpearsExtendedItems,
+                'nmagBowsExtended': renderNmagBowsExtendedItems,
+                'nmagCrossbows': renderNmagCrossbowsItems,
+                'nmagJavelins': renderNmagJavelinsItems,
+                'nmagArmorExtended': renderNmagArmorExtendedItems,
+                'nmagShieldsExtended': renderNmagShieldsExtendedItems,
+                'nmagPaladinShieldsExtended': renderNmagPaladinShieldsExtendedItems,
+                'nmagNecromancerShieldsExtended': renderNmagNecromancerShieldsExtendedItems,
+                'nmagHelmsExtended': renderNmagHelmsExtendedItems,
+                'nmagDruidPeltsExtended': renderNmagDruidPeltsExtendedItems,
+                'nmagNecroHeadsExtended': renderNmagNecroHeadsExtendedItems,
+                'nmagAssassinClawsExtended': renderNmagAssassinClawsExtendedItems,
+                'nmagSorcOrbsExtended': renderNmagSorcOrbsExtendedItems,
+                'nmagDaggersExtended': renderNmagDaggersExtendedItems,
+                'nmagWandsExtended': renderNmagWandsExtendedItems,
+                'nmagSceptersExtended': renderNmagSceptersExtendedItems,
+                'nmagBarbarianHelmsExtended': renderNmagBarbarianHelmsExtendedItems,
+                'nmagAmazonWeapons': renderNmagAmazonWeaponsItems,
+                'nmagCirclets': renderNmagCircletsItems
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
@@ -4399,12 +5915,44 @@
                 'nmagAxes': renderNmagAxesItems,
                 'nmagMaces': renderNmagMacesItems,
                 'nmagStaves': renderNmagStavesItems,
-                'nmagLightArmor': renderNmagLightArmorItems,
-                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagSpears': renderNmagSpearsItems,
+                'nmagBows': renderNmagBowsItems,
+                'nmagArmor': renderNmagArmorItems,
                 'nmagShieldsGeneric': renderNmagShieldsGenericItems,
                 'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
                 'nmagHelms': renderNmagHelmsItems,
-                'nmagClassSpecific': renderNmagClassSpecificItems
+                'nmagDruidPelts': renderNmagDruidPeltsItems,
+                'nmagNecroHeads': renderNmagNecroHeadsItems,
+                'nmagAssassinClaws': renderNmagAssassinClawsItems,
+                'nmagSorcOrbs': renderNmagSorcOrbsItems,
+                'nmagDaggers': renderNmagDaggersItems,
+                'nmagWands': renderNmagWandsItems,
+                'nmagScepters': renderNmagSceptersItems,
+                'nmagBarbarianHelms': renderNmagBarbarianHelmsItems,
+                'nmagPolearmsExtended': renderNmagPolearmsExtendedItems,
+                'nmagSwordsExtended': renderNmagSwordsExtendedItems,
+                'nmagAxesExtended': renderNmagAxesExtendedItems,
+                'nmagMacesExtended': renderNmagMacesExtendedItems,
+                'nmagStavesExtended': renderNmagStavesExtendedItems,
+                'nmagSpearsExtended': renderNmagSpearsExtendedItems,
+                'nmagBowsExtended': renderNmagBowsExtendedItems,
+                'nmagCrossbows': renderNmagCrossbowsItems,
+                'nmagJavelins': renderNmagJavelinsItems,
+                'nmagArmorExtended': renderNmagArmorExtendedItems,
+                'nmagShieldsExtended': renderNmagShieldsExtendedItems,
+                'nmagPaladinShieldsExtended': renderNmagPaladinShieldsExtendedItems,
+                'nmagNecromancerShieldsExtended': renderNmagNecromancerShieldsExtendedItems,
+                'nmagHelmsExtended': renderNmagHelmsExtendedItems,
+                'nmagDruidPeltsExtended': renderNmagDruidPeltsExtendedItems,
+                'nmagNecroHeadsExtended': renderNmagNecroHeadsExtendedItems,
+                'nmagAssassinClawsExtended': renderNmagAssassinClawsExtendedItems,
+                'nmagSorcOrbsExtended': renderNmagSorcOrbsExtendedItems,
+                'nmagDaggersExtended': renderNmagDaggersExtendedItems,
+                'nmagWandsExtended': renderNmagWandsExtendedItems,
+                'nmagSceptersExtended': renderNmagSceptersExtendedItems,
+                'nmagBarbarianHelmsExtended': renderNmagBarbarianHelmsExtendedItems,
+                'nmagAmazonWeapons': renderNmagAmazonWeaponsItems,
+                'nmagCirclets': renderNmagCircletsItems
             };
             if (renderMap[category]) renderMap[category]();
             generateFilter();
@@ -4506,33 +6054,33 @@
             generateFilter();
         }
 
-        function applyNmagLightArmorPreset(preset) {
+        function applyNmagSpearsPreset(preset) {
             if (!preset) return;
-            nmagLightArmor.forEach((item, idx) => {
+            nmagSpears.forEach((item, idx) => {
                 const key = item.code + '_' + idx;
                 if (preset === 'show-all') {
-                    filterState.nmagLightArmor[key].show = true;
+                    filterState.nmagSpears[key].show = true;
                 } else if (preset === 'hide-all') {
-                    filterState.nmagLightArmor[key].show = false;
-                } else if (preset === 'elite-only') {
-                    filterState.nmagLightArmor[key].show = item.quality === 'elite';
+                    filterState.nmagSpears[key].show = false;
                 }
             });
-            renderNmagLightArmorItems();
+            renderNmagSpearsItems();
             generateFilter();
         }
 
-        function applyNmagHeavyArmorPreset(preset) {
+        function applyNmagArmorPreset(preset) {
             if (!preset) return;
-            nmagHeavyArmor.forEach((item, idx) => {
+            nmagArmor.forEach((item, idx) => {
                 const key = item.code + '_' + idx;
                 if (preset === 'show-all') {
-                    filterState.nmagHeavyArmor[key].show = true;
+                    filterState.nmagArmor[key].show = true;
                 } else if (preset === 'hide-all') {
-                    filterState.nmagHeavyArmor[key].show = false;
+                    filterState.nmagArmor[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagArmor[key].show = item.quality === 'elite';
                 }
             });
-            renderNmagHeavyArmorItems();
+            renderNmagArmorItems();
             generateFilter();
         }
 
@@ -4578,17 +6126,459 @@
             generateFilter();
         }
 
-        function applyNmagClassSpecificPreset(preset) {
+        function applyNmagDruidPeltsPreset(preset) {
             if (!preset) return;
-            nmagClassSpecific.forEach((item, idx) => {
+            nmagDruidPelts.forEach((item, idx) => {
                 const key = item.code + '_' + idx;
                 if (preset === 'show-all') {
-                    filterState.nmagClassSpecific[key].show = true;
+                    filterState.nmagDruidPelts[key].show = true;
                 } else if (preset === 'hide-all') {
-                    filterState.nmagClassSpecific[key].show = false;
+                    filterState.nmagDruidPelts[key].show = false;
                 }
             });
-            renderNmagClassSpecificItems();
+            renderNmagDruidPeltsItems();
+            generateFilter();
+        }
+
+        function applyNmagNecroHeadsPreset(preset) {
+            if (!preset) return;
+            nmagNecroHeads.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagNecroHeads[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagNecroHeads[key].show = false;
+                }
+            });
+            renderNmagNecroHeadsItems();
+            generateFilter();
+        }
+
+        function applyNmagAssassinClawsPreset(preset) {
+            if (!preset) return;
+            nmagAssassinClaws.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagAssassinClaws[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagAssassinClaws[key].show = false;
+                }
+            });
+            renderNmagAssassinClawsItems();
+            generateFilter();
+        }
+
+        function applyNmagSorcOrbsPreset(preset) {
+            if (!preset) return;
+            nmagSorcOrbs.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagSorcOrbs[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagSorcOrbs[key].show = false;
+                }
+            });
+            renderNmagSorcOrbsItems();
+            generateFilter();
+        }
+
+        function applyNmagDaggersPreset(preset) {
+            if (!preset) return;
+            nmagDaggers.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagDaggers[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagDaggers[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagDaggers[key].show = (item.quality === 'elite');
+                }
+            });
+            renderNmagDaggersItems();
+            generateFilter();
+        }
+
+        function applyNmagWandsPreset(preset) {
+            if (!preset) return;
+            nmagWands.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagWands[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagWands[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagWands[key].show = (item.quality === 'elite');
+                }
+            });
+            renderNmagWandsItems();
+            generateFilter();
+        }
+
+        function applyNmagSceptersPreset(preset) {
+            if (!preset) return;
+            nmagScepters.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagScepters[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagScepters[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagScepters[key].show = (item.quality === 'elite');
+                }
+            });
+            renderNmagSceptersItems();
+            generateFilter();
+        }
+
+        function applyNmagBarbarianHelmsPreset(preset) {
+            if (!preset) return;
+            nmagBarbarianHelms.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagBarbarianHelms[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagBarbarianHelms[key].show = false;
+                } else if (preset === 'elite-only') {
+                    filterState.nmagBarbarianHelms[key].show = (item.quality === 'elite');
+                }
+            });
+            renderNmagBarbarianHelmsItems();
+            generateFilter();
+        }
+
+        function applyNmagPolearmsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagPolearmsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagPolearmsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagPolearmsExtended[key].show = false;
+                }
+            });
+            renderNmagPolearmsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagSwordsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagSwordsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagSwordsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagSwordsExtended[key].show = false;
+                }
+            });
+            renderNmagSwordsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagAxesExtendedPreset(preset) {
+            if (!preset) return;
+            nmagAxesExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagAxesExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagAxesExtended[key].show = false;
+                }
+            });
+            renderNmagAxesExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagMacesExtendedPreset(preset) {
+            if (!preset) return;
+            nmagMacesExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagMacesExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagMacesExtended[key].show = false;
+                }
+            });
+            renderNmagMacesExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagStavesExtendedPreset(preset) {
+            if (!preset) return;
+            nmagStavesExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagStavesExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagStavesExtended[key].show = false;
+                }
+            });
+            renderNmagStavesExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagSpearsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagSpearsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagSpearsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagSpearsExtended[key].show = false;
+                }
+            });
+            renderNmagSpearsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagBowsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagBowsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagBowsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagBowsExtended[key].show = false;
+                }
+            });
+            renderNmagBowsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagCrossbowsPreset(preset) {
+            if (!preset) return;
+            nmagCrossbows.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagCrossbows[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagCrossbows[key].show = false;
+                }
+            });
+            renderNmagCrossbowsItems();
+            generateFilter();
+        }
+
+        function applyNmagJavelinsPreset(preset) {
+            if (!preset) return;
+            nmagJavelins.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagJavelins[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagJavelins[key].show = false;
+                }
+            });
+            renderNmagJavelinsItems();
+            generateFilter();
+        }
+
+        function applyNmagArmorExtendedPreset(preset) {
+            if (!preset) return;
+            nmagArmorExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagArmorExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagArmorExtended[key].show = false;
+                }
+            });
+            renderNmagArmorExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagShieldsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagShieldsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagShieldsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagShieldsExtended[key].show = false;
+                }
+            });
+            renderNmagShieldsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagPaladinShieldsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagPaladinShieldsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagPaladinShieldsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagPaladinShieldsExtended[key].show = false;
+                }
+            });
+            renderNmagPaladinShieldsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagNecromancerShieldsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagNecromancerShieldsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagNecromancerShieldsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagNecromancerShieldsExtended[key].show = false;
+                }
+            });
+            renderNmagNecromancerShieldsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagHelmsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagHelmsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagHelmsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagHelmsExtended[key].show = false;
+                }
+            });
+            renderNmagHelmsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagDruidPeltsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagDruidPeltsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagDruidPeltsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagDruidPeltsExtended[key].show = false;
+                }
+            });
+            renderNmagDruidPeltsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagNecroHeadsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagNecroHeadsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagNecroHeadsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagNecroHeadsExtended[key].show = false;
+                }
+            });
+            renderNmagNecroHeadsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagAssassinClawsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagAssassinClawsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagAssassinClawsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagAssassinClawsExtended[key].show = false;
+                }
+            });
+            renderNmagAssassinClawsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagSorcOrbsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagSorcOrbsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagSorcOrbsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagSorcOrbsExtended[key].show = false;
+                }
+            });
+            renderNmagSorcOrbsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagDaggersExtendedPreset(preset) {
+            if (!preset) return;
+            nmagDaggersExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagDaggersExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagDaggersExtended[key].show = false;
+                }
+            });
+            renderNmagDaggersExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagWandsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagWandsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagWandsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagWandsExtended[key].show = false;
+                }
+            });
+            renderNmagWandsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagSceptersExtendedPreset(preset) {
+            if (!preset) return;
+            nmagSceptersExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagSceptersExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagSceptersExtended[key].show = false;
+                }
+            });
+            renderNmagSceptersExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagBarbarianHelmsExtendedPreset(preset) {
+            if (!preset) return;
+            nmagBarbarianHelmsExtended.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagBarbarianHelmsExtended[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagBarbarianHelmsExtended[key].show = false;
+                }
+            });
+            renderNmagBarbarianHelmsExtendedItems();
+            generateFilter();
+        }
+
+        function applyNmagAmazonWeaponsPreset(preset) {
+            if (!preset) return;
+            nmagAmazonWeapons.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagAmazonWeapons[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagAmazonWeapons[key].show = false;
+                }
+            });
+            renderNmagAmazonWeaponsItems();
+            generateFilter();
+        }
+
+        function applyNmagCircletsPreset(preset) {
+            if (!preset) return;
+            nmagCirclets.forEach((item, idx) => {
+                const key = item.code + '_' + idx;
+                if (preset === 'show-all') {
+                    filterState.nmagCirclets[key].show = true;
+                } else if (preset === 'hide-all') {
+                    filterState.nmagCirclets[key].show = false;
+                }
+            });
+            renderNmagCircletsItems();
             generateFilter();
         }
 
@@ -5235,13 +7225,47 @@
             filter += generateNmagItemLines(nmagAxes, 'nmagAxes', 'NMAG: Axes (Grief, Beast, Death)');
             filter += generateNmagItemLines(nmagMaces, 'nmagMaces', 'NMAG: Maces (BoTD, Heart of the Oak)');
             filter += generateNmagItemLines(nmagStaves, 'nmagStaves', 'NMAG: Staves (CTA, Memory');
+            filter += generateNmagItemLines(nmagSpears, 'nmagSpears', 'NMAG: Spears (Infinity, Insight, Pride, Obedience)');
             filter += generateNmagItemLines(nmagBows, 'nmagBows', 'NMAG: Bows (Faith, Ice, Brand, Insight)');
-            filter += generateNmagItemLines(nmagLightArmor, 'nmagLightArmor', 'NMAG: Light Armor (Enigma, Fortitude, CoH)');
-            filter += generateNmagItemLines(nmagHeavyArmor, 'nmagHeavyArmor', 'NMAG: Heavy Armor (Fortitude, CoH, Bramble)');
+            filter += generateNmagItemLines(nmagArmor, 'nmagArmor', 'NMAG: Armor (Enigma, Fortitude, CoH, Bramble)');
             filter += generateNmagItemLines(nmagShieldsGeneric, 'nmagShieldsGeneric', 'NMAG: Shields - Generic (Spirit, Dream, Splendor)');
             filter += generateNmagItemLines(nmagShieldsPaladin, 'nmagShieldsPaladin', 'NMAG: Shields - Paladin (Spirit, Exile)');
             filter += generateNmagItemLines(nmagHelms, 'nmagHelms', 'NMAG: Helms (Delirium, Dream)');
-            filter += generateNmagItemLines(nmagClassSpecific, 'nmagClassSpecific', 'NMAG: Class-Specific');
+            filter += generateNmagItemLines(nmagDruidPelts, 'nmagDruidPelts', 'NMAG: Druid Pelts (Delirium, Metamorphosis)');
+            filter += generateNmagItemLines(nmagNecroHeads, 'nmagNecroHeads', 'NMAG: Necro Shrunken Heads (Splendor, Rhyme)');
+            filter += generateNmagItemLines(nmagAssassinClaws, 'nmagAssassinClaws', 'NMAG: Assassin Claws (Chaos, Fury, Plague)');
+            filter += generateNmagItemLines(nmagSorcOrbs, 'nmagSorcOrbs', 'NMAG: Sorc Orbs (Plague)');
+            filter += generateNmagItemLines(nmagDaggers, 'nmagDaggers', 'NMAG: Daggers');
+            filter += generateNmagItemLines(nmagWands, 'nmagWands', 'NMAG: Wands (White, Memory)');
+            filter += generateNmagItemLines(nmagScepters, 'nmagScepters', 'NMAG: Scepters (Spirit, Hoto, Sanctuary)');
+            filter += generateNmagItemLines(nmagBarbarianHelms, 'nmagBarbarianHelms', 'NMAG: Barbarian Helms (Delirium, Dream)');
+            
+            filter += '\n// ===== Other NMAG base items to follow =====\n\n';
+            
+            filter += generateNmagItemLines(nmagPolearmsExtended, 'nmagPolearmsExtended', 'NMAG Extended: Polearms');
+            filter += generateNmagItemLines(nmagSwordsExtended, 'nmagSwordsExtended', 'NMAG Extended: Swords');
+            filter += generateNmagItemLines(nmagAxesExtended, 'nmagAxesExtended', 'NMAG Extended: Axes');
+            filter += generateNmagItemLines(nmagMacesExtended, 'nmagMacesExtended', 'NMAG Extended: Maces');
+            filter += generateNmagItemLines(nmagStavesExtended, 'nmagStavesExtended', 'NMAG Extended: Staves');
+            filter += generateNmagItemLines(nmagSpearsExtended, 'nmagSpearsExtended', 'NMAG Extended: Spears');
+            filter += generateNmagItemLines(nmagBowsExtended, 'nmagBowsExtended', 'NMAG Extended: Bows');
+            filter += generateNmagItemLines(nmagCrossbows, 'nmagCrossbows', 'NMAG Extended: Crossbows');
+            filter += generateNmagItemLines(nmagJavelins, 'nmagJavelins', 'NMAG Extended: Javelins');
+            filter += generateNmagItemLines(nmagArmorExtended, 'nmagArmorExtended', 'NMAG Extended: Armor');
+            filter += generateNmagItemLines(nmagShieldsExtended, 'nmagShieldsExtended', 'NMAG Extended: Shields');
+            filter += generateNmagItemLines(nmagPaladinShieldsExtended, 'nmagPaladinShieldsExtended', 'NMAG Extended: Paladin Shields');
+            filter += generateNmagItemLines(nmagNecromancerShieldsExtended, 'nmagNecromancerShieldsExtended', 'NMAG Extended: Necromancer Shields');
+            filter += generateNmagItemLines(nmagHelmsExtended, 'nmagHelmsExtended', 'NMAG Extended: Helms');
+            filter += generateNmagItemLines(nmagDruidPeltsExtended, 'nmagDruidPeltsExtended', 'NMAG Extended: Druid Pelts');
+            filter += generateNmagItemLines(nmagNecroHeadsExtended, 'nmagNecroHeadsExtended', 'NMAG Extended: Necro Heads');
+            filter += generateNmagItemLines(nmagAssassinClawsExtended, 'nmagAssassinClawsExtended', 'NMAG Extended: Assassin Claws');
+            filter += generateNmagItemLines(nmagSorcOrbsExtended, 'nmagSorcOrbsExtended', 'NMAG Extended: Sorc Orbs');
+            filter += generateNmagItemLines(nmagDaggersExtended, 'nmagDaggersExtended', 'NMAG Extended: Daggers');
+            filter += generateNmagItemLines(nmagWandsExtended, 'nmagWandsExtended', 'NMAG Extended: Wands');
+            filter += generateNmagItemLines(nmagSceptersExtended, 'nmagSceptersExtended', 'NMAG Extended: Scepters');
+            filter += generateNmagItemLines(nmagBarbarianHelmsExtended, 'nmagBarbarianHelmsExtended', 'NMAG Extended: Barbarian Helms');
+            filter += generateNmagItemLines(nmagAmazonWeapons, 'nmagAmazonWeapons', 'NMAG Extended: Amazon Weapons');
+            filter += generateNmagItemLines(nmagCirclets, 'nmagCirclets', 'NMAG Extended: Circlets');
 
             // === FILTER CLOSING ===
             if (globalSettings.hideJunk) {
@@ -5558,13 +7582,44 @@
                 'nmag-axes': 'nmagAxes',
                 'nmag-maces': 'nmagMaces',
                 'nmag-staves': 'nmagStaves',
+                'nmag-spears': 'nmagSpears',
                 'nmag-bows': 'nmagBows',
-                'nmag-light-armor': 'nmagLightArmor',
-                'nmag-heavy-armor': 'nmagHeavyArmor',
+                'nmag-armor': 'nmagArmor',
                 'nmag-shields-generic': 'nmagShieldsGeneric',
                 'nmag-shields-paladin': 'nmagShieldsPaladin',
                 'nmag-helms': 'nmagHelms',
-                'nmag-class-specific': 'nmagClassSpecific'
+                'nmag-druid-pelts': 'nmagDruidPelts',
+                'nmag-necro-heads': 'nmagNecroHeads',
+                'nmag-assassin-claws': 'nmagAssassinClaws',
+                'nmag-sorc-orbs': 'nmagSorcOrbs',
+                'nmag-daggers': 'nmagDaggers',
+                'nmag-wands': 'nmagWands',
+                'nmag-scepters': 'nmagScepters',
+                'nmag-barbarian-helms': 'nmagBarbarianHelms',
+                'nmag-polearms-extended': 'nmagPolearmsExtended',
+                'nmag-swords-extended': 'nmagSwordsExtended',
+                'nmag-axes-extended': 'nmagAxesExtended',
+                'nmag-maces-extended': 'nmagMacesExtended',
+                'nmag-staves-extended': 'nmagStavesExtended',
+                'nmag-spears-extended': 'nmagSpearsExtended',
+                'nmag-bows-extended': 'nmagBowsExtended',
+                'nmag-crossbows': 'nmagCrossbows',
+                'nmag-javelins': 'nmagJavelins',
+                'nmag-armor-extended': 'nmagArmorExtended',
+                'nmag-shields-extended': 'nmagShieldsExtended',
+                'nmag-paladin-shields-extended': 'nmagPaladinShieldsExtended',
+                'nmag-necromancer-shields-extended': 'nmagNecromancerShieldsExtended',
+                'nmag-helms-extended': 'nmagHelmsExtended',
+                'nmag-druid-pelts-extended': 'nmagDruidPeltsExtended',
+                'nmag-necro-heads-extended': 'nmagNecroHeadsExtended',
+                'nmag-assassin-claws-extended': 'nmagAssassinClawsExtended',
+                'nmag-sorc-orbs-extended': 'nmagSorcOrbsExtended',
+                'nmag-daggers-extended': 'nmagDaggersExtended',
+                'nmag-wands-extended': 'nmagWandsExtended',
+                'nmag-scepters-extended': 'nmagSceptersExtended',
+                'nmag-barbarian-helms-extended': 'nmagBarbarianHelmsExtended',
+                'nmag-amazon-weapons': 'nmagAmazonWeapons',
+                'nmag-circlets': 'nmagCirclets'
             };
             
             const stateCategory = categoryMap[category] || category;
@@ -5628,13 +7683,44 @@
                     'nmag-axes': nmagAxes,
                     'nmag-maces': nmagMaces,
                     'nmag-staves': nmagStaves,
+                    'nmag-spears': nmagSpears,
                     'nmag-bows': nmagBows,
-                    'nmag-light-armor': nmagLightArmor,
-                    'nmag-heavy-armor': nmagHeavyArmor,
+                    'nmag-armor': nmagArmor,
                     'nmag-shields-generic': nmagShieldsGeneric,
                     'nmag-shields-paladin': nmagShieldsPaladin,
                     'nmag-helms': nmagHelms,
-                    'nmag-class-specific': nmagClassSpecific
+                    'nmag-druid-pelts': nmagDruidPelts,
+                    'nmag-necro-heads': nmagNecroHeads,
+                    'nmag-assassin-claws': nmagAssassinClaws,
+                    'nmag-sorc-orbs': nmagSorcOrbs,
+                    'nmag-daggers': nmagDaggers,
+                    'nmag-wands': nmagWands,
+                    'nmag-scepters': nmagScepters,
+                    'nmag-barbarian-helms': nmagBarbarianHelms,
+                    'nmag-polearms-extended': nmagPolearmsExtended,
+                    'nmag-swords-extended': nmagSwordsExtended,
+                    'nmag-axes-extended': nmagAxesExtended,
+                    'nmag-maces-extended': nmagMacesExtended,
+                    'nmag-staves-extended': nmagStavesExtended,
+                    'nmag-spears-extended': nmagSpearsExtended,
+                    'nmag-bows-extended': nmagBowsExtended,
+                    'nmag-crossbows': nmagCrossbows,
+                    'nmag-javelins': nmagJavelins,
+                    'nmag-armor-extended': nmagArmorExtended,
+                    'nmag-shields-extended': nmagShieldsExtended,
+                    'nmag-paladin-shields-extended': nmagPaladinShieldsExtended,
+                    'nmag-necromancer-shields-extended': nmagNecromancerShieldsExtended,
+                    'nmag-helms-extended': nmagHelmsExtended,
+                    'nmag-druid-pelts-extended': nmagDruidPeltsExtended,
+                    'nmag-necro-heads-extended': nmagNecroHeadsExtended,
+                    'nmag-assassin-claws-extended': nmagAssassinClawsExtended,
+                    'nmag-sorc-orbs-extended': nmagSorcOrbsExtended,
+                    'nmag-daggers-extended': nmagDaggersExtended,
+                    'nmag-wands-extended': nmagWandsExtended,
+                    'nmag-scepters-extended': nmagSceptersExtended,
+                    'nmag-barbarian-helms-extended': nmagBarbarianHelmsExtended,
+                    'nmag-amazon-weapons': nmagAmazonWeapons,
+                    'nmag-circlets': nmagCirclets
                 };
                 itemsToUpdate = nmagCategories[category] || [];
             }
@@ -5726,13 +7812,40 @@
                 'nmagAxes': renderNmagAxesItems,
                 'nmagMaces': renderNmagMacesItems,
                 'nmagStaves': renderNmagStavesItems,
+                'nmagSpears': renderNmagSpearsItems,
                 'nmagBows': renderNmagBowsItems,
-                'nmagLightArmor': renderNmagLightArmorItems,
-                'nmagHeavyArmor': renderNmagHeavyArmorItems,
+                'nmagArmor': renderNmagArmorItems,
                 'nmagShieldsGeneric': renderNmagShieldsGenericItems,
                 'nmagShieldsPaladin': renderNmagShieldsPaladinItems,
                 'nmagHelms': renderNmagHelmsItems,
-                'nmagClassSpecific': renderNmagClassSpecificItems
+                'nmagDruidPelts': renderNmagDruidPeltsItems,
+                'nmagNecroHeads': renderNmagNecroHeadsItems,
+                'nmagAssassinClaws': renderNmagAssassinClawsItems,
+                'nmagSorcOrbs': renderNmagSorcOrbsItems,
+                'nmagPolearmsExtended': renderNmagPolearmsExtendedItems,
+                'nmagSwordsExtended': renderNmagSwordsExtendedItems,
+                'nmagAxesExtended': renderNmagAxesExtendedItems,
+                'nmagMacesExtended': renderNmagMacesExtendedItems,
+                'nmagStavesExtended': renderNmagStavesExtendedItems,
+                'nmagSpearsExtended': renderNmagSpearsExtendedItems,
+                'nmagBowsExtended': renderNmagBowsExtendedItems,
+                'nmagCrossbows': renderNmagCrossbowsItems,
+                'nmagJavelins': renderNmagJavelinsItems,
+                'nmagArmorExtended': renderNmagArmorExtendedItems,
+                'nmagShieldsExtended': renderNmagShieldsExtendedItems,
+                'nmagPaladinShieldsExtended': renderNmagPaladinShieldsExtendedItems,
+                'nmagNecromancerShieldsExtended': renderNmagNecromancerShieldsExtendedItems,
+                'nmagHelmsExtended': renderNmagHelmsExtendedItems,
+                'nmagDruidPeltsExtended': renderNmagDruidPeltsExtendedItems,
+                'nmagNecroHeadsExtended': renderNmagNecroHeadsExtendedItems,
+                'nmagAssassinClawsExtended': renderNmagAssassinClawsExtendedItems,
+                'nmagSorcOrbsExtended': renderNmagSorcOrbsExtendedItems,
+                'nmagDaggersExtended': renderNmagDaggersExtendedItems,
+                'nmagWandsExtended': renderNmagWandsExtendedItems,
+                'nmagSceptersExtended': renderNmagSceptersExtendedItems,
+                'nmagBarbarianHelmsExtended': renderNmagBarbarianHelmsExtendedItems,
+                'nmagAmazonWeapons': renderNmagAmazonWeaponsItems,
+                'nmagCirclets': renderNmagCircletsItems
             };
             
             const renderFunc = renderFunctions[stateCategory];
@@ -5775,12 +7888,10 @@
                 let maxSockets = baseItem?.max_sockets || 6;
                 
                 // Override for class-specific items if bases lookup failed
-                if (category === 'nmagClassSpecific') {
-                    if (itemKey === 'CL2') {
-                        maxSockets = 2; // Necro Shrunken Heads
-                    } else if (itemKey === 'CL1' || itemKey === 'CL5' || itemKey === 'WP11') {
-                        maxSockets = 3; // Druid Pelts, Assassin Claws, Sorceress Orbs
-                    }
+                if (category === 'nmagNecroHeads') {
+                    maxSockets = 2;
+                } else if (category === 'nmagDruidPelts' || category === 'nmagAssassinClaws' || category === 'nmagSorcOrbs') {
+                    maxSockets = 3;
                 }
                 
                 ['0', '2', '3', '4', '5', '6'].filter(sock => parseInt(sock) <= maxSockets).forEach(sock => {
@@ -6231,13 +8342,44 @@
             renderNmagAxesItems();
             renderNmagMacesItems();
             renderNmagStavesItems();
+            renderNmagSpearsItems();
             renderNmagBowsItems();
-            renderNmagLightArmorItems();
-            renderNmagHeavyArmorItems();
+            renderNmagArmorItems();
             renderNmagShieldsGenericItems();
             renderNmagShieldsPaladinItems();
             renderNmagHelmsItems();
-            renderNmagClassSpecificItems();
+            renderNmagDruidPeltsItems();
+            renderNmagNecroHeadsItems();
+            renderNmagAssassinClawsItems();
+            renderNmagSorcOrbsItems();
+            renderNmagDaggersItems();
+            renderNmagWandsItems();
+            renderNmagSceptersItems();
+            renderNmagBarbarianHelmsItems();
+            renderNmagPolearmsExtendedItems();
+            renderNmagSwordsExtendedItems();
+            renderNmagAxesExtendedItems();
+            renderNmagMacesExtendedItems();
+            renderNmagStavesExtendedItems();
+            renderNmagSpearsExtendedItems();
+            renderNmagBowsExtendedItems();
+            renderNmagCrossbowsItems();
+            renderNmagJavelinsItems();
+            renderNmagArmorExtendedItems();
+            renderNmagShieldsExtendedItems();
+            renderNmagPaladinShieldsExtendedItems();
+            renderNmagNecromancerShieldsExtendedItems();
+            renderNmagHelmsExtendedItems();
+            renderNmagDruidPeltsExtendedItems();
+            renderNmagNecroHeadsExtendedItems();
+            renderNmagAssassinClawsExtendedItems();
+            renderNmagSorcOrbsExtendedItems();
+            renderNmagDaggersExtendedItems();
+            renderNmagWandsExtendedItems();
+            renderNmagSceptersExtendedItems();
+            renderNmagBarbarianHelmsExtendedItems();
+            renderNmagAmazonWeaponsItems();
+            renderNmagCircletsItems();
             generateFilter();
         }
 
@@ -6302,13 +8444,44 @@
             renderNmagAxesItems();
             renderNmagMacesItems();
             renderNmagStavesItems();
+            renderNmagSpearsItems();
             renderNmagBowsItems();
-            renderNmagLightArmorItems();
-            renderNmagHeavyArmorItems();
+            renderNmagArmorItems();
             renderNmagShieldsGenericItems();
             renderNmagShieldsPaladinItems();
             renderNmagHelmsItems();
-            renderNmagClassSpecificItems();
+            renderNmagDruidPeltsItems();
+            renderNmagNecroHeadsItems();
+            renderNmagAssassinClawsItems();
+            renderNmagSorcOrbsItems();
+            renderNmagDaggersItems();
+            renderNmagWandsItems();
+            renderNmagSceptersItems();
+            renderNmagBarbarianHelmsItems();
+            renderNmagPolearmsExtendedItems();
+            renderNmagSwordsExtendedItems();
+            renderNmagAxesExtendedItems();
+            renderNmagMacesExtendedItems();
+            renderNmagStavesExtendedItems();
+            renderNmagSpearsExtendedItems();
+            renderNmagBowsExtendedItems();
+            renderNmagCrossbowsItems();
+            renderNmagJavelinsItems();
+            renderNmagArmorExtendedItems();
+            renderNmagShieldsExtendedItems();
+            renderNmagPaladinShieldsExtendedItems();
+            renderNmagNecromancerShieldsExtendedItems();
+            renderNmagHelmsExtendedItems();
+            renderNmagDruidPeltsExtendedItems();
+            renderNmagNecroHeadsExtendedItems();
+            renderNmagAssassinClawsExtendedItems();
+            renderNmagSorcOrbsExtendedItems();
+            renderNmagDaggersExtendedItems();
+            renderNmagWandsExtendedItems();
+            renderNmagSceptersExtendedItems();
+            renderNmagBarbarianHelmsExtendedItems();
+            renderNmagAmazonWeaponsItems();
+            renderNmagCircletsItems();
             generateFilter();
         }
 
@@ -6380,13 +8553,44 @@
         renderNmagAxesItems();
         renderNmagMacesItems();
         renderNmagStavesItems();
+        renderNmagSpearsItems();
         renderNmagBowsItems();
-        renderNmagLightArmorItems();
-        renderNmagHeavyArmorItems();
+        renderNmagArmorItems();
         renderNmagShieldsGenericItems();
         renderNmagShieldsPaladinItems();
         renderNmagHelmsItems();
-        renderNmagClassSpecificItems();
+        renderNmagDruidPeltsItems();
+        renderNmagNecroHeadsItems();
+        renderNmagAssassinClawsItems();
+        renderNmagSorcOrbsItems();
+        renderNmagDaggersItems();
+        renderNmagWandsItems();
+        renderNmagSceptersItems();
+        renderNmagBarbarianHelmsItems();
+        renderNmagPolearmsExtendedItems();
+        renderNmagSwordsExtendedItems();
+        renderNmagAxesExtendedItems();
+        renderNmagMacesExtendedItems();
+        renderNmagStavesExtendedItems();
+        renderNmagSpearsExtendedItems();
+        renderNmagBowsExtendedItems();
+        renderNmagCrossbowsItems();
+        renderNmagJavelinsItems();
+        renderNmagArmorExtendedItems();
+        renderNmagShieldsExtendedItems();
+        renderNmagPaladinShieldsExtendedItems();
+        renderNmagNecromancerShieldsExtendedItems();
+        renderNmagHelmsExtendedItems();
+        renderNmagDruidPeltsExtendedItems();
+        renderNmagNecroHeadsExtendedItems();
+        renderNmagAssassinClawsExtendedItems();
+        renderNmagSorcOrbsExtendedItems();
+        renderNmagDaggersExtendedItems();
+        renderNmagWandsExtendedItems();
+        renderNmagSceptersExtendedItems();
+        renderNmagBarbarianHelmsExtendedItems();
+        renderNmagAmazonWeaponsItems();
+        renderNmagCircletsItems();
         generateFilter();
     </script>
 

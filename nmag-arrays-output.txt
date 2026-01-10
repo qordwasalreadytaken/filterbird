@@ -1,0 +1,365 @@
+// ============================================================
+// NMAG ARRAYS - RESTRUCTURED
+// ============================================================
+// Main arrays: Items from nmag-list.txt only
+// Extended arrays: All other sockatable items
+// ============================================================
+
+        // === MAIN NMAG ARRAYS (items from nmag-list.txt) ===
+
+        const nmagPolearms = [
+            { name: "Thresher", code: "7s8", quality: "elite" },
+            { name: "Giant Thresher", code: "7wc", quality: "elite" },
+            { name: "Cryptic Axe", code: "7pa", quality: "elite" },
+            { name: "Mancatcher", code: "7br", quality: "elite" },
+            { name: "Colossus Voulge", code: "7vo", quality: "elite" },
+            { name: "Great Poleaxe", code: "7o7", quality: "elite" },
+            { name: "Poleaxe", code: "pax", quality: "normal" },
+            { name: "Scythe", code: "scy", quality: "normal" },
+            { name: "Halberd", code: "hal", quality: "normal" },
+            { name: "War Scythe", code: "wsc", quality: "normal" },
+            { name: "Bill", code: "9vo", quality: "exceptional" },
+            { name: "Battle Scythe", code: "9s8", quality: "exceptional" },
+            { name: "Partizan", code: "9pa", quality: "exceptional" },
+            { name: "Bec-de-Corbin", code: "9h7", quality: "exceptional" },
+            { name: "War Pike", code: "7p7", quality: "elite" },
+            { name: "Ghost Spear", code: "7st", quality: "elite" },
+            { name: "Stygian Pike", code: "7tr", quality: "elite" },
+            { name: "Pike", code: "pik", quality: "normal" },
+            { name: "Lance", code: "9p9", quality: "exceptional" },
+            { name: "War Fork", code: "9br", quality: "exceptional" },
+            { name: "Fuscina", code: "9tr", quality: "exceptional" },
+            { name: "Brandistock", code: "brn", quality: "normal" },
+            { name: "Matriarchal Spear", code: "amd", quality: "elite" },
+        ];
+        const nmagSwords = [
+            { name: "Phase Blade", code: "7cr", quality: "elite" },
+            { name: "Colossus Blade", code: "7gd", quality: "elite" },
+            { name: "Colossus Sword", code: "7fb", quality: "elite" },
+            { name: "Crystal Sword", code: "crs", quality: "normal" },
+            { name: "Broad Sword", code: "bsd", quality: "normal" },
+            { name: "Long Sword", code: "lsd", quality: "normal" },
+            { name: "Legend Sword", code: "72h", quality: "elite" },
+            { name: "Cryptic Sword", code: "7ls", quality: "elite" },
+            { name: "Conquest Sword", code: "7bs", quality: "elite" },
+            { name: "Dimensional Blade", code: "9cr", quality: "exceptional" },
+            { name: "Mythical Sword", code: "7wd", quality: "elite" },
+            { name: "Highland Blade", code: "7cm", quality: "elite" },
+            { name: "Balrog Blade", code: "7gs", quality: "elite" },
+            { name: "War Sword", code: "wsd", quality: "normal" },
+            { name: "Rune Sword", code: "9ls", quality: "exceptional" },
+            { name: "Claymore", code: "clm", quality: "normal" },
+            { name: "Champion Sword", code: "7b7", quality: "elite" },
+        ];
+        const nmagAxes = [
+            { name: "Berserker Axe", code: "7wa", quality: "elite" },
+            { name: "Ettin Axe", code: "72a", quality: "elite" },
+            { name: "Double Axe", code: "2ax", quality: "normal" },
+            { name: "War Axe", code: "wax", quality: "normal" },
+            { name: "Small Crescent", code: "7ax", quality: "elite" },
+            { name: "Glorious Axe", code: "7gi", quality: "elite" },
+            { name: "Military Pick", code: "mpi", quality: "normal" },
+            { name: "War Spike", code: "7mp", quality: "elite" },
+        ];
+        const nmagMaces = [
+            { name: "Thunder Maul", code: "7gm", quality: "elite" },
+            { name: "Scourge", code: "7fl", quality: "elite" },
+            { name: "Flail", code: "fla", quality: "normal" },
+            { name: "Legendary Mallet", code: "7wh", quality: "elite" },
+            { name: "Knout", code: "9fl", quality: "exceptional" },
+            { name: "Morning Star", code: "mst", quality: "normal" },
+            { name: "War Hammer", code: "whm", quality: "normal" },
+        ];
+        const nmagStaves = [
+            { name: "Archon Staff", code: "6ws", quality: "elite" },
+            { name: "War Staff", code: "wst", quality: "normal" },
+            { name: "Gnarled Staff", code: "cst", quality: "normal" },
+            { name: "Cedar Staff", code: "8cs", quality: "exceptional" },
+            { name: "Battle Staff", code: "bst", quality: "normal" },
+            { name: "Elder Staff", code: "6cs", quality: "elite" },
+            { name: "Gothic Staff", code: "8bs", quality: "exceptional" },
+            { name: "Shillelagh", code: "6bs", quality: "elite" },
+            { name: "Rune Staff", code: "8ws", quality: "exceptional" },
+            { name: "Jo Staff", code: "8ss", quality: "exceptional" },
+        ];
+        const nmagBows = [
+            { name: "Matriarchal Bow", code: "amb", quality: "elite" },
+            { name: "Grand Matron Bow", code: "amc", quality: "elite" },
+            { name: "Hydra Bow", code: "6lw", quality: "elite" },
+            { name: "Crusader Bow", code: "6l7", quality: "elite" },
+            { name: "Short Bow", code: "sbw", quality: "normal" },
+            { name: "Great Bow", code: "6cb", quality: "elite" },
+            { name: "Blade Bow", code: "6hb", quality: "elite" },
+            { name: "Hunters Bow", code: "hbw", quality: "normal" },
+            { name: "Long Bow", code: "lbw", quality: "normal" },
+            { name: "Demon Crossbow", code: "6rx", quality: "elite" },
+            { name: "Composite Bow", code: "cbw", quality: "normal" },
+            { name: "Diamond Bow", code: "6s7", quality: "elite" },
+            { name: "Short Battle Bow", code: "sbb", quality: "normal" },
+            { name: "Shadow Bow", code: "6lb", quality: "elite" },
+            { name: "Long Battle Bow", code: "lbb", quality: "normal" },
+            { name: "Razor Bow", code: "8hb", quality: "exceptional" },
+            { name: "Reflex Bow", code: "am2", quality: "normal" },
+            { name: "Stag Bow", code: "am1", quality: "normal" },
+            { name: "Edge Bow", code: "8sb", quality: "exceptional" },
+            { name: "Short Siege Bow", code: "8s8", quality: "exceptional" },
+            { name: "Cedar Bow", code: "8lb", quality: "exceptional" },
+            { name: "Gothic Bow", code: "8lw", quality: "exceptional" },
+            { name: "Crossbow", code: "mxb", quality: "normal" },
+            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional" },
+            { name: "Rune Bow", code: "8sw", quality: "exceptional" },
+            { name: "Short War Bow", code: "swb", quality: "normal" },
+            { name: "Double Bow", code: "8cb", quality: "exceptional" },
+            { name: "Ward Bow", code: "6sw", quality: "elite" },
+            { name: "Colossus Crossbow", code: "6lx", quality: "elite" },
+            { name: "Gorgon Crossbow", code: "6mx", quality: "elite" },
+        ];
+        const nmagArmor = [
+            { name: "Archon Plate", code: "utp", quality: "elite" },
+            { name: "Dusk Shroud", code: "uui", quality: "elite" },
+            { name: "Wyrmhide", code: "utu", quality: "elite" },
+            { name: "Mage Plate", code: "xtp", quality: "exceptional" },
+            { name: "Wire Fleece", code: "uea", quality: "elite" },
+            { name: "Boneweave", code: "utc", quality: "elite" },
+            { name: "Loricated Mail", code: "ung", quality: "elite" },
+            { name: "Balrog Skin", code: "ucl", quality: "elite" },
+            { name: "Hellforge Plate", code: "uul", quality: "elite" },
+            { name: "Scarab Husk", code: "urs", quality: "elite" },
+            { name: "Diamond Mail", code: "xng", quality: "exceptional" },
+            { name: "Breast Plate", code: "plt", quality: "normal" },
+            { name: "Shadow Plate", code: "uth", quality: "elite" },
+            { name: "Cuirass", code: "ucl", quality: "elite" },
+            { name: "Ring Mail", code: "rng", quality: "normal" },
+            { name: "Sacred Armor", code: "uar", quality: "elite" },
+            { name: "Lacquered Plate", code: "ula", quality: "elite" },
+            { name: "Great Hauberk", code: "urs", quality: "elite" },
+            { name: "Kraken Shell", code: "uhn", quality: "elite" },
+            { name: "Gothic Plate", code: "ufp", quality: "elite" },
+            { name: "Ornate Plate", code: "upl", quality: "elite" },
+            { name: "Ancient Armor", code: "uld", quality: "elite" },
+            { name: "Chaos Armor", code: "utu", quality: "elite" },
+            { name: "Tigulated Mail", code: "uml", quality: "elite" },
+            { name: "Trellised Armor", code: "ucl", quality: "elite" },
+            { name: "Sharktooth Armor", code: "uea", quality: "elite" },
+            { name: "Mesh Armor", code: "uuc", quality: "elite" },
+            { name: "Hard Leather Armor", code: "hla", quality: "normal" },
+        ];
+        const nmagShieldsGeneric = [
+            { name: "Monarch", code: "uit", quality: "elite" },
+            { name: "Bone Shield", code: "bsh", quality: "normal" },
+            { name: "Grim Shield", code: "xsh", quality: "exceptional" },
+            { name: "Heraldic Shield", code: "pa3", quality: "normal" },
+            { name: "Aerin Shield", code: "pa4", quality: "normal" },
+            { name: "Kite Shield", code: "kit", quality: "normal" },
+            { name: "Small Shield", code: "sml", quality: "normal" },
+            { name: "Hyperion", code: "urg", quality: "elite" },
+            { name: "Large Shield", code: "lrg", quality: "normal" },
+            { name: "Troll Nest", code: "ush", quality: "elite" },
+            { name: "Crown Shield", code: "pa5", quality: "normal" },
+            { name: "Dragon Shield", code: "xit", quality: "exceptional" },
+            { name: "Gothic Shield", code: "gts", quality: "normal" },
+            { name: "Heater", code: "uuc", quality: "elite" },
+        ];
+        const nmagShieldsPaladin = [
+            { name: "Sacred Targe", code: "pab", quality: "elite" },
+            { name: "Sacred Rondache", code: "pac", quality: "elite" },
+            { name: "Kurast Shield", code: "pad", quality: "elite" },
+            { name: "Zakarum Shield", code: "pae", quality: "elite" },
+            { name: "Vortex Shield", code: "paf", quality: "elite" },
+            { name: "Akaran Targe", code: "pa6", quality: "exceptional" },
+            { name: "Royal Shield", code: "paa", quality: "exceptional" },
+            { name: "Protector Shield", code: "pa8", quality: "exceptional" },
+            { name: "Gilded Shield", code: "pa9", quality: "exceptional" },
+            { name: "Rondache", code: "pa2", quality: "normal" },
+            { name: "Akaran Rondache", code: "pa7", quality: "exceptional" },
+            { name: "Targe", code: "pa1", quality: "normal" },
+        ];
+        const nmagHelms = [
+            { name: "Demonhead", code: "usk", quality: "elite" },
+            { name: "Bone Visage", code: "uh9", quality: "elite" },
+            { name: "Mask", code: "msk", quality: "normal" },
+            { name: "Diadem", code: "ci3", quality: "elite" },
+            { name: "Grand Crown", code: "xrn", quality: "exceptional" },
+            { name: "Tiara", code: "ci2", quality: "exceptional" },
+            { name: "Corona", code: "urn", quality: "elite" },
+            { name: "Cap", code: "cap", quality: "normal" },
+            { name: "Crown", code: "crn", quality: "normal" },
+            { name: "Great Helm", code: "ghm", quality: "normal" },
+            { name: "Death Mask", code: "xsk", quality: "exceptional" },
+            { name: "Bone Helm", code: "bhm", quality: "normal" },
+            { name: "Basinet", code: "xhl", quality: "exceptional" },
+            { name: "Helm", code: "hlm", quality: "normal" },
+        ];
+        const nmagDruidPelts = [
+            { name: "Wolf Head", code: "dr1", quality: "normal" },
+            { name: "Hawk Helm", code: "dr2", quality: "normal" },
+            { name: "Antlers", code: "dr3", quality: "normal" },
+            { name: "Falcon Mask", code: "dr4", quality: "normal" },
+            { name: "Spirit Mask", code: "dr5", quality: "normal" },
+            { name: "Alpha Helm", code: "dr6", quality: "exceptional" },
+            { name: "Griffon Headdress", code: "dr7", quality: "exceptional" },
+            { name: "Hunters Guise", code: "dr8", quality: "exceptional" },
+            { name: "Sacred Feathers", code: "dr9", quality: "exceptional" },
+            { name: "Totemic Mask", code: "dra", quality: "exceptional" },
+            { name: "Blood Spirit", code: "drb", quality: "elite" },
+            { name: "Sun Spirit", code: "drc", quality: "elite" },
+            { name: "Earth Spirit", code: "drd", quality: "elite" },
+            { name: "Sky Spirit", code: "dre", quality: "elite" },
+        ];
+        const nmagNecroHeads = [
+            { name: "Zombie Head", code: "ne2", quality: "normal" },
+            { name: "Gargoyle Head", code: "ne4", quality: "normal" },
+            { name: "Demon Head", code: "ne5", quality: "normal" },
+            { name: "Fetish Trophy", code: "ne7", quality: "exceptional" },
+        ];
+        const nmagAssassinClaws = [
+            { name: "Blade Talons", code: "btl", quality: "normal" },
+            { name: "Greater Claws", code: "9lw", quality: "exceptional" },
+            { name: "Greater Talons", code: "9tw", quality: "exceptional" },
+            { name: "Scissors Quhab", code: "9qr", quality: "exceptional" },
+            { name: "Suwayyah", code: "7ar", quality: "elite" },
+            { name: "Wrist Sword", code: "7wb", quality: "elite" },
+            { name: "Feral Claws", code: "7lw", quality: "elite" },
+            { name: "Runic Talons", code: "7tw", quality: "elite" },
+            { name: "Scissors Suwayyah", code: "7qr", quality: "elite" },
+        ];
+        const nmagSorcOrbs = [
+            { name: "Jareds Stone", code: "ob5", quality: "normal" },
+            { name: "Dimensional Shard", code: "obf", quality: "elite" },
+        ];
+
+        // === EXTENDED NMAG ARRAYS (other sockatable items) ===
+
+        const nmagPolearmsExtended = [];
+        const nmagSwordsExtended = [];
+        const nmagAxesExtended = [];
+        const nmagMacesExtended = [];
+        const nmagStavesExtended = [];
+        const nmagBowsExtended = [];
+        const nmagArmorExtended = [
+            { name: "Light Plate", code: "ltp", quality: "normal" },
+        ];
+        const nmagShieldsGenericExtended = [];
+        const nmagShieldsPaladinExtended = [];
+        const nmagHelmsExtended = [];
+        const nmagDruidPeltsExtended = [];
+        const nmagNecroHeadsExtended = [
+            { name: "Preserved Head", code: "ne1", quality: "normal" },
+            { name: "Unraveller Head", code: "ne3", quality: "normal" },
+            { name: "Mummified Trophy", code: "ne6", quality: "exceptional" },
+            { name: "Sexton Trophy", code: "ne8", quality: "exceptional" },
+            { name: "Cantor Trophy", code: "ne9", quality: "exceptional" },
+            { name: "Hierophant Trophy", code: "nea", quality: "exceptional" },
+            { name: "Minion Skull", code: "neb", quality: "elite" },
+            { name: "Overseer Skull", code: "ned", quality: "elite" },
+            { name: "Succubae Skull", code: "nee", quality: "elite" },
+            { name: "Bloodlord Skull", code: "nef", quality: "elite" },
+            { name: "Hellspawn Skull", code: "neg", quality: "elite" },
+        ];
+        const nmagAssassinClawsExtended = [
+            { name: "Katar", code: "ktr", quality: "normal" },
+            { name: "Wrist Blade", code: "wrb", quality: "normal" },
+            { name: "Hatchet Hands", code: "axf", quality: "normal" },
+            { name: "Cestus", code: "ces", quality: "normal" },
+            { name: "Claws", code: "clw", quality: "normal" },
+            { name: "Scissors Katar", code: "skr", quality: "normal" },
+            { name: "Quhab", code: "9ar", quality: "exceptional" },
+            { name: "Wrist Spike", code: "9wb", quality: "exceptional" },
+            { name: "Fascia", code: "9xf", quality: "exceptional" },
+            { name: "Hand Scythe", code: "9cs", quality: "exceptional" },
+            { name: "War Fist", code: "7xf", quality: "elite" },
+            { name: "Battle Cestus", code: "7cs", quality: "elite" },
+        ];
+        const nmagSorcOrbsExtended = [
+            { name: "Eagle Orb", code: "ob1", quality: "normal" },
+            { name: "Sacred Globe", code: "ob2", quality: "normal" },
+            { name: "Smoked Sphere", code: "ob3", quality: "normal" },
+            { name: "Clasped Orb", code: "ob4", quality: "normal" },
+            { name: "Glowing Orb", code: "ob6", quality: "exceptional" },
+            { name: "Crystalline Globe", code: "ob7", quality: "exceptional" },
+            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional" },
+            { name: "Sparkling Ball", code: "ob9", quality: "exceptional" },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional" },
+            { name: "Heavenly Stone", code: "obb", quality: "elite" },
+            { name: "Eldritch Orb", code: "obc", quality: "elite" },
+            { name: "Demon Heart", code: "obd", quality: "elite" },
+            { name: "Vortex Orb", code: "obe", quality: "elite" },
+        ];
+        const nmagDaggers = [
+            { name: "Fanged Knife", code: "7kr", quality: "elite" },
+            { name: "Dagger", code: "dgr", quality: "normal" },
+            { name: "Dirk", code: "dir", quality: "normal" },
+            { name: "Kris", code: "kri", quality: "normal" },
+            { name: "Blade", code: "bld", quality: "normal" },
+            { name: "Poignard", code: "9dg", quality: "exceptional" },
+            { name: "Rondel", code: "9di", quality: "exceptional" },
+            { name: "Cinquedeas", code: "9kr", quality: "exceptional" },
+            { name: "Stiletto", code: "9bl", quality: "exceptional" },
+            { name: "Bone Knife", code: "7dg", quality: "elite" },
+            { name: "Mithril Point", code: "7di", quality: "elite" },
+            { name: "Legend Spike", code: "7bl", quality: "elite" },
+        ];
+        const nmagWands = [
+            { name: "Bone Wand", code: "bwn", quality: "normal" },
+            { name: "Grave Wand", code: "9gw", quality: "exceptional" },
+            { name: "Wand", code: "wnd", quality: "normal" },
+            { name: "Yew Wand", code: "ywn", quality: "normal" },
+            { name: "Grim Wand", code: "gwn", quality: "normal" },
+            { name: "Burnt Wand", code: "9wn", quality: "exceptional" },
+            { name: "Petrified Wand", code: "9yw", quality: "exceptional" },
+            { name: "Tomb Wand", code: "9bw", quality: "exceptional" },
+            { name: "Polished Wand", code: "7wn", quality: "elite" },
+            { name: "Ghost Wand", code: "7yw", quality: "elite" },
+            { name: "Lich Wand", code: "7bw", quality: "elite" },
+            { name: "Unearthed Wand", code: "7gw", quality: "elite" },
+        ];
+        const nmagScepters = [
+            { name: "War Scepter", code: "wsp", quality: "normal" },
+            { name: "Divine Scepter", code: "9ws", quality: "exceptional" },
+            { name: "Caduceus", code: "7ws", quality: "elite" },
+            { name: "Scepter", code: "scp", quality: "normal" },
+            { name: "Grand Scepter", code: "gsc", quality: "normal" },
+            { name: "Rune Scepter", code: "9sc", quality: "exceptional" },
+            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional" },
+            { name: "Mighty Scepter", code: "7sc", quality: "elite" },
+            { name: "Seraph Rod", code: "7qs", quality: "elite" },
+        ];
+        const nmagBarbarianHelms = [
+            { name: "Horned Helm", code: "ba3", quality: "normal" },
+            { name: "Avenger Guard", code: "ba5", quality: "normal" },
+            { name: "Jawbone Visor", code: "ba6", quality: "exceptional" },
+            { name: "Destroyer Helm", code: "bad", quality: "elite" },
+            { name: "Jawbone Cap", code: "ba1", quality: "normal" },
+            { name: "Fanged Helm", code: "ba2", quality: "normal" },
+            { name: "Assault Helmet", code: "ba4", quality: "normal" },
+            { name: "Lion Helm", code: "ba7", quality: "exceptional" },
+            { name: "Rage Mask", code: "ba8", quality: "exceptional" },
+            { name: "Savage Helmet", code: "ba9", quality: "exceptional" },
+            { name: "Slayer Guard", code: "baa", quality: "exceptional" },
+            { name: "Carnage Helm", code: "bab", quality: "elite" },
+            { name: "Fury Visor", code: "bac", quality: "elite" },
+            { name: "Conqueror Crown", code: "bae", quality: "elite" },
+            { name: "Guardian Crown", code: "baf", quality: "elite" },
+        ];
+                const nmagAmazonWeapons = [
+            // Amazon spears and javelins not in other categories
+            { name: "Maiden Spear", code: "am3", quality: "normal" },
+            { name: "Maiden Pike", code: "am4", quality: "normal" },
+            { name: "Ceremonial Spear", code: "am8", quality: "exceptional" },
+            { name: "Ceremonial Pike", code: "am9", quality: "exceptional" },
+            { name: "Maiden Javelin", code: "am5", quality: "normal" },
+            { name: "Ceremonial Javelin", code: "ama", quality: "exceptional" },
+            { name: "Matriarchal Javelin", code: "amf", quality: "elite" },
+        ];
+                const nmagCrossbows = [
+            { name: "Demon Crossbow", code: "6rx", quality: "elite" },
+            { name: "Crossbow", code: "mxb", quality: "normal" },
+            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional" },
+            { name: "Colossus Crossbow", code: "6lx", quality: "elite" },
+            { name: "Gorgon Crossbow", code: "6mx", quality: "elite" },
+        ];
+                // nmagCirclets - Circlet and Coronet only (Tiara/Diadem are in nmagHelms from nmag-list.txt)
+        const nmagCirclets = [
+            { name: "Circlet", code: "ci0", quality: "normal" },
+            { name: "Coronet", code: "ci1", quality: "normal" },
+        ];

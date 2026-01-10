@@ -1,0 +1,203 @@
+Monarch		
+Flail		
+Archon	Plate	
+Crystal	Sword	
+Mage	Plate	
+Mancatcher		
+Thresher		
+Dusk	Shroud	
+Phase	Blade	
+Wire	Fleece	
+Giant	Thresher	
+Berserker	Axe	
+Great	Hauberk	
+Sacred	Armor	
+Sacred	Targe	
+Legend	Sword	
+Grand	Matron	Bow
+War	Pike	
+Colossus	Blade	
+Kraken	Shell	
+War	Scepter	
+Colossus	Voulge	
+Cryptic	Axe	
+Great	Poleaxe	
+Boneweave		
+Matriarchal	Bow	
+Loricated	Mail	
+Wyrmhide		
+Short	Bow	
+Great	Bow	
+Sacred	Rondache	
+Balrog	Skin	
+Lacquered	Plate	
+Broad	Sword	
+Greater	Talons	
+Hellforge	Plate	
+Scarab	Husk	
+Blade	Bow	
+Suwayyah		
+Runic	Talons	
+Diamond	Mail	
+Hunter's	Bow	
+Feral	Claws	
+Cryptic	Sword	
+Heraldic	Shield	
+Bone	Visage	
+Greater	Claws	
+Breast	Plate	
+Gnarled	Staff	
+Antlers		
+Colossus	Sword	
+Akaran	Targe	
+Long	Sword	
+Thunder	Maul	
+Kurast	Shield	
+Scissors	Suwayyah	
+Gothic	Plate	
+Scissors	Quhab	
+Wrist	Sword	
+Stygian	Pike	
+Royal	Shield	
+Long	Bow	
+Demon	Crossbow	
+Aerin	Shield	
+Protector	Shield	
+Cedar	Staff	
+Battle	Staff	
+Composite	Bow	
+Diamond	Bow	
+Conquest	Sword	
+Shadow	Plate	
+Vortex	Shield	
+Kite	Shield	
+Hunter's	Guise	
+Jared's	Stone	
+Spirit	Mask	
+Double	Axe	
+Dimensional	Blade	
+Mask		
+Bone	Wand	
+Divine	Scepter	
+Ettin	Axe	
+Totemic	Mask	
+Demonhead		
+Poleaxe		
+Short	Battle	Bow
+Elder	Staff	
+Caduceus		
+Shadow	Bow	
+Mythical	Sword	
+Gothic	Staff	
+Hydra	Bow	
+Highland	Blade	
+Cuirass		
+Gilded	Shield	
+Balrog	Blade	
+Horned	Helm	
+Rondache		
+Long	Battle	Bow
+War	Axe	
+Small	Shield	
+Grim	Shield	
+Scythe		
+Ornate	Plate	
+Akaran	Rondache	
+Gargoyle	Head	
+Ghost	Spear	
+Bone	Shield	
+Ancient	Armor	
+Zakarum	Shield	
+Ring	Mail	
+Razor	Bow	
+Hyperion		
+Halberd		
+Shillelagh		
+Matriarchal	Spear	
+Rune	Staff	
+Sun	Spirit	
+Small	Crescent	
+Hawk	Helm	
+Reflex	Bow	
+Earth	Spirit	
+War	Scythe	
+Scourge		
+Pike		
+Large	Shield	
+Troll	Nest	
+Stag	Bow	
+Diadem		
+Grand	Crown	
+Edge	Bow	
+Tiara		
+Chu-Ko-Nu		
+War	Sword	
+Crown	Shield	
+Fuscina		
+Bec-de-Corbin		
+Archon	Staff	
+Bill		
+Blood	Spirit	
+Alpha	Helm	
+Sacred	Feathers	
+Glorious	Axe	
+Demon	Head	
+Short	Siege	Bow
+Dimensional	Shard	
+Falcon	Mask	
+Legendary	Mallet	
+Wolf	Head	
+Cedar	Bow	
+Corona		
+Chaos	Armor	
+Dragon	Shield	
+War	Fork	
+Blade	Talons	
+Battle	Scythe	
+Military	Pick	
+Fetish	Trophy	
+Crusader	Bow	
+Gothic	Bow	
+War	Staff	
+Crossbow		
+Zombie	Head	
+Colossus	Crossbow	
+Griffon	Headdress	
+Gothic	Shield	
+Partizan		
+Avenger	Guard	
+Grave	Wand	
+Rune	Bow	
+Knout		
+Fanged	Knife	
+Gorgon	Crossbow	
+Short	War	Bow
+Cap		
+Jawbone	Visor	
+Crown		
+Destroyer	Helm	
+Brandistock		
+Morning	Star	
+Rune	Sword	
+Claymore		
+Tigulated	Mail	
+War	Hammer	
+Great	Helm	
+Double	Bow	
+War	Spike	
+Trellised	Armor	
+Sky	Spirit	
+Death	Mask	
+Sharktooth	Armor	
+Heater		
+Champion	Sword	
+Hard	Leather	Armor
+Bone	Helm	
+Lance		
+Targe		
+Ward	Bow	
+Basinet		
+Helm		
+Jo	Staff	
+Mesh	Armor	
+
