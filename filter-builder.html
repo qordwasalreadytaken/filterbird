@@ -3052,23 +3052,23 @@
         ];
 
         const magicCraftingBases = [
-            { name: "Vampirebone Gloves (ILVL 85+)", code: "vgl", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Sharkskin Gloves (ILVL 85+)", code: "xvg", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Bramble Mitts (ILVL 85+)", code: "uvg", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Chain Gloves (ILVL 85+)", code: "mgl", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Heavy Bracers (ILVL 85+)", code: "xmg", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Vambraces (ILVL 85+)", code: "umg", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Demonhide Gloves (ILVL 85+)", code: "xlg", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Wyrmhide Boots (ILVL 85+)", code: "ulb", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Demonhide Boots (ILVL 85+)", code: "xlb", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Battle Boots (ILVL 85+)", code: "tbt", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Scarabshell Boots (ILVL 85+)", code: "xtb", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Boneweave Boots (ILVL 85+)", code: "utb", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Vampirefang Belt (ILVL 85+)", code: "uvc", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Mithril Coil (ILVL 85+)", code: "zmb", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Mesh Belt (ILVL 85+)", code: "umc", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Berserker Axe (ILVL 85+)", code: "72a", minIlvl: 85, desc: "Crafting Base" },
-            { name: "Phase Blade (ILVL 85+)", code: "7sb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Vampirebone Gloves", code: "vgl", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Sharkskin Gloves", code: "xvg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Bramble Mitts", code: "uvg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Chain Gloves", code: "mgl", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Heavy Bracers", code: "xmg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Vambraces", code: "umg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Demonhide Gloves", code: "xlg", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Wyrmhide Boots", code: "ulb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Demonhide Boots", code: "xlb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Battle Boots", code: "tbt", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Scarabshell Boots", code: "xtb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Boneweave Boots", code: "utb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Vampirefang Belt", code: "uvc", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Mithril Coil", code: "zmb", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Mesh Belt", code: "umc", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Berserker Axe", code: "72a", minIlvl: 85, desc: "Crafting Base" },
+            { name: "Phase Blade", code: "7sb", minIlvl: 85, desc: "Crafting Base" },
         ];
 
         // Rare items data
@@ -7010,7 +7010,12 @@
                         if (stateCategory === 'magicJewelry' || stateCategory === 'magicCharms') {
                             line += ` %WHITE%[%ILVL%]`;
                         } else if (item.desc) {
-                            line += ` {${item.desc}}`;
+                            // Use grey color for crafting base description
+                            if (stateCategory === 'magicCrafting') {
+                                line += ` %GREY%{${item.desc}}`;
+                            } else {
+                                line += ` {${item.desc}}`;
+                            }
                         }
                         
                         // Add style reference for border/background/notification if needed
@@ -7056,7 +7061,7 @@
             }
             
             function generateNmagItemLines(items, stateCategory, sectionTitle) {
-                let lines = `// ${sectionTitle}\n`;
+                let lines = `\t// ${sectionTitle}\n`;
                 let hasItems = false;
                 
                 items.forEach((item, idx) => {
@@ -7066,7 +7071,7 @@
                         hasItems = true;
                         
                         // Add comment with item name and code for debugging
-                        lines += `// ${item.name} (${item.code})\n`;
+                        lines += `\t// ${item.name} (${item.code})\n`;
                         
                         // Generate filter level condition if enabled
                         const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
@@ -7125,11 +7130,11 @@
                         // Handle ETH filter - generate two lines when 'any'
                         if (state.ethFilter === 'eth-only') {
                             // ETH only - gray font for everything
-                            let line = `ItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
+                            let line = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
                             lines += line + '\n';
                         } else if (state.ethFilter === 'non-eth') {
                             // Non-ETH only - white name, gray sockets
-                            let line = `ItemDisplay[NMAG ${item.code} !ETH${sockCondition}${edCondition}${filtLvlCondition}]:`;
+                            let line = `\tItemDisplay[NMAG ${item.code} !ETH${sockCondition}${edCondition}${filtLvlCondition}]:`;
                             if (state.useCustomColors && state.fontColor) {
                                 line += ` %${state.fontColor}%`;
                             } else {
@@ -7140,11 +7145,11 @@
                         } else {
                             // 'any' - generate two lines: ETH first (gray), then non-ETH (white+gray)
                             // Line 1: ETH - all gray
-                            let ethLine = `ItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
+                            let ethLine = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
                             lines += ethLine + '\n';
                             
                             // Line 2: Non-ETH - white name, gray sockets
-                            let nonEthLine = `ItemDisplay[NMAG ${item.code}${sockCondition}${edCondition}${filtLvlCondition}]:`;
+                            let nonEthLine = `\tItemDisplay[NMAG ${item.code}${sockCondition}${edCondition}${filtLvlCondition}]:`;
                             if (state.useCustomColors && state.fontColor) {
                                 nonEthLine += ` %${state.fontColor}%`;
                             } else {
@@ -7180,7 +7185,7 @@
                             edCondition = ' ED>9';
                         }
                         
-                        lines += `ItemDisplay[NMAG ${item.code}${ethCondition}${sockCondition}${edCondition}]:\n`;
+                        lines += `\tItemDisplay[NMAG ${item.code}${ethCondition}${sockCondition}${edCondition}]:\n`;
                     }
                 });
                 
@@ -7219,7 +7224,8 @@
             filter += 'ItemDisplay[(MAG OR RARE OR SET OR UNI OR CRAFT) ID]: %NAME%\n\n';
 
             // === NMAG RUNEWORD BASES ===
-            filter += '\n// === NMAG RUNEWORD BASES ===\n\n';
+            filter += '\n// === NMAG RUNEWORD BASES ===\n';
+            filter += 'EnableIf[NMAG]\n\n';
             filter += generateNmagItemLines(nmagPolearms, 'nmagPolearms', 'NMAG: Polearms (Insight, Infinity, Obedience)');
             filter += generateNmagItemLines(nmagSwords, 'nmagSwords', 'NMAG: Swords (Spirit, Grief)');
             filter += generateNmagItemLines(nmagAxes, 'nmagAxes', 'NMAG: Axes (Grief, Beast, Death)');
@@ -7266,6 +7272,10 @@
             filter += generateNmagItemLines(nmagBarbarianHelmsExtended, 'nmagBarbarianHelmsExtended', 'NMAG Extended: Barbarian Helms');
             filter += generateNmagItemLines(nmagAmazonWeapons, 'nmagAmazonWeapons', 'NMAG Extended: Amazon Weapons');
             filter += generateNmagItemLines(nmagCirclets, 'nmagCirclets', 'NMAG Extended: Circlets');
+
+            // Close NMAG block
+            filter += '\n\tItemDisplay[]: %NAME%\n';
+            filter += 'EndIf[]\n';
 
             // === FILTER CLOSING ===
             if (globalSettings.hideJunk) {
@@ -7532,6 +7542,18 @@
             html += '</div>';
             html += '</div>';
 
+            // ILVL Setting for Magic Crafting Bases
+            if (category === 'magic-crafting') {
+                html += '<div class="modal-section">';
+                html += '<h4 class="modal-section-title">Item Level Requirement</h4>';
+                html += '<div class="modal-control-group">';
+                html += '<label style="display: block; margin-bottom: 8px;">Minimum ILVL for crafting bases:</label>';
+                html += '<input type="number" id="group-crafting-ilvl" min="1" max="99" value="85" style="width: 80px; padding: 6px; border: 1px solid #555; background: #1a1a1a; color: #fff; border-radius: 4px;">';
+                html += '<p style="color: #888; font-size: 12px; margin-top: 8px;">This will update the ILVL requirement for all crafting base items.</p>';
+                html += '</div>';
+                html += '</div>';
+            }
+
             // Display Options Section
             html += '<div class="modal-section">';
             html += '<h4 class="modal-section-title">Display Options</h4>';
@@ -7665,6 +7687,15 @@
             const chatNotification = document.getElementById('group-notifications')?.checked || false;
             const biggerClickbox = document.getElementById('group-bigger-clickbox')?.checked || false;
             
+            // Get crafting base ILVL setting
+            let craftingIlvl = null;
+            if (category === 'magic-crafting') {
+                const ilvlInput = document.getElementById('group-crafting-ilvl');
+                if (ilvlInput) {
+                    craftingIlvl = parseInt(ilvlInput.value) || 85;
+                }
+            }
+            
             // Apply to all items in the category
             if (!filterState[stateCategory]) filterState[stateCategory] = {};
             
@@ -7795,6 +7826,15 @@
                 // Apply bigger clickbox
                 if (biggerClickbox) {
                     filterState[stateCategory][itemKey].biggerClickbox = true;
+                }
+                
+                // Apply crafting ILVL change
+                if (craftingIlvl !== null && category === 'magic-crafting') {
+                    // Update the item's minIlvl
+                    item.minIlvl = craftingIlvl;
+                    // Also update the item name to reflect the new ILVL
+                    const baseName = item.name.replace(/\(ILVL \d+\+\)/, '').trim();
+                    item.name = `${baseName} (ILVL ${craftingIlvl}+)`;
                 }
             });
             
