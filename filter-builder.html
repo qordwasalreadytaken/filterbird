@@ -2349,7 +2349,8 @@
         </div>
     </div>
 
-    <script src="data/item_metadata.js"></script>
+    <!-- item_metadata.js no longer needed - max_sockets is stored in NMAG item arrays -->
+    <!-- <script src="data/item_metadata.js"></script> -->
     <script>
         // Available font colors for filter
         const FONT_COLORS = [
@@ -3099,566 +3100,566 @@
 
         // NMAG Runeword Bases
         const nmagPolearms = [
-            { name: "Thresher", code: "7s8", quality: "elite" },
-            { name: "Giant Thresher", code: "7wc", quality: "elite" },
-            { name: "Cryptic Axe", code: "7pa", quality: "elite" },
-            { name: "Mancatcher", code: "7br", quality: "elite" },
-            { name: "Colossus Voulge", code: "7vo", quality: "elite" },
-            { name: "Great Poleaxe", code: "7o7", quality: "elite" },
-            { name: "Poleaxe", code: "pax", quality: "normal" },
-            { name: "Scythe", code: "scy", quality: "normal" },
-            { name: "Halberd", code: "hal", quality: "normal" },
-            { name: "War Scythe", code: "wsc", quality: "normal" },
-            { name: "Bill", code: "9vo", quality: "exceptional" },
-            { name: "Battle Scythe", code: "9s8", quality: "exceptional" },
-            { name: "Partizan", code: "9pa", quality: "exceptional" },
-            { name: "Bec-de-Corbin", code: "9h7", quality: "exceptional" },
-            { name: "War Pike", code: "7p7", quality: "elite" },
-            { name: "Ghost Spear", code: "7st", quality: "elite" },
-            { name: "Stygian Pike", code: "7tr", quality: "elite" },
-            { name: "Pike", code: "pik", quality: "normal" },
-            { name: "Lance", code: "9p9", quality: "exceptional" },
-            { name: "War Fork", code: "9br", quality: "exceptional" },
-            { name: "Fuscina", code: "9tr", quality: "exceptional" },
-            { name: "Brandistock", code: "brn", quality: "normal" },
-            { name: "Matriarchal Spear", code: "amd", quality: "elite" },
+            { name: "Thresher", code: "7s8", quality: "elite", max_sockets: 5 },
+            { name: "Giant Thresher", code: "7wc", quality: "elite", max_sockets: 6 },
+            { name: "Cryptic Axe", code: "7pa", quality: "elite", max_sockets: 5 },
+            { name: "Mancatcher", code: "7br", quality: "elite", max_sockets: 5 },
+            { name: "Colossus Voulge", code: "7vo", quality: "elite", max_sockets: 4 },
+            { name: "Great Poleaxe", code: "7h7", quality: "elite", max_sockets: 6 },
+            { name: "Poleaxe", code: "pax", quality: "normal", max_sockets: 5 },
+            { name: "Scythe", code: "scy", quality: "normal", max_sockets: 5 },
+            { name: "Halberd", code: "hal", quality: "normal", max_sockets: 6 },
+            { name: "War Scythe", code: "wsc", quality: "normal", max_sockets: 6 },
+            { name: "Bill", code: "9vo", quality: "exceptional", max_sockets: 4 },
+            { name: "Battle Scythe", code: "9s8", quality: "exceptional", max_sockets: 5 },
+            { name: "Partizan", code: "9pa", quality: "exceptional", max_sockets: 5 },
+            { name: "Bec-de-Corbin", code: "9h9", quality: "exceptional", max_sockets: 6 },
+            { name: "War Pike", code: "7p7", quality: "elite", max_sockets: 6 },
+            { name: "Ghost Spear", code: "7st", quality: "elite", max_sockets: 6 },
+            { name: "Stygian Pike", code: "7tr", quality: "elite", max_sockets: 4 },
+            { name: "Pike", code: "pik", quality: "normal", max_sockets: 6 },
+            { name: "Lance", code: "9p9", quality: "exceptional", max_sockets: 6 },
+            { name: "War Fork", code: "9br", quality: "exceptional", max_sockets: 5 },
+            { name: "Fuscina", code: "9tr", quality: "exceptional", max_sockets: 4 },
+            { name: "Brandistock", code: "brn", quality: "normal", max_sockets: 5 },
+            { name: "Matriarchal Spear", code: "amd", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagSwords = [
-            { name: "Phase Blade", code: "7cr", quality: "elite" },
-            { name: "Colossus Blade", code: "7gd", quality: "elite" },
-            { name: "Colossus Sword", code: "7fb", quality: "elite" },
-            { name: "Crystal Sword", code: "crs", quality: "normal" },
-            { name: "Broad Sword", code: "bsd", quality: "normal" },
-            { name: "Long Sword", code: "lsd", quality: "normal" },
-            { name: "Legend Sword", code: "72h", quality: "elite" },
-            { name: "Cryptic Sword", code: "7ls", quality: "elite" },
-            { name: "Conquest Sword", code: "7bs", quality: "elite" },
-            { name: "Dimensional Blade", code: "9cr", quality: "exceptional" },
-            { name: "Mythical Sword", code: "7wd", quality: "elite" },
-            { name: "Highland Blade", code: "7cm", quality: "elite" },
-            { name: "Balrog Blade", code: "7gs", quality: "elite" },
-            { name: "War Sword", code: "wsd", quality: "normal" },
-            { name: "Rune Sword", code: "9ls", quality: "exceptional" },
-            { name: "Claymore", code: "clm", quality: "normal" },
-            { name: "Champion Sword", code: "7b7", quality: "elite" },
+            { name: "Phase Blade", code: "7cr", quality: "elite", max_sockets: 6 },
+            { name: "Colossus Blade", code: "7gd", quality: "elite", max_sockets: 6 },
+            { name: "Colossus Sword", code: "7fb", quality: "elite", max_sockets: 5 },
+            { name: "Crystal Sword", code: "crs", quality: "normal", max_sockets: 6 },
+            { name: "Broad Sword", code: "bsd", quality: "normal", max_sockets: 4 },
+            { name: "Long Sword", code: "lsd", quality: "normal", max_sockets: 4 },
+            { name: "Legend Sword", code: "72h", quality: "elite", max_sockets: 3 },
+            { name: "Cryptic Sword", code: "7ls", quality: "elite", max_sockets: 4 },
+            { name: "Conquest Sword", code: "7bs", quality: "elite", max_sockets: 4 },
+            { name: "Dimensional Blade", code: "9cr", quality: "exceptional", max_sockets: 6 },
+            { name: "Mythical Sword", code: "7wd", quality: "elite", max_sockets: 3 },
+            { name: "Highland Blade", code: "7cm", quality: "elite", max_sockets: 4 },
+            { name: "Balrog Blade", code: "7gs", quality: "elite", max_sockets: 4 },
+            { name: "War Sword", code: "wsd", quality: "normal", max_sockets: 3 },
+            { name: "Rune Sword", code: "9ls", quality: "exceptional", max_sockets: 4 },
+            { name: "Claymore", code: "clm", quality: "normal", max_sockets: 4 },
+            { name: "Champion Sword", code: "7b7", quality: "elite", max_sockets: 4 },
         ];
 
         const nmagAxes = [
-            { name: "Berserker Axe", code: "7wa", quality: "elite" },
-            { name: "Ettin Axe", code: "72a", quality: "elite" },
-            { name: "Double Axe", code: "2ax", quality: "normal" },
-            { name: "War Axe", code: "wax", quality: "normal" },
-            { name: "Small Crescent", code: "7ax", quality: "elite" },
-            { name: "Glorious Axe", code: "7gi", quality: "elite" },
-            { name: "Military Pick", code: "mpi", quality: "normal" },
-            { name: "War Spike", code: "7mp", quality: "elite" },
+            { name: "Berserker Axe", code: "7wa", quality: "elite", max_sockets: 6 },
+            { name: "Ettin Axe", code: "72a", quality: "elite", max_sockets: 5 },
+            { name: "Double Axe", code: "2ax", quality: "normal", max_sockets: 5 },
+            { name: "War Axe", code: "wax", quality: "normal", max_sockets: 6 },
+            { name: "Small Crescent", code: "7ax", quality: "elite", max_sockets: 4 },
+            { name: "Glorious Axe", code: "7gi", quality: "elite", max_sockets: 6 },
+            { name: "Military Pick", code: "mpi", quality: "normal", max_sockets: 6 },
+            { name: "War Spike", code: "7mp", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagMaces = [
-            { name: "Thunder Maul", code: "7gm", quality: "elite" },
-            { name: "Scourge", code: "7fl", quality: "elite" },
-            { name: "Flail", code: "fla", quality: "normal" },
-            { name: "Legendary Mallet", code: "7wh", quality: "elite" },
-            { name: "Knout", code: "9fl", quality: "exceptional" },
-            { name: "Morning Star", code: "mst", quality: "normal" },
-            { name: "War Hammer", code: "whm", quality: "normal" },
+            { name: "Thunder Maul", code: "7gm", quality: "elite", max_sockets: 6 },
+            { name: "Scourge", code: "7fl", quality: "elite", max_sockets: 5 },
+            { name: "Flail", code: "fla", quality: "normal", max_sockets: 5 },
+            { name: "Legendary Mallet", code: "7wh", quality: "elite", max_sockets: 4 },
+            { name: "Knout", code: "9fl", quality: "exceptional", max_sockets: 5 },
+            { name: "Morning Star", code: "mst", quality: "normal", max_sockets: 3 },
+            { name: "War Hammer", code: "whm", quality: "normal", max_sockets: 4 },
         ];
 
         const nmagStaves = [
-            { name: "Archon Staff", code: "6ws", quality: "elite" },
-            { name: "War Staff", code: "wst", quality: "normal" },
-            { name: "Gnarled Staff", code: "cst", quality: "normal" },
-            { name: "Cedar Staff", code: "8cs", quality: "exceptional" },
-            { name: "Battle Staff", code: "bst", quality: "normal" },
-            { name: "Elder Staff", code: "6cs", quality: "elite" },
-            { name: "Gothic Staff", code: "8bs", quality: "exceptional" },
-            { name: "Shillelagh", code: "6bs", quality: "elite" },
-            { name: "Rune Staff", code: "8ws", quality: "exceptional" },
-            { name: "Jo Staff", code: "8ss", quality: "exceptional" },
+            { name: "Archon Staff", code: "6ws", quality: "elite", max_sockets: 6 },
+            { name: "War Staff", code: "wst", quality: "normal", max_sockets: 6 },
+            { name: "Gnarled Staff", code: "cst", quality: "normal", max_sockets: 4 },
+            { name: "Cedar Staff", code: "8cs", quality: "exceptional", max_sockets: 4 },
+            { name: "Battle Staff", code: "bst", quality: "normal", max_sockets: 4 },
+            { name: "Elder Staff", code: "6cs", quality: "elite", max_sockets: 4 },
+            { name: "Gothic Staff", code: "8bs", quality: "exceptional", max_sockets: 4 },
+            { name: "Shillelagh", code: "6bs", quality: "elite", max_sockets: 4 },
+            { name: "Rune Staff", code: "8ws", quality: "exceptional", max_sockets: 6 },
+            { name: "Jo Staff", code: "8ss", quality: "exceptional", max_sockets: 2 },
         ];
 
         const nmagSpears = [
-            { name: "War Pike", code: "7p7", quality: "elite" },
-            { name: "Ghost Spear", code: "7st", quality: "elite" },
-            { name: "Stygian Pike", code: "7tr", quality: "elite" },
-            { name: "Lance", code: "9p9", quality: "exceptional" },
-            { name: "Pike", code: "pik", quality: "normal" },
-            { name: "Fuscina", code: "9tr", quality: "exceptional" },
-            { name: "War Fork", code: "9br", quality: "exceptional" },
-            { name: "Brandistock", code: "brn", quality: "normal" },
-            { name: "Matriarchal Spear", code: "amd", quality: "elite" },
+            { name: "War Pike", code: "7p7", quality: "elite", max_sockets: 6 },
+            { name: "Ghost Spear", code: "7st", quality: "elite", max_sockets: 6 },
+            { name: "Stygian Pike", code: "7tr", quality: "elite", max_sockets: 4 },
+            { name: "Lance", code: "9p9", quality: "exceptional", max_sockets: 6 },
+            { name: "Pike", code: "pik", quality: "normal", max_sockets: 6 },
+            { name: "Fuscina", code: "9tr", quality: "exceptional", max_sockets: 4 },
+            { name: "War Fork", code: "9br", quality: "exceptional", max_sockets: 5 },
+            { name: "Brandistock", code: "brn", quality: "normal", max_sockets: 5 },
+            { name: "Matriarchal Spear", code: "amd", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagBows = [
-            { name: "Matriarchal Bow", code: "amb", quality: "elite" },
-            { name: "Grand Matron Bow", code: "amc", quality: "elite" },
-            { name: "Hydra Bow", code: "6lw", quality: "elite" },
-            { name: "Crusader Bow", code: "6l7", quality: "elite" },
-            { name: "Short Bow", code: "sbw", quality: "normal" },
-            { name: "Great Bow", code: "6cb", quality: "elite" },
-            { name: "Blade Bow", code: "6hb", quality: "elite" },
-            { name: "Hunters Bow", code: "hbw", quality: "normal" },
-            { name: "Long Bow", code: "lbw", quality: "normal" },
-            { name: "Demon Crossbow", code: "6rx", quality: "elite" },
-            { name: "Composite Bow", code: "cbw", quality: "normal" },
-            { name: "Diamond Bow", code: "6s7", quality: "elite" },
-            { name: "Short Battle Bow", code: "sbb", quality: "normal" },
-            { name: "Shadow Bow", code: "6lb", quality: "elite" },
-            { name: "Long Battle Bow", code: "lbb", quality: "normal" },
-            { name: "Razor Bow", code: "8hb", quality: "exceptional" },
-            { name: "Reflex Bow", code: "am2", quality: "normal" },
-            { name: "Stag Bow", code: "am1", quality: "normal" },
-            { name: "Edge Bow", code: "8sb", quality: "exceptional" },
-            { name: "Short Siege Bow", code: "8s8", quality: "exceptional" },
-            { name: "Cedar Bow", code: "8lb", quality: "exceptional" },
-            { name: "Gothic Bow", code: "8lw", quality: "exceptional" },
-            { name: "Crossbow", code: "mxb", quality: "normal" },
-            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional" },
-            { name: "Rune Bow", code: "8sw", quality: "exceptional" },
-            { name: "Short War Bow", code: "swb", quality: "normal" },
-            { name: "Double Bow", code: "8cb", quality: "exceptional" },
-            { name: "Ward Bow", code: "6sw", quality: "elite" },
-            { name: "Colossus Crossbow", code: "6lx", quality: "elite" },
-            { name: "Gorgon Crossbow", code: "6mx", quality: "elite" },
+            { name: "Matriarchal Bow", code: "amb", quality: "elite", max_sockets: 5 },
+            { name: "Grand Matron Bow", code: "amc", quality: "elite", max_sockets: 5 },
+            { name: "Hydra Bow", code: "6lw", quality: "elite", max_sockets: 6 },
+            { name: "Crusader Bow", code: "6l7", quality: "elite", max_sockets: 6 },
+            { name: "Short Bow", code: "sbw", quality: "normal", max_sockets: 3 },
+            { name: "Great Bow", code: "6cb", quality: "elite", max_sockets: 4 },
+            { name: "Blade Bow", code: "6hb", quality: "elite", max_sockets: 4 },
+            { name: "Hunters Bow", code: "hbw", quality: "normal", max_sockets: 4 },
+            { name: "Long Bow", code: "lbw", quality: "normal", max_sockets: 5 },
+            { name: "Demon Crossbow", code: "6rx", quality: "elite", max_sockets: 5 },
+            { name: "Composite Bow", code: "cbw", quality: "normal", max_sockets: 4 },
+            { name: "Diamond Bow", code: "6s7", quality: "elite", max_sockets: 5 },
+            { name: "Short Battle Bow", code: "sbb", quality: "normal", max_sockets: 5 },
+            { name: "Shadow Bow", code: "6lb", quality: "elite", max_sockets: 5 },
+            { name: "Long Battle Bow", code: "lbb", quality: "normal", max_sockets: 6 },
+            { name: "Razor Bow", code: "8hb", quality: "exceptional", max_sockets: 4 },
+            { name: "Reflex Bow", code: "am2", quality: "normal", max_sockets: 5 },
+            { name: "Stag Bow", code: "am1", quality: "normal", max_sockets: 5 },
+            { name: "Edge Bow", code: "8sb", quality: "exceptional", max_sockets: 3 },
+            { name: "Short Siege Bow", code: "8s8", quality: "exceptional", max_sockets: 5 },
+            { name: "Cedar Bow", code: "8lb", quality: "exceptional", max_sockets: 5 },
+            { name: "Gothic Bow", code: "8lw", quality: "exceptional", max_sockets: 6 },
+            { name: "Crossbow", code: "mxb", quality: "normal", max_sockets: 4 },
+            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional", max_sockets: 5 },
+            { name: "Rune Bow", code: "8sw", quality: "exceptional", max_sockets: 5 },
+            { name: "Short War Bow", code: "swb", quality: "normal", max_sockets: 5 },
+            { name: "Double Bow", code: "8cb", quality: "exceptional", max_sockets: 4 },
+            { name: "Ward Bow", code: "6sw", quality: "elite", max_sockets: 5 },
+            { name: "Colossus Crossbow", code: "6hx", quality: "elite", max_sockets: 6 },
+            { name: "Gorgon Crossbow", code: "6mx", quality: "elite", max_sockets: 4 },
         ];
 
         // Armor (Light + Heavy combined) from nmag-list.txt
         const nmagArmor = [
-            { name: "Archon Plate", code: "utp", quality: "elite" },
-            { name: "Mage Plate", code: "xtp", quality: "exceptional" },
-            { name: "Dusk Shroud", code: "uui", quality: "elite" },
-            { name: "Wire Fleece", code: "utu", quality: "elite" },
-            { name: "Great Hauberk", code: "urs", quality: "elite" },
-            { name: "Sacred Armor", code: "uar", quality: "elite" },
-            { name: "Boneweave", code: "uhn", quality: "elite" },
-            { name: "Wyrmhide", code: "uea", quality: "elite" },
-            { name: "Loricated Mail", code: "ucl", quality: "elite" },
-            { name: "Balrog Skin", code: "upl", quality: "elite" },
-            { name: "Lacquered Plate", code: "uth", quality: "elite" },
-            { name: "Scarab Husk", code: "ula", quality: "elite" },
-            { name: "Hellforge Plate", code: "ult", quality: "elite" },
-            { name: "Kraken Shell", code: "uld", quality: "elite" },
-            { name: "Diamond Mail", code: "ung", quality: "elite" },
-            { name: "Shadow Plate", code: "uul", quality: "elite" },
-            { name: "Tigulated Mail", code: "xcl", quality: "exceptional" },
-            { name: "Cuirass", code: "xrs", quality: "exceptional" },
-            { name: "Breast Plate", code: "brs", quality: "normal" },
-            { name: "Ancient Armor", code: "aar", quality: "normal" },
-            { name: "Sharktooth Armor", code: "xld", quality: "exceptional" },
-            { name: "Ornate Plate", code: "xar", quality: "exceptional" },
-            { name: "Ring Mail", code: "rng", quality: "normal" },
-            { name: "Trellised Armor", code: "xtu", quality: "exceptional" },
-            { name: "Hard Leather Armor", code: "hla", quality: "normal" },
-            { name: "Gothic Plate", code: "gth", quality: "normal" },
-            { name: "Chaos Armor", code: "xul", quality: "exceptional" },
+            { name: "Archon Plate", code: "utp", quality: "elite", max_sockets: 4 },
+            { name: "Mage Plate", code: "xtp", quality: "exceptional", max_sockets: 3 },
+            { name: "Dusk Shroud", code: "uui", quality: "elite", max_sockets: 4 },
+            { name: "Wire Fleece", code: "utu", quality: "elite", max_sockets: 4 },
+            { name: "Great Hauberk", code: "urs", quality: "elite", max_sockets: 4 },
+            { name: "Sacred Armor", code: "uar", quality: "elite", max_sockets: 4 },
+            { name: "Boneweave", code: "uhn", quality: "elite", max_sockets: 4 },
+            { name: "Wyrmhide", code: "uea", quality: "elite", max_sockets: 4 },
+            { name: "Loricated Mail", code: "ucl", quality: "elite", max_sockets: 4 },
+            { name: "Balrog Skin", code: "upl", quality: "elite", max_sockets: 4 },
+            { name: "Lacquered Plate", code: "uth", quality: "elite", max_sockets: 4 },
+            { name: "Scarab Husk", code: "ula", quality: "elite", max_sockets: 4 },
+            { name: "Hellforge Plate", code: "ult", quality: "elite", max_sockets: 4 },
+            { name: "Kraken Shell", code: "uld", quality: "elite", max_sockets: 4 },
+            { name: "Diamond Mail", code: "ung", quality: "elite", max_sockets: 4 },
+            { name: "Shadow Plate", code: "uul", quality: "elite", max_sockets: 4 },
+            { name: "Tigulated Mail", code: "xcl", quality: "exceptional", max_sockets: 3 },
+            { name: "Cuirass", code: "xrs", quality: "exceptional", max_sockets: 3 },
+            { name: "Breast Plate", code: "brs", quality: "normal", max_sockets: 3 },
+            { name: "Ancient Armor", code: "aar", quality: "normal", max_sockets: 4 },
+            { name: "Sharktooth Armor", code: "xld", quality: "exceptional", max_sockets: 3 },
+            { name: "Ornate Plate", code: "xar", quality: "exceptional", max_sockets: 4 },
+            { name: "Ring Mail", code: "rng", quality: "normal", max_sockets: 3 },
+            { name: "Trellised Armor", code: "xtu", quality: "exceptional", max_sockets: 2 },
+            { name: "Hard Leather Armor", code: "hla", quality: "normal", max_sockets: 2 },
+            { name: "Gothic Plate", code: "gth", quality: "normal", max_sockets: 4 },
+            { name: "Chaos Armor", code: "xul", quality: "exceptional", max_sockets: 4 },
         ];
 
         const nmagShieldsGeneric = [
-            { name: "Monarch", code: "uit", quality: "elite" },
-            { name: "Bone Shield", code: "bsh", quality: "normal" },
-            { name: "Grim Shield", code: "xsh", quality: "exceptional" },
-            { name: "Heraldic Shield", code: "pa3", quality: "normal" },
-            { name: "Aerin Shield", code: "pa4", quality: "normal" },
-            { name: "Kite Shield", code: "kit", quality: "normal" },
-            { name: "Small Shield", code: "sml", quality: "normal" },
-            { name: "Hyperion", code: "urg", quality: "elite" },
-            { name: "Large Shield", code: "lrg", quality: "normal" },
-            { name: "Troll Nest", code: "ush", quality: "elite" },
-            { name: "Crown Shield", code: "pa5", quality: "normal" },
-            { name: "Dragon Shield", code: "xit", quality: "exceptional" },
-            { name: "Gothic Shield", code: "gts", quality: "normal" },
-            { name: "Heater", code: "uuc", quality: "elite" },
+            { name: "Monarch", code: "uit", quality: "elite", max_sockets: 4 },
+            { name: "Bone Shield", code: "bsh", quality: "normal", max_sockets: 2 },
+            { name: "Grim Shield", code: "xsh", quality: "exceptional", max_sockets: 2 },
+            { name: "Heraldic Shield", code: "pa3", quality: "normal", max_sockets: 4 },
+            { name: "Aerin Shield", code: "pa4", quality: "normal", max_sockets: 4 },
+            { name: "Kite Shield", code: "kit", quality: "normal", max_sockets: 3 },
+            { name: "Small Shield", code: "sml", quality: "normal", max_sockets: 2 },
+            { name: "Hyperion", code: "urg", quality: "elite", max_sockets: 3 },
+            { name: "Large Shield", code: "lrg", quality: "normal", max_sockets: 3 },
+            { name: "Troll Nest", code: "ush", quality: "elite", max_sockets: 3 },
+            { name: "Crown Shield", code: "pa5", quality: "normal", max_sockets: 4 },
+            { name: "Dragon Shield", code: "xit", quality: "exceptional", max_sockets: 3 },
+            { name: "Gothic Shield", code: "gts", quality: "normal", max_sockets: 3 },
+            { name: "Heater", code: "uuc", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagShieldsPaladin = [
-            { name: "Sacred Targe", code: "pab", quality: "elite" },
-            { name: "Sacred Rondache", code: "pac", quality: "elite" },
-            { name: "Kurast Shield", code: "pad", quality: "elite" },
-            { name: "Zakarum Shield", code: "pae", quality: "elite" },
-            { name: "Vortex Shield", code: "paf", quality: "elite" },
-            { name: "Akaran Targe", code: "pa6", quality: "exceptional" },
-            { name: "Royal Shield", code: "paa", quality: "exceptional" },
-            { name: "Protector Shield", code: "pa8", quality: "exceptional" },
-            { name: "Gilded Shield", code: "pa9", quality: "exceptional" },
-            { name: "Rondache", code: "pa2", quality: "normal" },
-            { name: "Akaran Rondache", code: "pa7", quality: "exceptional" },
-            { name: "Targe", code: "pa1", quality: "normal" },
+            { name: "Sacred Targe", code: "pab", quality: "elite", max_sockets: 4 },
+            { name: "Sacred Rondache", code: "pac", quality: "elite", max_sockets: 4 },
+            { name: "Kurast Shield", code: "pad", quality: "elite", max_sockets: 4 },
+            { name: "Zakarum Shield", code: "pae", quality: "elite", max_sockets: 4 },
+            { name: "Vortex Shield", code: "paf", quality: "elite", max_sockets: 4 },
+            { name: "Akaran Targe", code: "pa6", quality: "exceptional", max_sockets: 4 },
+            { name: "Royal Shield", code: "paa", quality: "exceptional", max_sockets: 4 },
+            { name: "Protector Shield", code: "pa8", quality: "exceptional", max_sockets: 4 },
+            { name: "Gilded Shield", code: "pa9", quality: "exceptional", max_sockets: 4 },
+            { name: "Rondache", code: "pa2", quality: "normal", max_sockets: 4 },
+            { name: "Akaran Rondache", code: "pa7", quality: "exceptional", max_sockets: 4 },
+            { name: "Targe", code: "pa1", quality: "normal", max_sockets: 4 },
         ];
 
         const nmagHelms = [
-            { name: "Demonhead", code: "usk", quality: "elite" },
-            { name: "Bone Visage", code: "uh9", quality: "elite" },
-            { name: "Mask", code: "msk", quality: "normal" },
-            { name: "Diadem", code: "ci3", quality: "elite" },
-            { name: "Grand Crown", code: "xrn", quality: "exceptional" },
-            { name: "Tiara", code: "ci2", quality: "exceptional" },
-            { name: "Corona", code: "urn", quality: "elite" },
-            { name: "Cap", code: "cap", quality: "normal" },
-            { name: "Crown", code: "crn", quality: "normal" },
-            { name: "Great Helm", code: "ghm", quality: "normal" },
-            { name: "Death Mask", code: "xsk", quality: "exceptional" },
-            { name: "Bone Helm", code: "bhm", quality: "normal" },
-            { name: "Basinet", code: "xhl", quality: "exceptional" },
-            { name: "Helm", code: "hlm", quality: "normal" },
+            { name: "Demonhead", code: "usk", quality: "elite", max_sockets: 3 },
+            { name: "Bone Visage", code: "uh9", quality: "elite", max_sockets: 3 },
+            { name: "Mask", code: "msk", quality: "normal", max_sockets: 3 },
+            { name: "Diadem", code: "ci3", quality: "elite", max_sockets: 3 },
+            { name: "Grand Crown", code: "xrn", quality: "exceptional", max_sockets: 3 },
+            { name: "Tiara", code: "ci2", quality: "exceptional", max_sockets: 3 },
+            { name: "Corona", code: "urn", quality: "elite", max_sockets: 3 },
+            { name: "Cap", code: "cap", quality: "normal", max_sockets: 2 },
+            { name: "Crown", code: "crn", quality: "normal", max_sockets: 3 },
+            { name: "Great Helm", code: "ghm", quality: "normal", max_sockets: 3 },
+            { name: "Death Mask", code: "xsk", quality: "exceptional", max_sockets: 3 },
+            { name: "Bone Helm", code: "bhm", quality: "normal", max_sockets: 2 },
+            { name: "Basinet", code: "xhl", quality: "exceptional", max_sockets: 2 },
+            { name: "Helm", code: "hlm", quality: "normal", max_sockets: 2 },
         ];
 
         const nmagDruidPelts = [
-            { name: "Wolf Head", code: "dr1", quality: "normal" },
-            { name: "Hawk Helm", code: "dr2", quality: "normal" },
-            { name: "Antlers", code: "dr3", quality: "normal" },
-            { name: "Falcon Mask", code: "dr4", quality: "normal" },
-            { name: "Spirit Mask", code: "dr5", quality: "normal" },
-            { name: "Alpha Helm", code: "dr6", quality: "exceptional" },
-            { name: "Griffon Headdress", code: "dr7", quality: "exceptional" },
-            { name: "Hunters Guise", code: "dr8", quality: "exceptional" },
-            { name: "Sacred Feathers", code: "dr9", quality: "exceptional" },
-            { name: "Totemic Mask", code: "dra", quality: "exceptional" },
-            { name: "Blood Spirit", code: "drb", quality: "elite" },
-            { name: "Sun Spirit", code: "drc", quality: "elite" },
-            { name: "Earth Spirit", code: "drd", quality: "elite" },
-            { name: "Sky Spirit", code: "dre", quality: "elite" },
+            { name: "Wolf Head", code: "dr1", quality: "normal", max_sockets: 3 },
+            { name: "Hawk Helm", code: "dr2", quality: "normal", max_sockets: 3 },
+            { name: "Antlers", code: "dr3", quality: "normal", max_sockets: 3 },
+            { name: "Falcon Mask", code: "dr4", quality: "normal", max_sockets: 3 },
+            { name: "Spirit Mask", code: "dr5", quality: "normal", max_sockets: 3 },
+            { name: "Alpha Helm", code: "dr6", quality: "exceptional", max_sockets: 3 },
+            { name: "Griffon Headdress", code: "dr7", quality: "exceptional", max_sockets: 3 },
+            { name: "Hunters Guise", code: "dr8", quality: "exceptional", max_sockets: 3 },
+            { name: "Sacred Feathers", code: "dr9", quality: "exceptional", max_sockets: 3 },
+            { name: "Totemic Mask", code: "dra", quality: "exceptional", max_sockets: 3 },
+            { name: "Blood Spirit", code: "drb", quality: "elite", max_sockets: 3 },
+            { name: "Sun Spirit", code: "drc", quality: "elite", max_sockets: 3 },
+            { name: "Earth Spirit", code: "drd", quality: "elite", max_sockets: 3 },
+            { name: "Sky Spirit", code: "dre", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagNecroHeads = [
-            { name: "Preserved Head", code: "ne1", quality: "normal" },
-            { name: "Zombie Head", code: "ne2", quality: "normal" },
-            { name: "Unraveller Head", code: "ne3", quality: "normal" },
-            { name: "Gargoyle Head", code: "ne4", quality: "normal" },
-            { name: "Demon Head", code: "ne5", quality: "normal" },
-            { name: "Mummified Trophy", code: "ne6", quality: "exceptional" },
-            { name: "Fetish Trophy", code: "ne7", quality: "exceptional" },
-            { name: "Sexton Trophy", code: "ne8", quality: "exceptional" },
-            { name: "Cantor Trophy", code: "ne9", quality: "exceptional" },
-            { name: "Hierophant Trophy", code: "nea", quality: "exceptional" },
-            { name: "Minion Skull", code: "neb", quality: "elite" },
-            { name: "Overseer Skull", code: "ned", quality: "elite" },
-            { name: "Succubae Skull", code: "nee", quality: "elite" },
-            { name: "Bloodlord Skull", code: "nef", quality: "elite" },
-            { name: "Hellspawn Skull", code: "neg", quality: "elite" },
+            { name: "Preserved Head", code: "ne1", quality: "normal", max_sockets: 2 },
+            { name: "Zombie Head", code: "ne2", quality: "normal", max_sockets: 2 },
+            { name: "Unraveller Head", code: "ne3", quality: "normal", max_sockets: 2 },
+            { name: "Gargoyle Head", code: "ne4", quality: "normal", max_sockets: 2 },
+            { name: "Demon Head", code: "ne5", quality: "normal", max_sockets: 2 },
+            { name: "Mummified Trophy", code: "ne6", quality: "exceptional", max_sockets: 2 },
+            { name: "Fetish Trophy", code: "ne7", quality: "exceptional", max_sockets: 2 },
+            { name: "Sexton Trophy", code: "ne8", quality: "exceptional", max_sockets: 2 },
+            { name: "Cantor Trophy", code: "ne9", quality: "exceptional", max_sockets: 2 },
+            { name: "Hierophant Trophy", code: "nea", quality: "exceptional", max_sockets: 2 },
+            { name: "Minion Skull", code: "neb", quality: "elite", max_sockets: 2 },
+            { name: "Overseer Skull", code: "ned", quality: "elite", max_sockets: 2 },
+            { name: "Succubae Skull", code: "nee", quality: "elite", max_sockets: 2 },
+            { name: "Bloodlord Skull", code: "nef", quality: "elite", max_sockets: 2 },
+            { name: "Hellspawn Skull", code: "neg", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagAssassinClaws = [
-            { name: "Katar", code: "ktr", quality: "normal" },
-            { name: "Wrist Blade", code: "wrb", quality: "normal" },
-            { name: "Hatchet Hands", code: "axf", quality: "normal" },
-            { name: "Cestus", code: "ces", quality: "normal" },
-            { name: "Claws", code: "clw", quality: "normal" },
-            { name: "Blade Talons", code: "btl", quality: "normal" },
-            { name: "Scissors Katar", code: "skr", quality: "normal" },
-            { name: "Quhab", code: "9ar", quality: "exceptional" },
-            { name: "Wrist Spike", code: "9wb", quality: "exceptional" },
-            { name: "Fascia", code: "9xf", quality: "exceptional" },
-            { name: "Hand Scythe", code: "9cs", quality: "exceptional" },
-            { name: "Greater Claws", code: "9lw", quality: "exceptional" },
-            { name: "Greater Talons", code: "9tw", quality: "exceptional" },
-            { name: "Scissors Quhab", code: "9qr", quality: "exceptional" },
-            { name: "Suwayyah", code: "7ar", quality: "elite" },
-            { name: "Wrist Sword", code: "7wb", quality: "elite" },
-            { name: "War Fist", code: "7xf", quality: "elite" },
-            { name: "Battle Cestus", code: "7cs", quality: "elite" },
-            { name: "Feral Claws", code: "7lw", quality: "elite" },
-            { name: "Runic Talons", code: "7tw", quality: "elite" },
-            { name: "Scissors Suwayyah", code: "7qr", quality: "elite" },
+            { name: "Katar", code: "ktr", quality: "normal", max_sockets: 2 },
+            { name: "Wrist Blade", code: "wrb", quality: "normal", max_sockets: 2 },
+            { name: "Hatchet Hands", code: "axf", quality: "normal", max_sockets: 2 },
+            { name: "Cestus", code: "ces", quality: "normal", max_sockets: 2 },
+            { name: "Claws", code: "clw", quality: "normal", max_sockets: 3 },
+            { name: "Blade Talons", code: "btl", quality: "normal", max_sockets: 3 },
+            { name: "Scissors Katar", code: "skr", quality: "normal", max_sockets: 3 },
+            { name: "Quhab", code: "9ar", quality: "exceptional", max_sockets: 3 },
+            { name: "Wrist Spike", code: "9wb", quality: "exceptional", max_sockets: 2 },
+            { name: "Fascia", code: "9xf", quality: "exceptional", max_sockets: 2 },
+            { name: "Hand Scythe", code: "9cs", quality: "exceptional", max_sockets: 2 },
+            { name: "Greater Claws", code: "9lw", quality: "exceptional", max_sockets: 3 },
+            { name: "Greater Talons", code: "9tw", quality: "exceptional", max_sockets: 3 },
+            { name: "Scissors Quhab", code: "9qr", quality: "exceptional", max_sockets: 3 },
+            { name: "Suwayyah", code: "7ar", quality: "elite", max_sockets: 3 },
+            { name: "Wrist Sword", code: "7wb", quality: "elite", max_sockets: 3 },
+            { name: "War Fist", code: "7xf", quality: "elite", max_sockets: 2 },
+            { name: "Battle Cestus", code: "7cs", quality: "elite", max_sockets: 2 },
+            { name: "Feral Claws", code: "7lw", quality: "elite", max_sockets: 3 },
+            { name: "Runic Talons", code: "7tw", quality: "elite", max_sockets: 3 },
+            { name: "Scissors Suwayyah", code: "7qr", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagSorcOrbs = [
-            { name: "Eagle Orb", code: "ob1", quality: "normal" },
-            { name: "Sacred Globe", code: "ob2", quality: "normal" },
-            { name: "Smoked Sphere", code: "ob3", quality: "normal" },
-            { name: "Clasped Orb", code: "ob4", quality: "normal" },
-            { name: "Jareds Stone", code: "ob5", quality: "normal" },
-            { name: "Glowing Orb", code: "ob6", quality: "exceptional" },
-            { name: "Crystalline Globe", code: "ob7", quality: "exceptional" },
-            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional" },
-            { name: "Sparkling Ball", code: "ob9", quality: "exceptional" },
-            { name: "Swirling Crystal", code: "oba", quality: "exceptional" },
-            { name: "Heavenly Stone", code: "obb", quality: "elite" },
-            { name: "Eldritch Orb", code: "obc", quality: "elite" },
-            { name: "Demon Heart", code: "obd", quality: "elite" },
-            { name: "Vortex Orb", code: "obe", quality: "elite" },
-            { name: "Dimensional Shard", code: "obf", quality: "elite" },
+            { name: "Eagle Orb", code: "ob1", quality: "normal", max_sockets: 2 },
+            { name: "Sacred Globe", code: "ob2", quality: "normal", max_sockets: 2 },
+            { name: "Smoked Sphere", code: "ob3", quality: "normal", max_sockets: 2 },
+            { name: "Clasped Orb", code: "ob4", quality: "normal", max_sockets: 2 },
+            { name: "Jareds Stone", code: "ob5", quality: "normal", max_sockets: 3 },
+            { name: "Glowing Orb", code: "ob6", quality: "exceptional", max_sockets: 2 },
+            { name: "Crystalline Globe", code: "ob7", quality: "exceptional", max_sockets: 2 },
+            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional", max_sockets: 2 },
+            { name: "Sparkling Ball", code: "ob9", quality: "exceptional", max_sockets: 2 },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional", max_sockets: 3 },
+            { name: "Heavenly Stone", code: "obb", quality: "elite", max_sockets: 2 },
+            { name: "Eldritch Orb", code: "obc", quality: "elite", max_sockets: 2 },
+            { name: "Demon Heart", code: "obd", quality: "elite", max_sockets: 2 },
+            { name: "Vortex Orb", code: "obe", quality: "elite", max_sockets: 2 },
+            { name: "Dimensional Shard", code: "obf", quality: "elite", max_sockets: 3 },
         ];
 
         // Extended NMAG categories - additional sockatable bases
         const nmagDaggers = [
-            { name: "Dagger", code: "dgr", quality: "normal" },
-            { name: "Dirk", code: "dir", quality: "normal" },
-            { name: "Kris", code: "kri", quality: "normal" },
-            { name: "Blade", code: "bld", quality: "normal" },
-            { name: "Poignard", code: "9dg", quality: "exceptional" },
-            { name: "Rondel", code: "9di", quality: "exceptional" },
-            { name: "Cinquedeas", code: "9kr", quality: "exceptional" },
-            { name: "Stiletto", code: "9bl", quality: "exceptional" },
-            { name: "Bone Knife", code: "7dg", quality: "elite" },
-            { name: "Mithril Point", code: "7di", quality: "elite" },
-            { name: "Fanged Knife", code: "7kr", quality: "elite" },
-            { name: "Legend Spike", code: "7bl", quality: "elite" },
+            { name: "Dagger", code: "dgr", quality: "normal", max_sockets: 1 },
+            { name: "Dirk", code: "dir", quality: "normal", max_sockets: 1 },
+            { name: "Kris", code: "kri", quality: "normal", max_sockets: 3 },
+            { name: "Blade", code: "bld", quality: "normal", max_sockets: 2 },
+            { name: "Poignard", code: "9dg", quality: "exceptional", max_sockets: 1 },
+            { name: "Rondel", code: "9di", quality: "exceptional", max_sockets: 1 },
+            { name: "Cinquedeas", code: "9kr", quality: "exceptional", max_sockets: 3 },
+            { name: "Stiletto", code: "9bl", quality: "exceptional", max_sockets: 2 },
+            { name: "Bone Knife", code: "7dg", quality: "elite", max_sockets: 1 },
+            { name: "Mithril Point", code: "7di", quality: "elite", max_sockets: 1 },
+            { name: "Fanged Knife", code: "7kr", quality: "elite", max_sockets: 3 },
+            { name: "Legend Spike", code: "7bl", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagWands = [
-            { name: "Wand", code: "wnd", quality: "normal" },
-            { name: "Yew Wand", code: "ywn", quality: "normal" },
-            { name: "Bone Wand", code: "bwn", quality: "normal" },
-            { name: "Grim Wand", code: "gwn", quality: "normal" },
-            { name: "Burnt Wand", code: "9wn", quality: "exceptional" },
-            { name: "Petrified Wand", code: "9yw", quality: "exceptional" },
-            { name: "Tomb Wand", code: "9bw", quality: "exceptional" },
-            { name: "Grave Wand", code: "9gw", quality: "exceptional" },
-            { name: "Polished Wand", code: "7wn", quality: "elite" },
-            { name: "Ghost Wand", code: "7yw", quality: "elite" },
-            { name: "Lich Wand", code: "7bw", quality: "elite" },
-            { name: "Unearthed Wand", code: "7gw", quality: "elite" },
+            { name: "Wand", code: "wnd", quality: "normal", max_sockets: 1 },
+            { name: "Yew Wand", code: "ywn", quality: "normal", max_sockets: 1 },
+            { name: "Bone Wand", code: "bwn", quality: "normal", max_sockets: 2 },
+            { name: "Grim Wand", code: "gwn", quality: "normal", max_sockets: 2 },
+            { name: "Burnt Wand", code: "9wn", quality: "exceptional", max_sockets: 1 },
+            { name: "Petrified Wand", code: "9yw", quality: "exceptional", max_sockets: 2 },
+            { name: "Tomb Wand", code: "9bw", quality: "exceptional", max_sockets: 2 },
+            { name: "Grave Wand", code: "9gw", quality: "exceptional", max_sockets: 2 },
+            { name: "Polished Wand", code: "7wn", quality: "elite", max_sockets: 2 },
+            { name: "Ghost Wand", code: "7yw", quality: "elite", max_sockets: 2 },
+            { name: "Lich Wand", code: "7bw", quality: "elite", max_sockets: 2 },
+            { name: "Unearthed Wand", code: "7gw", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagScepters = [
-            { name: "Scepter", code: "scp", quality: "normal" },
-            { name: "Grand Scepter", code: "gsc", quality: "normal" },
-            { name: "War Scepter", code: "wsp", quality: "normal" },
-            { name: "Rune Scepter", code: "9sc", quality: "exceptional" },
-            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional" },
-            { name: "Divine Scepter", code: "9ws", quality: "exceptional" },
-            { name: "Mighty Scepter", code: "7sc", quality: "elite" },
-            { name: "Seraph Rod", code: "7qs", quality: "elite" },
-            { name: "Caduceus", code: "7ws", quality: "elite" },
+            { name: "Scepter", code: "scp", quality: "normal", max_sockets: 2 },
+            { name: "Grand Scepter", code: "gsc", quality: "normal", max_sockets: 3 },
+            { name: "War Scepter", code: "wsp", quality: "normal", max_sockets: 5 },
+            { name: "Rune Scepter", code: "9sc", quality: "exceptional", max_sockets: 2 },
+            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional", max_sockets: 3 },
+            { name: "Divine Scepter", code: "9ws", quality: "exceptional", max_sockets: 5 },
+            { name: "Mighty Scepter", code: "7sc", quality: "elite", max_sockets: 2 },
+            { name: "Seraph Rod", code: "7qs", quality: "elite", max_sockets: 3 },
+            { name: "Caduceus", code: "7ws", quality: "elite", max_sockets: 5 },
         ];
 
         const nmagBarbarianHelms = [
-            { name: "Jawbone Cap", code: "ba1", quality: "normal" },
-            { name: "Fanged Helm", code: "ba2", quality: "normal" },
-            { name: "Horned Helm", code: "ba3", quality: "normal" },
-            { name: "Assault Helmet", code: "ba4", quality: "normal" },
-            { name: "Avenger Guard", code: "ba5", quality: "normal" },
-            { name: "Jawbone Visor", code: "ba6", quality: "exceptional" },
-            { name: "Lion Helm", code: "ba7", quality: "exceptional" },
-            { name: "Rage Mask", code: "ba8", quality: "exceptional" },
-            { name: "Savage Helmet", code: "ba9", quality: "exceptional" },
-            { name: "Slayer Guard", code: "baa", quality: "exceptional" },
-            { name: "Carnage Helm", code: "bab", quality: "elite" },
-            { name: "Fury Visor", code: "bac", quality: "elite" },
-            { name: "Destroyer Helm", code: "bad", quality: "elite" },
-            { name: "Conqueror Crown", code: "bae", quality: "elite" },
-            { name: "Guardian Crown", code: "baf", quality: "elite" },
+            { name: "Jawbone Cap", code: "ba1", quality: "normal", max_sockets: 3 },
+            { name: "Fanged Helm", code: "ba2", quality: "normal", max_sockets: 3 },
+            { name: "Horned Helm", code: "ba3", quality: "normal", max_sockets: 3 },
+            { name: "Assault Helmet", code: "ba4", quality: "normal", max_sockets: 3 },
+            { name: "Avenger Guard", code: "ba5", quality: "normal", max_sockets: 3 },
+            { name: "Jawbone Visor", code: "ba6", quality: "exceptional", max_sockets: 3 },
+            { name: "Lion Helm", code: "ba7", quality: "exceptional", max_sockets: 3 },
+            { name: "Rage Mask", code: "ba8", quality: "exceptional", max_sockets: 3 },
+            { name: "Savage Helmet", code: "ba9", quality: "exceptional", max_sockets: 3 },
+            { name: "Slayer Guard", code: "baa", quality: "exceptional", max_sockets: 3 },
+            { name: "Carnage Helm", code: "bab", quality: "elite", max_sockets: 3 },
+            { name: "Fury Visor", code: "bac", quality: "elite", max_sockets: 3 },
+            { name: "Destroyer Helm", code: "bad", quality: "elite", max_sockets: 3 },
+            { name: "Conqueror Crown", code: "bae", quality: "elite", max_sockets: 3 },
+            { name: "Guardian Crown", code: "baf", quality: "elite", max_sockets: 3 },
         ];
 
         // ===== Other NMAG base items to follow =====
         // Extended arrays contain all sockatable items NOT in nmag-list.txt
 
         const nmagPolearmsExtended = [
-            { name: "Bardiche", code: "bar", quality: "normal" },
-            { name: "Voulge", code: "vou", quality: "normal" },
-            { name: "War Scythe", code: "wsc", quality: "normal" },
-            { name: "Lochaber Axe", code: "9b7", quality: "exceptional" },
-            { name: "Bill", code: "9vo", quality: "exceptional" },
-            { name: "Partizan", code: "9pa", quality: "exceptional" },
-            { name: "Grim Scythe", code: "9wc", quality: "exceptional" },
-            { name: "Ogre Axe", code: "7o7", quality: "elite" },
+            { name: "Bardiche", code: "bar", quality: "normal", max_sockets: 3 },
+            { name: "Voulge", code: "vou", quality: "normal", max_sockets: 4 },
+            { name: "War Scythe", code: "wsc", quality: "normal", max_sockets: 6 },
+            { name: "Lochaber Axe", code: "9b7", quality: "exceptional", max_sockets: 3 },
+            { name: "Bill", code: "9vo", quality: "exceptional", max_sockets: 4 },
+            { name: "Partizan", code: "9pa", quality: "exceptional", max_sockets: 5 },
+            { name: "Grim Scythe", code: "9wc", quality: "exceptional", max_sockets: 6 },
+            { name: "Ogre Axe", code: "7o7", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagSwordsExtended = [
-            { name: "Short Sword", code: "ssd", quality: "normal" },
-            { name: "Scimitar", code: "scm", quality: "normal" },
-            { name: "Saber", code: "sbr", quality: "normal" },
-            { name: "Falchion", code: "flc", quality: "normal" },
-            { name: "Two-handed Sword", code: "2hs", quality: "normal" },
-            { name: "Giant Sword", code: "gis", quality: "normal" },
-            { name: "Bastard Sword", code: "bsw", quality: "normal" },
-            { name: "Flamberge", code: "flb", quality: "normal" },
-            { name: "Great Sword", code: "gsd", quality: "normal" },
-            { name: "Gladius", code: "9ss", quality: "exceptional" },
-            { name: "Cutlass", code: "9sm", quality: "exceptional" },
-            { name: "Shamshir", code: "9sb", quality: "exceptional" },
-            { name: "Tulwar", code: "9fc", quality: "exceptional" },
-            { name: "Battle Sword", code: "9bs", quality: "exceptional" },
-            { name: "Ancient Sword", code: "9wd", quality: "exceptional" },
-            { name: "Espandon", code: "92h", quality: "exceptional" },
-            { name: "Dacian Falx", code: "9cm", quality: "exceptional" },
-            { name: "Tusk Sword", code: "9gs", quality: "exceptional" },
-            { name: "Gothic Sword", code: "9b9", quality: "exceptional" },
-            { name: "Zweihander", code: "9fb", quality: "exceptional" },
-            { name: "Executioner Sword", code: "9gd", quality: "exceptional" },
-            { name: "Falcata", code: "7ss", quality: "elite" },
-            { name: "Ataghan", code: "7sm", quality: "elite" },
-            { name: "Elegant Blade", code: "7sb", quality: "elite" },
-            { name: "Hydra Edge", code: "7fc", quality: "elite" },
+            { name: "Short Sword", code: "ssd", quality: "normal", max_sockets: 2 },
+            { name: "Scimitar", code: "scm", quality: "normal", max_sockets: 2 },
+            { name: "Saber", code: "sbr", quality: "normal", max_sockets: 2 },
+            { name: "Falchion", code: "flc", quality: "normal", max_sockets: 2 },
+            { name: "Two-handed Sword", code: "2hs", quality: "normal", max_sockets: 3 },
+            { name: "Giant Sword", code: "gis", quality: "normal", max_sockets: 4 },
+            { name: "Bastard Sword", code: "bsw", quality: "normal", max_sockets: 4 },
+            { name: "Flamberge", code: "flb", quality: "normal", max_sockets: 5 },
+            { name: "Great Sword", code: "gsd", quality: "normal", max_sockets: 6 },
+            { name: "Gladius", code: "9ss", quality: "exceptional", max_sockets: 2 },
+            { name: "Cutlass", code: "9sm", quality: "exceptional", max_sockets: 2 },
+            { name: "Shamshir", code: "9sb", quality: "exceptional", max_sockets: 2 },
+            { name: "Tulwar", code: "9fc", quality: "exceptional", max_sockets: 2 },
+            { name: "Battle Sword", code: "9bs", quality: "exceptional", max_sockets: 4 },
+            { name: "Ancient Sword", code: "9wd", quality: "exceptional", max_sockets: 3 },
+            { name: "Espandon", code: "92h", quality: "exceptional", max_sockets: 3 },
+            { name: "Dacian Falx", code: "9cm", quality: "exceptional", max_sockets: 4 },
+            { name: "Tusk Sword", code: "9gs", quality: "exceptional", max_sockets: 4 },
+            { name: "Gothic Sword", code: "9b9", quality: "exceptional", max_sockets: 4 },
+            { name: "Zweihander", code: "9fb", quality: "exceptional", max_sockets: 5 },
+            { name: "Executioner Sword", code: "9gd", quality: "exceptional", max_sockets: 6 },
+            { name: "Falcata", code: "7ss", quality: "elite", max_sockets: 2 },
+            { name: "Ataghan", code: "7sm", quality: "elite", max_sockets: 2 },
+            { name: "Elegant Blade", code: "7sb", quality: "elite", max_sockets: 2 },
+            { name: "Hydra Edge", code: "7fc", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagAxesExtended = [
-            { name: "Hand Axe", code: "hax", quality: "normal" },
-            { name: "Axe", code: "axe", quality: "normal" },
-            { name: "Military Pick", code: "mpi", quality: "normal" },
-            { name: "Large Axe", code: "lax", quality: "normal" },
-            { name: "Broad Axe", code: "bax", quality: "normal" },
-            { name: "Battle Axe", code: "btx", quality: "normal" },
-            { name: "Great Axe", code: "gax", quality: "normal" },
-            { name: "Giant Axe", code: "gix", quality: "normal" },
-            { name: "Hatchet", code: "9ha", quality: "exceptional" },
-            { name: "Cleaver", code: "9ax", quality: "exceptional" },
-            { name: "Twin Axe", code: "92a", quality: "exceptional" },
-            { name: "Crowbill", code: "9mp", quality: "exceptional" },
-            { name: "Naga", code: "9wa", quality: "exceptional" },
-            { name: "Military Axe", code: "9la", quality: "exceptional" },
-            { name: "Bearded Axe", code: "9ba", quality: "exceptional" },
-            { name: "Tabar", code: "9bt", quality: "exceptional" },
-            { name: "Gothic Axe", code: "9ga", quality: "exceptional" },
-            { name: "Ancient Axe", code: "9gi", quality: "exceptional" },
-            { name: "Tomahawk", code: "7ha", quality: "elite" },
-            { name: "Small Crescent", code: "7ax", quality: "elite" },
-            { name: "War Spike", code: "7mp", quality: "elite" },
-            { name: "Feral Axe", code: "7la", quality: "elite" },
-            { name: "Silver Edged Axe", code: "7ba", quality: "elite" },
-            { name: "Decapitator", code: "7bt", quality: "elite" },
-            { name: "Champion Axe", code: "7ga", quality: "elite" },
+            { name: "Hand Axe", code: "hax", quality: "normal", max_sockets: 2 },
+            { name: "Axe", code: "axe", quality: "normal", max_sockets: 4 },
+            { name: "Military Pick", code: "mpi", quality: "normal", max_sockets: 6 },
+            { name: "Large Axe", code: "lax", quality: "normal", max_sockets: 4 },
+            { name: "Broad Axe", code: "bax", quality: "normal", max_sockets: 5 },
+            { name: "Battle Axe", code: "btx", quality: "normal", max_sockets: 5 },
+            { name: "Great Axe", code: "gax", quality: "normal", max_sockets: 6 },
+            { name: "Giant Axe", code: "gix", quality: "normal", max_sockets: 6 },
+            { name: "Hatchet", code: "9ha", quality: "exceptional", max_sockets: 2 },
+            { name: "Cleaver", code: "9ax", quality: "exceptional", max_sockets: 4 },
+            { name: "Twin Axe", code: "92a", quality: "exceptional", max_sockets: 5 },
+            { name: "Crowbill", code: "9mp", quality: "exceptional", max_sockets: 6 },
+            { name: "Naga", code: "9wa", quality: "exceptional", max_sockets: 6 },
+            { name: "Military Axe", code: "9la", quality: "exceptional", max_sockets: 4 },
+            { name: "Bearded Axe", code: "9ba", quality: "exceptional", max_sockets: 5 },
+            { name: "Tabar", code: "9bt", quality: "exceptional", max_sockets: 5 },
+            { name: "Gothic Axe", code: "9ga", quality: "exceptional", max_sockets: 6 },
+            { name: "Ancient Axe", code: "9gi", quality: "exceptional", max_sockets: 6 },
+            { name: "Tomahawk", code: "7ha", quality: "elite", max_sockets: 2 },
+            { name: "Small Crescent", code: "7ax", quality: "elite", max_sockets: 4 },
+            { name: "War Spike", code: "7mp", quality: "elite", max_sockets: 6 },
+            { name: "Feral Axe", code: "7la", quality: "elite", max_sockets: 4 },
+            { name: "Silver Edged Axe", code: "7ba", quality: "elite", max_sockets: 5 },
+            { name: "Decapitator", code: "7bt", quality: "elite", max_sockets: 5 },
+            { name: "Champion Axe", code: "7ga", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagMacesExtended = [
-            { name: "Club", code: "clb", quality: "normal" },
-            { name: "Spiked Club", code: "spc", quality: "normal" },
-            { name: "Mace", code: "mac", quality: "normal" },
-            { name: "Maul", code: "mau", quality: "normal" },
-            { name: "Great Maul", code: "gma", quality: "normal" },
-            { name: "Cudgel", code: "9cl", quality: "exceptional" },
-            { name: "Barbed Club", code: "9sp", quality: "exceptional" },
-            { name: "Flanged Mace", code: "9ma", quality: "exceptional" },
-            { name: "Jagged Star", code: "9mt", quality: "exceptional" },
-            { name: "Battle Hammer", code: "9wh", quality: "exceptional" },
-            { name: "War Club", code: "9m9", quality: "exceptional" },
-            { name: "Martel de Fer", code: "9gm", quality: "exceptional" },
-            { name: "Truncheon", code: "7cl", quality: "elite" },
-            { name: "Tyrant Club", code: "7sp", quality: "elite" },
-            { name: "Reinforced Mace", code: "7ma", quality: "elite" },
-            { name: "Devil Star", code: "7mt", quality: "elite" },
-            { name: "Ogre Maul", code: "7m7", quality: "elite" },
+            { name: "Club", code: "clb", quality: "normal", max_sockets: 2 },
+            { name: "Spiked Club", code: "spc", quality: "normal", max_sockets: 2 },
+            { name: "Mace", code: "mac", quality: "normal", max_sockets: 2 },
+            { name: "Maul", code: "mau", quality: "normal", max_sockets: 6 },
+            { name: "Great Maul", code: "gma", quality: "normal", max_sockets: 6 },
+            { name: "Cudgel", code: "9cl", quality: "exceptional", max_sockets: 2 },
+            { name: "Barbed Club", code: "9sp", quality: "exceptional", max_sockets: 3 },
+            { name: "Flanged Mace", code: "9ma", quality: "exceptional", max_sockets: 2 },
+            { name: "Jagged Star", code: "9mt", quality: "exceptional", max_sockets: 3 },
+            { name: "Battle Hammer", code: "9wh", quality: "exceptional", max_sockets: 4 },
+            { name: "War Club", code: "9m9", quality: "exceptional", max_sockets: 6 },
+            { name: "Martel de Fer", code: "9gm", quality: "exceptional", max_sockets: 6 },
+            { name: "Truncheon", code: "7cl", quality: "elite", max_sockets: 2 },
+            { name: "Tyrant Club", code: "7sp", quality: "elite", max_sockets: 3 },
+            { name: "Reinforced Mace", code: "7ma", quality: "elite", max_sockets: 2 },
+            { name: "Devil Star", code: "7mt", quality: "elite", max_sockets: 3 },
+            { name: "Ogre Maul", code: "7m7", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagStavesExtended = [
-            { name: "Short Staff", code: "sst", quality: "normal" },
-            { name: "Long Staff", code: "lst", quality: "normal" },
-            { name: "Jo Staff", code: "8ss", quality: "exceptional" },
-            { name: "Quarterstaff", code: "8ls", quality: "exceptional" },
-            { name: "Walking Stick", code: "6ss", quality: "elite" },
-            { name: "Stalagmite", code: "6ls", quality: "elite" },
+            { name: "Short Staff", code: "sst", quality: "normal", max_sockets: 2 },
+            { name: "Long Staff", code: "lst", quality: "normal", max_sockets: 3 },
+            { name: "Jo Staff", code: "8ss", quality: "exceptional", max_sockets: 2 },
+            { name: "Quarterstaff", code: "8ls", quality: "exceptional", max_sockets: 3 },
+            { name: "Walking Stick", code: "6ss", quality: "elite", max_sockets: 2 },
+            { name: "Stalagmite", code: "6ls", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagSpearsExtended = [
-            { name: "Spear", code: "spr", quality: "normal" },
-            { name: "Trident", code: "tri", quality: "normal" },
-            { name: "Spetum", code: "spt", quality: "normal" },
-            { name: "War Spear", code: "9sr", quality: "exceptional" },
-            { name: "Yari", code: "9st", quality: "exceptional" },
-            { name: "Hyperion Spear", code: "7sr", quality: "elite" },
-            { name: "Mancatcher", code: "7br", quality: "elite" },
+            { name: "Spear", code: "spr", quality: "normal", max_sockets: 3 },
+            { name: "Trident", code: "tri", quality: "normal", max_sockets: 4 },
+            { name: "Spetum", code: "spt", quality: "normal", max_sockets: 6 },
+            { name: "War Spear", code: "9sr", quality: "exceptional", max_sockets: 3 },
+            { name: "Yari", code: "9st", quality: "exceptional", max_sockets: 6 },
+            { name: "Hyperion Spear", code: "7sr", quality: "elite", max_sockets: 3 },
+            { name: "Mancatcher", code: "7br", quality: "elite", max_sockets: 5 },
         ];
 
         const nmagBowsExtended = [
-            { name: "Long War Bow", code: "lwb", quality: "normal" },
-            { name: "Long Siege Bow", code: "8l8", quality: "exceptional" },
-            { name: "Spider Bow", code: "6sb", quality: "elite" },
+            { name: "Long War Bow", code: "lwb", quality: "normal", max_sockets: 6 },
+            { name: "Long Siege Bow", code: "8l8", quality: "exceptional", max_sockets: 6 },
+            { name: "Spider Bow", code: "6sb", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagCrossbows = [
-            { name: "Light Crossbow", code: "lxb", quality: "normal" },
-            { name: "Crossbow", code: "mxb", quality: "normal" },
-            { name: "Heavy Crossbow", code: "hxb", quality: "normal" },
-            { name: "Repeating Crossbow", code: "rxb", quality: "normal" },
-            { name: "Arbalest", code: "8lx", quality: "exceptional" },
-            { name: "Siege Crossbow", code: "8mx", quality: "exceptional" },
-            { name: "Ballista", code: "8hx", quality: "exceptional" },
-            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional" },
-            { name: "Pellet Bow", code: "6lx", quality: "elite" },
-            { name: "Gorgon Crossbow", code: "6mx", quality: "elite" },
-            { name: "Colossus Crossbow", code: "6hx", quality: "elite" },
-            { name: "Demon Crossbow", code: "6rx", quality: "elite" },
+            { name: "Light Crossbow", code: "lxb", quality: "normal", max_sockets: 3 },
+            { name: "Crossbow", code: "mxb", quality: "normal", max_sockets: 4 },
+            { name: "Heavy Crossbow", code: "hxb", quality: "normal", max_sockets: 6 },
+            { name: "Repeating Crossbow", code: "rxb", quality: "normal", max_sockets: 5 },
+            { name: "Arbalest", code: "8lx", quality: "exceptional", max_sockets: 3 },
+            { name: "Siege Crossbow", code: "8mx", quality: "exceptional", max_sockets: 4 },
+            { name: "Ballista", code: "8hx", quality: "exceptional", max_sockets: 6 },
+            { name: "Chu-Ko-Nu", code: "8rx", quality: "exceptional", max_sockets: 5 },
+            { name: "Pellet Bow", code: "6lx", quality: "elite", max_sockets: 3 },
+            { name: "Gorgon Crossbow", code: "6mx", quality: "elite", max_sockets: 4 },
+            { name: "Colossus Crossbow", code: "6hx", quality: "elite", max_sockets: 6 },
+            { name: "Demon Crossbow", code: "6rx", quality: "elite", max_sockets: 5 },
         ];
 
         const nmagJavelins = [
-            { name: "Javelin", code: "jav", quality: "normal" },
-            { name: "Pilum", code: "pil", quality: "normal" },
-            { name: "Short Spear", code: "ssp", quality: "normal" },
-            { name: "Glaive", code: "glv", quality: "normal" },
-            { name: "Throwing Spear", code: "tsp", quality: "normal" },
-            { name: "War Javelin", code: "9ja", quality: "exceptional" },
-            { name: "Great Pilum", code: "9pi", quality: "exceptional" },
-            { name: "Simbilan", code: "9s9", quality: "exceptional" },
-            { name: "Spiculum", code: "9gl", quality: "exceptional" },
-            { name: "Harpoon", code: "9ts", quality: "exceptional" },
-            { name: "Hyperion Javelin", code: "7ja", quality: "elite" },
-            { name: "Stygian Pilum", code: "7pi", quality: "elite" },
-            { name: "Balrog Spear", code: "7s7", quality: "elite" },
-            { name: "Ghost Glaive", code: "7gl", quality: "elite" },
-            { name: "Winged Harpoon", code: "7ts", quality: "elite" },
+            { name: "Javelin", code: "jav", quality: "normal", max_sockets: 6 },
+            { name: "Pilum", code: "pil", quality: "normal", max_sockets: 6 },
+            { name: "Short Spear", code: "ssp", quality: "normal", max_sockets: 6 },
+            { name: "Glaive", code: "glv", quality: "normal", max_sockets: 6 },
+            { name: "Throwing Spear", code: "tsp", quality: "normal", max_sockets: 6 },
+            { name: "War Javelin", code: "9ja", quality: "exceptional", max_sockets: 6 },
+            { name: "Great Pilum", code: "9pi", quality: "exceptional", max_sockets: 6 },
+            { name: "Simbilan", code: "9s9", quality: "exceptional", max_sockets: 6 },
+            { name: "Spiculum", code: "9gl", quality: "exceptional", max_sockets: 6 },
+            { name: "Harpoon", code: "9ts", quality: "exceptional", max_sockets: 6 },
+            { name: "Hyperion Javelin", code: "7ja", quality: "elite", max_sockets: 6 },
+            { name: "Stygian Pilum", code: "7pi", quality: "elite", max_sockets: 6 },
+            { name: "Balrog Spear", code: "7s7", quality: "elite", max_sockets: 6 },
+            { name: "Ghost Glaive", code: "7gl", quality: "elite", max_sockets: 6 },
+            { name: "Winged Harpoon", code: "7ts", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagArmorExtended = [
-            { name: "Quilted Armor", code: "qui", quality: "normal" },
-            { name: "Leather Armor", code: "lea", quality: "normal" },
-            { name: "Studded Leather", code: "stu", quality: "normal" },
-            { name: "Scale Mail", code: "scl", quality: "normal" },
-            { name: "Chain Mail", code: "chn", quality: "normal" },
-            { name: "Splint Mail", code: "spl", quality: "normal" },
-            { name: "Plate Mail", code: "plt", quality: "normal" },
-            { name: "Field Plate", code: "fld", quality: "normal" },
-            { name: "Light Plate", code: "ltp", quality: "normal" },
-            { name: "Full Plate Mail", code: "ful", quality: "normal" },
-            { name: "Ghost Armor", code: "xui", quality: "exceptional" },
-            { name: "Serpentskin Armor", code: "xea", quality: "exceptional" },
-            { name: "Demonhide Armor", code: "xla", quality: "exceptional" },
-            { name: "Linked Mail", code: "xng", quality: "exceptional" },
-            { name: "Mesh Armor", code: "xhn", quality: "exceptional" },
-            { name: "Russet Armor", code: "xpl", quality: "exceptional" },
-            { name: "Templar Coat", code: "xlt", quality: "exceptional" },
-            { name: "Embossed Plate", code: "xth", quality: "exceptional" },
+            { name: "Quilted Armor", code: "qui", quality: "normal", max_sockets: 2 },
+            { name: "Leather Armor", code: "lea", quality: "normal", max_sockets: 2 },
+            { name: "Studded Leather", code: "stu", quality: "normal", max_sockets: 2 },
+            { name: "Scale Mail", code: "scl", quality: "normal", max_sockets: 2 },
+            { name: "Chain Mail", code: "chn", quality: "normal", max_sockets: 2 },
+            { name: "Splint Mail", code: "spl", quality: "normal", max_sockets: 2 },
+            { name: "Plate Mail", code: "plt", quality: "normal", max_sockets: 2 },
+            { name: "Field Plate", code: "fld", quality: "normal", max_sockets: 2 },
+            { name: "Light Plate", code: "ltp", quality: "normal", max_sockets: 3 },
+            { name: "Full Plate Mail", code: "ful", quality: "normal", max_sockets: 4 },
+            { name: "Ghost Armor", code: "xui", quality: "exceptional", max_sockets: 2 },
+            { name: "Serpentskin Armor", code: "xea", quality: "exceptional", max_sockets: 2 },
+            { name: "Demonhide Armor", code: "xla", quality: "exceptional", max_sockets: 2 },
+            { name: "Linked Mail", code: "xng", quality: "exceptional", max_sockets: 3 },
+            { name: "Mesh Armor", code: "xhn", quality: "exceptional", max_sockets: 3 },
+            { name: "Russet Armor", code: "xpl", quality: "exceptional", max_sockets: 3 },
+            { name: "Templar Coat", code: "xlt", quality: "exceptional", max_sockets: 3 },
+            { name: "Embossed Plate", code: "xth", quality: "exceptional", max_sockets: 4 },
         ];
 
         const nmagShieldsExtended = [
-            { name: "Buckler", code: "buc", quality: "normal" },
-            { name: "Spiked Shield", code: "spk", quality: "normal" },
-            { name: "Tower Shield", code: "tow", quality: "normal" },
-            { name: "Gothic Shield", code: "gts", quality: "normal" },
-            { name: "Defender", code: "xuc", quality: "exceptional" },
-            { name: "Round Shield", code: "xml", quality: "exceptional" },
-            { name: "Scutum", code: "xrg", quality: "exceptional" },
-            { name: "Barbed Shield", code: "xpk", quality: "exceptional" },
-            { name: "Pavise", code: "xow", quality: "exceptional" },
-            { name: "Ancient Shield", code: "xts", quality: "exceptional" },
-            { name: "Luna", code: "uml", quality: "elite" },
-            { name: "Blade Barrier", code: "upk", quality: "elite" },
-            { name: "Aegis", code: "uow", quality: "elite" },
-            { name: "Ward", code: "uts", quality: "elite" },
+            { name: "Buckler", code: "buc", quality: "normal", max_sockets: 1 },
+            { name: "Spiked Shield", code: "spk", quality: "normal", max_sockets: 2 },
+            { name: "Tower Shield", code: "tow", quality: "normal", max_sockets: 3 },
+            { name: "Gothic Shield", code: "gts", quality: "normal", max_sockets: 3 },
+            { name: "Defender", code: "xuc", quality: "exceptional", max_sockets: 1 },
+            { name: "Round Shield", code: "xml", quality: "exceptional", max_sockets: 2 },
+            { name: "Scutum", code: "xrg", quality: "exceptional", max_sockets: 3 },
+            { name: "Barbed Shield", code: "xpk", quality: "exceptional", max_sockets: 2 },
+            { name: "Pavise", code: "xow", quality: "exceptional", max_sockets: 3 },
+            { name: "Ancient Shield", code: "xts", quality: "exceptional", max_sockets: 3 },
+            { name: "Luna", code: "uml", quality: "elite", max_sockets: 2 },
+            { name: "Blade Barrier", code: "upk", quality: "elite", max_sockets: 3 },
+            { name: "Aegis", code: "uow", quality: "elite", max_sockets: 4 },
+            { name: "Ward", code: "uts", quality: "elite", max_sockets: 4 },
         ];
 
         const nmagPaladinShieldsExtended = [
-            { name: "Targe", code: "pa1", quality: "normal" },
+            { name: "Targe", code: "pa1", quality: "normal", max_sockets: 4 },
         ];
 
         const nmagNecromancerShieldsExtended = [
-            { name: "Preserved Head", code: "ne1", quality: "normal" },
-            { name: "Unraveller Head", code: "ne3", quality: "normal" },
-            { name: "Mummified Trophy", code: "ne6", quality: "exceptional" },
-            { name: "Sexton Trophy", code: "ne8", quality: "exceptional" },
-            { name: "Cantor Trophy", code: "ne9", quality: "exceptional" },
-            { name: "Hierophant Trophy", code: "nea", quality: "exceptional" },
-            { name: "Minion Skull", code: "neb", quality: "elite" },
-            { name: "Hellspawn Skull", code: "neg", quality: "elite" },
-            { name: "Overseer Skull", code: "ned", quality: "elite" },
-            { name: "Succubae Skull", code: "nee", quality: "elite" },
-            { name: "Bloodlord Skull", code: "nef", quality: "elite" },
+            { name: "Preserved Head", code: "ne1", quality: "normal", max_sockets: 2 },
+            { name: "Unraveller Head", code: "ne3", quality: "normal", max_sockets: 2 },
+            { name: "Mummified Trophy", code: "ne6", quality: "exceptional", max_sockets: 2 },
+            { name: "Sexton Trophy", code: "ne8", quality: "exceptional", max_sockets: 2 },
+            { name: "Cantor Trophy", code: "ne9", quality: "exceptional", max_sockets: 2 },
+            { name: "Hierophant Trophy", code: "nea", quality: "exceptional", max_sockets: 2 },
+            { name: "Minion Skull", code: "neb", quality: "elite", max_sockets: 2 },
+            { name: "Hellspawn Skull", code: "neg", quality: "elite", max_sockets: 2 },
+            { name: "Overseer Skull", code: "ned", quality: "elite", max_sockets: 2 },
+            { name: "Succubae Skull", code: "nee", quality: "elite", max_sockets: 2 },
+            { name: "Bloodlord Skull", code: "nef", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagHelmsExtended = [
-            { name: "Skull Cap", code: "skp", quality: "normal" },
-            { name: "Full Helm", code: "fhl", quality: "normal" },
-            { name: "War Hat", code: "xap", quality: "exceptional" },
-            { name: "Sallet", code: "xkp", quality: "exceptional" },
-            { name: "Casque", code: "xlm", quality: "exceptional" },
-            { name: "Death Mask", code: "xsk", quality: "exceptional" },
-            { name: "Grim Helm", code: "xh9", quality: "exceptional" },
-            { name: "Winged Helm", code: "xhm", quality: "exceptional" },
-            { name: "Shako", code: "uap", quality: "elite" },
-            { name: "Hydraskull", code: "ukp", quality: "elite" },
-            { name: "Armet", code: "ulm", quality: "elite" },
-            { name: "Giant Conch", code: "uhl", quality: "elite" },
-            { name: "Spired Helm", code: "uhm", quality: "elite" },
+            { name: "Skull Cap", code: "skp", quality: "normal", max_sockets: 2 },
+            { name: "Full Helm", code: "fhl", quality: "normal", max_sockets: 2 },
+            { name: "War Hat", code: "xap", quality: "exceptional", max_sockets: 2 },
+            { name: "Sallet", code: "xkp", quality: "exceptional", max_sockets: 2 },
+            { name: "Casque", code: "xlm", quality: "exceptional", max_sockets: 2 },
+            { name: "Death Mask", code: "xsk", quality: "exceptional", max_sockets: 3 },
+            { name: "Grim Helm", code: "xh9", quality: "exceptional", max_sockets: 2 },
+            { name: "Winged Helm", code: "xhm", quality: "exceptional", max_sockets: 3 },
+            { name: "Shako", code: "uap", quality: "elite", max_sockets: 2 },
+            { name: "Hydraskull", code: "ukp", quality: "elite", max_sockets: 2 },
+            { name: "Armet", code: "ulm", quality: "elite", max_sockets: 2 },
+            { name: "Giant Conch", code: "uhl", quality: "elite", max_sockets: 2 },
+            { name: "Spired Helm", code: "uhm", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagDruidPeltsExtended = [];
@@ -3666,88 +3667,88 @@
         const nmagNecroHeadsExtended = [];
 
         const nmagAssassinClawsExtended = [
-            { name: "Katar", code: "ktr", quality: "normal" },
-            { name: "Wrist Blade", code: "wrb", quality: "normal" },
-            { name: "Hatchet Hands", code: "axf", quality: "normal" },
-            { name: "Cestus", code: "ces", quality: "normal" },
-            { name: "Claws", code: "clw", quality: "normal" },
-            { name: "Scissors Katar", code: "skr", quality: "normal" },
-            { name: "Quhab", code: "9ar", quality: "exceptional" },
-            { name: "Wrist Spike", code: "9wb", quality: "exceptional" },
-            { name: "Fascia", code: "9xf", quality: "exceptional" },
-            { name: "Hand Scythe", code: "9cs", quality: "exceptional" },
-            { name: "War Fist", code: "7xf", quality: "elite" },
-            { name: "Battle Cestus", code: "7cs", quality: "elite" },
+            { name: "Katar", code: "ktr", quality: "normal", max_sockets: 2 },
+            { name: "Wrist Blade", code: "wrb", quality: "normal", max_sockets: 2 },
+            { name: "Hatchet Hands", code: "axf", quality: "normal", max_sockets: 2 },
+            { name: "Cestus", code: "ces", quality: "normal", max_sockets: 2 },
+            { name: "Claws", code: "clw", quality: "normal", max_sockets: 3 },
+            { name: "Scissors Katar", code: "skr", quality: "normal", max_sockets: 3 },
+            { name: "Quhab", code: "9ar", quality: "exceptional", max_sockets: 3 },
+            { name: "Wrist Spike", code: "9wb", quality: "exceptional", max_sockets: 2 },
+            { name: "Fascia", code: "9xf", quality: "exceptional", max_sockets: 2 },
+            { name: "Hand Scythe", code: "9cs", quality: "exceptional", max_sockets: 2 },
+            { name: "War Fist", code: "7xf", quality: "elite", max_sockets: 2 },
+            { name: "Battle Cestus", code: "7cs", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagSorcOrbsExtended = [
-            { name: "Eagle Orb", code: "ob1", quality: "normal" },
-            { name: "Sacred Globe", code: "ob2", quality: "normal" },
-            { name: "Smoked Sphere", code: "ob3", quality: "normal" },
-            { name: "Clasped Orb", code: "ob4", quality: "normal" },
-            { name: "Glowing Orb", code: "ob6", quality: "exceptional" },
-            { name: "Crystalline Globe", code: "ob7", quality: "exceptional" },
-            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional" },
-            { name: "Sparkling Ball", code: "ob9", quality: "exceptional" },
-            { name: "Swirling Crystal", code: "oba", quality: "exceptional" },
-            { name: "Heavenly Stone", code: "obb", quality: "elite" },
-            { name: "Eldritch Orb", code: "obc", quality: "elite" },
-            { name: "Demon Heart", code: "obd", quality: "elite" },
-            { name: "Vortex Orb", code: "obe", quality: "elite" },
+            { name: "Eagle Orb", code: "ob1", quality: "normal", max_sockets: 2 },
+            { name: "Sacred Globe", code: "ob2", quality: "normal", max_sockets: 2 },
+            { name: "Smoked Sphere", code: "ob3", quality: "normal", max_sockets: 2 },
+            { name: "Clasped Orb", code: "ob4", quality: "normal", max_sockets: 2 },
+            { name: "Glowing Orb", code: "ob6", quality: "exceptional", max_sockets: 2 },
+            { name: "Crystalline Globe", code: "ob7", quality: "exceptional", max_sockets: 2 },
+            { name: "Cloudy Sphere", code: "ob8", quality: "exceptional", max_sockets: 2 },
+            { name: "Sparkling Ball", code: "ob9", quality: "exceptional", max_sockets: 2 },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional", max_sockets: 3 },
+            { name: "Heavenly Stone", code: "obb", quality: "elite", max_sockets: 2 },
+            { name: "Eldritch Orb", code: "obc", quality: "elite", max_sockets: 2 },
+            { name: "Demon Heart", code: "obd", quality: "elite", max_sockets: 2 },
+            { name: "Vortex Orb", code: "obe", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagDaggersExtended = [];
 
         const nmagWandsExtended = [
-            { name: "Wand", code: "wnd", quality: "normal" },
-            { name: "Yew Wand", code: "ywn", quality: "normal" },
-            { name: "Grim Wand", code: "gwn", quality: "normal" },
-            { name: "Burnt Wand", code: "9wn", quality: "exceptional" },
-            { name: "Petrified Wand", code: "9yw", quality: "exceptional" },
-            { name: "Tomb Wand", code: "9bw", quality: "exceptional" },
-            { name: "Polished Wand", code: "7wn", quality: "elite" },
-            { name: "Ghost Wand", code: "7yw", quality: "elite" },
-            { name: "Lich Wand", code: "7bw", quality: "elite" },
-            { name: "Unearthed Wand", code: "7gw", quality: "elite" },
+            { name: "Wand", code: "wnd", quality: "normal", max_sockets: 1 },
+            { name: "Yew Wand", code: "ywn", quality: "normal", max_sockets: 1 },
+            { name: "Grim Wand", code: "gwn", quality: "normal", max_sockets: 2 },
+            { name: "Burnt Wand", code: "9wn", quality: "exceptional", max_sockets: 1 },
+            { name: "Petrified Wand", code: "9yw", quality: "exceptional", max_sockets: 2 },
+            { name: "Tomb Wand", code: "9bw", quality: "exceptional", max_sockets: 2 },
+            { name: "Polished Wand", code: "7wn", quality: "elite", max_sockets: 2 },
+            { name: "Ghost Wand", code: "7yw", quality: "elite", max_sockets: 2 },
+            { name: "Lich Wand", code: "7bw", quality: "elite", max_sockets: 2 },
+            { name: "Unearthed Wand", code: "7gw", quality: "elite", max_sockets: 2 },
         ];
 
         const nmagSceptersExtended = [
-            { name: "Scepter", code: "scp", quality: "normal" },
-            { name: "Grand Scepter", code: "gsc", quality: "normal" },
-            { name: "Rune Scepter", code: "9sc", quality: "exceptional" },
-            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional" },
-            { name: "Mighty Scepter", code: "7sc", quality: "elite" },
-            { name: "Seraph Rod", code: "7qs", quality: "elite" },
+            { name: "Scepter", code: "scp", quality: "normal", max_sockets: 2 },
+            { name: "Grand Scepter", code: "gsc", quality: "normal", max_sockets: 3 },
+            { name: "Rune Scepter", code: "9sc", quality: "exceptional", max_sockets: 2 },
+            { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional", max_sockets: 3 },
+            { name: "Mighty Scepter", code: "7sc", quality: "elite", max_sockets: 2 },
+            { name: "Seraph Rod", code: "7qs", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagBarbarianHelmsExtended = [
-            { name: "Jawbone Cap", code: "ba1", quality: "normal" },
-            { name: "Fanged Helm", code: "ba2", quality: "normal" },
-            { name: "Assault Helmet", code: "ba4", quality: "normal" },
-            { name: "Lion Helm", code: "ba7", quality: "exceptional" },
-            { name: "Rage Mask", code: "ba8", quality: "exceptional" },
-            { name: "Savage Helmet", code: "ba9", quality: "exceptional" },
-            { name: "Slayer Guard", code: "baa", quality: "exceptional" },
-            { name: "Carnage Helm", code: "bab", quality: "elite" },
-            { name: "Fury Visor", code: "bac", quality: "elite" },
-            { name: "Conqueror Crown", code: "bae", quality: "elite" },
-            { name: "Guardian Crown", code: "baf", quality: "elite" },
+            { name: "Jawbone Cap", code: "ba1", quality: "normal", max_sockets: 3 },
+            { name: "Fanged Helm", code: "ba2", quality: "normal", max_sockets: 3 },
+            { name: "Assault Helmet", code: "ba4", quality: "normal", max_sockets: 3 },
+            { name: "Lion Helm", code: "ba7", quality: "exceptional", max_sockets: 3 },
+            { name: "Rage Mask", code: "ba8", quality: "exceptional", max_sockets: 3 },
+            { name: "Savage Helmet", code: "ba9", quality: "exceptional", max_sockets: 3 },
+            { name: "Slayer Guard", code: "baa", quality: "exceptional", max_sockets: 3 },
+            { name: "Carnage Helm", code: "bab", quality: "elite", max_sockets: 3 },
+            { name: "Fury Visor", code: "bac", quality: "elite", max_sockets: 3 },
+            { name: "Conqueror Crown", code: "bae", quality: "elite", max_sockets: 3 },
+            { name: "Guardian Crown", code: "baf", quality: "elite", max_sockets: 3 },
         ];
 
         const nmagAmazonWeapons = [
-            { name: "Maiden Spear", code: "am3", quality: "normal" },
-            { name: "Maiden Pike", code: "am4", quality: "normal" },
-            { name: "Ceremonial Spear", code: "am8", quality: "exceptional" },
-            { name: "Ceremonial Pike", code: "am9", quality: "exceptional" },
-            { name: "Maiden Javelin", code: "am5", quality: "normal" },
-            { name: "Ceremonial Javelin", code: "ama", quality: "exceptional" },
-            { name: "Matriarchal Javelin", code: "amf", quality: "elite" },
-            { name: "Matriarchal Pike", code: "ame", quality: "elite" },
+            { name: "Maiden Spear", code: "am3", quality: "normal", max_sockets: 6 },
+            { name: "Maiden Pike", code: "am4", quality: "normal", max_sockets: 6 },
+            { name: "Ceremonial Spear", code: "am8", quality: "exceptional", max_sockets: 6 },
+            { name: "Ceremonial Pike", code: "am9", quality: "exceptional", max_sockets: 6 },
+            { name: "Maiden Javelin", code: "am5", quality: "normal", max_sockets: 6 },
+            { name: "Ceremonial Javelin", code: "ama", quality: "exceptional", max_sockets: 6 },
+            { name: "Matriarchal Javelin", code: "amf", quality: "elite", max_sockets: 6 },
+            { name: "Matriarchal Pike", code: "ame", quality: "elite", max_sockets: 6 },
         ];
 
         const nmagCirclets = [
-            { name: "Circlet", code: "ci0", quality: "normal" },
-            { name: "Coronet", code: "ci1", quality: "normal" },
+            { name: "Circlet", code: "ci0", quality: "normal", max_sockets: 2 },
+            { name: "Coronet", code: "ci1", quality: "normal", max_sockets: 2 },
         ];
 
         // Global settings state
@@ -4173,6 +4174,7 @@
                     code: item.code,
                     quality: item.quality,
                     rw: item.rw,
+                    max_sockets: item.max_sockets || 6,
                     show: true,
                     ethFilter: 'both',  // 'both', 'eth-only', 'non-eth'
                     sockFilter: [],     // Array of selected socket counts: ['0', '3', '4', etc]
@@ -4953,21 +4955,11 @@
             renderMagicRareItems(rareEliteBases, 'rareEliteBases', 'rare-elite-bases-items', 'rare-elite-bases-count', 'YELLOW');
         }
 
-        // Generate socket checkboxes based on max_sockets from bases object
+        // Generate socket checkboxes based on max_sockets from item state
         function generateSocketCheckboxes(itemCode, selectedSockets, stateCategory, key) {
-            // Look up max sockets from bases object in item_metadata.js
-            // The state contains the item name, we need to convert it to the bases key format
+            // Get max sockets from state (stored from item array)
             const state = filterState[stateCategory][key];
-            const basesKey = state.name.replace(/ /g, '_'); // "Colossus Blade" -> "Colossus_Blade"
-            const baseItem = bases[basesKey];
-            let maxSockets = baseItem?.max_sockets || 6;
-            
-            // Override max sockets for class-specific items
-            if (stateCategory === 'nmagNecroHeads') {
-                maxSockets = 2;
-            } else if (stateCategory === 'nmagDruidPelts' || stateCategory === 'nmagAssassinClaws' || stateCategory === 'nmagSorcOrbs') {
-                maxSockets = 3;
-            }
+            const maxSockets = state.max_sockets || 6;
             
             // Available socket options: 0, 2, 3, 4, 5, 6 but limited by max_sockets
             const socketOptions = ['0', '2', '3', '4', '5', '6'].filter(sock => {
@@ -6670,8 +6662,8 @@
 
             // Filter Start
             filter += '// === Default of never hiding runewords or identified items ===\n\n';
-            filter += 'ItemDisplay[RW]: %NAME%\n';
-            filter += 'ItemDisplay[ID]: %NAME%\n\n';
+//            filter += 'ItemDisplay[RW]: %NAME%\n';
+//            filter += 'ItemDisplay[ID]: %NAME%\n\n';
 
 
             // Utility items
@@ -6713,7 +6705,7 @@
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                         }
                     }
                     
@@ -6762,7 +6754,7 @@
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                         }
                     }
                     
@@ -6811,7 +6803,7 @@
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                         }
                     }
                     
@@ -6860,7 +6852,7 @@
                                 const rgb = hexToRGBSlash(state.backgroundColor);
                                 rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                             }
-                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                            line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                         }
                     }
                     
@@ -6913,7 +6905,7 @@
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                             }
                         }
                         
@@ -6966,7 +6958,7 @@
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                             }
                         }
                         
@@ -7041,7 +7033,7 @@
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                                line += ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                             }
                         }
                         
@@ -7072,6 +7064,10 @@
                     const state = filterState[stateCategory][key];
                     if (state.show) {
                         hasItems = true;
+                        
+                        // Add comment with item name and code for debugging
+                        lines += `// ${item.name} (${item.code})\n`;
+                        
                         // Generate filter level condition if enabled
                         const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
                         
@@ -7122,7 +7118,7 @@
                                     const rgb = hexToRGBSlash(state.backgroundColor);
                                     rgbParts.push(`BackgroundColor = RGB(${rgb})`);
                                 }
-                                styleRef = ` <:CustomDisplay: ${rgbParts.join(', ')}:>`;
+                                styleRef = ` <:CustomDisplay: ${rgbParts.join(', ')}>`;
                             }
                         }
                         
@@ -7218,6 +7214,10 @@
             filter += generateMagicRareItemLines(rareClassItems, 'rareClassItems', 'Rare Class-Specific Items', 'RARE');
             filter += generateMagicRareItemLines(rareEliteBases, 'rareEliteBases', 'Rare Elite Bases', 'RARE');
 
+            filter += '\n// === Always show runewords and identified items ===\n';
+            filter += 'ItemDisplay[RW]: %NAME%\n';
+            filter += 'ItemDisplay[(MAG OR RARE OR SET OR UNI OR CRAFT) ID]: %NAME%\n\n';
+
             // === NMAG RUNEWORD BASES ===
             filter += '\n// === NMAG RUNEWORD BASES ===\n\n';
             filter += generateNmagItemLines(nmagPolearms, 'nmagPolearms', 'NMAG: Polearms (Insight, Infinity, Obedience)');
@@ -7290,7 +7290,27 @@
             if (enabledLevels.length === 10) return ''; // All levels, no condition needed
             if (enabledLevels.length === 0) return ''; // None enabled, item won't show anyway
             
-            // Find consecutive ranges
+            // Use simple range operators when possible
+            const minLevel = Math.min(...enabledLevels);
+            const maxLevel = Math.max(...enabledLevels);
+            
+            // Check if it's a continuous range
+            const isContinuous = enabledLevels.length === (maxLevel - minLevel + 1);
+            
+            if (isContinuous) {
+                // Single continuous range
+                if (minLevel === maxLevel) {
+                    return ` FILTERLVL=${minLevel}`;
+                } else if (minLevel === 1) {
+                    return ` FILTERLVL<${maxLevel + 1}`;
+                } else if (maxLevel === 10) {
+                    return ` FILTERLVL>${minLevel - 1}`;
+                } else {
+                    return ` (FILTERLVL>${minLevel - 1} AND FILTERLVL<${maxLevel + 1})`;
+                }
+            }
+            
+            // Multiple ranges - fall back to OR logic
             const ranges = [];
             let rangeStart = enabledLevels[0];
             let rangeEnd = enabledLevels[0];
@@ -7304,11 +7324,8 @@
                     // End of range, save it
                     if (rangeStart === rangeEnd) {
                         ranges.push(`FILTERLVL=${rangeStart}`);
-                    } else if (rangeEnd === rangeStart + 1) {
-                        ranges.push(`FILTERLVL=${rangeStart}`);
-                        ranges.push(`FILTERLVL=${rangeEnd}`);
                     } else {
-                        ranges.push(`FILTERLVL>=${rangeStart} FILTERLVL<=${rangeEnd}`);
+                        ranges.push(`(FILTERLVL>${rangeStart - 1} AND FILTERLVL<${rangeEnd + 1})`);
                     }
                     
                     if (i < enabledLevels.length) {
@@ -7318,8 +7335,6 @@
                 }
             }
             
-            // If multiple ranges/levels, we need multiple ItemDisplay lines or complex conditions
-            // For simplicity, return conditions that can be combined with OR logic
             return ranges.length > 0 ? ' ' + ranges.join(' OR ') : '';
         }
 
@@ -7481,7 +7496,7 @@
             html += '<div class="modal-color-row">';
             html += '<span class="modal-color-label">Font Color:</span>';
             html += '<select class="modal-select" id="group-font-color">';
-            html += '<option value="">Default</option>';
+//            html += '<option value="">Default</option>';
             FONT_COLORS.forEach(fc => {
                 html += `<option value="${fc}">${fc}</option>`;
             });
@@ -7885,17 +7900,8 @@
                 html += '<div class="socket-checkbox-container">';
                 const sockFilter = state.sockFilter || [];
                 
-                // Determine max sockets from bases object in item_metadata.js
-                const basesKey = state.name.replace(/ /g, '_');
-                const baseItem = bases[basesKey];
-                let maxSockets = baseItem?.max_sockets || 6;
-                
-                // Override for class-specific items if bases lookup failed
-                if (category === 'nmagNecroHeads') {
-                    maxSockets = 2;
-                } else if (category === 'nmagDruidPelts' || category === 'nmagAssassinClaws' || category === 'nmagSorcOrbs') {
-                    maxSockets = 3;
-                }
+                // Get max sockets from state (stored from item array)
+                const maxSockets = state.max_sockets || 6;
                 
                 ['0', '2', '3', '4', '5', '6'].filter(sock => parseInt(sock) <= maxSockets).forEach(sock => {
                     const checked = sockFilter.includes(sock) ? 'checked' : '';
@@ -7948,7 +7954,7 @@
                 html += '<div class="modal-color-row">';
                 html += '<span class="modal-color-label">Font Color:</span>';
                 html += '<select class="modal-select" onchange="updateModalFontColor(\'' + category + '\', \'' + itemKey + '\', this.value, \'' + itemType + '\')">';
-                html += '<option value="">Default</option>';
+//                html += '<option value="">Default</option>';
                 FONT_COLORS.forEach(fc => {
                     const selected = state.fontColor === fc ? 'selected' : '';
                     html += `<option value="${fc}" ${selected}>${fc}</option>`;
