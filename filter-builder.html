@@ -6668,9 +6668,20 @@
 
             // Utility items
             filter += '// === UTILITY ITEMS ===\n\n';
+            let scrollLines = ''; // Store scroll lines to add at end
             utilityItems.forEach(item => {
                 const state = filterState.utility[item.code];
                 if (state.show) {
+                    // Special handling for scrolls with "only show when low" option
+                    if (state.onlyShowWhenLow && (item.code === 'tsc' || item.code === 'isc')) {
+                        const threshold = item.code === 'tsc' ? 'TPSCROLLS>15' : 'IDSCROLLS>25';
+                        const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
+                        // Store scroll lines to add at end of filter
+                        scrollLines += `ItemDisplay[${item.code} ${threshold}]:\n`;
+                        scrollLines += `ItemDisplay[${item.code}]: ${displayName}\n`;
+                        return; // Skip normal processing
+                    }
+                    
                     // Generate filter level condition if enabled
                     const filtLvlCondition = generateFilterLevelCondition(state.filterLevels);
                     let line = `ItemDisplay[${item.code}${filtLvlCondition}]:`;
@@ -7233,6 +7244,11 @@
             filter += 'ItemDisplay[RW]: %NAME%\n';
             filter += 'ItemDisplay[(MAG OR RARE OR SET OR UNI OR CRAFT) ID]: %NAME%\n\n';
 
+            if (globalSettings.hideJunk) {
+                filter += '\n// Hide junk items\n';
+                filter += 'ItemDisplay[(ARMOR OR WEAPON) INF]:\n\n';
+            }
+
             // === NMAG RUNEWORD BASES ===
             filter += '\n// === NMAG RUNEWORD BASES ===\n';
             filter += 'EnableIf[NMAG]\n\n';
@@ -7288,10 +7304,13 @@
             filter += 'EndIf[]\n';
 
             // === FILTER CLOSING ===
-            if (globalSettings.hideJunk) {
-                filter += '\n// Hide junk items\n';
-                filter += 'ItemDisplay[(ARMOR OR WEAPON) INF]:\n';
+            
+            // Add scroll lines right before "show all" to avoid performance issues
+            if (scrollLines) {
+                filter += '\n// === SCROLLS (Low Stock Only) ===\n';
+                filter += scrollLines;
             }
+            
             if (globalSettings.showAll) {
                 filter += '\n// Show all remaining items\n';
                 filter += 'ItemDisplay[]: %NAME%\n';
@@ -8050,6 +8069,24 @@
             html += '</div>';
             html += '</div>';
 
+            // Scroll-specific option: Only show when low
+            if (category === 'utility' && (itemKey === 'tsc' || itemKey === 'isc')) {
+                html += '<div class="modal-section">';
+                html += '<h4 class="modal-section-title">Scroll Display Options</h4>';
+                html += '<div class="modal-control-group">';
+                const onlyWhenLowEnabled = state.onlyShowWhenLow ? 'checked' : '';
+                const scrollType = itemKey === 'tsc' ? 'Town Portal (>15)' : 'Identify (>25)';
+                html += `
+                    <label class="modal-checkbox-label">
+                        <input type="checkbox" ${onlyWhenLowEnabled} 
+                            onchange="toggleModalOnlyShowWhenLow('${category}', '${itemKey}', this.checked, '${itemType}')">
+                        <span>Only show when running low ${scrollType}</span>
+                    </label>
+                `;
+                html += '</div>';
+                html += '</div>';
+            }
+
             // Custom Name Section
             html += '<div class="modal-section">';
             html += '<h4 class="modal-section-title">Custom Name</h4>';
@@ -8250,6 +8287,22 @@
             if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
             
             filterState[category][itemKey].customName = name;
+            generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function toggleModalOnlyShowWhenLow(category, itemKey, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
+            
+            filterState[category][itemKey].onlyShowWhenLow = checked;
+            
             generateFilter();
             updateSettingsButtonState(category, itemKey, itemType);
 
