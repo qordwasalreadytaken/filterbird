@@ -4588,7 +4588,7 @@
             if (!preset) return;
 
             const essentialCodes = ['rvl', 'rvs', 'hp5', 'mp5', 'tbk', 'ibk', 'tsc', 'isc'];
-            const lowPotions = ['hp1', 'hp2', 'hp3', 'mp1', 'mp2', 'mp3'];
+            const lowPotions = ['hp1', 'hp2', 'hp3', 'mp1', 'mp2', 'mp3', 'yps', 'wms', 'vps'];
 
             switch(preset) {
                 case 'show-all':
@@ -6680,10 +6680,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
+                    const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%%NL%`;
+                        line += ` %NL%       ${displayName}       %NL%%NL%`;
                     } else {
-                        line += ` %NAME%`;
+                        line += ` ${displayName}`;
                     }
                     
                     // Add style reference for border/background/notification if needed
@@ -6729,10 +6730,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
+                    const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%%NL%`;
+                        line += ` %NL%       ${displayName}       %NL%%NL%`;
                     } else {
-                        line += ` %NAME%`;
+                        line += ` ${displayName}`;
                     }
                     
                     // Add style reference for border/background/notification if needed
@@ -6778,10 +6780,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
+                    const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%%NL%`;
+                        line += ` %NL%       ${displayName}       %NL%%NL%`;
                     } else {
-                        line += ` %NAME%`;
+                        line += ` ${displayName}`;
                     }
                     
                     // Add style reference for border/background/notification if needed
@@ -6816,6 +6819,12 @@
             // PoD/Misc Items
             filter += '\n// === POD/Keys/Maps/MISC ITEMS ===\n\n';
             miscItems.forEach(item => {
+                // Add special items before QUEST
+                if (item.code === 'QUEST') {
+                    filter += 'ItemDisplay[hst OR msf]: %TAN%%NAME% {%NAME% %DGREEN%[Circle]                [Circle&Crescent]%NL%[Crescent]             [Triangle]%NL%[Square]     [Arrows]%NL%[Star]%NL%%ORANGE%DURIEL TOMB ORDER:} //%NOTIFY(GOLD)%\n';
+                    filter += 'ItemDisplay[box]: %TAN% %NAME% %NL% {Weapons: Ral + Amn + P Amethyst %NL% Armor: Tal + Thul + P Topaz %NL% Helmets: Ral + Thul + P Sapphire %NL% Shields: Tal + Amn + P Ruby %NL% Cube recipies for adding sockets to:}\n';
+                }
+                
                 const state = filterState.misc[item.code];
                 if (state.show) {
                     // Generate filter level condition if enabled
@@ -6827,10 +6836,11 @@
                         line += ` %${state.fontColor}%`;
                     }
                     
+                    const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
                     if (state.biggerClickbox) {
-                        line += ` %NL%       %NAME%       %NL%%NL%`;
+                        line += ` %NL%       ${displayName}       %NL%%NL%`;
                     } else {
-                        line += ` %NAME%`;
+                        line += ` ${displayName}`;
                     }
                     
                     // Add style reference for border/background/notification if needed
@@ -8040,6 +8050,30 @@
             html += '</div>';
             html += '</div>';
 
+            // Custom Name Section
+            html += '<div class="modal-section">';
+            html += '<h4 class="modal-section-title">Custom Name</h4>';
+            html += '<div class="modal-control-group">';
+            const customNameEnabled = state.useCustomName ? 'checked' : '';
+            html += `
+                <label class="modal-checkbox-label">
+                    <input type="checkbox" ${customNameEnabled} 
+                        onchange="toggleModalCustomName('${category}', '${itemKey}', this.checked, '${itemType}')">
+                    <span>Use custom name instead of %NAME%</span>
+                </label>
+            `;
+            if (state.useCustomName) {
+                const customName = state.customName || '';
+                html += '<div style="margin-top: 10px;">';
+                html += '<label style="display: block; margin-bottom: 5px; color: #888;">Custom display name:</label>';
+                html += `<input type="text" class="modal-text-input" value="${customName}" 
+                    onchange="updateModalCustomName('${category}', '${itemKey}', this.value, '${itemType}')"
+                    placeholder="e.g., TP for Town Portal" style="width: 100%; padding: 8px; border: 1px solid #444; background: #1a1a1a; color: #fff; border-radius: 4px;">`;
+                html += '</div>';
+            }
+            html += '</div>';
+            html += '</div>';
+
             // Display Options Section
             html += '<div class="modal-section">';
             html += '<h4 class="modal-section-title">Display Options</h4>';
@@ -8183,6 +8217,41 @@
             }
             openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
             generateFilter();
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function toggleModalCustomName(category, itemKey, checked, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
+            
+            filterState[category][itemKey].useCustomName = checked;
+            if (!checked) {
+                delete filterState[category][itemKey].customName;
+            }
+            
+            openItemSettings(category, itemKey, document.getElementById('modalItemName').textContent, itemType);
+            generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
+
+            const item = findItemByKey(category, itemKey);
+            if (item) {
+                const prefix = getItemPrefix(itemType);
+                setTimeout(() => highlightItemInOutput(item.code, prefix), 100);
+            }
+        }
+
+        function updateModalCustomName(category, itemKey, name, itemType) {
+            if (!filterState[category]) filterState[category] = {};
+            if (!filterState[category][itemKey]) filterState[category][itemKey] = { show: true };
+            
+            filterState[category][itemKey].customName = name;
+            generateFilter();
+            updateSettingsButtonState(category, itemKey, itemType);
 
             const item = findItemByKey(category, itemKey);
             if (item) {
