@@ -975,7 +975,7 @@
                             <select class="preset-select" onchange="applyJewelryCharmsPreset(this.value)">
                                 <option value="">-- Select Preset --</option>
                                 <option value="show-all">Show All</option>
-                                <option value="hide-all">Hide All</option>
+                                <option value="hide-all" disabled title="Disabled to prevent accidentally hiding valuable unique jewelry and charms">Hide All</option>
                             </select>
                             <button class="group-settings-btn" onclick="openGroupSettings('jewelry-charms', 'Unique Jewelry & Charms')">⚙ Group Settings</button>
                         </div>
@@ -3836,6 +3836,8 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
                 biggerClickbox: false,
                 fontColor: 'WHITE',
                 borderColor: null,
@@ -3850,6 +3852,8 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
                 biggerClickbox: false,
                 fontColor: 'ORANGE',
                 borderColor: null,
@@ -3864,6 +3868,8 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
                 biggerClickbox: false,
                 fontColor: 'WHITE',
                 borderColor: null,
@@ -3878,6 +3884,8 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
                 biggerClickbox: false,
                 fontColor: 'PURPLE',
                 borderColor: null,
@@ -3895,6 +3903,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -3911,6 +3922,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -3926,6 +3940,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -3941,6 +3958,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -3956,6 +3976,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -3971,6 +3994,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -3986,6 +4012,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -4001,6 +4030,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -4018,6 +4050,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -4034,6 +4069,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -4050,6 +4088,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'DARK_GREEN',
                 borderColor: null,
                 backgroundColor: null,
@@ -4069,6 +4110,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'BLUE',
                 borderColor: null,
                 backgroundColor: null,
@@ -4087,6 +4131,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'BLUE',
                 borderColor: null,
                 backgroundColor: null,
@@ -4105,6 +4152,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'BLUE',
                 borderColor: null,
                 backgroundColor: null,
@@ -4122,6 +4172,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'YELLOW',
                 borderColor: null,
                 backgroundColor: null,
@@ -4140,6 +4193,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'YELLOW',
                 borderColor: null,
                 backgroundColor: null,
@@ -4158,6 +4214,9 @@
                 show: true,
                 useCustomColors: false,
                 chatNotification: false,
+                useCustomName: false,
+                customName: '',
+                biggerClickbox: false,
                 fontColor: 'YELLOW',
                 borderColor: null,
                 backgroundColor: null,
@@ -4181,6 +4240,9 @@
                     edFilter: 'any',    // 'any', '10+', '12+', '13+', '14+', '15'
                     useCustomColors: false,
                     chatNotification: false,
+                    useCustomName: false,
+                    customName: '',
+                    biggerClickbox: false,
                     fontColor: 'WHITE',
                     borderColor: null,
                     backgroundColor: null,
@@ -4320,12 +4382,16 @@
                     .join('');
                 
                 const isModified = isItemModified(state, 'simple');
+                // High runes (Pul+ = r21-r33) should always be shown and cannot be hidden
+                const isHighRune = item.code >= 'r21';
                 
                 row.innerHTML = `
                     <input type="checkbox" class="item-checkbox" 
                         ${state.show ? 'checked' : ''} 
-                        onchange="updateItemState('runes', '${item.code}', 'show', this.checked)">
-                    <span class="item-name">${item.name}</span>
+                        ${isHighRune ? 'disabled checked' : ''}
+                        onchange="updateItemState('runes', '${item.code}', 'show', this.checked)"
+                        ${isHighRune ? 'title="High runes cannot be hidden to prevent missing valuable drops"' : ''}>
+                    <span class="item-name ${isHighRune ? 'high-rune' : ''}">${item.name}</span>
                     <div class="levels-selector ${!globalSettings.enableFilterLevels ? 'disabled' : ''}">
                         <span class="levels-label">FilterLevels:</span>
                         <button class="btn-link" onclick="setAllLevels('runes', '${item.code}', true); event.preventDefault();" title="Select all levels">All</button>
@@ -4530,6 +4596,8 @@
             if (state.useCustomColors) return true;
             if (state.chatNotification) return true;
             if (state.biggerClickbox) return true;
+            if (state.useCustomName) return true;
+            if (state.onlyShowWhenLow) return true;
             
             // Check NMAG-specific modifications
             if (itemType === 'nmag') {
@@ -4628,7 +4696,10 @@
                     break;
                 case 'hide-all':
                     Object.keys(filterState.runes).forEach(code => {
-                        filterState.runes[code].show = false;
+                        // Never hide high runes (Pul+ = r21-r33) to prevent users from missing valuable drops
+                        if (code < 'r21') {
+                            filterState.runes[code].show = false;
+                        }
                     });
                     break;
                 case 'hide-low':
@@ -4724,6 +4795,13 @@
             items.forEach(item => {
                 const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
                 const state = filterState[stateCategory][key];
+                
+                // Skip if state doesn't exist (shouldn't happen but safety check)
+                if (!state) {
+                    console.error(`Missing state for ${stateCategory}.${key}`);
+                    return;
+                }
+                
                 const row = document.createElement('div');
                 row.className = 'item-row';
                 
@@ -5221,6 +5299,12 @@
 
         // Helper functions for unique items
         function updateUniqueItemState(category, key, field, value) {
+            // Safety check
+            if (!filterState[category] || !filterState[category][key]) {
+                console.error(`Cannot update state: ${category}.${key} does not exist`);
+                return;
+            }
+            
             filterState[category][key][field] = value;
             
             if (category === 'jewelryCharms') {
@@ -5439,7 +5523,10 @@
                 if (preset === 'show-all') {
                     filterState[category][key].show = true;
                 } else if (preset === 'hide-all') {
-                    filterState[category][key].show = false;
+                    // Never hide unique jewelry and charms to prevent users from missing valuable items
+                    if (category !== 'jewelryCharms') {
+                        filterState[category][key].show = false;
+                    }
                 }
             });
             
@@ -6905,7 +6992,12 @@
                             line += ` %${state.fontColor}%`;
                         }
                         
-                        line += ` %NAME%`;
+                        const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
+                        if (state.biggerClickbox) {
+                            line += ` %NL%       ${displayName}       %NL%%NL%`;
+                        } else {
+                            line += ` ${displayName}`;
+                        }
                         
                         // Add style reference for border/background/notification if needed
                         if (state.useCustomColors || state.chatNotification) {
@@ -6958,7 +7050,12 @@
                             line += ` %${state.fontColor}%`;
                         }
                         
-                        line += ` %NAME%`;
+                        const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
+                        if (state.biggerClickbox) {
+                            line += ` %NL%       ${displayName}       %NL%%NL%`;
+                        } else {
+                            line += ` ${displayName}`;
+                        }
                         
                         // Add style reference for border/background/notification if needed
                         if (state.useCustomColors || state.chatNotification) {
@@ -7025,7 +7122,12 @@
                             line += ` %YELLOW%`;
                         }
                         
-                        line += ` %NAME%`;
+                        const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
+                        if (state.biggerClickbox) {
+                            line += ` %NL%       ${displayName}       %NL%%NL%`;
+                        } else {
+                            line += ` ${displayName}`;
+                        }
                         
                         // Add ILVL display for magic jewelry and charms, description for others
                         if (stateCategory === 'magicJewelry' || stateCategory === 'magicCharms') {
@@ -7148,10 +7250,22 @@
                             }
                         }
                         
+                        // Determine display name and socket display
+                        const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
+                        const socketDisplay = '[%SOCKETS%]';
+                        
+                        // Build display string based on bigger clickbox setting
+                        let nameAndSockets;
+                        if (state.biggerClickbox) {
+                            nameAndSockets = `%NL%       ${displayName} ${socketDisplay}       %NL%%NL%`;
+                        } else {
+                            nameAndSockets = `${displayName} ${socketDisplay}`;
+                        }
+                        
                         // Handle ETH filter - generate two lines when 'any'
                         if (state.ethFilter === 'eth-only') {
                             // ETH only - gray font for everything
-                            let line = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
+                            let line = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% ${nameAndSockets}${styleRef}`;
                             lines += line + '\n';
                         } else if (state.ethFilter === 'non-eth') {
                             // Non-ETH only - white name, gray sockets
@@ -7161,12 +7275,16 @@
                             } else {
                                 line += ` %WHITE%`;
                             }
-                            line += ` %NAME% %GRAY%[%SOCKETS%]${styleRef}`;
+                            if (state.biggerClickbox) {
+                                line += ` %NL%       ${displayName} %GRAY%${socketDisplay}       %NL%%NL%${styleRef}`;
+                            } else {
+                                line += ` ${displayName} %GRAY%${socketDisplay}${styleRef}`;
+                            }
                             lines += line + '\n';
                         } else {
                             // 'any' - generate two lines: ETH first (gray), then non-ETH (white+gray)
                             // Line 1: ETH - all gray
-                            let ethLine = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% %NAME% [%SOCKETS%]${styleRef}`;
+                            let ethLine = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% ${nameAndSockets}${styleRef}`;
                             lines += ethLine + '\n';
                             
                             // Line 2: Non-ETH - white name, gray sockets
@@ -7176,7 +7294,11 @@
                             } else {
                                 nonEthLine += ` %WHITE%`;
                             }
-                            nonEthLine += ` %NAME% %GRAY%[%SOCKETS%]${styleRef}`;
+                            if (state.biggerClickbox) {
+                                nonEthLine += ` %NL%       ${displayName} %GRAY%${socketDisplay}       %NL%%NL%${styleRef}`;
+                            } else {
+                                nonEthLine += ` ${displayName} %GRAY%${socketDisplay}${styleRef}`;
+                            }
                             lines += nonEthLine + '\n';
                         }
                     } else {
@@ -7845,16 +7967,28 @@
                     if (fontColor) filterState[stateCategory][itemKey].fontColor = fontColor;
                     filterState[stateCategory][itemKey].borderColor = borderColor;
                     filterState[stateCategory][itemKey].backgroundColor = bgColor;
+                } else {
+                    // Remove custom colors if unchecked
+                    filterState[stateCategory][itemKey].useCustomColors = false;
+                    delete filterState[stateCategory][itemKey].fontColor;
+                    delete filterState[stateCategory][itemKey].borderColor;
+                    delete filterState[stateCategory][itemKey].backgroundColor;
                 }
                 
                 // Apply notification
                 if (chatNotification) {
                     filterState[stateCategory][itemKey].chatNotification = true;
+                } else {
+                    // Remove notification if unchecked
+                    filterState[stateCategory][itemKey].chatNotification = false;
                 }
                 
                 // Apply bigger clickbox
                 if (biggerClickbox) {
                     filterState[stateCategory][itemKey].biggerClickbox = true;
+                } else {
+                    // Remove bigger clickbox if unchecked
+                    filterState[stateCategory][itemKey].biggerClickbox = false;
                 }
                 
                 // Apply crafting ILVL change
@@ -8597,19 +8731,26 @@
             if (!code) return;
             
             // Parse display formatting
-            let fontColor = 'WHITE';
+            let fontColor = null;  // Don't initialize to a default - only set if found in display
             let useCustomColors = false;
             let borderColor = null;
             let backgroundColor = null;
             let chatNotification = false;
             let biggerClickbox = false;
+            let customName = '';
+            let useCustomName = false;
             
             if (display) {
-                // Parse color codes
-                const colorMatch = display.match(/%([A-Z]+)%/);
+                // Parse color codes (but don't set useCustomColors yet - will determine later if color differs from default)
+                // Exclude special keywords like NAME, ILVL, SOCKETS, NL, etc. from being treated as colors
+                const colorMatch = display.match(/%([A-Z_]+)%/);
                 if (colorMatch) {
-                    fontColor = colorMatch[1];
-                    useCustomColors = true;
+                    const potentialColor = colorMatch[1];
+                    // Only treat it as a color if it's not a special keyword
+                    const specialKeywords = ['NAME', 'ILVL', 'SOCKETS', 'NL', 'CONTINUE', 'MAP-'];
+                    if (!specialKeywords.includes(potentialColor) && !potentialColor.startsWith('MAP-')) {
+                        fontColor = potentialColor;
+                    }
                 }
                 
                 // Check for bigger clickbox
@@ -8617,10 +8758,16 @@
                     biggerClickbox = true;
                 }
                 
-                // Parse CustomDisplay
+                // Check for custom name (anything that's not %NAME%, %ILVL%, color codes, or special syntax)
+                const hasCustomName = display && !display.match(/^\s*%[A-Z_]+%\s*%NAME%/) && !display.includes('%NAME%');
+                if (hasCustomName && !hidden) {
+                    useCustomName = true;
+                    // Extract custom name - this is complex, so we'll just flag it for now
+                }
+                
+                // Parse CustomDisplay - only this should trigger useCustomColors automatically
                 const customMatch = display.match(/<:CustomDisplay:\s*([^:]+):>/);
                 if (customMatch) {
-                    useCustomColors = true;
                     const customParts = customMatch[1].split(',');
                     customParts.forEach(part => {
                         part = part.trim();
@@ -8630,27 +8777,40 @@
                             const rgbMatch = part.match(/RGB\(([^)]+)\)/);
                             if (rgbMatch) {
                                 borderColor = rgbSlashToHex(rgbMatch[1]);
+                                useCustomColors = true;
                             }
                         } else if (part.startsWith('BackgroundColor')) {
                             const rgbMatch = part.match(/RGB\(([^)]+)\)/);
                             if (rgbMatch) {
                                 backgroundColor = rgbSlashToHex(rgbMatch[1]);
+                                useCustomColors = true;
                             }
                         }
                     });
                 }
             }
             
-            // Prepare state object - only include filterLevels if parsed
+            // Prepare state object - only include properties that were found
             const baseState = {
                 show: !hidden,
-                useCustomColors,
-                fontColor,
                 borderColor,
                 backgroundColor,
                 chatNotification,
-                biggerClickbox
+                biggerClickbox,
+                customName,
+                useCustomName
             };
+            
+            // Only include fontColor if we actually found one in the display
+            if (fontColor !== null) {
+                baseState.fontColor = fontColor;
+            }
+            
+            // Only add useCustomColors if we detected borders/backgrounds
+            // The update functions will set it based on whether fontColor differs from default
+            if (useCustomColors) {
+                baseState.useCustomColors = true;
+            }
             
             if (filterLevels) {
                 baseState.filterLevels = filterLevels;
@@ -8703,32 +8863,54 @@
         }
 
         function updateSimpleItemState(code, state) {
+            // Determine default color and check if current state uses custom colors
+            let defaultColor = 'WHITE';
+            let stateKey = null;
+            let stateCategory = null;
+            
             // Check utility items
             const utilItem = utilityItems.find(i => i.code === code);
             if (utilItem && filterState.utility[code]) {
-                Object.assign(filterState.utility[code], state);
-                return;
+                defaultColor = 'WHITE';
+                stateKey = code;
+                stateCategory = 'utility';
             }
             
             // Check runes
             const runeItem = runeItems.find(i => i.code === code);
             if (runeItem && filterState.runes[code]) {
-                Object.assign(filterState.runes[code], state);
-                return;
+                defaultColor = 'ORANGE';
+                stateKey = code;
+                stateCategory = 'runes';
             }
             
             // Check gems
             const gemItem = gemItems.find(i => i.code === code);
             if (gemItem && filterState.gems[code]) {
-                Object.assign(filterState.gems[code], state);
-                return;
+                defaultColor = 'WHITE';
+                stateKey = code;
+                stateCategory = 'gems';
             }
             
             // Check misc
             const miscItem = miscItems.find(i => i.code === code);
             if (miscItem && filterState.misc[code]) {
-                Object.assign(filterState.misc[code], state);
-                return;
+                defaultColor = 'PURPLE';
+                stateKey = code;
+                stateCategory = 'misc';
+            }
+            
+            if (stateKey && stateCategory) {
+                // Only set useCustomColors if fontColor differs from default OR has borders/backgrounds
+                const actualUseCustomColors = 
+                    (state.fontColor && state.fontColor !== defaultColor) ||
+                    state.borderColor !== null ||
+                    state.backgroundColor !== null;
+                    
+                Object.assign(filterState[stateCategory][stateKey], {
+                    ...state,
+                    useCustomColors: actualUseCustomColors
+                });
             }
         }
 
@@ -8785,7 +8967,17 @@
                 if (idx !== -1) {
                     const key = code + '_' + idx;
                     if (filterState[cat] && filterState[cat][key]) {
-                        Object.assign(filterState[cat][key], state);
+                        // NMAG default color is WHITE
+                        const defaultColor = 'WHITE';
+                        const actualUseCustomColors = 
+                            (state.fontColor && state.fontColor !== defaultColor) ||
+                            state.borderColor !== null ||
+                            state.backgroundColor !== null;
+                            
+                        Object.assign(filterState[cat][key], {
+                            ...state,
+                            useCustomColors: actualUseCustomColors
+                        });
                         return;
                     }
                 }
@@ -8810,7 +9002,17 @@
                 if (item && item.name) {
                     const key = item.name.replace(/[^a-zA-Z0-9]/g, '_');
                     if (filterState[cat] && filterState[cat][key]) {
-                        Object.assign(filterState[cat][key], state);
+                        // Unique default color is DARK_GREEN
+                        const defaultColor = 'DARK_GREEN';
+                        const actualUseCustomColors = 
+                            (state.fontColor && state.fontColor !== defaultColor) ||
+                            state.borderColor !== null ||
+                            state.backgroundColor !== null;
+                            
+                        Object.assign(filterState[cat][key], {
+                            ...state,
+                            useCustomColors: actualUseCustomColors
+                        });
                         return;
                     }
                 }
@@ -8830,7 +9032,17 @@
                 items.forEach(item => {
                     const key = item.code + '_' + item.set;
                     if (filterState[cat] && filterState[cat][key]) {
-                        Object.assign(filterState[cat][key], state);
+                        // Set default color is DARK_GREEN
+                        const defaultColor = 'DARK_GREEN';
+                        const actualUseCustomColors = 
+                            (state.fontColor && state.fontColor !== defaultColor) ||
+                            state.borderColor !== null ||
+                            state.backgroundColor !== null;
+                            
+                        Object.assign(filterState[cat][key], {
+                            ...state,
+                            useCustomColors: actualUseCustomColors
+                        });
                     }
                 });
             }
@@ -8852,7 +9064,21 @@
                     if (item.code === code) {
                         const key = code + '_' + idx;
                         if (filterState[cat] && filterState[cat][key]) {
-                            Object.assign(filterState[cat][key], state);
+                            // Determine default color based on category
+                            let defaultColor = 'BLUE'; // magic items
+                            if (cat.startsWith('rare')) {
+                                defaultColor = 'YELLOW'; // rare items
+                            }
+                            
+                            const actualUseCustomColors = 
+                                (state.fontColor && state.fontColor !== defaultColor) ||
+                                state.borderColor !== null ||
+                                state.backgroundColor !== null;
+                                
+                            Object.assign(filterState[cat][key], {
+                                ...state,
+                                useCustomColors: actualUseCustomColors
+                            });
                         }
                     }
                 });
