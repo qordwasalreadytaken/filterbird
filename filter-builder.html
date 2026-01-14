@@ -3111,11 +3111,12 @@
         ];
 
         // NMAG Runeword Bases
+        // socketTier: 'premium' = tan sockets (someone wants this), 'standard' = grey (meh/common), omitted = black (junk/early)
         const nmagPolearms = [
-            { name: "Thresher", code: "7s8", quality: "elite", max_sockets: 5 },
-            { name: "Giant Thresher", code: "7wc", quality: "elite", max_sockets: 6 },
-            { name: "Cryptic Axe", code: "7pa", quality: "elite", max_sockets: 5 },
-            { name: "Mancatcher", code: "7br", quality: "elite", max_sockets: 5 },
+            { name: "Thresher", code: "7s8", quality: "elite", max_sockets: 5, socketTier: "premium" },
+            { name: "Giant Thresher", code: "7wc", quality: "elite", max_sockets: 6, socketTier: "premium" },
+            { name: "Cryptic Axe", code: "7pa", quality: "elite", max_sockets: 5, socketTier: "premium" },
+            { name: "Mancatcher", code: "7br", quality: "elite", max_sockets: 5, socketTier: "premium" },
             { name: "Colossus Voulge", code: "7vo", quality: "elite", max_sockets: 4 },
             { name: "Great Poleaxe", code: "7h7", quality: "elite", max_sockets: 6 },
             { name: "Poleaxe", code: "pax", quality: "normal", max_sockets: 5 },
@@ -3138,9 +3139,9 @@
         ];
 
         const nmagSwords = [
-            { name: "Phase Blade", code: "7cr", quality: "elite", max_sockets: 6 },
-            { name: "Colossus Blade", code: "7gd", quality: "elite", max_sockets: 6 },
-            { name: "Colossus Sword", code: "7fb", quality: "elite", max_sockets: 5 },
+            { name: "Phase Blade", code: "7cr", quality: "elite", max_sockets: 6, socketTier: "premium" },
+            { name: "Colossus Blade", code: "7gd", quality: "elite", max_sockets: 6, socketTier: "premium" },
+            { name: "Colossus Sword", code: "7fb", quality: "elite", max_sockets: 5, socketTier: "premium" },
             { name: "Crystal Sword", code: "crs", quality: "normal", max_sockets: 6 },
             { name: "Broad Sword", code: "bsd", quality: "normal", max_sockets: 4 },
             { name: "Long Sword", code: "lsd", quality: "normal", max_sockets: 4 },
@@ -3158,7 +3159,7 @@
         ];
 
         const nmagAxes = [
-            { name: "Berserker Axe", code: "7wa", quality: "elite", max_sockets: 6 },
+            { name: "Berserker Axe", code: "7wa", quality: "elite", max_sockets: 6, socketTier: "premium" },
             { name: "Ettin Axe", code: "72a", quality: "elite", max_sockets: 5 },
             { name: "Double Axe", code: "2ax", quality: "normal", max_sockets: 5 },
             { name: "War Axe", code: "wax", quality: "normal", max_sockets: 6 },
@@ -3192,7 +3193,7 @@
         ];
 
         const nmagSpears = [
-            { name: "War Pike", code: "7p7", quality: "elite", max_sockets: 6 },
+            { name: "War Pike", code: "7p7", quality: "elite", max_sockets: 6, socketTier: "premium" },
             { name: "Ghost Spear", code: "7st", quality: "elite", max_sockets: 6 },
             { name: "Stygian Pike", code: "7tr", quality: "elite", max_sockets: 4 },
             { name: "Lance", code: "9p9", quality: "exceptional", max_sockets: 6 },
@@ -3204,9 +3205,9 @@
         ];
 
         const nmagBows = [
-            { name: "Matriarchal Bow", code: "amb", quality: "elite", max_sockets: 5 },
-            { name: "Grand Matron Bow", code: "amc", quality: "elite", max_sockets: 5 },
-            { name: "Hydra Bow", code: "6lw", quality: "elite", max_sockets: 6 },
+            { name: "Matriarchal Bow", code: "amb", quality: "elite", max_sockets: 5, socketTier: "premium" },
+            { name: "Grand Matron Bow", code: "amc", quality: "elite", max_sockets: 5, socketTier: "premium" },
+            { name: "Hydra Bow", code: "6lw", quality: "elite", max_sockets: 6, socketTier: "premium" },
             { name: "Crusader Bow", code: "6l7", quality: "elite", max_sockets: 6 },
             { name: "Short Bow", code: "sbw", quality: "normal", max_sockets: 3 },
             { name: "Great Bow", code: "6cb", quality: "elite", max_sockets: 4 },
@@ -3238,9 +3239,9 @@
 
         // Armor (Light + Heavy combined) from nmag-list.txt
         const nmagArmor = [
-            { name: "Archon Plate", code: "utp", quality: "elite", max_sockets: 4 },
-            { name: "Mage Plate", code: "xtp", quality: "exceptional", max_sockets: 3 },
-            { name: "Dusk Shroud", code: "uui", quality: "elite", max_sockets: 4 },
+            { name: "Archon Plate", code: "utp", quality: "elite", max_sockets: 4, socketTier: "premium" },
+            { name: "Mage Plate", code: "xtp", quality: "exceptional", max_sockets: 3, socketTier: "premium" },
+            { name: "Dusk Shroud", code: "uui", quality: "elite", max_sockets: 4, socketTier: "premium" },
             { name: "Wire Fleece", code: "utu", quality: "elite", max_sockets: 4 },
             { name: "Great Hauberk", code: "urs", quality: "elite", max_sockets: 4 },
             { name: "Sacred Armor", code: "uar", quality: "elite", max_sockets: 4 },
@@ -3268,7 +3269,7 @@
         ];
 
         const nmagShieldsGeneric = [
-            { name: "Monarch", code: "uit", quality: "elite", max_sockets: 4 },
+            { name: "Monarch", code: "uit", quality: "elite", max_sockets: 4, socketTier: "premium" },
             { name: "Bone Shield", code: "bsh", quality: "normal", max_sockets: 2 },
             { name: "Grim Shield", code: "xsh", quality: "exceptional", max_sockets: 2 },
             { name: "Heraldic Shield", code: "pa3", quality: "normal", max_sockets: 4 },
@@ -3380,17 +3381,17 @@
             { name: "Sacred Globe", code: "ob2", quality: "normal", max_sockets: 2 },
             { name: "Smoked Sphere", code: "ob3", quality: "normal", max_sockets: 2 },
             { name: "Clasped Orb", code: "ob4", quality: "normal", max_sockets: 2 },
-            { name: "Jareds Stone", code: "ob5", quality: "normal", max_sockets: 3 },
+            { name: "Jareds Stone", code: "ob5", quality: "normal", max_sockets: 3, socketTier: "premium" },
             { name: "Glowing Orb", code: "ob6", quality: "exceptional", max_sockets: 2 },
             { name: "Crystalline Globe", code: "ob7", quality: "exceptional", max_sockets: 2 },
             { name: "Cloudy Sphere", code: "ob8", quality: "exceptional", max_sockets: 2 },
             { name: "Sparkling Ball", code: "ob9", quality: "exceptional", max_sockets: 2 },
-            { name: "Swirling Crystal", code: "oba", quality: "exceptional", max_sockets: 3 },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional", max_sockets: 3, socketTier: "premium" },
             { name: "Heavenly Stone", code: "obb", quality: "elite", max_sockets: 2 },
             { name: "Eldritch Orb", code: "obc", quality: "elite", max_sockets: 2 },
             { name: "Demon Heart", code: "obd", quality: "elite", max_sockets: 2 },
             { name: "Vortex Orb", code: "obe", quality: "elite", max_sockets: 2 },
-            { name: "Dimensional Shard", code: "obf", quality: "elite", max_sockets: 3 },
+            { name: "Dimensional Shard", code: "obf", quality: "elite", max_sockets: 3, socketTier: "premium" },
         ];
 
         // Extended NMAG categories - additional sockatable bases
@@ -3427,13 +3428,13 @@
         const nmagScepters = [
             { name: "Scepter", code: "scp", quality: "normal", max_sockets: 2 },
             { name: "Grand Scepter", code: "gsc", quality: "normal", max_sockets: 3 },
-            { name: "War Scepter", code: "wsp", quality: "normal", max_sockets: 5 },
+            { name: "War Scepter", code: "wsp", quality: "normal", max_sockets: 5, socketTier: "premium" },
             { name: "Rune Scepter", code: "9sc", quality: "exceptional", max_sockets: 2 },
             { name: "Holy Water Sprinkler", code: "9qs", quality: "exceptional", max_sockets: 3 },
-            { name: "Divine Scepter", code: "9ws", quality: "exceptional", max_sockets: 5 },
+            { name: "Divine Scepter", code: "9ws", quality: "exceptional", max_sockets: 5, socketTier: "premium" },
             { name: "Mighty Scepter", code: "7sc", quality: "elite", max_sockets: 2 },
             { name: "Seraph Rod", code: "7qs", quality: "elite", max_sockets: 3 },
-            { name: "Caduceus", code: "7ws", quality: "elite", max_sockets: 5 },
+            { name: "Caduceus", code: "7ws", quality: "elite", max_sockets: 5, socketTier: "premium" },
         ];
 
         const nmagBarbarianHelms = [
@@ -3702,7 +3703,7 @@
             { name: "Crystalline Globe", code: "ob7", quality: "exceptional", max_sockets: 2 },
             { name: "Cloudy Sphere", code: "ob8", quality: "exceptional", max_sockets: 2 },
             { name: "Sparkling Ball", code: "ob9", quality: "exceptional", max_sockets: 2 },
-            { name: "Swirling Crystal", code: "oba", quality: "exceptional", max_sockets: 3 },
+            { name: "Swirling Crystal", code: "oba", quality: "exceptional", max_sockets: 3, socketTier: "premium" },
             { name: "Heavenly Stone", code: "obb", quality: "elite", max_sockets: 2 },
             { name: "Eldritch Orb", code: "obc", quality: "elite", max_sockets: 2 },
             { name: "Demon Heart", code: "obd", quality: "elite", max_sockets: 2 },
@@ -6722,6 +6723,12 @@
                 }
             }
 
+            // Add Text Macros for socket displays
+            filter += '// === TEXT MACROS ===\n\n';
+            filter += 'TextMacro[tansocks]: %TAN%[%SOCKETS%] // %!tansocks!%\n';
+            filter += 'TextMacro[graysocks]: %GRAY%[%SOCKETS%] // %!graysocks!%\n';
+            filter += 'TextMacro[blacksocks]: %BLACK%[%SOCKETS%] // %!blacksocks!%\n\n';
+
             // Check if any items need custom styles (for border/background colors)
             let needsCustomStyle = false;
             
@@ -7288,9 +7295,27 @@
                             }
                         }
                         
-                        // Determine display name and socket display
+                        // Determine display name and socket displays
                         const displayName = state.useCustomName && state.customName ? state.customName : '%NAME%';
-                        const socketDisplay = '[%SOCKETS%]';
+                        
+                        // Socket display for non-ETH items: use text macro based on socketTier
+                        // 'premium' = tan (someone wants this), 'standard' = grey (meh/common), default = black (junk/early)
+                        let socketDisplay;
+                        if (item.socketTier === 'premium') {
+                            socketDisplay = '%!tansocks!%';
+                        } else if (item.socketTier === 'standard') {
+                            socketDisplay = '%!graysocks!%';
+                        } else {
+                            socketDisplay = '%!blacksocks!%';
+                        }
+                        
+                        // Socket display for ETH items: grey by default, tan only if premium
+                        let ethSocketDisplay;
+                        if (item.socketTier === 'premium') {
+                            ethSocketDisplay = '%!tansocks!%';
+                        } else {
+                            ethSocketDisplay = '%!graysocks!%'; // ETH items default to grey
+                        }
                         
                         // Build display string based on bigger clickbox setting
                         let nameAndSockets;
@@ -7300,13 +7325,21 @@
                             nameAndSockets = `${displayName} ${socketDisplay}`;
                         }
                         
+                        // Build ETH display string
+                        let ethNameAndSockets;
+                        if (state.biggerClickbox) {
+                            ethNameAndSockets = `%NL%       ${displayName} ${ethSocketDisplay}       %NL%%NL%`;
+                        } else {
+                            ethNameAndSockets = `${displayName} ${ethSocketDisplay}`;
+                        }
+                        
                         // Handle ETH filter - generate two lines when 'any'
                         if (state.ethFilter === 'eth-only') {
                             // ETH only - gray font for everything
-                            let line = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% ${nameAndSockets}${styleRef}`;
+                            let line = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% ${ethNameAndSockets}${styleRef}`;
                             lines += line + '\n';
                         } else if (state.ethFilter === 'non-eth') {
-                            // Non-ETH only - white name, gray sockets
+                            // Non-ETH only - white name, colored sockets (tan/black based on socketTier)
                             let line = `\tItemDisplay[NMAG ${item.code} !ETH${sockCondition}${edCondition}${filtLvlCondition}]:`;
                             if (state.useCustomColors && state.fontColor) {
                                 line += ` %${state.fontColor}%`;
@@ -7314,18 +7347,18 @@
                                 line += ` %WHITE%`;
                             }
                             if (state.biggerClickbox) {
-                                line += ` %NL%       ${displayName} %GRAY%${socketDisplay}       %NL%%NL%${styleRef}`;
+                                line += ` %NL%       ${displayName} ${socketDisplay}       %NL%%NL%${styleRef}`;
                             } else {
-                                line += ` ${displayName} %GRAY%${socketDisplay}${styleRef}`;
+                                line += ` ${displayName} ${socketDisplay}${styleRef}`;
                             }
                             lines += line + '\n';
                         } else {
-                            // 'any' - generate two lines: ETH first (gray), then non-ETH (white+gray)
-                            // Line 1: ETH - all gray
-                            let ethLine = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% ${nameAndSockets}${styleRef}`;
+                            // 'any' - generate two lines: ETH first (gray), then non-ETH (white+colored sockets)
+                            // Line 1: ETH - grey sockets by default, tan if premium
+                            let ethLine = `\tItemDisplay[NMAG ${item.code} ETH${sockCondition}${edCondition}${filtLvlCondition}]: %GRAY% ${ethNameAndSockets}${styleRef}`;
                             lines += ethLine + '\n';
                             
-                            // Line 2: Non-ETH - white name, gray sockets
+                            // Line 2: Non-ETH - white name, colored sockets based on socketTier
                             let nonEthLine = `\tItemDisplay[NMAG ${item.code}${sockCondition}${edCondition}${filtLvlCondition}]:`;
                             if (state.useCustomColors && state.fontColor) {
                                 nonEthLine += ` %${state.fontColor}%`;
@@ -7333,9 +7366,9 @@
                                 nonEthLine += ` %WHITE%`;
                             }
                             if (state.biggerClickbox) {
-                                nonEthLine += ` %NL%       ${displayName} %GRAY%${socketDisplay}       %NL%%NL%${styleRef}`;
+                                nonEthLine += ` %NL%       ${displayName} ${socketDisplay}       %NL%%NL%${styleRef}`;
                             } else {
-                                nonEthLine += ` ${displayName} %GRAY%${socketDisplay}${styleRef}`;
+                                nonEthLine += ` ${displayName} ${socketDisplay}${styleRef}`;
                             }
                             lines += nonEthLine + '\n';
                         }
