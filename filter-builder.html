@@ -858,7 +858,7 @@
                         </label>
                     </div>
                     <div style="margin-top: 8px;">
-                        <label title="Adds random color codes to the filter filename for a colorful appearance">
+                        <label title="Surprise only applies to exported filters">
                             <input type="checkbox" id="surprise-me" onchange="toggleSurpriseMe(this.checked)">
                             Surprise me
                         </label>
@@ -6668,6 +6668,24 @@
         }
 
         // Generate filter output
+        // Helper function to add random color codes between characters
+        function addRandomColors(text) {
+            const colorCodes = ['\u00ffc0', '\u00ffc1', '\u00ffc2', '\u00ffc3', '\u00ffc4', '\u00ffc5', '\u00ffc8', '\u00ffc9'];
+            const chars = text.split('');
+            const coloredChars = [];
+            
+            for (let i = 0; i < chars.length; i++) {
+                // Randomly decide if we should add a color code (60% chance)
+                if (Math.random() > 0.4) {
+                    const randomColor = colorCodes[Math.floor(Math.random() * colorCodes.length)];
+                    coloredChars.push(randomColor);
+                }
+                coloredChars.push(chars[i]);
+            }
+            
+            return coloredChars.join('');
+        }
+
         function generateFilter() {
             // Get current date formatted as "DD MMM"
             const now = new Date();
@@ -6689,8 +6707,10 @@
                 
                 if (namedLevels.length > 0) {
                     filter += '// === FILTER LEVELS ===\n\n';
+                    const surpriseMe = document.getElementById('surprise-me')?.checked || false;
                     namedLevels.forEach(item => {
-                        filter += `FilterLevel[${item.level}]: ${item.name}\n`;
+                        const levelName = surpriseMe ? addRandomColors(item.name) : item.name;
+                        filter += `FilterLevel[${item.level}]: ${levelName}\n`;
                     });
                     filter += '\n';
                 }
@@ -8597,21 +8617,7 @@
             let filename = 'FPCustom';
             
             if (surpriseMe) {
-                // Add random color codes between letters
-                const colorCodes = ['ÿc0', 'ÿc1', 'ÿc2', 'ÿc3', 'ÿc4', 'ÿc5', 'ÿc8', 'ÿc9'];
-                const letters = filename.split('');
-                const coloredLetters = [];
-                
-                for (let i = 0; i < letters.length; i++) {
-                    // Randomly decide if we should add a color code (60% chance)
-                    if (Math.random() > 0.4) {
-                        const randomColor = colorCodes[Math.floor(Math.random() * colorCodes.length)];
-                        coloredLetters.push(randomColor);
-                    }
-                    coloredLetters.push(letters[i]);
-                }
-                
-                filename = coloredLetters.join('');
+                filename = addRandomColors(filename);
             }
             
             a.download = filename + '.filter';
@@ -8622,8 +8628,8 @@
         }
 
         function toggleSurpriseMe(enabled) {
-            // Just store the state, no need to regenerate filter
-            // The setting is only used during export
+            // Regenerate filter to update filter level names with/without colors
+            generateFilter();
         }
         
         // Copy to clipboard
