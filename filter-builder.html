@@ -857,6 +857,12 @@
                             End the filter with show anything not explicitly hidden
                         </label>
                     </div>
+                    <div style="margin-top: 8px;">
+                        <label title="Adds random color codes to the filter filename for a colorful appearance">
+                            <input type="checkbox" id="surprise-me" onchange="toggleSurpriseMe(this.checked)">
+                            Surprise me
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Utility Items Section -->
@@ -6671,8 +6677,8 @@
             
             let filter = '// FilterPhoenix Visual Filter Builder\n';
             filter += '// Generated: ' + new Date().toLocaleString() + '\n\n';
-            filter += 'Attribute[Author]: Filter Builder\n';
-            filter += 'Attribute[Name]: You\n';
+            filter += 'Attribute[Author]: You\n';
+            filter += 'Attribute[Name]: Filter Builder filter\n';
             filter += `Attribute[Date]: ${dateStr}\n\n`;
 
             // Add FilterLevel declarations if enabled (only for named levels)
@@ -8585,13 +8591,41 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'FPCustom.filter';
+            
+            // Check if surprise me is enabled
+            const surpriseMe = document.getElementById('surprise-me')?.checked || false;
+            let filename = 'FPCustom';
+            
+            if (surpriseMe) {
+                // Add random color codes between letters
+                const colorCodes = ['ÿc0', 'ÿc1', 'ÿc2', 'ÿc3', 'ÿc4', 'ÿc5', 'ÿc8', 'ÿc9'];
+                const letters = filename.split('');
+                const coloredLetters = [];
+                
+                for (let i = 0; i < letters.length; i++) {
+                    // Randomly decide if we should add a color code (60% chance)
+                    if (Math.random() > 0.4) {
+                        const randomColor = colorCodes[Math.floor(Math.random() * colorCodes.length)];
+                        coloredLetters.push(randomColor);
+                    }
+                    coloredLetters.push(letters[i]);
+                }
+                
+                filename = coloredLetters.join('');
+            }
+            
+            a.download = filename + '.filter';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
+        function toggleSurpriseMe(enabled) {
+            // Just store the state, no need to regenerate filter
+            // The setting is only used during export
+        }
+        
         // Copy to clipboard
         function copyToClipboard() {
             const output = document.getElementById('filter-output');
