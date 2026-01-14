@@ -6794,7 +6794,8 @@
                         if (needsBorder || needsBackground || needsNotification) {
                             const rgbParts = [];
                             if (needsNotification) {
-                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                const notifyColor = state.fontColor || 'WHITE';
+                                rgbParts.push(`NotificationColor = ${notifyColor}`);
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
@@ -6844,7 +6845,8 @@
                         if (needsBorder || needsBackground || needsNotification) {
                             const rgbParts = [];
                             if (needsNotification) {
-                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                const notifyColor = state.fontColor || 'ORANGE';
+                                rgbParts.push(`NotificationColor = ${notifyColor}`);
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
@@ -6894,7 +6896,8 @@
                         if (needsBorder || needsBackground || needsNotification) {
                             const rgbParts = [];
                             if (needsNotification) {
-                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                const notifyColor = state.fontColor || 'WHITE';
+                                rgbParts.push(`NotificationColor = ${notifyColor}`);
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
@@ -6930,7 +6933,7 @@
                     let line = `ItemDisplay[${item.code}${filtLvlCondition}]:`;
                     
                     // Only add colors if custom colors are enabled
-                    if (state.useCustomColors && state.fontColor !== 'PURPLE') {
+                    if (state.useCustomColors && state.fontColor !== 'WHITE') {
                         line += ` %${state.fontColor}%`;
                     }
                     
@@ -6950,7 +6953,8 @@
                         if (needsBorder || needsBackground || needsNotification) {
                             const rgbParts = [];
                             if (needsNotification) {
-                                rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                const notifyColor = state.fontColor || 'WHITE';
+                                rgbParts.push(`NotificationColor = ${notifyColor}`);
                             }
                             if (needsBorder) {
                                 const rgb = hexToRGBSlash(state.borderColor);
@@ -6988,7 +6992,7 @@
                         let line = `ItemDisplay[UNI ${item.code}${filtLvlCondition}]:`;
                         
                         // Only add colors if custom colors are enabled
-                        if (state.useCustomColors && state.fontColor !== 'DARK_GREEN') {
+                        if (state.useCustomColors && state.fontColor !== 'GOLD') {
                             line += ` %${state.fontColor}%`;
                         }
                         
@@ -7008,7 +7012,8 @@
                             if (needsBorder || needsBackground || needsNotification) {
                                 const rgbParts = [];
                                 if (needsNotification) {
-                                    rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                    const notifyColor = state.fontColor || 'GOLD';
+                                    rgbParts.push(`NotificationColor = ${notifyColor}`);
                                 }
                                 if (needsBorder) {
                                     const rgb = hexToRGBSlash(state.borderColor);
@@ -7046,7 +7051,7 @@
                         let line = `ItemDisplay[SET ${item.code}${filtLvlCondition}]:`;
                         
                         // Only add colors if custom colors are enabled
-                        if (state.useCustomColors && state.fontColor !== 'DARK_GREEN') {
+                        if (state.useCustomColors && state.fontColor !== 'GREEN') {
                             line += ` %${state.fontColor}%`;
                         }
                         
@@ -7066,7 +7071,8 @@
                             if (needsBorder || needsBackground || needsNotification) {
                                 const rgbParts = [];
                                 if (needsNotification) {
-                                    rgbParts.push(`NotificationColor = ${state.fontColor}`);
+                                    const notifyColor = state.fontColor || 'GREEN';
+                                    rgbParts.push(`NotificationColor = ${notifyColor}`);
                                 }
                                 if (needsBorder) {
                                     const rgb = hexToRGBSlash(state.borderColor);
@@ -7954,6 +7960,11 @@
                 
                 if (!filterState[stateCategory][itemKey]) {
                     filterState[stateCategory][itemKey] = { show: true };
+                }
+                
+                // Only apply group settings to items that are currently shown
+                if (!filterState[stateCategory][itemKey].show) {
+                    return;
                 }
                 
                 // Apply filter levels if any selected
