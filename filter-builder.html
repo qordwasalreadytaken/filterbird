@@ -8766,7 +8766,7 @@
                 }
                 
                 // Parse CustomDisplay - only this should trigger useCustomColors automatically
-                const customMatch = display.match(/<:CustomDisplay:\s*([^:]+):>/);
+                const customMatch = display.match(/<:CustomDisplay:\s*([^>]+)>/);
                 if (customMatch) {
                     const customParts = customMatch[1].split(',');
                     customParts.forEach(part => {
